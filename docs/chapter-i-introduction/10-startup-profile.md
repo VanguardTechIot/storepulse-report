@@ -1,8 +1,16 @@
 # Capítulo I: Introducción
 
-En esta sección, se presenta la visión general sobre el origen de VanguardTech, los desafíos que impulsaron su creación y la propuesta de valor que ofrecemos al sector de bienes raíces comerciales. Además, se detalla la misión, visión y el perfil profesional del equipo detrás de esta innovación tecnológica.
+El presente proyecto tiene como finalidad el diseño, desarrollo e implementación de una solución tecnológica basada en el enfoque de Internet de las Cosas (IoT), integrando dispositivos físicos, procesamiento en el edge y servicios en la nube, con el objetivo de resolver problemáticas reales en el sector comercial urbano. Esta solución se construye bajo un enfoque de ingeniería de software moderna, incorporando metodologías ágiles, diseño centrado en el usuario (Lean UX) y arquitecturas empresariales escalables orientadas a servicios.
+
+Actualmente, las galerías comerciales enfrentan diversos problemas relacionados con la vigilancia, la detección tardía de incidentes y el cálculo estimado de los servicios básicos. Estos problemas son más frecuentes en lugares donde todavía se utilizan procesos manuales o sistemas poco digitalizados. Como consecuencia, pueden producirse pérdidas económicas, riesgos para la seguridad de las personas y conflictos entre los administradores de las galerías y sus inquilinos.
+
+Frente a este escenario, el presente proyecto propone desarrollar un ecosistema digital que permita automatizar la detección de eventos y la medición del consumo mediante dispositivos IoT. La información obtenida será procesada en el edge y mostrada a través de aplicaciones web y móviles, facilitando una gestión más segura, transparente y basada en datos.
+
+En esta sección se presenta una visión general de VanguardTech, incluyendo su origen, los problemas que motivaron su creación y la propuesta de valor que ofrece al sector de bienes raíces comerciales. También se presentan la misión, la visión y el perfil profesional del equipo responsable de desarrollar esta solución tecnológica.
 
 ## 1.1. Startup Profile
+
+La presente sección describe el contexto general de la startup encargada de desarrollar la solución propuesta. Se presenta una visión general de la organización, su enfoque tecnológico y su propuesta de valor. Asimismo, se describen los integrantes del equipo, sus perfiles profesionales y los roles que cumplen dentro del proyecto.
 
 ### 1.1.1. Descripción de la Startup
 

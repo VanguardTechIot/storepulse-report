@@ -4,6 +4,8 @@ En esta sección se presentan los antecedentes y la problemática que sustentan 
 
 ### 1.2.1. Antecedentes y problemática
 
+Para comprender y delimitar la problemática, el equipo aplicó previamente **la técnica de las 5 'W's y 2 'H's (Who, What, Where, When, Why, How & How Much)**. Este análisis permitió identificar quiénes están involucrados, qué problemas se presentan, dónde y cuándo ocurren, por qué se producen, cómo se gestionan actualmente y cuál es su impacto.
+
 **Técnica de las 5 'W's y 2 'H's**
 
 * **Who (Quién):**
@@ -50,6 +52,8 @@ En esta sección se presentan los antecedentes y la problemática que sustentan 
     - **Brecha de adopción:** La penetración de videovigilancia monitoreada en negocios se mantiene en torno al **15 %**, muy por debajo de la magnitud del riesgo declarado por los propios comerciantes.
 
 <div class="page"></div>
+
+**Análisis de la problemática**
 
 El análisis bajo la técnica de las 5 'W's y 2 'H's revela que el problema no es la ausencia de tecnología en el mercado, sino que la disponible fue diseñada para un comercio autónomo y no para un edificio donde decenas de negocios independientes comparten infraestructura, riesgos y facturación.
 

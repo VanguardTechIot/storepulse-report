@@ -1,16 +1,20 @@
 ### 1.2.2. Lean UX Process
 
-En esta sección se detalla el proceso de trabajo aplicado por el equipo para StorePulse. Mediante un enfoque ágil y colaborativo, las creencias iniciales del equipo sobre el negocio y sus usuarios se declararon de forma explícita y se convirtieron en hipótesis verificables. Este proceso permite alinear los resultados esperados del negocio con las necesidades del administrador de galería y del inquilino de local, garantizando que las funcionalidades propuestas respondan a un beneficio identificado y no a una suposición no examinada.
+En esta sección se presenta el proceso de Lean UX aplicado por el equipo para definir la propuesta de StorePulse. A partir de las creencias iniciales sobre el negocio y los usuarios, se identifican los principales problemas, supuestos y resultados esperados, los cuales se transforman en hipótesis que pueden ser validadas durante el desarrollo del proyecto.
+
+Este proceso permite relacionar las necesidades de los administradores de galerías y los inquilinos de los locales con los resultados esperados del negocio y las funcionalidades propuestas para el producto.
 
 #### 1.2.2.1. Lean UX Problem Statements
 
-Se elabora un único Problem Statement para todo el proyecto, considerando ambos segmentos objetivo, según la plantilla *Brand new initiative*.
+Para representar la problemática general del proyecto se elaboró un único Problem Statement que considera los dos segmentos objetivo: administradores de galerías comerciales e inquilinos de los locales. De acuerdo con las indicaciones del Lean UX Process, se utiliza la plantilla correspondiente a una iniciativa nueva (Brand new initiative).
+
+**Problem Statement**
 
 El estado actual de **la gestión operativa de galerías comerciales en Lima Metropolitana** se ha enfocado principalmente en **la vigilancia presencial de áreas comunes, la inspección manual periódica y el prorrateo estimado de los servicios básicos, atendiendo a administradores e inquilinos únicamente después de que un incidente ha ocurrido**.
 
-Lo que los productos y servicios existentes no logran atender es **la ausencia de medición individual por local: las soluciones de seguridad electrónica se ofrecen como suscripciones concebidas para un comercio autónomo, con costos y contratos que no se ajustan al formato de galería, y ninguna integra en un mismo lugar la detección de intrusión, la detección temprana de humo y el consumo verificable de servicios**.
+Lo que los productos y servicios existentes no logran atender es **la falta de información individual y verificable por local, ya que las soluciones de seguridad electrónica suelen estar diseñadas para comercios independientes y no para galerías comerciales. Además, no existe una solución integrada que permita gestionar la detección de intrusiones, la detección temprana de humo y el consumo verificable de servicios desde una misma plataforma**.
 
-Nuestro producto atenderá esta brecha mediante **una plataforma IoT que instala dispositivos de bajo costo en cada local, procesa la telemetría en el borde para operar aún sin conectividad, y expone la información en aplicaciones web y móvil con alcance diferenciado según el rol del usuario**.
+Nuestro producto atenderá esta brecha mediante **una plataforma IoT que instala dispositivos de bajo costo en cada local, procesa la telemetría en el edge para mantener la detección y el registro ante interrupciones de conectividad, y presenta la información mediante aplicaciones web y móviles con acceso diferenciado según el rol del usuario**.
 
 Nuestro enfoque inicial será **los administradores e inquilinos de galerías comerciales de alta densidad de locales en Lima Metropolitana, específicamente en Gamarra, Mesa Redonda, Las Malvinas y el jirón Wilson**.
 
@@ -18,11 +22,13 @@ Sabremos que hemos tenido éxito cuando observemos que **los administradores sus
 
 #### 1.2.2.2. Lean UX Assumptions
 
-En esta sección el equipo declara de forma explícita las creencias que sostienen la propuesta de StorePulse, organizadas en las cinco categorías del proceso Lean UX. Cada enunciado corresponde a una creencia resultante de la discusión del equipo y no a una pregunta de exploración. Los Feature Assumptions constituyen la base sobre la cual se formulan los Hypothesis Statements de la sección siguiente.
+En esta sección se presentan las creencias que sustentan la propuesta de StorePulse. Los assumptions se organizan en las cinco categorías establecidas por Lean UX: Business Assumptions, Business Outcome Assumptions, User Assumptions, User Outcome and Benefit Assumptions y Feature Assumptions.
+
+Estos enunciados representan las creencias resultantes de la discusión del equipo y no preguntas de exploración. Los Feature Assumptions sirven como base para la formulación de los Hypothesis Statements.
 
 **1. Business Assumptions**
 
-- Creemos que existe un mercado sostenible en las galerías comerciales de Lima Metropolitana, dado el volumen de locales agrupados por inmueble y la baja penetración de soluciones de monitoreo.
+- Creemos que existe un mercado sostenible en las galerías comerciales de Lima Metropolitana, debido al volumen de locales agrupados por inmueble y a la necesidad de mejorar la seguridad y gestión operativa.
 - Creemos que el administrador de la galería es quien toma la decisión de compra y asume el costo de la suscripción, mientras que el inquilino es el usuario beneficiario.
 - Creemos que un modelo de suscripción mensual escalonado por número de locales monitoreados se ajusta a la capacidad de pago de una administración de galería.
 - Creemos que la venta por inmueble completo, y no por local individual, reduce el costo de adquisición y hace escalable el crecimiento del negocio.
@@ -60,15 +66,17 @@ En esta sección el equipo declara de forma explícita las creencias que sostien
 **5. Feature Assumptions**
 
 - Creemos que la detección de intrusión mediante sensores de movimiento y activación por proximidad, con notificación inmediata y captura de imagen asociada al evento, permitirá al inquilino reaccionar durante el evento y distinguir una alerta real de una falsa sin trasladarse al local.
-- Creemos que la detección de humo con escalamiento simultáneo al inquilino y al administrador reducirá el tiempo entre el inicio del fuego y la respuesta.
-- Creemos que los medidores inteligentes de energía y agua instalados por local sustituirán el prorrateo estimado por una facturación verificable por ambas partes.
+- Creemos que la detección de humo y el envío simultáneo de la alerta al inquilino y al administrador permitirá reducir el tiempo entre la detección del evento y la respuesta.
+- Creemos que los medidores inteligentes de energía y agua instalados en cada local permitirán sustituir el prorrateo estimado por una facturación basada en el consumo real verificable por ambas partes.
 - Creemos que un tablero de control web con visualización de consumo acumulado, promedio histórico y desviación respecto de la línea base permitirá a ambos segmentos interpretar la información sin formación técnica.
 - Creemos que el control de acceso por rol, que limita al inquilino a su propio local y otorga al administrador la vista consolidada del inmueble, es condición para que el inquilino acepte el uso de la plataforma.
-- Creemos que una aplicación móvil nativa con notificaciones push de emergencias en tiempo real permitirá al inquilino supervisar su local mientras se desplaza.
+- Creemos que una aplicación móvil nativa con push notifications de emergencias permitirá al inquilino supervisar su local mientras se encuentra fuera de la galería.
 - Creemos que el procesamiento y almacenamiento local en el Edge API mantendrá la detección y el registro operativos aun cuando se interrumpa la conectividad con la nube.
-- Creemos que un Landing Page estático con contenido y llamadas a la acción diferenciados por segmento comunicará la propuesta de valor y conducirá al visitante al punto de acceso correspondiente.
+- Creemos que una Landing Page estática con contenido y calls to action diferenciados por segmento permitirá comunicar la propuesta de valor y dirigir a cada usuario hacia el punto de acceso correspondiente..
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
+
+A partir de los Feature Assumptions definidos anteriormente, se formula un Hypothesis Statement por cada funcionalidad propuesta. Cada hipótesis relaciona un resultado de negocio esperado con los usuarios, el beneficio que buscan obtener y la solución propuesta.
 
 *Hypothesis 1 — Detección de intrusión con registro visual*
 
@@ -104,8 +112,12 @@ En esta sección el equipo declara de forma explícita las creencias que sostien
 
 #### 1.2.2.4. Lean UX Canvas
 
-A continuación, mostraremos el análisis de los procesos iterativos y descubrimientos realizados por los miembros del equipo VanguardTech para asentar las bases de valor propuesta dentro de la solución; centrándonos en solventar las problemáticas críticas y sobre todo maximizar el beneficio percibido por el cliente.
+A continuación, se presenta el Lean UX Canvas elaborado por el equipo VanguardTech. Este canvas resume los principales elementos analizados durante el proceso de Lean UX y permite visualizar la relación entre el problema identificado, los usuarios, las necesidades, las soluciones propuestas y los resultados esperados.
 
-![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas.jpg)
+![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas-v2.png)
+
+El canvas fue elaborado en Figma y puede consultarse en el siguiente enlace:
+
+**Lean UX Canvas:** [Figma – StorePulse](https://www.figma.com/design/jTuNZACYcl08INpbeTyAol/lean-ux-canvas-v2?node-id=0-1&t=Yqwn63SJRlKfXyZw-1)
 
 <div class="page"></div>
