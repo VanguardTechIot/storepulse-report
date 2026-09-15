@@ -133,6 +133,34 @@ Estas tareas comprenden actividades que los usuarios llevan a cabo en su día a 
 
 ### 2.3.3. User Journey Mapping
 
+En esta sección se presentan los User Journey Maps (As-Is) de los segmentos representados, correspondientes a sus respectivas User Personas. Se ilustra el recorrido actual de los usuarios sin la intervención de StorePulse, con el fin de identificar sus necesidades, puntos de fricción y oportunidades de mejora. 
+
+Cada mapa refleja las etapas clave de interacción, acciones realizadas, puntos de contacto, experiencia emocional, dificultades enfrentadas y posibles mejoras.
+
+**Segmento Objetivo - Administrador de Galería Comercial**
+
+A continuación se presenta el User Journey Map de Benjamín Montenegro.
+
+![user-journey-mapping-administrador](../../assets/research/user-journey-mapping-administrator.png)
+
+Uno de los problemas más críticos se encuentra en la detección de incidentes de seguridad. Al no existir un sistema de alertas automatizado, es común que el administrador se entere de una intrusión o de un riesgo de incendio recién durante su siguiente recorrido presencial, lo que genera una caída marcada en la experiencia emocional en esa etapa del recorrido.
+
+La experiencia del usuario presenta también un punto crítico en la etapa de facturación, donde el cálculo manual del prorrateo de servicios obliga a resolver los reclamos de los inquilinos mediante negociación directa, sin contar con evidencia que sustente el monto cobrado.
+
+En conclusión, el proceso de administración de la galería requiere la implementación de un sistema que permita detectar eventos en el momento en que ocurren y sustentar la facturación con datos reales. Esto contribuiría a reducir la carga operativa del administrador y a mejorar significativamente la relación comercial con sus inquilinos.
+
+**Segmento Objetivo - Inquilino de Local Comercial**
+
+A continuación se presenta el User Journey Map de Juana Flores.
+
+![user-journey-mapping-inquilino](../../assets/research/user-journey-mapping-tenant.png)
+
+Uno de los principales problemas identificados es la ausencia total de visibilidad sobre el local durante la noche. Al no existir ningún mecanismo de monitoreo remoto, el inquilino permanece sin información desde que cierra su local hasta que lo abre al día siguiente, periodo en el que se concentra su mayor nivel de ansiedad.
+
+En cuanto a la experiencia del usuario, se identifican puntos de frustración adicionales relacionados con la recepción de la factura de servicios, donde la falta de un desglose por consumo real genera desconfianza hacia la administración.
+
+Finalmente, el análisis permite concluir que el proceso del inquilino requiere una solución que reemplace la incertidumbre nocturna por notificaciones en tiempo real, y que sustituya el cobro estimado por un desglose de consumo verificable. Esto no solo reduciría su ansiedad, sino que también fortalecería la confianza en la relación con la administración de la galería.
+
 ### 2.3.4. Empathy Mapping
 
 **Segmento Objetivo - Administrador de Galería Comercial**
