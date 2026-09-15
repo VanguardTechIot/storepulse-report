@@ -32,6 +32,105 @@ Su perfil evidencia una dependencia total del dispositivo móvil, lo que afecta 
 
 ### 2.3.2. User Task Matrix
 
+Se presenta el User Task Matrix, que reúne las tareas que ambos User Persona, administrador de galería e inquilino de local comercial, realizan para lograr sus objetivos.
+
+Estas tareas comprenden actividades que los usuarios llevan a cabo en su día a día, independientemente de la existencia de StorePulse.
+
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Tarea</th>
+      <th colspan="2">Benjamín Montenegro</th>
+      <th colspan="2">Juana Flores</th>
+    </tr>
+    <tr>
+      <th>Frecuencia</th>
+      <th>Importancia</th>
+      <th>Frecuencia</th>
+      <th>Importancia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Supervisar la seguridad del local/inmueble</td>
+      <td>Often</td>
+      <td>High</td>
+      <td>Often</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Verificar el consumo de servicios básicos</td>
+      <td>Often</td>
+      <td>High</td>
+      <td>Sometimes</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Comunicarse con la contraparte (administración/inquilino)</td>
+      <td>Often</td>
+      <td>Medium</td>
+      <td>Sometimes</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>Calcular o revisar el monto facturado por servicios</td>
+      <td>Often</td>
+      <td>High</td>
+      <td>Sometimes</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Atender o presentar reclamos por facturación</td>
+      <td>Sometimes</td>
+      <td>High</td>
+      <td>Sometimes</td>
+      <td>Medium</td>
+    </tr>
+    <tr>
+      <td>Registrar o reportar incidentes de seguridad</td>
+      <td>Sometimes</td>
+      <td>High</td>
+      <td>Rarely</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Proteger la mercadería/activos fuera de horario</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>Often</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Coordinar con personal de seguridad y mantenimiento</td>
+      <td>Often</td>
+      <td>Medium</td>
+      <td>N/A</td>
+      <td>N/A</td>
+    </tr>
+    <tr>
+      <td>Atender clientes y proveedores en el día a día</td>
+      <td>N/A</td>
+      <td>N/A</td>
+      <td>Often</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Buscar herramientas para mejorar la gestión</td>
+      <td>Rarely</td>
+      <td>Medium</td>
+      <td>Rarely</td>
+      <td>Medium</td>
+    </tr>
+  </tbody>
+</table>
+
+**Análisis:**
+
+- Ambos segmentos comparten la supervisión de seguridad y la revisión del monto facturado como tareas frecuentes y de alta importancia, aunque con enfoques distintos: el administrador la ejecuta a nivel de todo el inmueble, mientras que el inquilino la ejecuta únicamente sobre su propio local.
+- La verificación del consumo y la revisión del monto facturado también son tareas de alta importancia para ambos perfiles, aunque presentan distinta frecuencia. Esto evidencia la relevancia que tiene el control y seguimiento de los servicios básicos para ambos segmentos.
+- La comunicación entre ambas partes y la atención de reclamos por facturación aparecen en ambos perfiles, lo que evidencia una necesidad compartida de contar con información clara y canales de comunicación más eficientes.
+- Por otro lado, “proteger la mercadería/activos fuera de horario” es una tarea exclusiva del inquilino y de alta importancia, mientras que “coordinar con personal de seguridad y mantenimiento” es exclusiva del administrador. Esta diferencia confirma que, aunque ambos comparten necesidades relacionadas con la seguridad y el control de información, sus tareas cotidianas son complementarias y no idénticas, lo que justifica ofrecer vistas diferenciadas por rol dentro de StorePulse.
+
 ### 2.3.3. User Journey Mapping
 
 ### 2.3.4. Empathy Mapping
