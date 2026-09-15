@@ -163,6 +163,26 @@ Finalmente, el análisis permite concluir que el proceso del inquilino requiere 
 
 ### 2.3.4. Empathy Mapping
 
+En esta sección, el equipo resume el proceso de elaboración y presenta los Empathy Maps realizados para cada User Persona. El proceso implicó centrar cada User Persona y plasmar las observaciones del equipo, respondiendo a preguntas clave sobre qué piensan, sienten, ven, oyen, dicen y hacen. Finalmente, se identificaron los "Pains" y "Gains" con el objetivo de comprender mejor sus preocupaciones, necesidades y las soluciones que podrían generar mayor valor para ellos.
+
 **Segmento Objetivo - Administrador de Galería Comercial**
 
-![Administrador](../../assets/research/empathy-map-administrator.png)
+Esta sección presenta el Empathy Map elaborado para Benjamín Montenegro, nuestro User Persona clave que representa al administrador de una galería comercial en Lima Metropolitana. Este mapa permite visualizar de manera integral sus pensamientos, emociones, necesidades y desafíos dentro del contexto de la gestión operativa del inmueble.
+
+![empathy-map-administrador](../../assets/research/empathy-map-administrator.png)
+
+A partir de este análisis, se evidencia que Benjamín Montenegro enfrenta dificultades principalmente relacionadas con la dependencia de procesos manuales, la ausencia de alertas automatizadas y la imposibilidad de sustentar los cobros de servicios ante sus inquilinos. Estas limitaciones generan desgaste operativo, conflictos recurrentes y dificultan una gestión proactiva del inmueble.
+
+Mediante este enfoque empático, se identificaron sus principales frustraciones (Pains), como la detección tardía de incidentes y el cálculo estimado del consumo, así como sus oportunidades de valor (Gains), entre las que destacan la centralización de la información, la reducción del tiempo dedicado a recorridos presenciales y una facturación respaldada por datos reales. Esto permite orientar la solución hacia una plataforma intuitiva, accesible en costo y enfocada en sustituir la supervisión reactiva por información medida.
+
+**Segmento Objetivo - Inquilino de Local Comercial**
+
+Esta sección presenta el Empathy Map elaborado para Juana Flores, nuestro User Persona clave que representa a un inquilino de local comercial dentro de una galería en Lima, Perú. Este mapa permite comprender de manera integral sus pensamientos, emociones, necesidades y desafíos en la protección de su mercadería y la transparencia del cobro de servicios.
+
+![empathy-map-inquilino](../../assets/research/empathy-map-tenant.png)
+
+El análisis muestra que Juana Flores enfrenta problemas relacionados con la falta de visibilidad de su local fuera del horario de atención, la comunicación ineficiente con la administración y la opacidad en el cobro de servicios, lo que impacta directamente en su tranquilidad y en la confianza hacia la galería donde opera.
+
+A través de este ejercicio empático, se identificaron sus principales frustraciones (Pains), como la ausencia de alertas ante intrusiones y la falta de un desglose de consumo verificable. Asimismo, se definieron sus oportunidades de valor (Gains), que incluyen notificaciones en tiempo real y transparencia sobre su consumo real.
+
+Este entendimiento permite diseñar una solución enfocada en brindar tranquilidad, transparencia y accesibilidad total desde el dispositivo móvil, alineada con su necesidad de operar su negocio sin depender de trámites presenciales.
