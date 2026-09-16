@@ -48,3 +48,14 @@ con el Tenant <br>
 la capacidad de respuesta de otros módulos como el de seguridad, por lo que genera un gran impacto en el proceso de negocio.<br>
 
 ![big-picture-eventstorming-stage-3.png](../../assets/research/big-picture-eventstorming-stage-3.png)
+
+
+También se presenta la versión general de todo el proceso de creación del **Big Picture EventStorming**, incluyendo las 3 etapas.
+
+![big-picture-eventstorming.png](../../assets/research/big-picture-eventstorming.png)
+
+El diagrama general expone el *landscape* completo del negocio a través de las tres etapas metodológicas consolidadas progresivamente en un solo lienzo:
+
+*   **Open (Descubrimiento):** Se mapearon todos los eventos de dominio relevantes (notas naranjas) mediante una lluvia de ideas divergente. Se capturaron desde acciones operativas (*"Commercial Unit Rented"*) hasta incidentes físicos imprevistos (*"Smoke Appeared"*, *"Intrusion Occurred"*), abarcando toda la realidad de la galería.
+*   **Explore (Narrativa y Relaciones):** Se estructuraron los eventos cronológicamente, integrando Actores (notas amarillas) y Sistemas Externos (notas azules). Esta narración reveló un patrón crítico: la brecha de tiempo entre la ocurrencia de un incidente de seguridad y el momento en que alguien lo reporta o lo atiende.
+*   **Close (Procesos clave y Límites):** Se agruparon los eventos para definir las fronteras estructurales del sistema, identificando los módulos *Core* (*Seguridad y Emergencias*, *Consumo y Facturación*, *Comunicación*, *Continuidad*). Además, se visibilizaron los riesgos operativos mediante *hotspots* (notas rosadas) y se delimitaron oportunidades futuras que quedan fuera del alcance funcional directo (*out of scope*), como el pago de facturas.
