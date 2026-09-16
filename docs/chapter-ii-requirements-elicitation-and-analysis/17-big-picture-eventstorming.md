@@ -21,3 +21,11 @@ de un intruso, las alertas que se emiten hasta el registro y pago de las factura
 identificar los eventos sin tener en cuenta el orden de los mismos. 
 
 * **Etapa 2: Explore (Ordenamiento y Narrativa)**
+
+En esta etapa el equipo se centró en el ordenamiento cronológico de izquierda a derecha de los eventos,
+esta vez con la incorporación de los actores, sistemas externos y los puntos de dolor o hotspots.<br>
+![big-picture-eventstorming-stage-2.png](../../assets/research/big-picture-eventstorming-stage-2.png)
+
+Muestra la línea de tiempo de eventos de dominio desde la apertura de la galería hasta los hilos paralelos de seguridad,
+incendio, facturación y comunicación con el inquilino, con actores (amarillo), sistemas externos (azul) y 
+hotspots (rosado) identificados durante la sesión de narración.
