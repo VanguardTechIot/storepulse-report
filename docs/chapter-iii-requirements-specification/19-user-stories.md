@@ -2,437 +2,111 @@
 
 ## 3.1. User Stories
 
-Las siguientes User Stories representan las necesidades funcionales identificadas en el análisis de User Personas (Capítulo II.3.1) y en el proceso de necesidades (Capítulo II.3). Cada historia está redactada en formato Gherkin con criterios de aceptación que permiten validar el cumplimiento de la funcionalidad desde la perspectiva del usuario.
+Para el presente proyecto, se definieron los epics a partir de los objetivos funcionales y necesidades estratégicas identificadas durante la fase de análisis. Estas representan agrupaciones de alto nivel que organizan grandes bloques de funcionalidades del sistema, permitiendo estructurar el alcance del producto, establecer prioridades y servir como marco de referencia para la descomposición progresiva de requerimientos más específicos.
 
-### Segmento: Administrador de Galería Comercial (Benjamín Montenegro)
-
-#### US-01: Recibir Alertas Inmediatas de Intrusiones
-
-**Título:** Como administrador de galería, quiero recibir alertas inmediatas cuando se detecte una intrusión en la galería.
-
-**User Persona:** Benjamín Montenegro (Gallery Administrator)
-
-**Descripción:**
-El administrador necesita un mecanismo automatizado que le notifique en tiempo real cuando ocurra un evento de intrusión (Security Incident de tipo Intrusion) en cualquier local o área común de la galería. Esta notificación debe llegar incluso fuera del horario de atención, permitiendo una respuesta rápida.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Intrusion Alerts for Gallery Administrator
-  As a Gallery Administrator
-  I want to receive immediate notifications about intrusions
-  So that I can respond quickly to security threats
-
-  Scenario: Administrator receives intrusion alert outside office hours
-    Given a security sensor detects an unauthorized entry in the gallery
-    When the intrusion is verified by the system
-    Then an emergency alert notification is sent to the administrator's mobile device within 30 seconds
-    And the alert includes the location of the intrusion, timestamp and event details
-    And the alert persists in the system even if the administrator misses it initially
-
-  Scenario: Administrator views intrusion history
-    Given the administrator wants to review past intrusion attempts
-    When they access the security events dashboard
-    Then they can view a chronological list of all intrusions with location, date, time and status
-    And they can filter intrusions by location, date range or resolution status
-```
-
-**Value Proposition:** Reduce risk of security breaches and enable proactive response to threats.
-
----
-
-#### US-02: Centralizar Información de Consumo de Servicios Básicos
-
-**Título:** Como administrador de galería, quiero consultar el consumo de agua y energía de cada local en un único sistema.
-
-**User Persona:** Benjamín Montenegro (Gallery Administrator)
-
-**Descripción:**
-El administrador necesita acceso centralizado a los datos de Utility Consumption para todos los locales. En lugar de Excel y documentos físicos, debe poder visualizar consumos por período, comparar tendencias y detectar anomalías de manera ágil.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Centralized Utility Consumption Dashboard
-  As a Gallery Administrator
-  I want to view all utility consumption data in a single dashboard
-  So that I can make informed decisions about billing and detect anomalies
-
-  Scenario: Administrator views consumption for a specific commercial unit
-    Given the administrator has access to the utility dashboard
-    When they select a specific commercial unit (Commercial Unit)
-    Then they can see the consumption history (Consumption History) for water and electricity
-    And the data is organized by consumption period (Consumption Period)
-    And they can compare current period against previous periods
-
-  Scenario: Administrator detects anomalous consumption
-    Given consumption data is displayed for all commercial units
-    When the system detects consumption exceeding the baseline consumption (Baseline Consumption) by more than 20%
-    Then the unit is highlighted in the dashboard
-    And the administrator can access a detailed report of the anomaly
-    And they can receive an optional alert notification
-
-  Scenario: Administrator exports consumption data
-    Given the administrator wants to share consumption data with inquilinos
-    When they select a date range and commercial unit
-    Then they can export the data in CSV or PDF format
-    And the exported file includes detailed consumption metrics and baseline comparisons
-```
-
-**Value Proposition:** Replace manual Excel tracking with real-time data, enabling data-driven billing and anomaly detection.
-
----
-
-#### US-03: Facturación Respaldada por Datos Verificables
-
-**Título:** Como administrador de galería, quiero generar factura de servicios compartidos basada en consumo real medido.
-
-**User Persona:** Benjamín Montenegro (Gallery Administrator)
-
-**Descripción:**
-El administrador necesita que cada Utility Bill esté fundamentado en mediciones reales de los sensores IoT, no en estimaciones. Esto permite reducir conflictos con inquilinos y sustenta cada cobro (Shared Expense) con evidencia tangible.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Data-Driven Utility Billing
-  As a Gallery Administrator
-  I want to generate utility bills based on actual measured consumption
-  So that billing disputes are reduced and charges are defensible
-
-  Scenario: Administrator generates consumption-based bill
-    Given a consumption period (Consumption Period) has ended
-    When the administrator initiates bill generation for a specific commercial unit
-    Then the system calculates the shared expense (Shared Expense) based on actual utility consumption (Utility Consumption)
-    And the bill displays a breakdown showing: total consumption, baseline, overage and final amount
-    And the bill includes a reference to the meter readings (Utility Meter) supporting the calculation
-    And the bill is timestamped and marked as "Data-Verified"
-
-  Scenario: Administrator resolves a billing dispute with supporting data
-    Given a tenant questions their billing amount (Billing Dispute)
-    When the administrator accesses the bill details
-    Then they can display a chart showing the tenant's consumption history vs baseline
-    And they can export a detailed report with meter readings and calculations
-    And the tenant can verify the data independently using their mobile app
-```
-
-**Value Proposition:** Eliminate billing disputes through transparent, data-backed charges.
-
----
-
-#### US-04: Detección Automatizada de Riesgo de Incendio
-
-**Título:** Como administrador de galería, quiero detectar automáticamente la presencia de humo en locales y áreas comunes.
-
-**User Persona:** Benjamín Montenegro (Gallery Administrator)
-
-**Descripción:**
-El administrador necesita que el sistema detecte Fire Risk situaciones (específicamente Smoke Events) de manera automatizada y genere alertas de emergencia (Emergency Alert) inmediatas, reemplazando la falta de detectores de humo en muchos locales.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Automated Fire Risk Detection
-  As a Gallery Administrator
-  I want to be automatically notified of smoke events in the gallery
-  So that I can initiate emergency protocols quickly
-
-  Scenario: System detects smoke and alerts administrator
-    Given smoke sensors are installed in commercial units and common areas (Common Area)
-    When a smoke event (Smoke Event) is detected
-    Then an emergency alert (Emergency Alert) is generated immediately
-    And the administrator receives a notification with location and severity level
-    And the alert is also sent to designated emergency personnel
-    And the event is recorded in the security incident log (Security Incident)
-
-  Scenario: Administrator verifies smoke alert
-    Given a smoke alert has been generated
-    When the administrator accesses the alert details
-    Then they can view the location of the detection (Local Event or Gallery Event)
-    And they can see the sensor readings and timestamp
-    And they have options to: acknowledge, escalate to emergency services or cancel (if false alarm)
-```
-
-**Value Proposition:** Reduce response time to fire emergencies by replacing manual detection with automated alerts.
-
----
-
-#### US-05: Coordinación Integrada con Personal de Seguridad
-
-**Título:** Como administrador de galería, quiero coordinar con mi equipo de seguridad usando un sistema centralizado.
-
-**User Persona:** Benjamín Montenegro (Gallery Administrator)
-
-**Descripción:**
-El administrador necesita comunicar incidentes de seguridad a su personal de seguridad de manera inmediata y coordinada, en lugar de depender de llamadas y WhatsApp informales.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Integrated Security Team Coordination
-  As a Gallery Administrator
-  I want to send security incident alerts to my security team members
-  So that they can respond in a coordinated manner
-
-  Scenario: Administrator assigns security team to incident
-    Given a security incident (Security Incident) has been detected
-    When the administrator views the incident details
-    Then they can select from pre-configured security team members
-    And they can assign one or more team members to investigate or respond
-    And the assigned team members receive a notification with incident details
-    And the administrator can monitor the response status in real-time
-```
-
-**Value Proposition:** Replace ad-hoc communication with structured incident management.
-
----
-
-### Segmento: Inquilino de Local Comercial (Juana Flores)
-
-#### US-06: Recibir Alertas Móviles de Intrusiones en mi Local
-
-**Título:** Como inquilino, quiero recibir notificaciones en mi móvil cuando alguien intente ingresar a mi local fuera del horario.
-
-**User Persona:** Juana Flores (Tenant)
-
-**Descripción:**
-La inquilina necesita visibilidad remota sobre la seguridad de su local (Commercial Unit) durante las horas no comerciales. Las notificaciones de intrusión deben llegar a su teléfono móvil de manera inmediata, permitiéndole tomar medidas o informar a la administración.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Real-Time Intrusion Alerts for Tenants
-  As a Tenant
-  I want to receive mobile notifications when an intrusion is detected at my store
-  So that I can respond quickly and protect my merchandise
-
-  Scenario: Tenant receives intrusion alert on mobile device
-    Given intrusion detection is active at the tenant's commercial unit
-    When an unauthorized entry is detected (Intrusion)
-    Then the tenant receives a push notification on their mobile device within 30 seconds
-    And the notification includes: location (Commercial Unit), time, and severity
-    And the notification persists until the tenant acknowledges it
-    And the tenant can take actions: view location on map, contact administrator or call emergency
-
-  Scenario: Tenant views intrusion incident details
-    Given the tenant has received an intrusion alert
-    When they tap on the notification or access their security history
-    Then they can view the incident status: ongoing, resolved or false alarm
-    And they can see timestamps and any comments from the administrator
-    And they can take actions: mark as resolved or request administrator investigation
-```
-
-**Value Proposition:** Provide peace of mind by enabling remote monitoring of store security.
-
----
-
-#### US-07: Visualizar Desglose de Consumo de Servicios Básicos
-
-**Título:** Como inquilino, quiero ver exactamente cuánta agua y energía consumí este período.
-
-**User Persona:** Juana Flores (Tenant)
-
-**Descripción:**
-La inquilina necesita transparencia sobre su Utility Consumption real. En lugar de recibir un monto facturado sin justificación, debe poder visualizar en su móvil cuánto consumió (en kWh, m³, etc.) y cómo se calculó su cuota correspondiente.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Transparent Utility Consumption Visibility for Tenants
-  As a Tenant
-  I want to view my actual consumption for each utility in real-time
-  So that I can understand and verify my charges
-
-  Scenario: Tenant views current consumption
-    Given the tenant opens the mobile app
-    When they navigate to the consumption section
-    Then they can see their current period consumption for water and electricity
-    And the data displays: total consumption, consumption period (dates), and comparison to previous period
-    And they can visualize consumption trends in a simple chart or graph
-
-  Scenario: Tenant reviews monthly billing breakdown
-    Given a new billing period (Consumption Period) has been generated
-    When the tenant accesses their bill (Utility Bill)
-    Then they can see: individual utility meters (Utility Meter) readings
-    And they can see their proportional share of shared expenses (Shared Expense)
-    And they can see the calculation: (My consumption / Total consumption) × Total cost
-    And all numbers are linked to actual meter readings as proof
-
-  Scenario: Tenant challenges a billing amount
-    Given the tenant believes their bill is incorrect (Billing Dispute)
-    When they initiate a dispute claim in the app
-    Then they can include evidence: compare their consumption to baseline consumption (Baseline Consumption)
-    And they can request administrator review with consumption details
-    And they receive acknowledgment and estimated resolution time
-```
-
-**Value Proposition:** Replace distrust with transparency, reducing billing disputes.
-
----
-
-#### US-08: Reportar Incidentes de Seguridad Directamente desde la App
-
-**Título:** Como inquilino, quiero reportar un incidente de seguridad o daño a mi local directamente por la aplicación.
-
-**User Persona:** Juana Flores (Tenant)
-
-**Descripción:**
-La inquilina necesita un canal de comunicación directo para reportar Security Incidents, roturas, daños o situaciones anormales sin depender de WhatsApp o llamadas. El reporte debe documentarse automáticamente en el sistema.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: In-App Security Incident Reporting
-  As a Tenant
-  I want to report security incidents or property damage through the mobile app
-  So that my report is documented and tracked
-
-  Scenario: Tenant reports an unauthorized entry attempt
-    Given the tenant has observed or been notified of an intrusion attempt
-    When they access the app and select "Report Incident"
-    Then they can choose the incident type: Intrusion, Smoke/Fire, Property Damage or Other
-    And they can provide details: description, location within their unit, photos/evidence
-    And they can attach up to 5 photos as evidence
-    And the report is immediately sent to the gallery administrator
-    And they receive a confirmation number and estimated response time
-
-  Scenario: Tenant tracks incident resolution
-    Given the tenant has filed an incident report (Security Incident)
-    When they return to the app
-    Then they can view the status: Pending, In Investigation, Resolved or Closed
-    And they can see any comments or updates from the administrator
-    And they receive notifications when the status changes
-```
-
-**Value Proposition:** Ensure incident documentation and improve response tracking.
-
----
-
-#### US-09: Recibir Alertas de Emergencia (Humo/Incendio)
-
-**Título:** Como inquilino, quiero ser notificado inmediatamente si hay detección de humo o riesgo de incendio en mi local.
-
-**User Persona:** Juana Flores (Tenant)
-
-**Descripción:**
-La inquilina necesita protección contra Fire Risks. Aunque ella no instalará sensores en su local, StorePulse debe integrar detectores de humo a nivel de galería y notificarla de cualquier Smoke Event que afecte o se localice cerca de su área.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Fire Emergency Alerts for Tenants
-  As a Tenant
-  I want to receive immediate alerts if smoke or fire is detected near my store
-  So that I can evacuate or take protective measures
-
-  Scenario: System detects smoke and alerts affected tenants
-    Given smoke sensors are monitoring the gallery (Common Area and Commercial Unit areas)
-    When a smoke event (Smoke Event) is detected near the tenant's unit
-    Then the tenant receives an urgent push notification
-    And the notification includes: severity level, location and recommended action (evacuate or monitor)
-    And the alert is delivered within 10 seconds of detection
-    And the alert cannot be dismissed until acknowledged by the tenant
-
-  Scenario: Tenant receives all-clear notification after fire event
-    Given a fire alert was triggered at the tenant's location
-    When the administrator or emergency services determines the threat is over
-    Then the tenant receives a follow-up notification: "All Clear - Fire Risk Resolved"
-    And they can access a summary of what triggered the alert and response taken
-```
-
-**Value Proposition:** Provide safety assurance and reduce fear of undetected fires.
-
----
-
-### Segmento: Ambos (Administrador e Inquilino)
-
-#### US-10: Comunicación Eficiente Entre Administrador e Inquilino
-
-**Título:** Como administrador/inquilino, quiero comunicarme directamente dentro de la plataforma para resolver dudas y reclamos.
-
-**User Persona:** Benjamín Montenegro & Juana Flores
-
-**Descripción:**
-Ambos segmentos necesitan reemplazar WhatsApp (calificado por 100% de inquilinos como "ineficiente") con un canal de comunicación integrado que centralice conversaciones sobre billing, incidents y maintenance.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Integrated Messaging Between Administrator and Tenants
-  As a Gallery Administrator or Tenant
-  I want to communicate through the platform about billing and incidents
-  So that all conversations are documented and accessible
-
-  Scenario: Tenant initiates conversation about billing
-    Given the tenant has a question about their billing (Billing Dispute or Utility Bill)
-    When they access the messaging section and create a new message to the administrator
-    Then they can attach relevant documents (previous bill, consumption comparison)
-    And they can assign priority: Low, Medium or High
-    And the administrator receives a notification with the message details
-    And the conversation history is maintained and searchable
-
-  Scenario: Administrator responds to tenant inquiry
-    Given the administrator has received a message from a tenant
-    When they access the messaging inbox
-    Then they can view all open conversations grouped by tenant or category
-    And they can respond with explanations, supporting data or proposed solutions
-    And the tenant is notified of the response
-    And both parties can continue the conversation until resolution
-```
-
-**Value Proposition:** Replace fragmented WhatsApp conversations with organized, documented communication.
-
----
-
-#### US-11: Histórico de Eventos y Consumo Disponible Offline
-
-**Título:** Como usuario, quiero poder consultar mi histórico de eventos y consumo incluso si pierdo conexión temporal a Internet.
-
-**User Persona:** Benjamín Montenegro & Juana Flores
-
-**Descripción:**
-Ambos segmentos requieren que el sistema continúe registrando y almacenando datos localmente cuando hay pérdida de conectividad, asegurando que no se pierda información crítica de incidentes o consumo.
-
-**Criterios de Aceptación (Gherkin):**
-
-```gherkin
-Feature: Offline Availability of History and Consumption Data
-  As a Gallery Administrator or Tenant
-  I want to access my event history and consumption data even with temporary Internet loss
-  So that I don't lose critical information
-
-  Scenario: User accesses history during offline mode
-    Given the user has previously synced data to their device
-    When they lose Internet connection
-    Then they can still view consumption history (Consumption History), event logs and past incidents
-    And the data displayed is marked as "Last updated: [timestamp]"
-    And the user cannot make changes while offline (read-only mode)
-
-  Scenario: Data syncs automatically when connection is restored
-    Given the user regains Internet connection
-    When the app reconnects to the server
-    Then all local data is automatically synced
-    And any new events from the server are merged with local records
-    And a notification confirms: "Sync successful - all data is current"
-    And the user can resume normal operations (creation/modification of records)
-```
-
-**Value Proposition:** Ensure business continuity and prevent loss of critical security or consumption records.
-
----
-
-## Summary of User Stories
-
-| # | User Persona | Feature | Priority | Complexity |
+| ID | Título | Descripción | Criterios de Aceptación | Epic ID |
 |---|---|---|---|---|
-| US-01 | Administrador | Intrusion Alerts | Critical | Medium |
-| US-02 | Administrador | Consumption Dashboard | Critical | High |
-| US-03 | Administrador | Data-Driven Billing | Critical | High |
-| US-04 | Administrador | Smoke Detection Alerts | Critical | Medium |
-| US-05 | Administrador | Security Team Coordination | High | Medium |
-| US-06 | Inquilino | Intrusion Alerts (Mobile) | Critical | Low |
-| US-07 | Inquilino | Consumption Visibility | Critical | Medium |
-| US-08 | Inquilino | Incident Reporting | High | Medium |
-| US-09 | Inquilino | Fire Alerts | Critical | Low |
-| US-10 | Ambos | In-Platform Messaging | High | High |
-| US-11 | Ambos | Offline Data Access | Medium | High |
+| **EP-01** | **Comunicación de valor de StorePulse** | Como visitante, quiero comprender qué es StorePulse y cómo puede beneficiar a mi galería comercial, para decidir si la solución es adecuada para mi negocio. | | |
+| VS-01 | Conocer el propósito de StorePulse | Como visitante,<br>quiero conocer el propósito de StorePulse,<br>para entender qué problema de mi galería puede solucionar. | Escenario 1: Dado que el visitante accede al sitio web estático, cuando llega a la sección principal, entonces visualiza una descripción clara del propósito de la plataforma. | EP-01 |
+| VS-02 | Conocer los beneficios según segmento | Como visitante,<br>quiero conocer los beneficios de StorePulse diferenciados por segmento (administrador/inquilino),<br>para evaluar el valor que aporta según mi rol. | Escenario 1: Dado que el visitante accede a la sección de beneficios, cuando selecciona su tipo de perfil (administrador o inquilino), entonces visualiza los beneficios correspondientes a ese rol. | EP-01 |
+| VS-03 | Conocer el funcionamiento de la solución | Como visitante,<br>quiero conocer cómo funciona StorePulse,<br>para comprender cómo se relacionan el monitoreo, las alertas y el consumo. | Escenario 1: Dado que el visitante accede a la sección "Cómo funciona", cuando revisa el contenido, entonces visualiza un video explicativo con el flujo del producto. | EP-01 |
+| VS-04 | Conocer los planes de suscripción | Como visitante administrador,<br>quiero conocer los planes de suscripción disponibles,<br>para evaluar el costo de implementar StorePulse en mi galería. | Escenario 1: Dado que el visitante accede a la sección de planes, cuando revisa las opciones, entonces visualiza el precio, la cantidad de locales cubiertos y los beneficios de cada plan. | EP-01 |
+| VS-05 | Resolver dudas frecuentes | Como visitante,<br>quiero acceder a una sección de preguntas frecuentes,<br>para resolver dudas antes de decidir registrarme. | Escenario 1: Dado que el visitante tiene una duda, cuando accede a la sección de FAQ, entonces encuentra respuestas a las preguntas más comunes sobre instalación, costo y funcionamiento. | EP-01 |
+| VS-06 | Acceder o registrarse en la plataforma | Como visitante,<br>quiero acceder al registro o inicio de sesión desde el sitio web,<br>para comenzar a usar StorePulse. | Escenario 1: Dado que el visitante decide convertirse en usuario, cuando presiona el botón de registro, entonces es redirigido al formulario de registro de la plataforma. | EP-01 |
+| **EP-02** | **Gestión de acceso y cuentas** | Como usuario de StorePulse, quiero gestionar mi acceso a la plataforma de forma segura, para utilizar las funcionalidades correspondientes a mi rol. | | |
+| US-01 | Registro de usuario | Como visitante,<br>quiero registrarme indicando mis datos y mi rol (administrador o inquilino),<br>para acceder a las funcionalidades de la plataforma. | Escenario 1: Dado que el visitante no tiene cuenta, cuando completa el registro con datos válidos, entonces se crea su cuenta según el rol seleccionado.<br>Escenario 2: Dado que el visitante ingresa un correo ya registrado, cuando intenta completar el registro, entonces el sistema muestra un mensaje indicando que no se pudo completar. | EP-02 |
+| US-02 | Inicio de sesión | Como usuario,<br>quiero iniciar sesión en StorePulse,<br>para acceder de forma segura a la información de mi galería o local. | Escenario 1: Dado que el usuario tiene una cuenta registrada, cuando ingresa credenciales correctas, entonces accede a su cuenta.<br>Escenario 2: Dado que el usuario ingresa credenciales incorrectas, cuando intenta iniciar sesión, entonces el sistema muestra un mensaje de error y no permite el acceso. | EP-02 |
+| US-03 | Recuperación de contraseña | Como usuario,<br>quiero recuperar mi contraseña mediante un código enviado a mi correo,<br>para recuperar el acceso a mi cuenta. | Escenario 1: Dado que el usuario solicita recuperar su contraseña, cuando ingresa su correo, entonces recibe un código de verificación.<br>Escenario 2: Dado que el usuario ingresa un código expirado (mayor a 15 minutos), cuando intenta validarlo, entonces el sistema no permite continuar con el cambio. | EP-02 |
+| US-04 | Cierre de sesión | Como usuario,<br>quiero cerrar mi sesión en el dispositivo que esté usando,<br>para evitar accesos indebidos a mi cuenta. | Escenario 1: Dado que el usuario está autenticado, cuando selecciona cerrar sesión, entonces finaliza su sesión activa y es redirigido al inicio de sesión. | EP-02 |
+| US-05 | Control de acceso por rol | Como usuario,<br>quiero que la plataforma me muestre únicamente la información correspondiente a mi rol y local,<br>para asegurar que mi información privada no sea accesible por otros. | Escenario 1: Dado que un inquilino inicia sesión, cuando accede al dashboard, entonces solo visualiza la información de su propio local.<br>Escenario 2: Dado que un administrador inicia sesión, cuando accede al dashboard, entonces visualiza la vista consolidada de todo el inmueble. | EP-02 |
+| TS-01 | Autenticación de usuarios | Como backend developer,<br>quiero autenticar a los usuarios de forma segura,<br>para permitir el acceso al sistema. | Escenario 1: Dado que se envía una solicitud a `/api/v1/auth/sign-in` con credenciales válidas, cuando se procesa, entonces el sistema responde 200 OK y genera un token de acceso.<br>Escenario 2: Dado que las credenciales son inválidas, cuando se procesa la solicitud, entonces el sistema responde 401 UNAUTHORIZED. | EP-02 |
+| TS-02 | Registro de usuarios | Como backend developer,<br>quiero gestionar el registro de usuarios de forma segura,<br>para permitir la creación de cuentas según su rol. | Escenario 1: Dado que se envía una solicitud a `/api/v1/auth/sign-up` con datos válidos, cuando se procesa, entonces se almacena la contraseña encriptada y se responde 201 CREATED.<br>Escenario 2: Dado que el correo ya existe, cuando se procesa la solicitud, entonces responde 409 CONFLICT. | EP-02 |
+| TS-03 | Recuperación de contraseña vía correo | Como backend developer,<br>quiero gestionar la recuperación de contraseña mediante un token temporal,<br>para permitir a los usuarios restablecer su acceso. | Escenario 1: Dado que el endpoint `/api/v1/auth/password-reset` recibe un correo válido, cuando se procesa, entonces se envía un token de 6 dígitos con vigencia de 15 minutos.<br>Escenario 2: Dado que el correo no existe, cuando se procesa la solicitud, entonces responde 404 NOT FOUND. | EP-02 |
+| **EP-03** | **Gestión de perfil de usuario** | Como usuario, quiero visualizar y actualizar mi información personal, para mantener mis datos actualizados dentro de la plataforma. | | |
+| US-06 | Gestión de perfil de usuario | Como usuario de la plataforma,<br>quiero gestionar la información de mi perfil,<br>para asegurar que mis datos de contacto sean correctos. | Escenario 1: Dado que el usuario está autenticado, cuando accede a su perfil, entonces visualiza su nombre, correo y rol.<br>Escenario 2: Dado que el usuario edita su información, cuando ingresa datos inválidos, entonces el sistema muestra un mensaje de error y no guarda los cambios. | EP-03 |
+| TS-04 | Gestión de perfil de usuario | Como backend developer,<br>quiero centralizar la consulta y actualización del perfil de usuario,<br>para mantener la información asociada a su cuenta disponible y actualizada. | Escenario 1: Dado que el endpoint `/api/v1/users/:id/profile` recibe una petición GET con token válido, cuando se procesa, entonces responde 200 OK con los datos del perfil.<br>Escenario 2: Dado que se envía una petición PUT con datos válidos, cuando se procesa, entonces el sistema actualiza el perfil y responde 200 OK. | EP-03 |
+| **EP-04** | **Gestión del inmueble y locales** | Como administrador, quiero registrar y administrar la galería, sus locales y sus inquilinos, para organizar la operación del inmueble dentro de StorePulse. | | |
+| US-07 | Registro de la galería comercial | Como administrador,<br>quiero registrar los datos de mi galería comercial,<br>para habilitar la gestión del inmueble en la plataforma. | Escenario 1: Dado que el administrador completa el registro con nombre, dirección y cantidad de locales, cuando confirma, entonces el sistema crea el perfil de la galería. | EP-04 |
+| US-08 | Administrar locales de la galería | Como administrador,<br>quiero registrar y administrar los locales que componen mi galería,<br>para asociar cada uno con su inquilino y sus dispositivos. | Escenario 1: Dado que el administrador registra un nuevo local con su número e inquilino asignado, cuando confirma, entonces el sistema crea el local vinculado a la galería.<br>Escenario 2: Dado que un local tiene dispositivos IoT activos, cuando el administrador intenta eliminarlo, entonces el sistema impide la acción. | EP-04 |
+| US-09 | Invitar o asignar inquilino a un local | Como administrador,<br>quiero invitar a un inquilino a vincularse a su local,<br>para que pueda acceder a la información de su propio espacio. | Escenario 1: Dado que el administrador ingresa el correo del inquilino, cuando envía la invitación, entonces el inquilino recibe un enlace para crear su cuenta vinculada al local. | EP-04 |
+| US-10 | Consultar información del inmueble | Como administrador,<br>quiero visualizar la información consolidada de mi galería (locales, inquilinos, dispositivos),<br>para tener una vista general de la operación. | Escenario 1: Dado que la galería tiene locales registrados, cuando el administrador accede al resumen del inmueble, entonces visualiza el listado de locales con su estado. | EP-04 |
+| TS-05 | Gestión de galerías | Como backend developer,<br>quiero consolidar el registro y consulta de galerías comerciales,<br>para administrar su ciclo de vida técnico. | Escenario 1: Dado que se envía POST a `/api/v1/galleries` con datos válidos, cuando se procesa, entonces se crea el registro y responde 201 CREATED. | EP-04 |
+| TS-06 | Gestión de locales | Como backend developer,<br>quiero consolidar el registro, edición y baja lógica de locales,<br>para mantener la estructura del inmueble consistente. | Escenario 1: Dado que se envía POST a `/api/v1/galleries/{id}/units` con datos válidos, cuando se procesa, entonces se crea el local y responde 201 CREATED.<br>Escenario 2: Dado que un local tiene dispositivos vinculados, cuando se solicita su eliminación, entonces el sistema responde 409 CONFLICT. | EP-04 |
+| TS-07 | Vinculación de inquilino a local | Como backend developer,<br>quiero gestionar la invitación y vinculación de un inquilino a su local,<br>para asociar correctamente el acceso por rol. | Escenario 1: Dado que se envía POST a `/api/v1/units/{id}/invite` con un correo válido, cuando se procesa, entonces se genera un token de invitación y responde 201 CREATED. | EP-04 |
+| **EP-05** | **Gestión de dispositivos IoT** | Como administrador, quiero registrar y administrar los dispositivos IoT instalados en cada local, para mantener el monitoreo operativo del inmueble. | | |
+| US-11 | Registrar dispositivo IoT | Como administrador,<br>quiero registrar un dispositivo IoT y asociarlo a un local,<br>para habilitar su monitoreo dentro de la plataforma. | Escenario 1: Dado que el administrador ingresa el identificador del dispositivo y el local, cuando confirma, entonces el sistema vincula el dispositivo al local.<br>Escenario 2: Dado que el identificador ya está registrado, cuando se intenta vincular, entonces el sistema rechaza la operación. | EP-05 |
+| US-12 | Visualizar estado de dispositivos | Como administrador,<br>quiero visualizar el estado de los dispositivos IoT de mi galería,<br>para identificar cuáles están operativos. | Escenario 1: Dado que existen dispositivos registrados, cuando el administrador consulta el listado, entonces visualiza el estado (activo/inactivo/con falla) de cada uno. | EP-05 |
+| US-13 | Desactivar dispositivo | Como administrador,<br>quiero desactivar un dispositivo en mantenimiento,<br>para suspender temporalmente su monitoreo sin perder su historial. | Escenario 1: Dado que un dispositivo está activo, cuando el administrador solicita su desactivación, entonces el sistema detiene la recepción de datos y lo marca como "Inactivo". | EP-05 |
+| US-14 | Recibir alerta de falla de dispositivo | Como administrador,<br>quiero ser notificado cuando un dispositivo presente una falla técnica,<br>para gestionar su reparación o reemplazo. | Escenario 1: Dado que un dispositivo reporta un voltaje fuera de rango, cuando el sistema detecta la anomalía, entonces se genera una alerta de falla técnica visible en el dashboard. | EP-05 |
+| TS-08 | Registro y consulta de dispositivos | Como backend developer,<br>quiero consolidar el registro y consulta de dispositivos IoT,<br>para vincularlos correctamente con su local. | Escenario 1: Dado que se envía POST a `/api/v1/devices` con un identificador único de hardware, cuando se procesa, entonces se crea el dispositivo con estado "Pendiente de vinculación" y responde 201 CREATED.<br>Escenario 2: Dado que el identificador ya existe, cuando se intenta registrar de nuevo, entonces responde 409 CONFLICT. | EP-05 |
+| TS-09 | Gestión de estado de dispositivos | Como backend developer,<br>quiero gestionar el ciclo de estados de un dispositivo (activo, inactivo, con falla),<br>para reflejar su condición operativa real. | Escenario 1: Dado que un dispositivo existe, cuando se recibe una solicitud PATCH cambiando su estado, entonces el sistema actualiza el estado y responde 200 OK. | EP-05 |
+| TS-10 | Recepción de métricas de salud del dispositivo | Como backend developer,<br>quiero recibir y almacenar métricas de voltaje, CPU y temperatura del microcontrolador,<br>para diagnosticar fallas técnicas remotamente. | Escenario 1: Dado que el dispositivo envía POST a `/api/v1/devices/status` con métricas válidas, cuando se procesan, entonces se almacenan y responde 201 CREATED.<br>Escenario 2: Dado que el voltaje está por debajo del umbral de estabilidad, cuando se evalúa, entonces se genera un evento de falla y responde 422 UNPROCESSABLE ENTITY. | EP-05 |
+| MS-01 | Identificación única del dispositivo | Como device maker,<br>quiero que cada dispositivo tenga un identificador único de hardware,<br>para asociar correctamente sus mediciones con el local correspondiente. | Escenario 1: Dado que el dispositivo se enciende por primera vez, cuando se ejecuta el proceso de inicialización, entonces genera y almacena su identificador único local. | EP-05 |
+| MS-02 | Autenticación del dispositivo | Como device maker,<br>quiero que el dispositivo se autentique con una API Key antes de enviar telemetría,<br>para evitar que dispositivos no registrados envíen información. | Escenario 1: Dado que el dispositivo envía una solicitud sin API Key válida, cuando el servicio edge la valida, entonces responde 401 UNAUTHORIZED. | EP-05 |
+| MS-03 | Registro de logs y métricas locales | Como device maker,<br>quiero que el dispositivo registre logs estructurados y métricas de funcionamiento,<br>para diagnosticar fallos incluso sin conectividad. | Escenario 1: Dado que el dispositivo detecta un evento de error, cuando lo registra, entonces almacena el log localmente para su posterior envío. | EP-05 |
+| **EP-06** | **Monitoreo de seguridad y emergencias** | Como administrador o inquilino, quiero conocer oportunamente los eventos de seguridad que afectan al inmueble o a mi local, para responder ante posibles incidentes. | | |
+| US-15 | Visualizar estado de seguridad de la galería | Como administrador,<br>quiero visualizar el estado de seguridad consolidado de la galería,<br>para conocer si existen incidentes activos. | Escenario 1: Dado que existen locales monitoreados, cuando el administrador accede al dashboard de seguridad, entonces visualiza el estado actual de cada local. | EP-06 |
+| US-16 | Recibir alerta de intrusión | Como inquilino,<br>quiero recibir una alerta inmediata cuando se detecte una posible intrusión en mi local,<br>para reaccionar durante el evento. | Escenario 1: Dado que el sensor de movimiento detecta activación por proximidad fuera del horario de atención, cuando se genera el evento, entonces el inquilino recibe una notificación push con la imagen capturada. | EP-06 |
+| US-17 | Recibir alerta de humo | Como administrador e inquilino,<br>quiero recibir una alerta simultánea cuando se detecte humo,<br>para actuar antes de que el fuego se propague. | Escenario 1: Dado que el sensor de humo detecta una concentración anómala, cuando se genera el evento, entonces tanto el administrador como el inquilino del local afectado reciben la alerta de forma simultánea. | EP-06 |
+| US-18 | Consultar historial de incidentes | Como administrador,<br>quiero consultar el historial de incidentes de seguridad del inmueble,<br>para realizar seguimiento de los eventos registrados. | Escenario 1: Dado que existen incidentes registrados, cuando el administrador consulta el historial, entonces visualiza tipo, ubicación, fecha y estado de cada uno. | EP-06 |
+| US-19 | Reportar un incidente manualmente | Como inquilino,<br>quiero reportar un incidente relacionado con mi local,<br>para comunicarlo a la administración cuando no fue detectado automáticamente. | Escenario 1: Dado que el inquilino detecta una situación de riesgo, cuando registra el reporte con una descripción, entonces la administración recibe la notificación correspondiente. | EP-06 |
+| US-20 | Consultar detalle de un incidente | Como administrador,<br>quiero consultar el detalle de un incidente específico,<br>para conocer su tipo, ubicación, evidencia visual y estado de atención. | Escenario 1: Dado que existe un incidente registrado, cuando el administrador lo selecciona, entonces visualiza toda la información asociada, incluyendo la imagen capturada. | EP-06 |
+| TS-11 | Recepción de eventos de seguridad | Como backend developer,<br>quiero recibir eventos de seguridad provenientes de los dispositivos IoT,<br>para registrar y procesar los incidentes detectados. | Escenario 1: Dado que se envía POST a `/api/v1/incidents` con tipo, local y evidencia, cuando se procesa, entonces se registra el incidente y responde 201 CREATED. | EP-06 |
+| TS-12 | Gestión del estado de incidentes | Como backend developer,<br>quiero gestionar el ciclo de estado de un incidente (detectado, en atención, resuelto),<br>para reflejar su seguimiento. | Escenario 1: Dado que un incidente existe, cuando se recibe PATCH actualizando su estado, entonces el sistema lo actualiza y responde 200 OK. | EP-06 |
+| TS-13 | Escalamiento simultáneo de alertas | Como backend developer,<br>quiero escalar una alerta de humo simultáneamente al inquilino y al administrador,<br>para reducir el tiempo de respuesta ante una emergencia. | Escenario 1: Dado que se genera un evento de humo, cuando el sistema procesa la alerta, entonces envía la notificación push a ambos destinatarios en paralelo. | EP-06 |
+| TS-14 | Almacenamiento de evidencia visual | Como backend developer,<br>quiero almacenar la imagen capturada asociada a un evento de intrusión,<br>para permitir su consulta posterior desde el historial. | Escenario 1: Dado que un evento de intrusión incluye una imagen, cuando se procesa el registro, entonces la imagen se almacena y se vincula al incidente correspondiente. | EP-06 |
+| MS-04 | Detección de intrusión | Como device maker,<br>quiero que el dispositivo detecte movimiento y activación por proximidad,<br>para generar un evento de posible intrusión. | Escenario 1: Dado que el sensor detecta movimiento fuera del horario de atención configurado, cuando se supera el umbral, entonces el dispositivo genera el evento y captura una imagen. | EP-06 |
+| MS-05 | Detección de humo | Como device maker,<br>quiero que el dispositivo detecte presencia de humo en fase temprana,<br>para generar un evento de posible emergencia. | Escenario 1: Dado que el sensor de humo registra una concentración por encima del umbral configurado, cuando se detecta, entonces el dispositivo genera el evento inmediatamente. | EP-06 |
+| **EP-07** | **Monitoreo y transparencia del consumo** | Como administrador o inquilino, quiero visualizar información verificable sobre el consumo de servicios básicos, para facilitar el control y la transparencia de los cobros. | | |
+| US-21 | Visualizar consumo de servicios de la galería | Como administrador,<br>quiero visualizar el consumo consolidado de agua y energía de la galería,<br>para dar seguimiento a los registros. | Escenario 1: Dado que existen mediciones registradas, cuando el administrador accede al panel de consumo, entonces visualiza el total consolidado por servicio. | EP-07 |
+| US-22 | Visualizar consumo del local | Como inquilino,<br>quiero visualizar el consumo correspondiente a mi local,<br>para conocer cuánto estoy consumiendo realmente. | Escenario 1: Dado que el inquilino tiene un local con medidor asociado, cuando accede a su panel, entonces visualiza su consumo actual de agua y energía. | EP-07 |
+| US-23 | Consultar historial de consumo | Como administrador,<br>quiero consultar el historial de consumo por local y por periodo,<br>para comparar registros y detectar anomalías. | Escenario 1: Dado que existen mediciones históricas, cuando el administrador filtra por periodo, entonces visualiza el consumo acumulado, el promedio histórico y la desviación respecto de la línea base. | EP-07 |
+| US-24 | Consultar desglose del consumo | Como inquilino,<br>quiero visualizar el desglose del consumo utilizado para calcular mi cobro,<br>para verificar que el monto corresponde a mi consumo real. | Escenario 1: Dado que se generó una facturación, cuando el inquilino consulta el desglose, entonces visualiza el detalle de consumo que sustenta el monto. | EP-07 |
+| US-25 | Generar información para facturación | Como administrador,<br>quiero utilizar los datos de consumo registrados para calcular los cobros,<br>para sustentar la facturación con información verificable. | Escenario 1: Dado que existen mediciones del periodo, cuando el administrador genera la facturación, entonces el sistema calcula el monto por local en base al consumo real. | EP-07 |
+| US-26 | Consultar factura | Como inquilino,<br>quiero consultar el detalle de mi factura de servicios,<br>para conocer los conceptos que componen el monto a pagar. | Escenario 1: Dado que existe una factura generada, cuando el inquilino la consulta, entonces visualiza el monto, el consumo asociado y el periodo correspondiente. | EP-07 |
+| TS-15 | Recepción de métricas de consumo | Como backend developer,<br>quiero recibir y validar las mediciones de consumo enviadas por los dispositivos IoT,<br>para almacenar información confiable. | Escenario 1: Dado que se envía POST a `/api/v1/tracking/consumption` con datos válidos, cuando se procesa, entonces se registra la medición y responde 201 CREATED.<br>Escenario 2: Dado que faltan campos obligatorios, cuando se procesa, entonces responde 400 BAD REQUEST. | EP-07 |
+| TS-16 | Cálculo de consumo por local | Como backend developer,<br>quiero calcular el consumo correspondiente a cada local a partir de las mediciones,<br>para generar información utilizable en la facturación. | Escenario 1: Dado que existen mediciones del periodo asociadas a un local, cuando se solicita el cálculo, entonces el sistema retorna el consumo total y responde 200 OK. | EP-07 |
+| TS-17 | Generación del desglose de facturación | Como backend developer,<br>quiero generar el desglose del cobro utilizando los datos de consumo registrados,<br>para proporcionar información verificable. | Escenario 1: Dado que se solicita GET a `/api/v1/billing/{unitId}/breakdown`, cuando se procesa, entonces el sistema retorna el desglose de consumo que sustenta el monto y responde 200 OK. | EP-07 |
+| TS-18 | Comparación con línea base histórica | Como backend developer,<br>quiero calcular la desviación del consumo actual respecto del promedio histórico,<br>para identificar anomalías de consumo. | Escenario 1: Dado que existe un historial de consumo de al menos 3 periodos, cuando se solicita la comparación, entonces el sistema retorna la desviación porcentual respecto de la línea base. | EP-07 |
+| MS-06 | Medición de consumo de servicios | Como device maker,<br>quiero que el dispositivo mida el consumo de energía y agua del local mediante el medidor inteligente,<br>para proporcionar información real del consumo. | Escenario 1: Dado que el medidor está operativo, cuando transcurre el intervalo de envío configurado, entonces el dispositivo transmite la lectura junto con su timestamp. | EP-07 |
+| **EP-08** | **Comunicación administración-inquilino** | Como administrador o inquilino, quiero disponer de comunicación relacionada con incidentes y servicios, para coordinar acciones sin depender de canales informales. | | |
+| US-27 | Recibir comunicación de la administración | Como inquilino,<br>quiero recibir comunicaciones de la administración relacionadas con incidentes o servicios,<br>para mantenerme informado. | Escenario 1: Dado que la administración envía un comunicado, cuando se publica, entonces el inquilino lo recibe como notificación dentro de la plataforma. | EP-08 |
+| US-28 | Notificar un incidente al inquilino afectado | Como administrador,<br>quiero notificar directamente a los inquilinos afectados por un incidente,<br>para informarles oportunamente. | Escenario 1: Dado que se registra un incidente en un local, cuando el administrador confirma la notificación, entonces el inquilino de ese local la recibe de inmediato. | EP-08 |
+| US-29 | Consultar estado de un reporte propio | Como inquilino,<br>quiero consultar el estado de un incidente que reporté,<br>para conocer si la administración ya lo está atendiendo. | Escenario 1: Dado que el inquilino reportó un incidente, cuando consulta su estado, entonces visualiza si está pendiente, en atención o resuelto. | EP-08 |
+| US-30 | Presentar reclamo de facturación | Como inquilino,<br>quiero presentar un reclamo sobre mi facturación,<br>para solicitar una revisión cuando encuentre una discrepancia. | Escenario 1: Dado que el inquilino cuestiona un monto, cuando presenta el reclamo indicando el motivo, entonces la administración recibe el reclamo vinculado a la factura correspondiente. | EP-08 |
+| US-31 | Atender reclamos de facturación | Como administrador,<br>quiero revisar los reclamos de facturación utilizando los registros de consumo,<br>para responder con información verificable. | Escenario 1: Dado que existe un reclamo pendiente, cuando el administrador lo revisa, entonces visualiza el desglose de consumo del local para sustentar su respuesta. | EP-08 |
+| TS-19 | Gestión de reportes y reclamos | Como backend developer,<br>quiero implementar el registro, notificación y seguimiento de reportes y reclamos,<br>para permitir que la administración gestione su atención. | Escenario 1: Dado que se envía POST a `/api/v1/claims` con los datos del reclamo, cuando se procesa, entonces se registra y responde 201 CREATED.<br>Escenario 2: Dado que se actualiza el estado de un reclamo, cuando se procesa PATCH, entonces el sistema notifica al inquilino del cambio. | EP-08 |
+| **EP-09** | **Continuidad operativa (Edge Computing)** | Como administrador, quiero que StorePulse mantenga la continuidad de la detección y el registro ante problemas de conectividad, para evitar interrupciones en el monitoreo. | | |
+| US-32 | Identificar pérdida de conectividad de un dispositivo | Como administrador,<br>quiero saber cuándo un dispositivo pierde conectividad con la nube,<br>para identificar posibles interrupciones en el monitoreo. | Escenario 1: Dado que un dispositivo deja de reportar señales por un tiempo determinado, cuando se detecta, entonces se genera una alerta indicando la sucursal y el equipo afectado. | EP-09 |
+| US-33 | Visualizar estado de conectividad de dispositivos | Como administrador,<br>quiero visualizar el estado de conexión de todos mis dispositivos,<br>para conocer cuáles están operativos. | Escenario 1: Dado que existen dispositivos registrados, cuando el administrador consulta el panel, entonces visualiza el estado de conectividad (en línea/desconectado) de cada uno. | EP-09 |
+| US-34 | Continuidad de detección sin conexión | Como administrador,<br>quiero que la detección y el registro local continúen operando aun sin conexión a la nube,<br>para no perder eventos críticos de seguridad. | Escenario 1: Dado que el dispositivo pierde conectividad con la nube, cuando ocurre un evento de intrusión o humo, entonces el evento se detecta y almacena localmente igualmente. | EP-09 |
+| US-35 | Sincronización automática al recuperar conexión | Como administrador,<br>quiero que los datos almacenados localmente se sincronicen automáticamente al recuperar la conexión,<br>para no perder información. | Escenario 1: Dado que existen registros almacenados localmente durante una interrupción, cuando el servicio edge recupera la conexión, entonces sincroniza automáticamente los datos pendientes con la nube. | EP-09 |
+| TS-20 | Monitoreo de conectividad de dispositivos | Como backend developer,<br>quiero registrar el estado de conectividad de los dispositivos IoT,<br>para detectar interrupciones en la comunicación. | Escenario 1: Dado que un dispositivo no envía señal en un intervalo configurado, cuando el sistema lo evalúa, entonces marca el dispositivo como desconectado y genera una alerta. | EP-09 |
+| TS-21 | Almacenamiento temporal en el Edge API | Como backend developer,<br>quiero permitir el almacenamiento temporal de mediciones y eventos en la base de datos local del Edge API,<br>para evitar la pérdida de información ante caídas de red. | Escenario 1: Dado que el Edge API pierde conexión con la nube, cuando recibe telemetría del dispositivo, entonces la persiste localmente en SQLite. | EP-09 |
+| TS-22 | Sincronización de datos pendientes | Como backend developer,<br>quiero sincronizar las mediciones almacenadas localmente cuando se recupere la conexión,<br>para mantener actualizada la información central. | Escenario 1: Dado que el Edge API recupera conectividad, cuando detecta registros pendientes de sincronización, entonces los envía al backend central y marca cada uno como sincronizado tras la confirmación. | EP-09 |
+| MS-07 | Persistencia local ante caída de red | Como device maker,<br>quiero que cada registro generado por el dispositivo se almacene localmente de forma duradera,<br>para garantizar la trazabilidad incluso ante caídas de red. | Escenario 1: Dado que el dispositivo genera un evento y no tiene conexión con el Edge API, cuando ocurre, entonces el evento se almacena en la memoria/almacenamiento local del dispositivo. | EP-09 |
+| MS-08 | Reintento de envío de telemetría | Como device maker,<br>quiero que el dispositivo reintente el envío de información cuando falle la comunicación,<br>para reducir la pérdida de telemetría. | Escenario 1: Dado que un envío de telemetría falla, cuando el dispositivo detecta la falla, entonces reintenta el envío tras un intervalo definido hasta confirmar la recepción. | EP-09 |
+| MS-09 | Inicialización automática del almacenamiento | Como device maker,<br>quiero que el servicio edge prepare su almacenamiento local en la primera solicitud,<br>para comenzar a operar sin configuración manual. | Escenario 1: Dado que el servicio edge recibe su primera solicitud tras iniciar, cuando ejecuta el bootstrap, entonces inicializa las estructuras de almacenamiento local necesarias. | EP-09 |
+| **EP-10** | **Gestión de suscripción y facturación del administrador** | Como administrador, quiero gestionar la suscripción de StorePulse para mi galería, para mantener activo el servicio según la cantidad de locales monitoreados. | | |
+| US-36 | Activar suscripción | Como administrador,<br>quiero contratar un plan de suscripción según la cantidad de locales de mi galería,<br>para habilitar el monitoreo IoT en mi inmueble. | Escenario 1: Dado que el administrador completó el registro de su galería, cuando selecciona un plan e ingresa un método de pago válido, entonces el sistema activa la suscripción.<br>Escenario 2: Dado que la pasarela de pago rechaza la transacción, cuando se procesa, entonces el sistema no activa el plan y muestra un aviso. | EP-10 |
+| US-37 | Visualizar estado de la suscripción | Como administrador,<br>quiero visualizar el estado de mi suscripción,<br>para conocer su vigencia, beneficios y fecha de renovación. | Escenario 1: Dado que existe una suscripción activa, cuando el administrador accede a su perfil, entonces visualiza el plan, su estado y la fecha de expiración. | EP-10 |
+| US-38 | Cancelar renovación automática | Como administrador,<br>quiero desactivar la renovación automática de mi plan,<br>para evitar cobros futuros cuando decida dejar de usar el servicio. | Escenario 1: Dado que el plan está activo, cuando el administrador solicita la cancelación, entonces el sistema confirma que no se realizarán más cobros al finalizar el ciclo actual. | EP-10 |
+| US-39 | Renovación automática de suscripción | Como administrador,<br>quiero que el sistema renueve automáticamente mi plan,<br>para asegurar que el monitoreo de mis locales no se interrumpa. | Escenario 1: Dado que llega la fecha de expiración, cuando el sistema procesa el cargo, entonces genera una nueva fecha de vencimiento.<br>Escenario 2: Dado que el cobro de renovación es rechazado, cuando se detecta, entonces el sistema notifica al administrador y otorga un periodo de gracia. | EP-10 |
+| TS-23 | Procesamiento de pago mediante integración externa | Como backend developer,<br>quiero procesar los pagos mediante integración con un proveedor externo,<br>para validar la transacción antes de activar la suscripción. | Escenario 1: Dado que el proveedor valida la transacción, cuando el sistema procesa la respuesta, entonces responde 200 OK y registra el pago como aceptado.<br>Escenario 2: Dado que el proveedor rechaza la transacción, cuando se procesa, entonces responde 400 BAD REQUEST. | EP-10 |
+| TS-24 | Gestión del estado de suscripción | Como backend developer,<br>quiero habilitar la consulta de vigencia de la suscripción por galería,<br>para garantizar que el sistema restrinja funcionalidades si expira. | Escenario 1: Dado que se solicita GET a `/api/v1/subscriptions/{galleryId}/status`, cuando se procesa, entonces retorna el estado (active/expired/expiring_soon) y responde 200 OK. | EP-10 |
+| TS-25 | Renovación y facturación recurrente | Como backend developer,<br>quiero automatizar el cobro de renovación en la fecha de expiración,<br>para mantener la continuidad del servicio sin intervención manual. | Escenario 1: Dado que una suscripción alcanza su fecha de expiración, cuando el sistema ejecuta el proceso de renovación, entonces intenta el cobro y actualiza la fecha de vencimiento si es exitoso. | EP-10 |
+| **EP-11** | **Centro de notificaciones y dashboard** | Como administrador o inquilino, quiero acceder a un panel centralizado de notificaciones y métricas, para tomar decisiones oportunas sobre la seguridad y el consumo. | | |
+| US-40 | Centro de notificaciones | Como usuario de la plataforma,<br>quiero acceder a un historial de las últimas notificaciones generadas por el sistema,<br>para tomar medidas según el tipo de alerta recibida. | Escenario 1: Dado que el sistema generó alertas (intrusión, humo, desconexión, consumo anómalo), cuando el usuario accede al centro de notificaciones, entonces visualiza un listado cronológico con tipo, local y hora del evento.<br>Escenario 2: Dado que no existen alertas pendientes, cuando el usuario accede, entonces el sistema indica que no hay eventos activos. | EP-11 |
+| US-41 | Visualizar dashboard consolidado | Como administrador,<br>quiero visualizar un dashboard con métricas clave de seguridad y consumo de mi galería,<br>para tomar decisiones operativas informadas. | Escenario 1: Dado que existen datos de seguridad y consumo registrados, cuando el administrador accede al dashboard, entonces visualiza indicadores consolidados de incidentes activos, consumo del periodo y dispositivos desconectados. | EP-11 |
+| US-42 | Visualizar dashboard del local | Como inquilino,<br>quiero visualizar un panel con el estado de seguridad y consumo de mi local,<br>para monitorear mi negocio desde el celular. | Escenario 1: Dado que el local del inquilino tiene dispositivos activos, cuando accede a su panel, entonces visualiza el estado de seguridad actual y su consumo del periodo. | EP-11 |
+| TS-26 | Generación de alertas centralizadas | Como backend developer,<br>quiero consolidar la generación de notificaciones a partir de eventos de seguridad, conectividad y consumo,<br>para centralizar su gestión y entrega. | Escenario 1: Dado que se genera un evento crítico de cualquier módulo, cuando se procesa, entonces el sistema crea una notificación asociada al usuario y local correspondiente. | EP-11 |
+| TS-27 | Consulta de métricas del dashboard | Como backend developer,<br>quiero exponer un endpoint que consolide las métricas clave de seguridad, consumo y dispositivos,<br>para alimentar el dashboard de forma eficiente. | Escenario 1: Dado que se solicita GET a `/api/v1/dashboard/{galleryId}/summary`, cuando se procesa, entonces retorna incidentes activos, consumo del periodo y dispositivos desconectados en una sola respuesta con estado 200 OK. | EP-11 |
+| SP-01 | Viabilidad de detección de intrusión | Como equipo de desarrollo,<br>queremos investigar qué tecnología de sensado permite detectar una intrusión en un local comercial,<br>para determinar su viabilidad y precisión antes de implementar el dispositivo. | Se documenta una comparación de al menos 2 alternativas de sensor con su precisión, costo y facilidad de integración con el ESP32. | |
+| SP-02 | Viabilidad de detección de humo | Como equipo de desarrollo,<br>queremos investigar qué sensor permite detectar humo de forma confiable en fase temprana,<br>para definir los parámetros de la detección de emergencias. | Se documenta el sensor seleccionado y el umbral de detección validado mediante pruebas controladas. | |
+| SP-03 | Método de medición del consumo eléctrico | Como equipo de desarrollo,<br>queremos investigar qué mecanismo permite medir el consumo eléctrico de cada local de forma segura y precisa,<br>para determinar la tecnología de medidor a utilizar. | Se documenta el componente de medición elegido y su margen de error frente a un medidor de referencia. | |
+| SP-04 | Comunicación IoT | Como equipo de desarrollo,<br>queremos investigar qué protocolo de comunicación es más adecuado para transmitir la telemetría,<br>para elegir una alternativa compatible con la conectividad de una galería comercial. | Se documenta la comparación entre al menos 2 protocolos (ej. MQTT vs HTTP) considerando consumo de energía y estabilidad. | |
+| SP-05 | Estrategia offline y sincronización | Como equipo de desarrollo,<br>queremos investigar cómo conservar y sincronizar las mediciones cuando el dispositivo pierde conectividad,<br>para definir una estrategia que reduzca la pérdida de datos. | Se documenta el diseño de la estrategia de almacenamiento local y sincronización, validado con una prueba de interrupción simulada. | |
+| SP-06 | Estrategia de notificaciones en tiempo real | Como equipo de desarrollo,<br>queremos investigar las alternativas disponibles para entregar alertas push en tiempo real,<br>para seleccionar un mecanismo adecuado para eventos críticos de seguridad. | Se documenta la comparación de al menos 2 servicios de push notification y se define el elegido con su justificación. | |
+| SP-07 | Seguridad de la comunicación IoT | Como equipo de desarrollo,<br>queremos investigar mecanismos de autenticación entre dispositivos y backend,<br>para evitar el envío de telemetría desde dispositivos no autorizados. | Se documenta el mecanismo de autenticación elegido (ej. API Key rotativa) y su validación frente a un escenario de dispositivo no registrado. | |
+| SP-08 | Precisión de sensores en condiciones reales | Como equipo de desarrollo,<br>queremos investigar la precisión de los sensores seleccionados en condiciones similares a una galería comercial,<br>para determinar si las mediciones son suficientes para las necesidades de StorePulse. | Se documentan los resultados de pruebas de precisión bajo condiciones controladas (variación de luz, temperatura, interferencia). | |
+| SP-09 | Viabilidad de pasarela de pago para suscripciones | Como equipo de desarrollo,<br>queremos investigar qué pasarela de pago se ajusta mejor al modelo de suscripción escalonado por número de locales,<br>para elegir la integración a utilizar en el módulo de facturación. | Se documenta la comparación de al menos 2 pasarelas (costos, soporte de suscripciones recurrentes, documentación de API) y se define la elegida. | |
