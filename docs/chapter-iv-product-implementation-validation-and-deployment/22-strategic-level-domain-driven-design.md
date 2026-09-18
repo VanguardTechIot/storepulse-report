@@ -159,4 +159,10 @@ La imagen conecta cada evento originado fuera del control del equipo con su Exte
 Provider en la pérdida y restauración de conectividad, Fire Brigade en la detección de humo, y Sedapal / Luz del Sur en
 el registro del consumo de servicios.
 
+**Paso 8: Business Rules en Blanco**
+
+![eventstorming-business-rules.png](../../assets/research/eventstorming/eventstorming-business-rules.png)
+
+La imagen marca con una estrella los Commands que requieren una Business Rule explícita antes de ejecutarse: Establish Baseline Consumption,
+Verify Security Incident, Issue Utility Bill y Assign Tenant. La redacción de cada regla se completa en el paso 9.
 
