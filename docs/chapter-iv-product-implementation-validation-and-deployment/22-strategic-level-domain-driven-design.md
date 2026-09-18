@@ -151,3 +151,12 @@ información que el Gallery Administrator consulta antes de asignar un Tenant a 
 El Read Model Conversation History reúne los mensajes previos, adjuntos y el estado de la conversación, que el Gallery
 Administrator revisa antes de marcarla como resuelta.
 
+**Paso 7: Agregar External Systems**
+
+![eventstorming-external-system.png](../../assets/research/eventstorming/eventstorming-external-system.png)
+
+La imagen conecta cada evento originado fuera del control del equipo con su External System (rosado): Internet Service
+Provider en la pérdida y restauración de conectividad, Fire Brigade en la detección de humo, y Sedapal / Luz del Sur en
+el registro del consumo de servicios.
+
+
