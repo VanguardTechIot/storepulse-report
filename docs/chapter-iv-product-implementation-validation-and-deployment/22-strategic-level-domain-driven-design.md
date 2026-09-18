@@ -109,3 +109,14 @@ locales y el modo de solo lectura sin conexión para el usuario.
 
 Al restablecerse la conectividad, la Policy sincroniza los eventos acumulados en el búfer y confirma al usuario que la
 sincronización se completó.
+
+**Paso 5: Read-models**
+
+![eventstorming-read-models.png](../../assets/research/eventstorming/eventstorming-read-models.png)
+
+La imagen incorpora los Read Models (verde) en cada punto donde un actor necesita consultar información antes de ejecutar
+su Command: Security Monitoring para el Security Team Member, Consumption History y Baseline Consumption para las
+decisiones de facturación, y Commercial Unit Availability / Conversation History para Management-Tenant Communication.
+Business Continuity no requiere ninguno, ya que todos sus eventos son automáticos.
+
+
