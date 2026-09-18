@@ -63,3 +63,49 @@ La imagen muestra los Commands (azul) agregados junto a cada Domain Event, repre
 en imperativo, que lo origina. Los eventos que provienen de un External System (sensores IoT en este caso) o que se derivan
 automáticamente de una Policy no llevan Command propio, ya que no nacen de la decisión de un actor.
 
+**Paso 4: Agregar Actors y Policies**
+
+![eventstorming-actors.png](../../assets/research/eventstorming/eventstorming-actors.png)
+
+La imagen agrupa los eventos que nacen directamente de la decisión de un Actor (Gallery Administrator, Tenant o Security
+Team Member) mediante su Command respectivo, por lo que no requieren una Policy: el propio actor decide y ejecuta la acción.
+
+
+![eventstorming-policy-1.png](../../assets/research/eventstorming/eventstorming-policy-1.png)
+
+Policy que consolida las dos vías de detección de un incidente de seguridad (intrusión detectada por VanguardTech o
+reporte directo del Tenant vía app) en el evento pivote Security Incident Noticed.
+
+![eventstorming-policy-2.png](../../assets/research/eventstorming/eventstorming-policy-2.png)
+
+Policy que, ante la detección de humo, dispara automáticamente la evaluación del riesgo de incendio.
+
+![eventstorming-policy-3.png](../../assets/research/eventstorming/eventstorming-policy-3.png)
+
+Una vez verificado el incidente por el Security Team Member, la Policy notifica en paralelo al Gallery Administrator y
+al Tenant mediante la emisión de la alerta de emergencia.
+
+![eventstorming-policy-4.png](../../assets/research/eventstorming/eventstorming-policy-4.png)
+
+Policy de cierre: cuando el incidente de seguridad y el riesgo de incendio quedan resueltos, se envía de forma
+automática la notificación de "todo despejado" (All-Clear).
+
+![eventstorming-policy-5.png](../../assets/research/eventstorming/eventstorming-policy-5.png)
+
+Policy que compara el consumo registrado contra la Baseline Consumption establecida y, si la excede, marca
+automáticamente una desviación de consumo.
+
+![eventstorming-policy-6.png](../../assets/research/eventstorming/eventstorming-policy-6.png)
+
+Policy que, al emitirse la factura (evento pivote Utility Bill Issued), notifica automáticamente al Tenant sin
+intervención adicional del Gallery Administrator.
+
+![eventstorming-policy-7.png](../../assets/research/eventstorming/eventstorming-policy-7.png)
+
+Ante la pérdida de conectividad (evento pivote), la Policy activa en paralelo el almacenamiento en búfer de eventos
+locales y el modo de solo lectura sin conexión para el usuario.
+
+![eventstorming-policy-8.png](../../assets/research/eventstorming/eventstorming-policy-8.png)
+
+Al restablecerse la conectividad, la Policy sincroniza los eventos acumulados en el búfer y confirma al usuario que la
+sincronización se completó.
