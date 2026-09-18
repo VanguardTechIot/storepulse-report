@@ -35,3 +35,11 @@ Finalmente, el tercer objetivo consiste en reducir en un 15 % la tasa anual de r
 que reemplaza el canal informal por un registro documentado. Al reducir la pérdida patrimonial y la sensación de desprotección, estas funcionalidades atacan directamente una de las causas de abandono del local.
 
 _Stories asociadas a este mapa: US-05, US-20, US-22, US-25, US-29, US-31, US-36, US-41, US-42, US-43, US-49, US-51, TS-01, TS-02, TS-15 a TS-18, TS-25, TS-26, TS-30, MS-04, MS-05, MS-07 y MS-08._
+
+### Análisis de los resultados esperados
+
+Ambos mapas evidencian que los objetivos de negocio de StorePulse solo se alcanzan mediante la contribución conjunta de los dos segmentos, pero con roles claramente diferenciados. El administrador concentra los objetivos vinculados a la decisión de compra, la facturación sustentada y la resolución de reclamos, mientras que la inquilina concentra los objetivos de adopción, permanencia y reducción de la rotación.
+
+Esta distribución confirma la asimetría identificada en el Capítulo I y validada en las entrevistas del Capítulo II: el administrador decide y asume el costo de la suscripción, pero la continuidad del servicio depende de que la inquilina adopte la plataforma y acepte la instalación del dispositivo. Por esa razón, el control de acceso por rol aparece asociado a la retención de la suscripción y no únicamente a la seguridad de la información, ya que sin la confianza de la inquilina el dispositivo no llega a instalarse y el objetivo comercial no se concreta.
+
+Asimismo, se observa que un mismo conjunto de entregables contribuye a más de un objetivo. Los medidores inteligentes sustentan tanto la reducción de disputas del administrador como la transparencia que motiva el uso semanal de la aplicación por parte de la inquilina, lo que justifica su prioridad dentro del Product Backlog presentado en la sección siguiente.
