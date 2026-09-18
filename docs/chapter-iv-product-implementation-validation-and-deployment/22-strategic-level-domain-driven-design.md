@@ -24,8 +24,8 @@ trabajando enteramente con notas adhesivas sobre el tablero
 colaborativo de Lucid, sin recurrir a herramientas de diseño visual. El proceso inició generando los Domain Events
 (naranja) que detallan, a nivel de diseño, los eventos ya validados en el Big Picture EventStorming; a partir de ahí
 se incorporaron los Commands (azul) que los originan y los Actores y Policies (amarillo/morado) responsables de
-ejecutarlos. Luego se agregaron los Read Models (verde) simples bocetos de la información que un actor necesita
-antes de decidir, no un diseño de interfaz y los External Systems (rosado) ajenos al control del equipo. Finalmente,
+ejecutarlos. Luego se agregaron los Read Models (verde), simples bocetos de la información que un actor necesita
+antes de decidir y no un diseño de interfaz, junto con los External Systems (rosado) ajenos al control del equipo. Finalmente,
 se redactaron las Business Rules asociadas a cada Policy y se agruparon los Commands y Events relacionados bajo
 Aggregates con nombre propio, completando así el nivel de detalle exigido por la sesión.
 
@@ -57,7 +57,7 @@ los eventos ya validados en el Big Picture EventStorming.
 
 **Paso 3: Agregar Commands**
 
-![eventstorming-commads.png](../../assets/research/eventstorming/eventstorming-commads.png)
+![eventstorming-commands.png](../../assets/research/eventstorming/eventstorming-commands.png)
 
 La imagen muestra los Commands (azul) agregados junto a cada Domain Event, representando la intención de acción,
 en imperativo, que lo origina. Los eventos que provienen de un External System (sensores IoT en este caso) o que se derivan
@@ -121,7 +121,7 @@ Business Continuity no requiere ninguno, ya que todos sus eventos son automátic
 
 **Paso 6: Read-models detallados**
 
-![eventstorming-read-model-security-monotoring.png](../../assets/research/eventstorming/eventstorming-read-model-security-monotoring.png)
+![eventstorming-read-model-security-monitoring.png](../../assets/research/eventstorming/eventstorming-read-model-security-monitoring.png)
 
 El Read Model Security Monitoring detalla el estado de los sensores del local, la hora del último evento y el historial
 de incidentes recientes, información que el Security Team Member consulta antes de verificar un incidente.
@@ -219,7 +219,7 @@ sensores hasta la verificación del incidente), Fire Risk (la detección de humo
 (el envío de alertas y la notificación All-Clear). Las dos Policies que cruzan de un Aggregate a otro permanecen en la
 frontera entre los óvalos, ya que representan la comunicación entre Aggregates y no pertenecen a uno solo.
 
-![eventstorming-aggregates-consumtion-and-billing.png](../../assets/research/eventstorming/eventstorming-aggregates-consumtion-and-billing.png)
+![eventstorming-aggregates-consumption-and-billing.png](../../assets/research/eventstorming/eventstorming-aggregates-consumption-and-billing.png)
 
 La imagen agrupa Consumption and Billing en 3 Aggregates: Utility Meter (la vinculación y captura del consumo del
 medidor), Consumption Baseline (el establecimiento de la referencia y la detección de desviaciones) y Utility Bill
@@ -252,4 +252,6 @@ que dan soporte a los 4 Bounded Contexts candidatos —Safety and Emergencies, C
 Management-Tenant Communication y Business Continuity— y se consolidaron en 10 Aggregates que constituyen la unidad
 de consistencia transaccional del diseño. Este resultado sirve de base para el Candidate Context Discovery, el Domain
 Message Flows Modeling y las Bounded Context Canvases desarrollados en las siguientes secciones.
+
+#### 4.1.1.1. Candidate Context Discovery
 
