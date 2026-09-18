@@ -47,3 +47,10 @@ el mismo lenguaje visual desde el inicio, siguiendo la guía de facilitación de
 | External System | Nota rosada (grande) | Sistema externo fuera del control del equipo. |
 | Aggregate | Nota amarilla grande | Agrupación de Commands y Events que comparten ciclo de vida y consistencia transaccional. |
 | Bounded Context | Contorno punteado | Límite candidato que agrupa Aggregates, Commands, Events y Policies con lenguaje y responsabilidad cohesivos. |
+
+**Paso 2: Generar Domain Events**
+
+![eventstorming-events.png](../../assets/research/eventstorming/eventstorming-events.png)
+
+Como se muestra en la imagen, se construyeron los 39 Domain Events (naranja) a mayor nivel de profundidad de
+los eventos ya validados en el Big Picture EventStorming.
