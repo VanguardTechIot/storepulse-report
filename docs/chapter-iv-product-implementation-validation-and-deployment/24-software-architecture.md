@@ -1,8 +1,8 @@
 ### 4.1.3. Software Architecture
 
-En esta sección se presenta la arquitectura de software de StorePulse, una solución IoT distribuida para la supervisión de seguridad perimetral y la gestión transparente del consumo de servicios básicos en galerías comerciales. La arquitectura se modela mediante C4 Model, utilizando cuatro perspectivas: System Landscape, System Context, Container y Deployment.
+En esta sección se presenta la arquitectura de software de StorePulse, una solución IoT distribuida para la supervisión de seguridad perimetral y la gestión transparente del consumo de servicios básicos en galerías comerciales. La arquitectura se modela mediante C4 Model, utilizando cuatro perspectivas: System Landscape, System Context, Container, Component y Deployment.
 
-La propuesta mantiene un RESTful API monolítico como núcleo de negocio en la nube, complementado por un Edge API local y una Embedded Application ejecutada en el dispositivo IoT. Esta distribución responde al flujo definido en el proyecto: los sensores generan eventos y mediciones, el Edge procesa y conserva temporalmente la información cuando es necesario, y el backend centraliza la información para su consulta, cálculo y visualización en las aplicaciones Web y Mobile.
+La propuesta mantiene un RESTful API monolítico como núcleo de negocio en la nube, complementado por un Edge API local y una Embedded Application ejecutada en el dispositivo IoT. Esta distribución responde al flujo definido en el proyecto: los sensores y medidores generan eventos y mediciones, el Edge procesa y conserva temporalmente la información cuando es necesario, y el backend centraliza la información para su consulta, cálculo y visualización en las aplicaciones Web y Mobile.
 
 #### 4.1.3.1. Software Architecture System Landscape Diagram
 
@@ -18,16 +18,16 @@ Los elementos principales son:
 
 - StorePulse: sistema central que integra las aplicaciones digitales, el procesamiento Edge, la aplicación embebida y los servicios de backend necesarios para operar la solución.
 
-- Dispositivo IoT: dispositivo físico que contiene sensores y medidores para generar eventos de seguridad y mediciones de consumo.
+- Dispositivo IoT: conjunto de dispositivos físicos, sensores y medidores utilizados en la galería comercial para recopilar eventos de seguridad y mediciones de los servicios básicos monitoreados, como agua, humedad y electricidad.
 
 - Stripe: servicio externo utilizado para procesar los pagos asociados a las suscripciones de StorePulse.
 
-![StorePulse - System Context](assets/architecture/StorePulse-diagram-landscape.png)
+![StorePulse - System Landscape](../../assets/architecture/StorePulse-diagram-landscape.png)
 
 
-#### 4.1.3.2. Software Architecture Context Level Diagrams
+#### 4.1.3.2. Software Architecture Context Level Diagram
 
-El diagrama de contexto representa únicamente los principales usuarios que interactúan con el sistema y el dispositivo IoT externo con el que intercambia información. No se detallan componentes internos, contenedores, bases de datos ni APIs, ya que estos elementos corresponden a niveles posteriores del modelo C4.
+El diagrama de contexto muestra los principales usuarios y sistemas externos con los que intercambia información. No se detallan componentes internos, contenedores, bases de datos ni APIs, ya que estos elementos corresponden a niveles posteriores del modelo C4.
 
 Los principales elementos que interactúan con StorePulse son:
 
@@ -41,10 +41,10 @@ Los principales elementos que interactúan con StorePulse son:
 
 - Stripe: servicio externo utilizado por StorePulse para gestionar los pagos asociados a las suscripciones.
 
+![StorePulse - System Context](../../assets/architecture/StorePulse-diagram-context.png)
 
-![StorePulse - System Context](assets/architecture/StorePulse-diagram-context.png)
 
-#### 4.1.3.3. Software Architecture Container Level Diagrams
+#### 4.1.3.3. Software Architecture Container Level Diagram
 
 El diagrama de contenedores representa la estructura interna de alto nivel de StorePulse, mostrando los principales contenedores de software que conforman el sistema y las relaciones entre ellos. En este nivel se detallan las aplicaciones, APIs, bases de datos y otros elementos tecnológicos que permiten implementar las funcionalidades identificadas en el diagrama de contexto.
 
@@ -52,7 +52,8 @@ El diagrama permite visualizar cómo interactúan la Landing Page, la Aplicació
 
 Este nivel no profundiza todavía en las clases, módulos o componentes internos de las APIs, ya que dicho detalle corresponde al nivel de componentes del modelo C4.
 
-![StorePulse - Container Diagram](assets/architecture/StorePulse-diagram-container.png)
+![StorePulse - Container Diagram](../../assets/architecture/StorePulse-diagram-container.png)
+
 
 #### 4.1.3.4. Software Architecture Component Level Diagrams
 
@@ -62,25 +63,17 @@ El diagrama de componentes representa la estructura interna de los principales c
 
 El diagrama presenta los componentes internos de la REST API, responsables de gestionar la autenticación, usuarios, seguridad, consumo, estadísticas, notificaciones y persistencia de información.
 
-![StorePulse - REST API Component Diagram](assets/architecture/StorePulse-REST-API-Component.png)
+![StorePulse - REST API Component Diagram](../../assets/architecture/StorePulse-REST-API-Component.png)
 
 ##### Edge API - Component Diagram
 
 El diagrama presenta los componentes internos de la Edge API, encargados de recibir y validar la telemetría, realizar el procesamiento en el entorno Edge, almacenar información localmente y sincronizar los datos con la nube.
 
-![StorePulse - Edge API Component Diagram](assets/architecture/StorePulse-Edge-API-Component.png)
+![StorePulse - Edge API Component Diagram](../../assets/architecture/StorePulse-Edge-API-Component.png)
 
 
-#### 4.1.3.5. Software Architecture Deployment Diagrams
-
-El diagrama de despliegue representa la distribución física de los elementos de software de StorePulse sobre la infraestructura donde serán ejecutados. Su objetivo es mostrar dónde se despliegan las aplicaciones, APIs, bases de datos y componentes relacionados con el dispositivo IoT, así como las conexiones existentes entre los diferentes nodos de ejecución.
-
-Para StorePulse, el despliegue contempla el entorno físico de la Galería Comercial, donde se ubican el dispositivo IoT y el equipo Edge; la infraestructura de Cloud, donde se ejecutan los servicios de la REST API, la base de datos y la Landing Page; y los dispositivos utilizados por los usuarios, como la computadora del administrador y el dispositivo móvil del inquilino.
-
-Este diagrama permite visualizar la relación entre la arquitectura lógica definida en los diagramas de contenedores y componentes y la infraestructura física sobre la cual se ejecuta la solución IoT.
-
-#### 4.1.3.5. Software Architecture Deployment Diagrams
+#### 4.1.3.5. Software Architecture Deployment Diagram
 
 El diagrama de despliegue representa la distribución física de los elementos de software de StorePulse sobre la infraestructura donde serán ejecutados. Se muestran los nodos correspondientes al entorno físico de la galería comercial, el entorno Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
 
-![StorePulse - Deployment Diagram](assets/architecture/StorePulse-Deployment.png)
+![StorePulse - Deployment Diagram](../../assets/architecture/StorePulse-Deployment.png)
