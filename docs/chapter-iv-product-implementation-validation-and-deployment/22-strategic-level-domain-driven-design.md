@@ -210,3 +210,40 @@ intercambio de mensajes y el registro de la comunicación derivada de la factura
 Agrupación completa del Bounded Context Business Continuity: la pérdida de conectividad con su respuesta de buffering y
 modo offline, y la restauración con la sincronización de los eventos acumulados.
 
+**Paso 11: Aggregates**
+
+![eventstorming-aggregates-safety-emergencies.png](../../assets/research/eventstorming/eventstorming-aggregates-safety-emergencies.png)
+
+La imagen consolida el Bounded Context Safety and Emergencies en 3 Aggregates: Security Incident (desde la instalación de
+sensores hasta la verificación del incidente), Fire Risk (la detección de humo y su resolución) y Emergency Notification
+(el envío de alertas y la notificación All-Clear). Las dos Policies que cruzan de un Aggregate a otro permanecen en la
+frontera entre los óvalos, ya que representan la comunicación entre Aggregates y no pertenecen a uno solo.
+
+![eventstorming-aggregates-consumtion-and-billing.png](../../assets/research/eventstorming/eventstorming-aggregates-consumtion-and-billing.png)
+
+La imagen agrupa Consumption and Billing en 3 Aggregates: Utility Meter (la vinculación y captura del consumo del
+medidor), Consumption Baseline (el establecimiento de la referencia y la detección de desviaciones) y Utility Bill
+(desde el cierre del periodo hasta la emisión de la factura y la resolución de disputas). La única Policy que cruza de
+un Aggregate a otro, de Utility Meter hacia Consumption Baseline, queda en el límite entre ambos óvalos.
+
+![eventstorming-aggregates-management-tenant-communication.png](../../assets/research/eventstorming/eventstorming-aggregates-management-tenant-communication.png)
+
+La imagen agrupa Management-Tenant Communication en 3 Aggregates: Tenant Assignment (la asignación del Tenant a su
+unidad), Conversation (el intercambio de mensajes hasta su resolución) y Tenant Notification, que converge dos orígenes
+distintos —la resolución de una conversación y la Policy cruzada desde Utility Bill Issued en Consumption and
+Billing— en un único registro de comunicación.
+
+![eventstorming-aggregates-connectivity-buffer.png](../../assets/research/eventstorming/eventstorming-aggregates-connectivity-buffer.png)
+
+La imagen muestra Business Continuity como un único Aggregate, Connectivity Buffer, ya que la pérdida y la restauración
+de conectividad son dos fases del mismo ciclo de vida y no requieren una frontera transaccional separada. Ambas
+Policies quedan completamente dentro del óvalo, pues no cruzan hacia ningún otro Aggregate.
+
+![eventstorming-complete.png](../../assets/research/eventstorming/eventstorming-complete.png)
+
+La imagen final consolida los 4 Bounded Contexts con los 10 Aggregates resultantes. Los eventos Commercial Unit
+Registered y Commercial Gallery Registered permanecen fuera de los cuatro recuadros, ya que son precondiciones
+compartidas —el alta de la unidad y de la galería comercial— que no pertenecen a ningún Bounded Context en particular,
+siguiendo el mismo patrón con el que ya se habían presentado en el Big Picture EventStorming.
+
+
