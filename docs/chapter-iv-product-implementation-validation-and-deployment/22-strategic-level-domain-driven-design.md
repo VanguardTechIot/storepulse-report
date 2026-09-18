@@ -166,3 +166,24 @@ el registro del consumo de servicios.
 La imagen marca con una estrella los Commands que requieren una Business Rule explícita antes de ejecutarse: Establish Baseline Consumption,
 Verify Security Incident, Issue Utility Bill y Assign Tenant. La redacción de cada regla se completa en el paso 9.
 
+**Paso 9: Escribir los Business Rules**
+
+![eventstorming-business-assign-tenant.png](../../assets/research/eventstorming/eventstorming-business-assign-tenant.png)
+
+Business Rule de Assign Tenant: un Tenant solo puede asignarse a una Commercial Unit que figure como disponible
+(sin otro Tenant activo asignado).
+
+![eventstorming-business-issue-utility.png](../../assets/research/eventstorming/eventstorming-business-issue-utility.png)
+
+Business Rule de Issue Utility Bill: la factura solo se emite una vez cerrado el Consumption Period y siempre que no
+exista ya una factura emitida para ese mismo período.
+
+![eventstorming-business-establish-baseline.png](../../assets/research/eventstorming/eventstorming-business-establish-baseline.png)
+
+Business Rule de Establish Baseline Consumption: se requiere un mínimo de tres periodos históricos de consumo para
+calcular la Baseline; si no están disponibles, se usa un valor de referencia por defecto.
+
+![eventstorming-business-verify-security.png](../../assets/research/eventstorming/eventstorming-business-verify-security.png)
+
+Business Rule de Verify Security Incident: la verificación debe completarse dentro de un SLA máximo (ej. 15 minutos)
+desde que el incidente fue asignado al Security Team Member.
