@@ -19,3 +19,19 @@ Finalmente, el tercer objetivo consiste en reducir en un 50 % el tiempo de resol
 negociación sin evidencia en una verificación documentada.
 
 _Stories asociadas a este mapa: VS-01 a VS-06, US-28, US-30, US-31, US-32, US-33, US-38, US-44, US-45, TS-19 a TS-23, TS-27, TS-28 y MS-06._
+
+### Inquilino de Local Comercial
+
+El Impact Mapping asociado a Juana Flores representa la alineación estratégica entre los objetivos de adopción y permanencia de StorePulse y las necesidades reales de los comerciantes que ocupan los locales de la galería. Este mapa visualiza de manera estructurada cómo el comportamiento de la usuaria beneficiaria impacta directamente en el éxito de la plataforma, y detalla qué entregables de software son necesarios para facilitar dicho comportamiento, garantizando que el esfuerzo de desarrollo esté justificado por el valor que aporta.
+
+![impact-map-inquilino](../../assets/requirements/impact-map-inquilino.png)
+
+En cuanto al primer eje estratégico, orientado a la adopción cotidiana de la plataforma, se busca lograr que el 70 % de los inquilinos con local monitoreado utilice la aplicación móvil al menos una vez por semana, al término del primer trimestre posterior a la instalación. Para alcanzar esta meta, Juana debe incorporar la consulta del estado de su local a su rutina de apertura y cierre, en lugar de depender de avisos informales de la administración. El producto despliega como entregables un dashboard del local en la aplicación móvil, con el estado de seguridad y el consumo del periodo; un centro de notificaciones con historial cronológico de alertas por tipo y local, que evita que los avisos se pierdan entre mensajes; y la visualización del consumo propio junto con el desglose que sustenta su cobro. Estas funcionalidades convierten una herramienta de consulta ocasional en parte de la operación diaria del negocio.
+
+Respecto al segundo eje, vinculado a la permanencia de la suscripción, la plataforma busca sostener una retención superior al 70 % tras el tercer mes de servicio. Este objetivo depende de que Juana acepte la instalación del dispositivo en su local en lugar de oponerse por  desconfianza sobre quién accede a la información de su actividad interna. El núcleo de esta solución reside en el control de acceso por rol, que limita al inquilino a la información de su propio local y otorga al administrador únicamente la vista consolidada del inmueble. Se complementa con la continuidad operativa del Edge API, que mantiene la detección y el registro
+de eventos aun cuando se interrumpa la conexión con la nube, y sincroniza la información pendiente al restablecerse, sosteniendo la confianza en el servicio durante las interrupciones de red frecuentes en galerías comerciales.
+
+Finalmente, el tercer objetivo consiste en reducir en un 15 % la tasa anual de rotación de inquilinos en las galerías suscritas. El enfoque se dirige a que Juana reaccione ante un incidente mientras ocurre, en lugar de descubrir un robo al abrir su local al día siguiente. La plataforma integra sensores de movimiento y activación por proximidad que generan una alerta inmediata con la imagen capturada del evento; sensores de humo con escalamiento simultáneo al inquilino y al administrador, que permiten actuar antes de que el fuego alcance los locales contiguos; y un módulo de reporte manual de incidentes con seguimiento de estado,
+que reemplaza el canal informal por un registro documentado. Al reducir la pérdida patrimonial y la sensación de desprotección, estas funcionalidades atacan directamente una de las causas de abandono del local.
+
+_Stories asociadas a este mapa: US-05, US-20, US-22, US-25, US-29, US-31, US-36, US-41, US-42, US-43, US-49, US-51, TS-01, TS-02, TS-15 a TS-18, TS-25, TS-26, TS-30, MS-04, MS-05, MS-07 y MS-08._
