@@ -119,4 +119,35 @@ su Command: Security Monitoring para el Security Team Member, Consumption Histor
 decisiones de facturación, y Commercial Unit Availability / Conversation History para Management-Tenant Communication.
 Business Continuity no requiere ninguno, ya que todos sus eventos son automáticos.
 
+**Paso 6: Read-models detallados**
+
+![eventstorming-read-model-security-monotoring.png](../../assets/research/eventstorming/eventstorming-read-model-security-monotoring.png)
+
+El Read Model Security Monitoring detalla el estado de los sensores del local, la hora del último evento y el historial
+de incidentes recientes, información que el Security Team Member consulta antes de verificar un incidente.
+
+![eventstorming-read-model-utility-bill-detail.png](../../assets/research/eventstorming/eventstorming-read-model-utility-bill-detail.png)
+
+El Read Model Utility Bill Detail muestra el monto facturado, el período, el desglose por servicio y el consumo frente
+a la Baseline, datos que el Tenant revisa antes de reportar una disputa de facturación.
+
+![eventstorming-read-model-consumption-history.png](../../assets/research/eventstorming/eventstorming-read-model-consumption-history.png)
+
+El Read Model Consumption History resume el consumo de periodos anteriores y el promedio histórico, insumo que el
+Gallery Administrator utiliza para establecer la Baseline Consumption.
+
+![eventstorming-read-model-baseline-consumption.png](../../assets/research/eventstorming/eventstorming-read-model-baseline-consumption.png)
+
+El Read Model Baseline Consumption expone el nivel de referencia vigente y la fecha de su última actualización,
+dato verificable que el Gallery Administrator usa para resolver una disputa de facturación.
+
+![eventstorming-read-model-commercial-unit-availability.png](../../assets/research/eventstorming/eventstorming-read-model-commercial-unit-availability.png)
+
+El Read Model Commercial Unit Availability lista los locales sin Tenant asignado y su estado,
+información que el Gallery Administrator consulta antes de asignar un Tenant a una unidad.
+
+![eventstorming-read-conversation-history.png](../../assets/research/eventstorming/eventstorming-read-conversation-history.png)
+
+El Read Model Conversation History reúne los mensajes previos, adjuntos y el estado de la conversación, que el Gallery
+Administrator revisa antes de marcarla como resuelta.
 
