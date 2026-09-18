@@ -54,3 +54,12 @@ el mismo lenguaje visual desde el inicio, siguiendo la guía de facilitación de
 
 Como se muestra en la imagen, se construyeron los 39 Domain Events (naranja) a mayor nivel de profundidad de
 los eventos ya validados en el Big Picture EventStorming.
+
+**Paso 3: Agregar Commands**
+
+![eventstorming-commads.png](../../assets/research/eventstorming/eventstorming-commads.png)
+
+La imagen muestra los Commands (azul) agregados junto a cada Domain Event, representando la intención de acción,
+en imperativo, que lo origina. Los eventos que provienen de un External System (sensores IoT en este caso) o que se derivan
+automáticamente de una Policy no llevan Command propio, ya que no nacen de la decisión de un actor.
+
