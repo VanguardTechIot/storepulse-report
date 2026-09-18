@@ -187,3 +187,26 @@ calcular la Baseline; si no están disponibles, se usa un valor de referencia po
 
 Business Rule de Verify Security Incident: la verificación debe completarse dentro de un SLA máximo (ej. 15 minutos)
 desde que el incidente fue asignado al Security Team Member.
+
+**Paso 10: Agrupación de los Business Rules**
+
+![eventstorming-group-business-rule-safety-and-emergencies.png](../../assets/research/eventstorming/eventstorming-group-business-rule-safety-and-emergencies.png)
+
+Agrupación completa del Bounded Context Safety and Emergencies: las dos vías de detección (intrusión y humo), la
+verificación del incidente con su Business Rule de SLA, y el cierre con la notificación All-Clear.
+
+![eventstorming-group-business-rule-consumption-billing.png](../../assets/research/eventstorming/eventstorming-group-business-rule-consumption-billing.png)
+
+Agrupación completa del Bounded Context Consumption and Billing: desde el registro del consumo y el establecimiento de
+la Baseline (con su Business Rule) hasta la emisión de la factura y la disputa de facturación.
+
+![eventstorming-group-business-rule-management.png](../../assets/research/eventstorming/eventstorming-group-business-rule-management.png)
+
+Agrupación completa del Bounded Context Management-Tenant Communication: la asignación del Tenant a su unidad, el
+intercambio de mensajes y el registro de la comunicación derivada de la factura emitida.
+
+![eventstorming-group-business-rule-business-continuity.png](../../assets/research/eventstorming/eventstorming-group-business-rule-business-continuity.png)
+
+Agrupación completa del Bounded Context Business Continuity: la pérdida de conectividad con su respuesta de buffering y
+modo offline, y la restauración con la sincronización de los eventos acumulados.
+
