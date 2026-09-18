@@ -22,7 +22,7 @@ Los elementos principales son:
 
 - Stripe: servicio externo utilizado para procesar los pagos asociados a las suscripciones de StorePulse.
 
-![StorePulse - System Landscape](../../assets/architecture/StorePulse-diagram-landscape.png)
+![StorePulse - System Landscape](../../assets/architecture/StorePulse-System-Landscape.png)
 
 
 #### 4.1.3.2. Software Architecture Context Level Diagram
