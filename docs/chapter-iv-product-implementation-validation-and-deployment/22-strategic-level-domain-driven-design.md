@@ -246,4 +246,10 @@ Registered y Commercial Gallery Registered permanecen fuera de los cuatro recuad
 compartidas —el alta de la unidad y de la galería comercial— que no pertenecen a ningún Bounded Context en particular,
 siguiendo el mismo patrón con el que ya se habían presentado en el Big Picture EventStorming.
 
+Con este paso concluye el **Design-Level EventStorming**. Partiendo de los 39 Domain Events identificados en el
+Paso 2, se incorporaron sucesivamente los Commands, Actors, Policies, Read Models, External Systems y Business Rules
+que dan soporte a los 4 Bounded Contexts candidatos —Safety and Emergencies, Consumption and Billing,
+Management-Tenant Communication y Business Continuity— y se consolidaron en 10 Aggregates que constituyen la unidad
+de consistencia transaccional del diseño. Este resultado sirve de base para el Candidate Context Discovery, el Domain
+Message Flows Modeling y las Bounded Context Canvases desarrollados en las siguientes secciones.
 
