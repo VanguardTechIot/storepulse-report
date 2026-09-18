@@ -28,3 +28,22 @@ ejecutarlos. Luego se agregaron los Read Models (verde) simples bocetos de la in
 antes de decidir, no un diseño de interfaz y los External Systems (rosado) ajenos al control del equipo. Finalmente,
 se redactaron las Business Rules asociadas a cada Policy y se agruparon los Commands y Events relacionados bajo
 Aggregates con nombre propio, completando así el nivel de detalle exigido por la sesión.
+
+**Paso 1: Presentar el diseño objetivo**
+
+Antes de abordar el dominio de negocio, se presenta el patrón visual y
+la gramática de notación que se utilizará durante toda la sesión, de forma que todos los miembros compartan
+el mismo lenguaje visual desde el inicio, siguiendo la guía de facilitación de referencia.
+
+> **Actor → Command → Aggregate/Event → Policy → Command → Event**
+
+| Elemento | Color / forma en Lucid | Descripción |
+|---|---|---|
+| Domain Event | Nota naranja | Hecho relevante del dominio, redactado en pasado (ej. *Security Incident Noticed*). |
+| Actor / Rol | Nota amarilla pequeña | Persona o rol que ejecuta un Command (ej. *Gallery Administrator*, *Tenant*). |
+| Command | Nota azul | Intención de acción de un actor o sistema, redactada en imperativo. |
+| Policy | Nota morada/violeta | Reacción automática del negocio ante un evento, con la forma "Cada vez que X, entonces Y". |
+| Read Model | Nota verde | Información que un actor necesita consultar antes de emitir un Command. |
+| External System | Nota rosada (grande) | Sistema externo fuera del control del equipo. |
+| Aggregate | Nota amarilla grande | Agrupación de Commands y Events que comparten ciclo de vida y consistencia transaccional. |
+| Bounded Context | Contorno punteado | Límite candidato que agrupa Aggregates, Commands, Events y Policies con lenguaje y responsabilidad cohesivos. |
