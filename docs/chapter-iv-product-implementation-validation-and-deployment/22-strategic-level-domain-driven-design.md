@@ -260,3 +260,17 @@ de 2 horas, con el objetivo de transformar los Aggregates ya agrupados en Bounde
 tres técnicas propuestas por la guía de referencia, se aplicaron **look-for-pivotal-events** y **start-with-value**: la
 primera porque los eventos pivote del dominio ya habían sido validados desde el Big Picture EventStorming, y la segunda
 para argumentar cuál Bounded Context concentra el mayor valor de negocio para StorePulse.
+
+**Look for Pivotal Events**
+
+![eventstorming-pivotal-events.png](../../assets/research/eventstorming/eventstorming-pivotal-events.png)
+
+Sobre el board de detalle se volvieron a marcar los 4 eventos pivote ya identificados en el Big Picture
+EventStorming —Security Incident Noticed, Billing Dispute Raised, Utility Bill Issued y Connectivity Lost Detected—,
+confirmando que cada uno sigue señalando, a este nivel de detalle, el mismo cambio de responsabilidad o de fase que
+justificó su elección: de una detección externa a una responsabilidad interna (Security Incident Noticed), de la
+iniciativa del Tenant a la de la administración (Billing Dispute Raised), del sistema externo a la interacción directa
+con el Tenant (Utility Bill Issued), y de la conectividad normal a la operación en modo offline
+(Connectivity Lost Detected).
+
+
