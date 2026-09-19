@@ -273,4 +273,17 @@ iniciativa del Tenant a la de la administración (Billing Dispute Raised), del s
 con el Tenant (Utility Bill Issued), y de la conectividad normal a la operación en modo offline
 (Connectivity Lost Detected).
 
+**Delimitación de los Bounded Contexts candidatos**
+
+![eventstorming-candidate-contexts.png](../../assets/research/eventstorming/eventstorming-candidate-contexts.png)
+
+Usando los 4 eventos pivote como frontera, se trazó un contorno punteado alrededor de cada cluster de Aggregates,
+confirmando los 4 Bounded Contexts candidatos: Safety and Emergencies, Consumption and Billing, Management-Tenant
+Communication y Business Continuity. Los eventos Commercial Unit Registered y Commercial Gallery Registered permanecen
+fuera de los cuatro contornos, ya que son precondiciones compartidas que no pertenecen a ningún contexto en particular.
+Las Policies que cruzan de un contexto a otro de Utility Meter hacia Consumption Baseline dentro de Consumption and
+Billing, y de Utility Bill Issued hacia Tenant Notification entre Consumption and Billing y Management Tenant
+Communication quedan visiblemente en la frontera entre los contornos, evidenciando la comunicación entre Bounded
+Contexts.
+
 
