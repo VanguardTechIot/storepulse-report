@@ -24,8 +24,7 @@ Fuera del límite organizacional se encuentran los siguientes actores y sistemas
 
 Esta perspectiva permite comprender el contexto organizacional de StorePulse y las principales entidades que forman parte de su ecosistema.
 
-![StorePulse - System Landscape]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4))
-
+![StorePulse - System Landscape](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4)
 #### 4.1.3.2. Software Architecture Context Level Diagram
 
 El System Context Diagram muestra a StorePulse como el sistema central y presenta los principales usuarios y sistemas externos que interactúan directamente con él. En este nivel no se detallan los contenedores internos, las tecnologías utilizadas, las bases de datos ni la infraestructura de despliegue, ya que estos elementos corresponden a niveles posteriores del modelo C4.
@@ -39,9 +38,7 @@ Los principales elementos que interactúan con StorePulse son:
 - **Stripe:** servicio externo utilizado por StorePulse para procesar los pagos asociados a las suscripciones.
 
 El diagrama permite visualizar las principales interacciones externas de StorePulse sin profundizar en la implementación interna del sistema.
-
-![StorePulse - System Context]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4))
-
+![StorePulse - System Context](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4)
 #### 4.1.3.3. Software Architecture Container Level Diagram
 
 El Container Level Diagram representa la estructura interna de alto nivel de StorePulse, mostrando los principales contenedores de software que conforman el sistema, las tecnologías utilizadas y las relaciones existentes entre ellos.
@@ -62,8 +59,7 @@ Por otro lado, el **Gallery Administrator** utiliza la **Web Application** y el 
 
 El diagrama permite visualizar la estructura lógica de StorePulse y las principales tecnologías utilizadas para implementar sus funcionalidades.
 
-![StorePulse - Container Diagram]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4))
-
+![StorePulse - Container Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4)
 #### 4.1.3.4. Software Architecture Deployment Diagram
 
 El Deployment Diagram representa la distribución física de los contenedores de software de StorePulse sobre la infraestructura donde serán ejecutados. Esta vista permite identificar los nodos físicos y de infraestructura asociados al entorno de la galería comercial, el procesamiento Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
@@ -90,4 +86,4 @@ La comunicación entre los elementos desplegados se realiza mediante los siguien
 
 Esta distribución permite mantener el procesamiento de los datos IoT cercano a los dispositivos mediante Edge Computing, mientras que la lógica de negocio y la persistencia centralizada se mantienen en la infraestructura Cloud.
 
-![StorePulse - Deployment Diagram]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4))
+![StorePulse - Deployment Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4)
