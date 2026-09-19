@@ -74,7 +74,7 @@ Las principales operaciones del dominio son:
 
 El modelo completo de relaciones se representa en el siguiente diagrama:
 
-![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/05-service-monitoring-domain-class.puml\&fmt=svg\&v=4))
+![StorePulse - Resource and Asset Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4)
 
 ### 4.2.3.2. Interface Layer
 
@@ -145,25 +145,25 @@ Los siguientes diagramas representan la distribución de los componentes del con
 
 La aplicación web contiene una interfaz de monitoreo y un servicio que consume los endpoints correspondientes de la REST API.
 
-![StorePulse - Service Execution and Monitoring - Web Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/01-service-monitoring-web-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/01-service-monitoring-web-component.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/01-service-monitoring-web-component.puml&fmt=svg&v=4)
 
 #### Mobile Application
 
 La aplicación móvil contiene la interfaz de monitoreo y un servicio encargado de consumir los servicios REST relacionados con telemetría, mediciones y alertas.
 
-![StorePulse - Service Execution and Monitoring - Mobile Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/02-service-monitoring-mobile-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/02-service-monitoring-mobile-component.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/02-service-monitoring-mobile-component.puml&fmt=svg&v=4)
 
 #### REST API
 
 La REST API concentra los controladores, manejadores de comandos y consultas, dominio y repositorios del contexto de monitoreo.
 
-![StorePulse - Service Execution and Monitoring - REST API Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/03-service-monitoring-rest-api-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/03-service-monitoring-rest-api-component.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/03-service-monitoring-rest-api-component.puml&fmt=svg&v=4)
 
 #### Edge API
 
 La Edge API recibe los datos provenientes de la aplicación embebida, realiza un procesamiento local y sincroniza la información con la REST API central.
 
-![StorePulse - Service Execution and Monitoring - Edge Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/04-service-monitoring-edge-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/04-service-monitoring-edge-component.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/04-service-monitoring-edge-component.puml&fmt=svg&v=4)
 
 ### 4.2.3.6. Bounded Context Software Architecture Code Level Diagrams
 
@@ -175,7 +175,7 @@ El diagrama de clases representa los agregados `Telemetry`, `MonitoringRule` y `
 
 Las relaciones permiten observar cómo la telemetría contiene mediciones, cómo las reglas evalúan las mediciones y cómo las condiciones detectadas pueden generar alertas.
 
-![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/05-service-monitoring-domain-class.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=4)
 
 #### 4.2.3.6.2. Bounded Context Database Design Diagram
 
@@ -195,4 +195,4 @@ Las principales relaciones representadas en el modelo son:
 - `monitoring_rules` → `alerts`
 - `measurements` → `alerts`
 
-![StorePulse - Service Execution and Monitoring - Database Design]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/06-service-monitoring-database.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/service-execution-monitoring/06-service-monitoring-database.puml\&fmt=svg\&v=4))
+![StorePulse - Service Execution and Monitoring - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/06-service-monitoring-database.puml&fmt=svg&v=4)

@@ -61,7 +61,7 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. E
 
 El modelo de relaciones se encuentra representado en el siguiente diagrama:
 
-![StorePulse - Resource and Asset Management - Domain Layer Class Diagram]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/05-resource-asset-domain-class.puml\&fmt=svg\&v=4))
+![StorePulse - Resource and Asset Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/06-resource-asset-database.puml&fmt=svg&v=4)
 
 ### 4.2.2.2. Interface Layer
 
@@ -127,26 +127,23 @@ Los siguientes diagramas muestran cómo se distribuyen los componentes del Bound
 
 La aplicación web, desarrollada con Angular, contiene una interfaz de gestión y un servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Resource and Asset Management - Web Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/01-resource-asset-web-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/01-resource-asset-web-component.puml\&fmt=svg\&v=4))
-
+![StorePulse - Resource and Asset Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/01-resource-asset-web-component.puml&fmt=svg&v=4)
 #### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de recursos y activos y el servicio encargado de consumir la API REST.
 
-![StorePulse - Resource and Asset Management - Mobile Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/02-resource-asset-mobile-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/02-resource-asset-mobile-component.puml\&fmt=svg\&v=4))
+![StorePulse - Resource and Asset Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/02-resource-asset-mobile-component.puml&fmt=svg&v=4)
 
 #### REST API
 
 La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, dominio y repositorios del contexto.
 
-![StorePulse - Resource and Asset Management - REST API Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/03-resource-asset-rest-api-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/03-resource-asset-rest-api-component.puml\&fmt=svg\&v=4))
-
+![StorePulse - Resource and Asset Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/03-resource-asset-rest-api-component.puml&fmt=svg&v=4)
 #### Edge API
 
 La Edge API, desarrollada con Python y Flask, actúa como intermediaria entre la aplicación embebida y la plataforma central para las operaciones relacionadas con los dispositivos.
 
-![StorePulse - Resource and Asset Management - Edge Components]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/04-resource-asset-edge-component.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/04-resource-asset-edge-component.puml\&fmt=svg\&v=4))
-
+![StorePulse - Resource and Asset Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/04-resource-asset-edge-component.puml&fmt=svg&v=4)
 ### 4.2.2.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.
@@ -155,8 +152,7 @@ Los diagramas de nivel de código detallan la estructura interna del dominio y e
 
 El diagrama de clases presenta los agregados raíz `Resource` y `Asset`, las entidades `IoTDevice`, `Sensor` y `Meter`, los objetos de valor, las enumeraciones, los repositorios y los eventos de dominio. Las relaciones muestran cómo un recurso administra activos y cómo los activos y dispositivos se organizan dentro del modelo.
 
-![StorePulse - Resource and Asset Management - Domain Layer Class Diagram]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/05-resource-asset-domain-class.puml\&fmt=svg\&v=4))
-
+![StorePulse - Resource and Asset Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4)
 #### 4.2.2.6.2. Bounded Context Database Design Diagram
 
 El modelo de datos representa la persistencia de los principales elementos del contexto.
@@ -176,4 +172,4 @@ Las relaciones del modelo de datos son:
 - `iot_devices` → `sensors`
 - `iot_devices` → `meters`
 
-![StorePulse - Resource and Asset Management - Database Design]\([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/06-resource-asset-database.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/bounded-context/resource-asset-management/06-resource-asset-database.puml\&fmt=svg\&v=4))
+![StorePulse - Resource and Asset Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/06-resource-asset-database.puml&fmt=svg&v=4)
