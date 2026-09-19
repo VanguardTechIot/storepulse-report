@@ -1,0 +1,64 @@
+@startuml storepulse-service-monitoring-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Database Design
+
+entity "telemetry" as telemetry {
+    * id : CHAR(36) <<PK>>
+    --
+    device_id : CHAR(36)
+    received_at : DATETIME
+}
+
+entity "measurements" as measurements {
+    * id : CHAR(36) <<PK>>
+    --
+    telemetry_id : CHAR(36) <<FK>>
+    measurement_type : VARCHAR(50)
+    value : DECIMAL(18,4)
+    unit : VARCHAR(30)
+    recorded_at : DATETIME
+}
+
+entity "monitoring_rules" as rules {
+    * id : CHAR(36) <<PK>>
+    --
+    name : VARCHAR(150)
+    measurement_type : VARCHAR(50)
+    threshold_value : DECIMAL(18,4)
+    comparison_operator : VARCHAR(30)
+    enabled : BOOLEAN
+    created_at : DATETIME
+}
+
+entity "alerts" as alerts {
+    * id : CHAR(36) <<PK>>
+    --
+    rule_id : CHAR(36) <<FK>>
+    measurement_id : CHAR(36) <<FK>>
+    status : VARCHAR(30)
+    created_at : DATETIME
+    acknowledged_at : DATETIME
+    resolved_at : DATETIME
+}
+
+entity "consumption" as consumption {
+    * id : CHAR(36) <<PK>>
+    --
+    resource_id : CHAR(36)
+    measurement_type : VARCHAR(50)
+    total_value : DECIMAL(18,4)
+    period_start : DATETIME
+    period_end : DATETIME
+}
+
+telemetry ||--o{ measurements : contains
+rules ||--o{ alerts : triggers
+measurements ||--o{ alerts : generates
+
+@enduml

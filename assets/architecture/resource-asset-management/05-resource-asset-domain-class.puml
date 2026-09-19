@@ -1,0 +1,194 @@
+@startuml storepulse-resource-asset-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - Domain Layer Class Diagram
+
+package "Resource Management" {
+
+    class Resource <<Aggregate Root>> {
+        - resourceId: ResourceId
+        - name: String
+        - description: String
+        - location: Location
+        - status: ResourceStatus
+        + activate(): void
+        + deactivate(): void
+        + updateInformation(name: String, description: String): void
+        + assignAsset(asset: Asset): void
+    }
+
+    class ResourceId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class Location <<Value Object>> {
+        - address: String
+        - floor: String
+        - reference: String
+        + validate(): boolean
+    }
+
+    enum ResourceStatus {
+        ACTIVE
+        INACTIVE
+        MAINTENANCE
+    }
+}
+
+package "Asset Management" {
+
+    class Asset <<Aggregate Root>> {
+        - assetId: AssetId
+        - name: String
+        - type: AssetType
+        - status: AssetStatus
+        - resourceId: ResourceId
+        + activate(): void
+        + deactivate(): void
+        + changeStatus(status: AssetStatus): void
+        + assignToResource(resourceId: ResourceId): void
+    }
+
+    class AssetId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    enum AssetType {
+        IOT_DEVICE
+        SENSOR
+        METER
+    }
+
+    enum AssetStatus {
+        ACTIVE
+        INACTIVE
+        MAINTENANCE
+    }
+}
+
+package "IoT Device Management" {
+
+    class IoTDevice <<Entity>> {
+        - deviceId: DeviceId
+        - serialNumber: String
+        - manufacturer: String
+        - firmwareVersion: String
+        - status: AssetStatus
+        + activate(): void
+        + deactivate(): void
+        + updateFirmware(version: String): void
+    }
+
+    class DeviceId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class Sensor <<Entity>> {
+        - sensorId: UUID
+        - type: SensorType
+        - unit: String
+        + activate(): void
+        + deactivate(): void
+    }
+
+    class Meter <<Entity>> {
+        - meterId: UUID
+        - type: MeterType
+        - unit: String
+        + activate(): void
+        + deactivate(): void
+    }
+
+    enum SensorType {
+        HUMIDITY
+        TEMPERATURE
+        WATER
+        ELECTRICITY
+    }
+
+    enum MeterType {
+        WATER
+        ELECTRICITY
+    }
+}
+
+package "Repositories" {
+
+    interface IResourceRepository {
+        + save(resource: Resource): void
+        + findById(id: ResourceId): Resource
+        + findAll(): List<Resource>
+    }
+
+    interface IAssetRepository {
+        + save(asset: Asset): void
+        + findById(id: AssetId): Asset
+        + findByResource(id: ResourceId): List<Asset>
+    }
+
+    interface IIoTDeviceRepository {
+        + save(device: IoTDevice): void
+        + findById(id: DeviceId): IoTDevice
+    }
+}
+
+package "Domain Events" {
+
+    class ResourceRegisteredEvent <<Domain Event>> {
+        - resourceId: ResourceId
+        - occurredAt: DateTime
+    }
+
+    class AssetRegisteredEvent <<Domain Event>> {
+        - assetId: AssetId
+        - occurredAt: DateTime
+    }
+
+    class AssetAssignedToResourceEvent <<Domain Event>> {
+        - assetId: AssetId
+        - resourceId: ResourceId
+        - occurredAt: DateTime
+    }
+
+    class IoTDeviceRegisteredEvent <<Domain Event>> {
+        - deviceId: DeviceId
+        - occurredAt: DateTime
+    }
+}
+
+Resource "1" o-- "0..*" Asset : manages
+
+Resource --> ResourceId
+Resource --> Location
+Resource --> ResourceStatus
+
+Asset --> AssetId
+Asset --> ResourceId
+Asset --> AssetType
+Asset --> AssetStatus
+
+Asset "1" o-- "1" IoTDevice : represents
+
+IoTDevice --> DeviceId
+IoTDevice "1" o-- "0..*" Sensor
+IoTDevice "1" o-- "0..*" Meter
+
+Sensor --> SensorType
+Meter --> MeterType
+
+IResourceRepository ..> Resource
+IAssetRepository ..> Asset
+IIoTDeviceRepository ..> IoTDevice
+
+Resource ..> ResourceRegisteredEvent : raises
+Asset ..> AssetRegisteredEvent : raises
+Asset ..> AssetAssignedToResourceEvent : raises
+IoTDevice ..> IoTDeviceRegisteredEvent : raises
+
+@enduml
