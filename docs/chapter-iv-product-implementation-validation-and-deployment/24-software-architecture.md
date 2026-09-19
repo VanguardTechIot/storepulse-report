@@ -1,79 +1,93 @@
 ### 4.1.3. Software Architecture
 
-En esta sección se presenta la arquitectura de software de StorePulse, una solución IoT distribuida para la supervisión de seguridad perimetral y la gestión transparente del consumo de servicios básicos en galerías comerciales. La arquitectura se modela mediante C4 Model, utilizando cuatro perspectivas: System Landscape, System Context, Container, Component y Deployment.
+En esta sección se presenta la arquitectura de software de StorePulse, una solución IoT distribuida para la supervisión de seguridad, el monitoreo del consumo de servicios básicos y la gestión de información de facturación en galerías comerciales. La arquitectura se modela mediante el C4 Model, utilizando cuatro perspectivas: System Landscape, System Context, Container y Deployment.
 
-La propuesta mantiene un RESTful API monolítico como núcleo de negocio en la nube, complementado por un Edge API local y una Embedded Application ejecutada en el dispositivo IoT. Esta distribución responde al flujo definido en el proyecto: los sensores y medidores generan eventos y mediciones, el Edge procesa y conserva temporalmente la información cuando es necesario, y el backend centraliza la información para su consulta, cálculo y visualización en las aplicaciones Web y Mobile.
+La propuesta mantiene una REST API monolítica como núcleo de negocio en la nube, complementada por una Edge API local y una Embedded Application ejecutada en los dispositivos IoT. Esta distribución permite procesar la información generada por los dispositivos en el entorno Edge y centralizar la información en la nube para su consulta y gestión mediante las aplicaciones Web y Mobile.
 
 #### 4.1.3.1. Software Architecture System Landscape Diagram
 
-El System Landscape Diagram presenta una visión general del ecosistema de StorePulse, identificando a los actores que utilizan la solución y los sistemas externos con los que esta intercambia información. En esta vista no se muestran los componentes internos ni la distribución física de los contenedores.
+El System Landscape Diagram presenta una visión general del ecosistema organizacional de StorePulse, identificando los principales roles internos de la organización, los usuarios externos y los sistemas externos que interactúan con la solución. En esta vista no se detallan los contenedores, componentes internos ni la distribución física de la infraestructura.
 
-Los elementos principales son:
+Dentro del límite organizacional de StorePulse se consideran los siguientes elementos:
 
-- Visitor: persona que consulta la propuesta de valor, funcionamiento y planes de StorePulse desde la Landing Page antes de utilizar la plataforma.
+- **Maintenance Technician:** responsable de realizar actividades de mantenimiento relacionadas con la infraestructura y los dispositivos IoT de la galería comercial.
+- **Support / Customer Service:** responsable de brindar soporte y atención relacionada con la solución StorePulse.
+- **StorePulse:** sistema principal que permite la supervisión y gestión de la seguridad, el consumo y la información de facturación de los locales comerciales.
 
-- Administrador de Galería: responsable de supervisar el inmueble, gestionar los locales, consultar seguridad, consumo y facturación, y atender situaciones asociadas a la operación de la galería.
+Fuera del límite organizacional se encuentran los siguientes actores y sistemas externos:
 
-- Inquilino de Local: usuario que supervisa su local, recibe alertas y consulta su consumo y facturación.
+- **Visitor:** persona que consulta la información pública de StorePulse.
+- **Gallery Administrator:** responsable de supervisar el inmueble, gestionar información de consumo y facturación y recibir alertas.
+- **Tenant:** usuario que supervisa su propio local, consulta información de consumo y facturación y recibe alertas.
+- **IoT Device:** conjunto de dispositivos físicos, sensores y medidores utilizados para recopilar información relacionada con la seguridad y el consumo de los servicios monitoreados.
+- **Stripe:** servicio externo utilizado para procesar los pagos asociados a las suscripciones de StorePulse.
 
-- StorePulse: sistema central que integra las aplicaciones digitales, el procesamiento Edge, la aplicación embebida y los servicios de backend necesarios para operar la solución.
+Esta perspectiva permite comprender el contexto organizacional de StorePulse y las principales entidades que forman parte de su ecosistema.
 
-- Dispositivo IoT: conjunto de dispositivos físicos, sensores y medidores utilizados en la galería comercial para recopilar eventos de seguridad y mediciones de los servicios básicos monitoreados, como agua, humedad y electricidad.
-
-- Stripe: servicio externo utilizado para procesar los pagos asociados a las suscripciones de StorePulse.
-
-![StorePulse - System Landscape](../../assets/architecture/StorePulse-System-Landscape.png)
-
+![StorePulse - System Landscape]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4))
 
 #### 4.1.3.2. Software Architecture Context Level Diagram
 
-El diagrama de contexto muestra los principales usuarios y sistemas externos con los que intercambia información. No se detallan componentes internos, contenedores, bases de datos ni APIs, ya que estos elementos corresponden a niveles posteriores del modelo C4.
+El System Context Diagram muestra a StorePulse como el sistema central y presenta los principales usuarios y sistemas externos que interactúan directamente con él. En este nivel no se detallan los contenedores internos, las tecnologías utilizadas, las bases de datos ni la infraestructura de despliegue, ya que estos elementos corresponden a niveles posteriores del modelo C4.
 
 Los principales elementos que interactúan con StorePulse son:
 
-- Visitor: consulta información pública relacionada con StorePulse a través de la Landing Page.
+- **Visitor:** consulta la información pública proporcionada por StorePulse.
+- **Gallery Administrator:** utiliza StorePulse para supervisar el inmueble, gestionar información relacionada con la operación y recibir alertas.
+- **Tenant:** utiliza StorePulse para supervisar su propio local y consultar información relacionada con el consumo y la facturación.
+- **IoT Device:** representa los dispositivos físicos, sensores y medidores utilizados para recopilar información de seguridad y consumo. StorePulse puede enviar comandos y configuraciones hacia estos dispositivos.
+- **Stripe:** servicio externo utilizado por StorePulse para procesar los pagos asociados a las suscripciones.
 
-- Administrador de Galería: utiliza StorePulse para supervisar el inmueble, recibir alertas y gestionar información relacionada con los locales, consumo, seguridad y facturación.
+El diagrama permite visualizar las principales interacciones externas de StorePulse sin profundizar en la implementación interna del sistema.
 
-- Inquilino de Local: utiliza StorePulse para supervisar su propio local, recibir alertas y consultar información correspondiente a su consumo y facturación.
-
-- Dispositivo IoT: representa el conjunto de dispositivos físicos, sensores y medidores desplegados en la galería. Estos recopilan eventos de seguridad y telemetría de consumo, enviando la información hacia StorePulse para su procesamiento y gestión.
-
-- Stripe: servicio externo utilizado por StorePulse para gestionar los pagos asociados a las suscripciones.
-
-![StorePulse - System Context](../../assets/architecture/StorePulse-diagram-context.png)
-
+![StorePulse - System Context]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4))
 
 #### 4.1.3.3. Software Architecture Container Level Diagram
 
-El diagrama de contenedores representa la estructura interna de alto nivel de StorePulse, mostrando los principales contenedores de software que conforman el sistema y las relaciones entre ellos. En este nivel se detallan las aplicaciones, APIs, bases de datos y otros elementos tecnológicos que permiten implementar las funcionalidades identificadas en el diagrama de contexto.
+El Container Level Diagram representa la estructura interna de alto nivel de StorePulse, mostrando los principales contenedores de software que conforman el sistema, las tecnologías utilizadas y las relaciones existentes entre ellos.
 
-El diagrama permite visualizar cómo interactúan la Landing Page, la Aplicación Web, la Aplicación Móvil, la REST API, la Edge API, la Base de Datos y la Embedded Application, así como sus relaciones con el dispositivo IoT y los servicios externos. También se especifican las principales tecnologías empleadas en cada contenedor, facilitando la comprensión de la arquitectura lógica de StorePulse.
+Los principales contenedores que conforman StorePulse son:
 
-Este nivel no profundiza todavía en las clases, módulos o componentes internos de las APIs, ya que dicho detalle corresponde al nivel de componentes del modelo C4.
+- **Landing Page:** página web pública desarrollada con HTML5, CSS3 y JavaScript, utilizada para proporcionar información pública y permitir el acceso a las aplicaciones de StorePulse.
+- **Web Application:** aplicación web desarrollada con Angular, utilizada por el Gallery Administrator para supervisar el inmueble y gestionar información del sistema.
+- **Mobile Application:** aplicación móvil desarrollada con Flutter y Dart, utilizada por el Tenant para monitorear su local, consultar información de consumo y recibir alertas.
+- **REST API:** API monolítica desarrollada con ASP.NET Core y .NET, responsable de centralizar la lógica de negocio y proporcionar los servicios utilizados por las aplicaciones Web y Mobile.
+- **Edge API:** API desarrollada con Python y Flask que opera en el entorno Edge. Se encarga de recibir, validar y procesar la información proveniente de los dispositivos IoT antes de sincronizarla con la nube.
+- **Database:** base de datos MySQL utilizada para almacenar información de usuarios, consumo, seguridad, estadísticas y demás información gestionada por StorePulse.
+- **Embedded Application:** aplicación embebida desarrollada en C++ que controla el dispositivo IoT, recopila la información de los sensores y transmite los datos hacia el entorno Edge.
 
-![StorePulse - Container Diagram](../../assets/architecture/StorePulse-diagram-container.png)
+El flujo principal de información proveniente de los dispositivos IoT se desarrolla desde el **IoT Device** hacia la **Embedded Application**, posteriormente hacia la **Edge API** y finalmente hacia la **REST API**, donde la información puede ser centralizada y almacenada en la **Database**.
 
+Por otro lado, el **Gallery Administrator** utiliza la **Web Application** y el **Tenant** utiliza la **Mobile Application**. Ambas aplicaciones consumen los servicios proporcionados por la **REST API** mediante HTTPS/JSON. La **REST API** también se comunica con **Stripe** mediante HTTPS/REST para procesar los pagos asociados a las suscripciones.
 
-#### 4.1.3.4. Software Architecture Component Level Diagrams
+El diagrama permite visualizar la estructura lógica de StorePulse y las principales tecnologías utilizadas para implementar sus funcionalidades.
 
-El diagrama de componentes representa la estructura interna de los principales contenedores de software de StorePulse, detallando los componentes que implementan sus responsabilidades y las relaciones existentes entre ellos.
+![StorePulse - Container Diagram]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4))
 
-##### REST API - Component Diagram
+#### 4.1.3.4. Software Architecture Deployment Diagram
 
-El diagrama presenta los componentes internos de la REST API, responsables de gestionar la autenticación, usuarios, seguridad, consumo, estadísticas, notificaciones y persistencia de información.
+El Deployment Diagram representa la distribución física de los contenedores de software de StorePulse sobre la infraestructura donde serán ejecutados. Esta vista permite identificar los nodos físicos y de infraestructura asociados al entorno de la galería comercial, el procesamiento Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
 
-![StorePulse - REST API Component Diagram](../../assets/architecture/StorePulse-REST-API-Component.png)
+Los principales nodos de despliegue son:
 
-##### Edge API - Component Diagram
+- **Commercial Gallery:** representa la infraestructura física de la galería comercial. Contiene los dispositivos IoT y el Edge Device encargado del procesamiento local.
+- **IoT Device:** dispositivo físico que contiene los sensores y medidores utilizados para recopilar información. Sobre este nodo se ejecuta la **Embedded Application**, desarrollada en C++.
+- **Edge Device:** dispositivo local encargado del procesamiento Edge. Sobre este nodo se ejecuta la **Edge API**, desarrollada con Python y Flask.
+- **Cloud:** infraestructura donde se ejecutan los principales servicios centralizados de StorePulse.
+    - **Application Server:** aloja la **REST API**, desarrollada con ASP.NET Core y .NET.
+    - **Database Server:** aloja la **Database**, desarrollada en MySQL.
+    - **Web Server:** aloja la **Landing Page**, desarrollada con HTML5, CSS3 y JavaScript.
+- **Administrator Computer:** computadora utilizada por el Gallery Administrator, donde se ejecuta la **Web Application** desarrollada con Angular.
+- **Tenant Mobile Device:** dispositivo móvil utilizado por el Tenant, donde se ejecuta la **Mobile Application** desarrollada con Flutter y Dart.
 
-El diagrama presenta los componentes internos de la Edge API, encargados de recibir y validar la telemetría, realizar el procesamiento en el entorno Edge, almacenar información localmente y sincronizar los datos con la nube.
+La comunicación entre los elementos desplegados se realiza mediante los siguientes mecanismos:
 
-![StorePulse - Edge API Component Diagram](../../assets/architecture/StorePulse-Edge-API-Component.png)
+- **Embedded Application → Edge API:** HTTP/JSON.
+- **Edge API → REST API:** HTTPS/JSON.
+- **Web Application → REST API:** HTTPS/JSON.
+- **Mobile Application → REST API:** HTTPS/JSON.
+- **REST API → Database:** Entity Framework Core.
 
+Esta distribución permite mantener el procesamiento de los datos IoT cercano a los dispositivos mediante Edge Computing, mientras que la lógica de negocio y la persistencia centralizada se mantienen en la infraestructura Cloud.
 
-#### 4.1.3.5. Software Architecture Deployment Diagram
-
-El diagrama de despliegue representa la distribución física de los elementos de software de StorePulse sobre la infraestructura donde serán ejecutados. Se muestran los nodos correspondientes al entorno físico de la galería comercial, el entorno Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
-
-![StorePulse - Deployment Diagram](../../assets/architecture/StorePulse-Deployment.png)
+![StorePulse - Deployment Diagram]([https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4))
