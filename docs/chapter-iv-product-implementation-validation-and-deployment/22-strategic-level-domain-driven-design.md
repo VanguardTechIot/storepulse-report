@@ -286,4 +286,13 @@ Billing, y de Utility Bill Issued hacia Tenant Notification entre Consumption an
 Communication quedan visiblemente en la frontera entre los contornos, evidenciando la comunicación entre Bounded
 Contexts.
 
+**Start with Value**
 
+Como técnica complementaria, el equipo clasificó los 4 Bounded Contexts candidatos según su valor de negocio para
+StorePulse. Safety and Emergencies se identificó como **Core Domain**, ya que la detección y respuesta automática ante
+incidentes de seguridad e incendio es el diferencial real de un sistema de gallería comercial inteligente; sin este
+contexto, StorePulse sería solo un sistema de facturación con sensores. Consumption and Billing y Management-Tenant
+Communication se clasificaron como **Supporting Subdomains**: son necesarios para operar el negocio (monetización y
+comunicación con el Tenant), pero no constituyen el diferencial competitivo del producto. Business Continuity se
+clasificó como **Generic Subdomain**, pues la resiliencia ante pérdida de conectividad es un problema técnico de
+sincronización resoluble con soluciones genéricas de mensajería o colas, sin lógica de negocio distintiva.
