@@ -1,11 +1,6 @@
 @startuml storepulse-system-context
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-' Styling approximations for Structurizr look
-skinparam monochrome true
-skinparam shadowing false
-skinparam defaultFontName Arial
 
-' System Context Diagram
 title System Context View: StorePulse Platform
 
 LAYOUT_LEFT_RIGHT()
@@ -28,6 +23,4 @@ Rel(tenant, platform, "Monitors their premises, receives alerts, and reviews wat
 
 Rel(platform, hardware, "Receives sensor events, consumption readings, and device status")
 Rel(platform, stripe, "Processes and verifies subscription payments")
-
-SHOW_LEGEND()
 @enduml
