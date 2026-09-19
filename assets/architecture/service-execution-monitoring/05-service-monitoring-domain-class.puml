@@ -1,0 +1,203 @@
+@startuml storepulse-service-monitoring-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram
+
+package "Telemetry and Measurement" {
+
+    class Telemetry <<Aggregate Root>> {
+        - telemetryId: TelemetryId
+        - deviceId: DeviceId
+        - receivedAt: DateTime
+        - measurements: List<Measurement>
+        + addMeasurement(measurement: Measurement): void
+        + validate(): boolean
+    }
+
+    class TelemetryId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class Measurement <<Entity>> {
+        - measurementId: MeasurementId
+        - type: MeasurementType
+        - value: MeasurementValue
+        - unit: String
+        - recordedAt: DateTime
+        + validate(): boolean
+    }
+
+    class MeasurementId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class MeasurementValue <<Value Object>> {
+        - value: Decimal
+        + isValid(): boolean
+    }
+
+    enum MeasurementType {
+        TEMPERATURE
+        HUMIDITY
+        WATER
+        ELECTRICITY
+    }
+}
+
+package "Monitoring" {
+
+    class MonitoringRule <<Aggregate Root>> {
+        - ruleId: UUID
+        - name: String
+        - measurementType: MeasurementType
+        - threshold: Threshold
+        - enabled: boolean
+        + enable(): void
+        + disable(): void
+        + evaluate(measurement: Measurement): boolean
+    }
+
+    class Threshold <<Value Object>> {
+        - value: Decimal
+        - operator: ComparisonOperator
+        + evaluate(value: Decimal): boolean
+    }
+
+    enum ComparisonOperator {
+        GREATER_THAN
+        GREATER_THAN_OR_EQUAL
+        LESS_THAN
+        LESS_THAN_OR_EQUAL
+        EQUAL
+    }
+
+    class Alert <<Aggregate Root>> {
+        - alertId: AlertId
+        - ruleId: UUID
+        - measurementId: MeasurementId
+        - status: AlertStatus
+        - createdAt: DateTime
+        - acknowledgedAt: DateTime
+        - resolvedAt: DateTime
+        + acknowledge(): void
+        + resolve(): void
+    }
+
+    class AlertId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    enum AlertStatus {
+        ACTIVE
+        ACKNOWLEDGED
+        RESOLVED
+    }
+
+    class Consumption <<Entity>> {
+        - consumptionId: UUID
+        - resourceId: UUID
+        - measurementType: MeasurementType
+        - totalValue: Decimal
+        - periodStart: DateTime
+        - periodEnd: DateTime
+        + calculate(): Decimal
+    }
+}
+
+package "Repositories" {
+
+    interface ITelemetryRepository {
+        + save(telemetry: Telemetry): void
+        + findByDevice(deviceId: UUID): List<Telemetry>
+    }
+
+    interface IMeasurementRepository {
+        + save(measurement: Measurement): void
+        + findByDevice(deviceId: UUID): List<Measurement>
+    }
+
+    interface IMonitoringRuleRepository {
+        + save(rule: MonitoringRule): void
+        + findActive(): List<MonitoringRule>
+    }
+
+    interface IAlertRepository {
+        + save(alert: Alert): void
+        + findActive(): List<Alert>
+    }
+}
+
+package "Domain Events" {
+
+    class TelemetryReceivedEvent <<Domain Event>> {
+        - telemetryId: TelemetryId
+        - occurredAt: DateTime
+    }
+
+    class MeasurementRecordedEvent <<Domain Event>> {
+        - measurementId: MeasurementId
+        - occurredAt: DateTime
+    }
+
+    class ThresholdExceededEvent <<Domain Event>> {
+        - ruleId: UUID
+        - measurementId: MeasurementId
+        - occurredAt: DateTime
+    }
+
+    class AlertCreatedEvent <<Domain Event>> {
+        - alertId: AlertId
+        - occurredAt: DateTime
+    }
+
+    class AlertAcknowledgedEvent <<Domain Event>> {
+        - alertId: AlertId
+        - occurredAt: DateTime
+    }
+
+    class AlertResolvedEvent <<Domain Event>> {
+        - alertId: AlertId
+        - occurredAt: DateTime
+    }
+}
+
+Telemetry "1" o-- "1..*" Measurement : contains
+
+Telemetry --> TelemetryId
+Telemetry --> DeviceId
+
+Measurement --> MeasurementId
+Measurement --> MeasurementValue
+Measurement --> MeasurementType
+
+MonitoringRule --> Threshold
+MonitoringRule --> MeasurementType
+
+Alert --> AlertId
+Alert --> MeasurementId
+Alert --> AlertStatus
+
+MonitoringRule ..> Measurement : evaluates
+MonitoringRule ..> Alert : creates
+
+Consumption --> MeasurementType
+
+ITelemetryRepository ..> Telemetry
+IMeasurementRepository ..> Measurement
+IMonitoringRuleRepository ..> MonitoringRule
+IAlertRepository ..> Alert
+
+Telemetry ..> TelemetryReceivedEvent : raises
+Measurement ..> MeasurementRecordedEvent : raises
+MonitoringRule ..> ThresholdExceededEvent : raises
+Alert ..> AlertCreatedEvent : raises
+Alert ..> AlertAcknowledgedEvent : raises
+Alert ..> AlertResolvedEvent : raises
+
+@enduml

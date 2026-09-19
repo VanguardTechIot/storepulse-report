@@ -1,0 +1,49 @@
+@startuml storepulse-resource-asset-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - REST API Components
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+
+    Component(resourceController, "ResourceController", "ASP.NET Core Controller", "Exposes endpoints for resource management.")
+
+    Component(assetController, "AssetController", "ASP.NET Core Controller", "Exposes endpoints for asset management.")
+
+    Component(iotDeviceController, "IoTDeviceController", "ASP.NET Core Controller", "Exposes endpoints for IoT device management.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates resource, asset and IoT device use cases.")
+
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Processes queries for resources, assets and devices.")
+
+    Component(domainModel, "Resource & Asset Domain", "Domain Layer", "Contains aggregates, entities, value objects and domain rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores resources, assets and IoT device information.")
+
+Container(edgeApi, "Edge API", "Python, Flask", "Processes local IoT information.")
+
+Rel(resourceController, commandHandlers, "Invokes")
+
+Rel(assetController, commandHandlers, "Invokes")
+
+Rel(iotDeviceController, commandHandlers, "Invokes")
+
+Rel(commandHandlers, domainModel, "Executes domain operations")
+
+Rel(queryHandlers, domainModel, "Queries domain data")
+
+Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
+
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(iotDeviceController, edgeApi, "Sends device configuration", "HTTPS/JSON")
+
+@enduml
