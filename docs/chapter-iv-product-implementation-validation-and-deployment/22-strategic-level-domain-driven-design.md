@@ -296,3 +296,7 @@ Communication se clasificaron como **Supporting Subdomains**: son necesarios par
 comunicación con el Tenant), pero no constituyen el diferencial competitivo del producto. Business Continuity se
 clasificó como **Generic Subdomain**, pues la resiliencia ante pérdida de conectividad es un problema técnico de
 sincronización resoluble con soluciones genéricas de mensajería o colas, sin lógica de negocio distintiva.
+
+Con la aplicación de ambas técnicas quedan confirmados los 4 Bounded Contexts candidatos —Safety and Emergencies (Core),
+Consumption and Billing (Supporting), Management Tenant Communication (Supporting) y Business Continuity (Generic),
+que sirven de base para el Domain Message Flows Modeling y las Bounded Context Canvases desarrollados a continuación.
