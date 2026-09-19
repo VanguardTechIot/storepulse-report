@@ -1,0 +1,98 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Container Diagram
+
+' ==========================================
+' EXTERNAL PEOPLE
+' ==========================================
+
+Person(visitor, "Visitor", "User who browses the public information of StorePulse.")
+
+Person(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the premises, managing consumption and billing information, and receiving alerts.")
+
+Person(tenant, "Tenant", "User who monitors their premises, checks consumption and billing, and receives alerts.")
+
+' ==========================================
+' EXTERNAL SYSTEMS
+' ==========================================
+
+System_Ext(iotDevice, "IoT Device", "Physical devices, sensors, and meters used to collect security and consumption information.")
+
+System_Ext(stripe, "Stripe", "External service used to process subscription payments.")
+
+' ==========================================
+' STOREPULSE CONTAINERS
+' ==========================================
+
+System_Boundary(storePulse, "StorePulse") {
+
+    Container(landingPage, "Landing Page", "HTML5, CSS3, JavaScript", "Public webpage providing information and presentation of StorePulse.")
+
+    Container(webApplication, "Web Application", "Angular", "Application used by the Gallery Administrator to supervise the premises and manage system information.")
+
+    Container(mobileApplication, "Mobile Application", "Flutter, Dart", "Application used by tenants to monitor their premises, check consumption, and receive alerts.")
+
+    Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes business logic and provides services for the Web and Mobile Applications.")
+
+    Container(edgeApi, "Edge API", "Python, Flask", "API running in the Edge environment that receives, validates, and processes IoT device information before synchronizing it with the cloud.")
+
+    ContainerDb(database, "Database", "MySQL", "Stores user, consumption, security, statistics, and other StorePulse information.")
+
+    Container(embeddedApplication, "Embedded Application", "C++", "Embedded application that controls the IoT device, collects sensor information, and transmits data to the Edge environment.")
+}
+
+' ==========================================
+' USER RELATIONSHIPS
+' ==========================================
+
+Rel(visitor, landingPage, "Browses public information")
+
+Rel(galleryAdministrator, webApplication, "Uses")
+
+Rel(tenant, mobileApplication, "Uses")
+
+' ==========================================
+' LANDING PAGE RELATIONSHIPS
+' ==========================================
+
+Rel(landingPage, webApplication, "Accesses the Web Application")
+
+Rel(landingPage, mobileApplication, "Accesses the Mobile Application")
+
+' ==========================================
+' APPLICATION RELATIONSHIPS
+' ==========================================
+
+Rel(webApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+Rel(mobileApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+' ==========================================
+' IOT / EDGE RELATIONSHIPS
+' ==========================================
+
+Rel(iotDevice, embeddedApplication, "Provides sensor data and events")
+
+Rel(embeddedApplication, edgeApi, "Sends telemetry and events", "HTTP/JSON")
+
+Rel(edgeApi, restApi, "Synchronizes processed information", "HTTPS/JSON")
+
+' ==========================================
+' DATA RELATIONSHIPS
+' ==========================================
+
+Rel(restApi, database, "Reads and writes information", "Entity Framework Core")
+
+' ==========================================
+' PAYMENT RELATIONSHIP
+' ==========================================
+
+Rel(restApi, stripe, "Processes subscription payments", "HTTPS/REST")
+@enduml

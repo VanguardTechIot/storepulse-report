@@ -1,0 +1,82 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+LAYOUT_TOP_DOWN()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Deployment Diagram
+
+' ==========================================
+' COMMERCIAL GALLERY INFRASTRUCTURE
+' ==========================================
+
+Deployment_Node(gallery, "Commercial Gallery", "Physical infrastructure of the commercial gallery.") {
+
+    Deployment_Node(iotNode, "IoT Device", "Physical device with sensors and meters.") {
+
+        Container(embeddedApplication, "Embedded Application", "C++", "Embedded application that controls the IoT device, collects sensor information, and transmits data to the Edge environment.")
+    }
+
+    Deployment_Node(edgeNode, "Edge Device", "Local device responsible for Edge processing.") {
+
+        Container(edgeApi, "Edge API", "Python, Flask", "API running in the Edge environment that receives, validates, and processes IoT device information before synchronizing it with the cloud.")
+    }
+}
+
+' ==========================================
+' CLOUD INFRASTRUCTURE
+' ==========================================
+
+Deployment_Node(cloud, "Cloud", "Cloud computing infrastructure.") {
+
+    Deployment_Node(appServer, "Application Server", "Server where the main API is deployed.") {
+
+        Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes business logic and provides services for the Web and Mobile Applications.")
+    }
+
+    Deployment_Node(databaseServer, "Database Server", "Server where persistent information is stored.") {
+
+        ContainerDb(database, "Database", "MySQL", "Stores user, consumption, security, statistics, and other StorePulse information.")
+    }
+
+    Deployment_Node(webServer, "Web Server", "Server where the public webpage is deployed.") {
+
+        Container(landingPage, "Landing Page", "HTML5, CSS3, JavaScript", "Public webpage providing information and presentation of StorePulse.")
+    }
+}
+
+' ==========================================
+' ADMINISTRATOR DEVICE
+' ==========================================
+
+Deployment_Node(adminComputer, "Administrator Computer", "Computer used by the Gallery Administrator.") {
+
+    Container(webApplication, "Web Application", "Angular", "Application used by the Gallery Administrator to supervise the premises and manage system information.")
+}
+
+' ==========================================
+' TENANT DEVICE
+' ==========================================
+
+Deployment_Node(tenantMobile, "Tenant Mobile Device", "Mobile device used by the tenant.") {
+
+    Container(mobileApplication, "Mobile Application", "Flutter, Dart", "Application used by tenants to monitor their premises, check consumption, and receive alerts.")
+}
+
+' ==========================================
+' DEPLOYMENT RELATIONSHIPS
+' ==========================================
+
+Rel(embeddedApplication, edgeApi, "Sends telemetry and events", "HTTP/JSON")
+
+Rel(edgeApi, restApi, "Synchronizes processed information", "HTTPS/JSON")
+
+Rel(webApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+Rel(mobileApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+Rel(restApi, database, "Reads and writes information", "Entity Framework Core")
+@enduml
