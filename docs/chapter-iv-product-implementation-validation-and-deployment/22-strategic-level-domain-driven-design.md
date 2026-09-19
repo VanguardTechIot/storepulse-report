@@ -255,3 +255,8 @@ Message Flows Modeling y las Bounded Context Canvases desarrollados en las sigui
 
 #### 4.1.1.1. Candidate Context Discovery
 
+Con el Design-Level EventStorming completo, el equipo realizó una sesión de **Candidate Context Discovery** de no más
+de 2 horas, con el objetivo de transformar los Aggregates ya agrupados en Bounded Contexts candidatos formales. De las
+tres técnicas propuestas por la guía de referencia, se aplicaron **look-for-pivotal-events** y **start-with-value**: la
+primera porque los eventos pivote del dominio ya habían sido validados desde el Big Picture EventStorming, y la segunda
+para argumentar cuál Bounded Context concentra el mayor valor de negocio para StorePulse.
