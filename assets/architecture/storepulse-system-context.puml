@@ -10,17 +10,17 @@ Person(galleryAdmin, "Gallery Administrator", "Manages the commercial gallery, m
 Person(tenant, "Tenant", "Monitors the security and consumption of their own commercial premises and receives relevant alerts.")
 
 System(platform, "StorePulse Platform", "IoT-based platform for security monitoring, incident detection, and individual water and electricity consumption management in commercial galleries.")
-System_Ext(hardware, "StorePulse Hardware", "IoT devices installed in commercial premises to detect security events and smoke and to measure water and electricity consumption.")
+System_Ext(hardware, "StorePulse Hardware", "IoT devices installed in commercial galleries to detect security events, smoke and to measure water and electricity consumption.")
 System_Ext(stripe, "Stripe", "External payment platform used to process StorePulse subscription payments.")
 
 Rel(visitor, platform, "Browses public content and learns about the platform")
-Rel(visitor, tenant, "Registers as a tenant after administrator invitation")
+Rel(visitor, tenant, "Registers as a tenant")
 Rel(visitor, galleryAdmin, "Registers as a gallery administrator")
 
 Rel(galleryAdmin, platform, "Manages the gallery, tenants, devices, incidents and consumption")
 
 Rel(tenant, platform, "Monitors their premises, receives alerts, and reviews water and electricity consumption")
 
-Rel(platform, hardware, "Receives sensor events, consumption readings, and device status")
-Rel(platform, stripe, "Processes and verifies subscription payments")
+Rel(platform, hardware, "Communicates with physical devices")
+Rel(platform, stripe, "Translates domain models to stripe API")
 @enduml
