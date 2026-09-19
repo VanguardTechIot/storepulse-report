@@ -1,0 +1,49 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - System Context
+
+' ==========================================
+' EXTERNAL PEOPLE
+' ==========================================
+
+Person(visitor, "Visitor", "User who browses the public information of StorePulse.")
+
+Person(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the premises, managing consumption and billing information, and receiving alerts.")
+
+Person(tenant, "Tenant", "User who monitors their premises, checks consumption and billing, and receives alerts.")
+
+' ==========================================
+' SYSTEM IN SCOPE
+' ==========================================
+
+System(storePulse, "StorePulse", "IoT system for security, consumption, and billing monitoring of commercial premises.")
+
+' ==========================================
+' EXTERNAL SYSTEMS
+' ==========================================
+
+System_Ext(iotDevice, "IoT Device", "Physical devices, sensors, and meters used to collect security and consumption information.")
+
+System_Ext(stripe, "Stripe", "External service used to process subscription payments.")
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+Rel(visitor, storePulse, "Browses public information")
+
+Rel(galleryAdministrator, storePulse, "Supervises the premises and manages information")
+
+Rel(tenant, storePulse, "Monitors their premises and checks information")
+
+Rel(storePulse, iotDevice, "Sends commands and configuration")
+
+Rel(storePulse, stripe, "Processes subscription payments")
+@enduml

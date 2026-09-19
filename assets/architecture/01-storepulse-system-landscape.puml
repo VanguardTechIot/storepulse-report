@@ -1,0 +1,85 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_LANDSCAPE()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - System Landscape
+
+' ==========================================
+' CUSTOM COLORS FOR PEOPLE
+' ==========================================
+
+AddPersonTag("maintenance", $bgColor="#60758F", $fontColor="white", $borderColor="#60758F", $legendText="Maintenance employee")
+
+AddPersonTag("support", $bgColor="#60758F", $fontColor="white", $borderColor="#60758F", $legendText="Support employee")
+
+AddExternalPersonTag("visitor", $bgColor="#245782", $fontColor="white", $borderColor="#245782", $legendText="External user")
+
+AddExternalPersonTag("administrator", $bgColor="#245782", $fontColor="white", $borderColor="#245782", $legendText="External user")
+
+AddExternalPersonTag("tenant", $bgColor="#245782", $fontColor="white", $borderColor="#245782", $legendText="External user")
+
+' ==========================================
+' STARTUP
+' ==========================================
+
+Enterprise_Boundary(startup, "StorePulse") {
+
+    Person(maintenanceTechnician, "Maintenance Technician", "Employee responsible for maintaining and monitoring IoT devices.", $tags="maintenance")
+
+    Person(supportStaff, "Support / Customer Service", "Employee responsible for handling user incidents and requests.", $tags="support")
+
+    System(storePulse, "StorePulse", "IoT system for security, consumption, and billing monitoring of commercial premises.")
+}
+
+' ==========================================
+' EXTERNAL PEOPLE
+' ==========================================
+
+Person_Ext(visitor, "Visitor", "User who browses the public information of StorePulse.", $tags="visitor")
+
+Person_Ext(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the premises, managing consumption and billing information, and receiving alerts.", $tags="administrator")
+
+Person_Ext(tenant, "Tenant", "User who monitors their premises, checks consumption and billing, and receives alerts.", $tags="tenant")
+
+' ==========================================
+' EXTERNAL SYSTEMS
+' ==========================================
+
+System_Ext(iotDevice, "IoT Device", "Physical devices, sensors, and meters used to collect security and consumption information.")
+
+System_Ext(stripe, "Stripe", "External service used to process subscription payments.")
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+Rel(visitor, storePulse, "Browses public information")
+
+Rel(galleryAdministrator, storePulse, "Supervises the premises and manages information")
+
+Rel(tenant, storePulse, "Monitors their premises and checks information")
+
+Rel(maintenanceTechnician, storePulse, "Monitors and maintains")
+
+Rel(supportStaff, storePulse, "Handles incidents")
+
+Rel(iotDevice, storePulse, "Sends telemetry and events")
+
+Rel(storePulse, stripe, "Processes subscription payments")
+
+' ==========================================
+' VISUAL ORGANIZATION
+' ==========================================
+
+Lay_D(maintenanceTechnician, supportStaff)
+
+Lay_D(visitor, galleryAdministrator)
+Lay_D(galleryAdministrator, tenant)
+
+Lay_D(iotDevice, stripe)
+@enduml
