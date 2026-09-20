@@ -1,0 +1,114 @@
+@startuml storepulse-analytics-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Analytics - Domain Layer Class Diagram
+
+package "Notification Management" {
+
+    class Notification <<Aggregate Root>> {
+        - notificationId: NotificationId
+        - type: NotificationType
+        - relatedEntityId: UUID
+        - message: String
+        - generatedAt: DateTime
+        + generate(type: NotificationType, relatedEntityId: UUID, message: String): void
+        + group(others: List<Notification>): void
+    }
+
+    class NotificationId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    enum NotificationType {
+        SAFETY_ALERT
+        CONNECTIVITY_ALERT
+        CONSUMPTION_DEVIATION
+    }
+}
+
+package "Consumption Registration" {
+
+    class ConsumptionRegistration <<Aggregate Root>> {
+        - consumptionRegistrationId: ConsumptionRegistrationId
+        - utilityType: UtilityType
+        - meterId: UUID
+        - reading: ConsumptionValue
+        - period: String
+        - capturedAt: DateTime
+        - recordedAt: DateTime
+        + captureReading(meterId: UUID, utilityType: UtilityType, reading: ConsumptionValue): void
+        + recordConsumption(period: String, value: ConsumptionValue): void
+    }
+
+    class ConsumptionRegistrationId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class ConsumptionValue <<Value Object>> {
+        - amount: Decimal
+        - unit: String
+    }
+
+    enum UtilityType {
+        WATER
+        ELECTRICITY
+    }
+}
+
+package "Repositories" {
+
+    interface INotificationRepository {
+        + save(notification: Notification): void
+        + findRecentByType(type: NotificationType): List<Notification>
+    }
+
+    interface IConsumptionRegistrationRepository {
+        + save(registration: ConsumptionRegistration): void
+        + findByMeterAndPeriod(meterId: UUID, period: String): ConsumptionRegistration
+    }
+}
+
+package "Domain Events" {
+
+    class NotificationGeneratedEvent <<Domain Event>> {
+        - notificationId: NotificationId
+        - occurredAt: DateTime
+    }
+
+    class NotificationsGroupedEvent <<Domain Event>> {
+        - notificationId: NotificationId
+        - occurredAt: DateTime
+    }
+
+    class UtilityMeterReadingCapturedEvent <<Domain Event>> {
+        - consumptionRegistrationId: ConsumptionRegistrationId
+        - occurredAt: DateTime
+    }
+
+    class UtilityConsumptionRecordedEvent <<Domain Event>> {
+        - consumptionRegistrationId: ConsumptionRegistrationId
+        - occurredAt: DateTime
+    }
+}
+
+Notification --> NotificationId
+Notification --> NotificationType
+
+ConsumptionRegistration --> ConsumptionRegistrationId
+ConsumptionRegistration --> UtilityType
+ConsumptionRegistration --> ConsumptionValue
+
+INotificationRepository ..> Notification
+IConsumptionRegistrationRepository ..> ConsumptionRegistration
+
+Notification ..> NotificationGeneratedEvent : raises
+Notification ..> NotificationsGroupedEvent : raises
+ConsumptionRegistration ..> UtilityMeterReadingCapturedEvent : raises
+ConsumptionRegistration ..> UtilityConsumptionRecordedEvent : raises
+
+@enduml
