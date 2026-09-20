@@ -1,0 +1,57 @@
+@startuml storepulse-utility-billing-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Utility Billing - REST API Components
+
+Container(webApplication, "Web Application", "Angular", "Allows the Gallery Administrator to manage utility billing operations.")
+Container(mobileApplication, "Mobile Application", "Flutter / Dart", "Allows the Tenant to consult bills and submit billing disputes.")
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+    Component(utilityBillsController, "Utility Bills Controller", "ASP.NET Core Controller", "Exposes operations for generating, issuing and consulting utility bills.")
+    Component(billingBreakdownController, "Billing Breakdown Controller", "ASP.NET Core Controller", "Exposes operations for consulting the consumption breakdown associated with a bill.")
+    Component(billingDisputesController, "Billing Disputes Controller", "ASP.NET Core Controller", "Exposes operations for creating, reviewing and resolving billing disputes.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates utility bill and billing dispute commands.")
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Processes queries for bills, breakdowns and billing disputes.")
+    Component(eventHandlers, "Event Handlers", "Application Layer", "Reacts to consumption information and emits or processes integration events related to billing.")
+
+    Component(utilityBillingDomain, "Utility Billing Domain", "Domain Layer", "Contains UtilityBill and BillingDispute aggregates, value objects, rules and domain events.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(analyticsFacade, "Analytics Facade", "ACL / Facade", "Translates consumption summaries and baseline information provided by Dashboard and Analytics into the Utility Billing model.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores utility bills, billing breakdowns and billing disputes.")
+Container(analytics, "Dashboard and Analytics", "ASP.NET Core", "Provides consumption summaries and baseline information used as billing input.")
+Container(propertyCommunication, "Management-Tenant Communication", "ASP.NET Core", "Consumes UtilityBillIssued and billing dispute events for tenant and administrator communication.")
+
+Rel(webApplication, utilityBillsController, "Generates and queries bills", "HTTPS/JSON")
+Rel(webApplication, billingBreakdownController, "Queries billing breakdowns", "HTTPS/JSON")
+Rel(webApplication, billingDisputesController, "Manages billing disputes", "HTTPS/JSON")
+
+Rel(mobileApplication, utilityBillsController, "Queries bills", "HTTPS/JSON")
+Rel(mobileApplication, billingBreakdownController, "Queries billing breakdowns", "HTTPS/JSON")
+Rel(mobileApplication, billingDisputesController, "Creates and queries disputes", "HTTPS/JSON")
+
+Rel(utilityBillsController, commandHandlers, "Invokes")
+Rel(utilityBillsController, queryHandlers, "Invokes")
+Rel(billingBreakdownController, queryHandlers, "Invokes")
+Rel(billingDisputesController, commandHandlers, "Invokes")
+Rel(billingDisputesController, queryHandlers, "Invokes")
+
+Rel(commandHandlers, utilityBillingDomain, "Executes domain operations")
+Rel(queryHandlers, utilityBillingDomain, "Queries domain data")
+Rel(eventHandlers, utilityBillingDomain, "Processes domain events")
+Rel(utilityBillingDomain, repositoryImplementations, "Uses repository abstractions")
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(analyticsFacade, analytics, "Consumes consumption summary and baseline", "HTTPS/JSON")
+Rel(commandHandlers, analyticsFacade, "Requests billing input")
+Rel(utilityBillingDomain, propertyCommunication, "Publishes billing events", "Integration Events")
+
+@enduml
