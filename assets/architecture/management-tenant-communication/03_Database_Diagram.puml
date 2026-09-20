@@ -1,0 +1,92 @@
+@startuml
+
+title Management-Tenant Communication - Database Diagram
+
+hide methods
+hide stereotypes
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor #222222
+    FontColor #222222
+}
+
+entity "tenant_notifications" as tenant_notifications {
+    * id : CHAR(36) <<PK>>
+    --
+    o tenant_id : CHAR(36) <<FK externa>>
+    o type : VARCHAR(50)
+    o title : VARCHAR(200)
+    o body : TEXT
+    o status : VARCHAR(20)
+    o channel : VARCHAR(20)
+    o reference_id : CHAR(36)
+    o created_at : DATETIME
+    o sent_at : DATETIME
+}
+
+entity "communication_logs" as communication_logs {
+    * id : CHAR(36) <<PK>>
+    --
+    o reference_id : CHAR(36)
+    o reference_type : VARCHAR(30)
+    o tenant_id : CHAR(36) <<FK externa>>
+    o channel : VARCHAR(20)
+    o logged_at : DATETIME
+    o detail : VARCHAR(500)
+}
+
+entity "conversations" as conversations {
+    * id : CHAR(36) <<PK>>
+    --
+    o tenant_id : CHAR(36) <<FK externa>>
+    o gallery_administrator_id : CHAR(36) <<FK externa>>
+    o subject : VARCHAR(200)
+    o status : VARCHAR(20)
+    o started_at : DATETIME
+    o resolved_at : DATETIME
+}
+
+entity "tenant_assignments" as tenant_assignments {
+    * id : CHAR(36) <<PK>>
+    --
+    o tenant_id : CHAR(36) <<FK externa>>
+    o commercial_unit_id : CHAR(36) <<FK externa>>
+    o gallery_administrator_id : CHAR(36) <<FK externa>>
+    o assigned_at : DATETIME
+    o terminated_at : DATETIME
+    o status : VARCHAR(20)
+}
+
+entity "messages" as messages {
+    * id : CHAR(36) <<PK>>
+    --
+    o conversation_id : CHAR(36) <<FK>>
+    o sender_id : CHAR(36) <<FK externa>>
+    o sender_role : VARCHAR(30)
+    o content : VARCHAR(2000)
+    o sent_at : DATETIME
+}
+
+entity "message_attachments" as message_attachments {
+    * id : CHAR(36) <<PK>>
+    --
+    o message_id : CHAR(36) <<FK>>
+    o file_name : VARCHAR(255)
+    o url : VARCHAR(500)
+    o mime_type : VARCHAR(100)
+    o size_in_bytes : BIGINT
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+conversations ||--o{ messages : contains
+
+messages ||--o{ message_attachments : has
+
+@enduml
