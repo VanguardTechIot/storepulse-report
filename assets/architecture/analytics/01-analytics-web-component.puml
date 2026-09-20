@@ -1,0 +1,25 @@
+@startuml storepulse-analytics-web-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Analytics - Web Components
+
+Container_Boundary(webApp, "Web Application - Angular") {
+
+    Component(analyticsWebUI, "Analytics UI", "Angular", "Displays the Consolidated Dashboard and the Notification Center for the Gallery Administrator.")
+
+    Component(analyticsWebService, "Analytics Service", "Angular Service", "Consumes the dashboard and notification REST endpoints.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(analyticsWebUI, analyticsWebService, "Uses")
+
+Rel(analyticsWebService, restApi, "Consumes notification and dashboard services", "HTTPS/JSON")
+
+@enduml
