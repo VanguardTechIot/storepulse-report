@@ -102,3 +102,48 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 | Integración con Sedapal y Luz del Sur | HTTPS/JSON | Recibe la confirmación de consumo del periodo. |
 | `Firebase Cloud Messaging` | Firebase | Envía las notificaciones push generadas hacia la Web Application y la Mobile Application. |
 | Evento saliente hacia Consumption and Billing | Integration Event | Publica `UtilityConsumptionRecordedEvent` para alimentar la Baseline de consumo en Consumption and Billing. |
+
+## 4.2.5.5. Bounded Context Software Architecture Component Level Diagrams
+
+Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/analytics/analytics.dsl`), siguiendo la misma herramienta utilizada en Management-Tenant Communication. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+
+> **Pendiente:** las imágenes deben generarse abriendo `analytics.dsl` en Structurizr Lite (o en el workspace en línea de structurizr.com) y exportando cada vista como PNG a `assets/architecture/analytics/`, con los nombres referenciados abajo.
+
+### Web Application
+
+La aplicación web, desarrollada con Angular, contiene la interfaz de Analytics y el servicio encargado de consumir los servicios REST correspondientes.
+
+![StorePulse - Analytics - Web Components](../../assets/architecture/analytics/01-analytics-web-component.png)
+
+### Mobile Application
+
+La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de Analytics y el servicio encargado de consumir la API REST.
+
+![StorePulse - Analytics - Mobile Components](../../assets/architecture/analytics/02-analytics-mobile-component.png)
+
+### REST API
+
+La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de consultas y de eventos, dominio y repositorios del contexto.
+
+![StorePulse - Analytics - REST API Components](../../assets/architecture/analytics/03-analytics-rest-api-component.png)
+
+## 4.2.5.6. Bounded Context Software Architecture Code Level Diagrams
+
+Los diagramas de nivel de código se elaboran con **PlantUML**.
+
+### 4.2.5.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama de clases presenta los agregados raíz `Notification` y `ConsumptionRegistration`, sus objetos de valor, las enumeraciones `NotificationType` y `UtilityType`, los repositorios y los eventos de dominio. Ambos agregados son independientes entre sí.
+
+![StorePulse - Analytics - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/04-analytics-domain-class.puml&fmt=svg&v=4)
+
+### 4.2.5.6.2. Bounded Context Database Design Diagram
+
+El modelo de datos representa la persistencia de los principales elementos del contexto.
+
+| Tabla | Propósito | Relación principal |
+|---|---|---|
+| `notifications` | Almacenar las notificaciones generadas a partir de eventos críticos externos. | Independiente; no se relaciona con `consumption_registrations`. |
+| `consumption_registrations` | Almacenar las lecturas y consumos de agua y electricidad registrados por medidor y periodo. | `meter_id` es una referencia externa a Resource and Assets Management, sin FK física entre contextos. |
+
+![StorePulse - Analytics - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/05-analytics-database.puml&fmt=svg&v=4)
