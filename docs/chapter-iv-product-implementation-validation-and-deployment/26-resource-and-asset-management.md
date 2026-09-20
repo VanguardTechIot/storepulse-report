@@ -59,10 +59,6 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. E
 | `AssetAssignedToResourceEvent` | `Asset` | Representa la asignación de un activo a un recurso. |
 | `IoTDeviceRegisteredEvent` | `IoTDevice` | Representa el registro de un dispositivo IoT. |
 
-El modelo de relaciones se encuentra representado en el siguiente diagrama:
-
-![StorePulse - Resource and Asset Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4)
-
 
 ### 4.2.2.2. Interface Layer
 
