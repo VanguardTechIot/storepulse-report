@@ -105,9 +105,9 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 ## 4.2.5.5. Bounded Context Software Architecture Component Level Diagrams
 
-Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/analytics/analytics.dsl`), siguiendo la misma herramienta utilizada en Management-Tenant Communication. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+Los diagramas de componentes de este Bounded Context se elaboran con **PlantUML**, siguiendo la notación C4-PlantUML y la misma convención aplicada en el resto de Bounded Contexts. Los archivos `.puml` fuente se encuentran en `assets/architecture/analytics/` y las imágenes siguientes son su exportación a PNG, incrustadas directamente en el informe para que no dependan de un servicio de renderizado externo.
 
-> **Pendiente:** las imágenes deben generarse abriendo `analytics.dsl` en Structurizr Lite (o en el workspace en línea de structurizr.com) y exportando cada vista como PNG a `assets/architecture/analytics/`, con los nombres referenciados abajo.
+Se conserva además `assets/architecture/analytics/analytics.dsl`, la descripción equivalente en Structurizr DSL elaborada durante el modelado del contexto.
 
 ### Web Application
 
