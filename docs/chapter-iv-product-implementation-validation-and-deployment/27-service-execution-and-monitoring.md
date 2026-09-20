@@ -72,9 +72,7 @@ Las principales operaciones del dominio son:
 | `AlertAcknowledgedEvent` | `Alert` | Representa el reconocimiento de una alerta. |
 | `AlertResolvedEvent` | `Alert` | Representa la resolución de una alerta. |
 
-El modelo completo de relaciones se representa en el siguiente diagrama:
 
-![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=4)
 ### 4.2.3.2. Interface Layer
 
 La **Interface Layer** proporciona los puntos de entrada mediante los cuales las aplicaciones y la infraestructura Edge interactúan con el contexto.
