@@ -1,0 +1,180 @@
+@startuml
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title Management-Tenant Communication - REST API Component View
+
+' ==========================================
+' EXTERNAL PEOPLE
+' ==========================================
+
+Person(galleryAdministrator, "Gallery Administrator", "Administrator of the commercial gallery.")
+
+Person(tenant, "Tenant", "Tenant of a commercial gallery.")
+
+' ==========================================
+' EXTERNAL CONTAINERS
+' ==========================================
+
+Container(webApplication, "Web Application", "Web", "Web application for the Management-Tenant Communication bounded context.")
+
+Container(mobileApplication, "Mobile Application", "Mobile", "Mobile application for the Management-Tenant Communication bounded context.")
+
+' ==========================================
+' REST API
+' ==========================================
+
+Container_Boundary(restApi, "REST API") {
+
+    Component(mtcFacade, "MTC Facade", "Facade", "Entry point for external clients.")
+
+    Component(tenantAssignmentsController, "Tenant Assignments Controller", "Controller", "Manages tenant assignments.")
+
+    Component(communicationLogsController, "Communication Logs Controller", "Controller", "Manages communication logs.")
+
+    Component(tenantNotificationsController, "Tenant Notifications Controller", "Controller", "Manages tenant notifications.")
+
+    Component(conversationMessagesController, "Conversation Messages Controller", "Controller", "Manages conversation messages.")
+
+    Component(conversationsController, "Conversations Controller", "Controller", "Manages conversations.")
+
+    Component(queryHandlers, "Query Handlers", "Application Handler", "Processes queries from the bounded context.")
+
+    Component(assignmentCommandHandlers, "Assignment Command Handlers", "Command Handler", "Processes assignment commands.")
+
+    Component(conversationCommandHandlers, "Conversation Command Handlers", "Command Handler", "Processes conversation commands.")
+
+    Component(notificationCommandHandlers, "Notification Command Handlers", "Command Handler", "Processes notification commands.")
+
+    Component(logCommandHandlers, "Log Command Handlers", "Command Handler", "Processes communication log commands.")
+
+    Component(utilityBillIssuedEventHandler, "Utility Bill Issued Event Handler", "Event Handler", "Reacts to utility bill issued events.")
+
+    Component(tenantNotifiedEventHandler, "Tenant Notified Event Handler", "Event Handler", "Reacts to tenant notification events.")
+
+    Component(tenantAssignmentRepository, "Tenant Assignment Repository", "Repository", "Persists tenant assignments.")
+
+    Component(conversationRepository, "Conversation Repository", "Repository", "Persists conversations.")
+
+    Component(tenantNotificationRepository, "Tenant Notification Repository", "Repository", "Persists tenant notifications.")
+
+    Component(communicationLogRepository, "Communication Log Repository", "Repository", "Persists communication logs.")
+
+    Component(tenantAssignmentAggregate, "Tenant Assignment Aggregate", "Aggregate", "Domain model for assignments.")
+
+    Component(conversationAggregate, "Conversation Aggregate", "Aggregate", "Domain model for conversations and messages.")
+
+    Component(tenantNotificationAggregate, "Tenant Notification Aggregate", "Aggregate", "Domain model for tenant notifications.")
+
+    Component(communicationLogAggregate, "Communication Log Aggregate", "Aggregate", "Domain model for communication logs.")
+
+    Component(pushNotificationAdapter, "Push Notification Adapter", "Adapter", "Sends push notifications.")
+
+    Component(emailNotificationAdapter, "Email Notification Adapter", "Adapter", "Sends notifications by email.")
+}
+
+' ==========================================
+' DATABASE
+' ==========================================
+
+System_Ext(database, "Database", "Stores conversations, messages, notifications, assignments and communication logs.")
+
+' ==========================================
+' EXTERNAL CLIENTS
+' ==========================================
+
+Rel(webApplication, tenantAssignmentsController, "Manages assignments", "HTTPS/JSON")
+
+Rel(webApplication, communicationLogsController, "Queries communication logs", "HTTPS/JSON")
+
+Rel(webApplication, tenantNotificationsController, "Manages notifications", "HTTPS/JSON")
+
+Rel(webApplication, conversationMessagesController, "Sends and queries messages", "HTTPS/JSON")
+
+Rel(webApplication, conversationsController, "Queries and manages conversations", "HTTPS/JSON")
+
+Rel(mobileApplication, tenantNotificationsController, "Queries notifications", "HTTPS/JSON")
+
+Rel(mobileApplication, conversationMessagesController, "Sends and queries messages", "HTTPS/JSON")
+
+Rel(mobileApplication, conversationsController, "Queries conversations", "HTTPS/JSON")
+
+' ==========================================
+' CONTROLLERS -> APPLICATION LAYER
+' ==========================================
+
+Rel(tenantAssignmentsController, assignmentCommandHandlers, "Dispatches commands")
+
+Rel(communicationLogsController, queryHandlers, "Dispatches queries")
+
+Rel(tenantNotificationsController, queryHandlers, "Dispatches queries")
+
+Rel(tenantNotificationsController, notificationCommandHandlers, "Dispatches commands")
+
+Rel(conversationMessagesController, queryHandlers, "Dispatches queries")
+
+Rel(conversationMessagesController, conversationCommandHandlers, "Dispatches commands")
+
+Rel(conversationsController, queryHandlers, "Dispatches queries")
+
+Rel(conversationsController, conversationCommandHandlers, "Dispatches commands")
+
+' ==========================================
+' APPLICATION -> DOMAIN / PERSISTENCE
+' ==========================================
+
+Rel(assignmentCommandHandlers, tenantAssignmentAggregate, "Orchestrates")
+
+Rel(assignmentCommandHandlers, tenantAssignmentRepository, "Persists")
+
+Rel(conversationCommandHandlers, conversationAggregate, "Orchestrates")
+
+Rel(conversationCommandHandlers, conversationRepository, "Persists")
+
+Rel(notificationCommandHandlers, tenantNotificationAggregate, "Orchestrates")
+
+Rel(notificationCommandHandlers, tenantNotificationRepository, "Persists")
+
+Rel(logCommandHandlers, communicationLogAggregate, "Orchestrates")
+
+Rel(logCommandHandlers, communicationLogRepository, "Persists")
+
+Rel(queryHandlers, conversationRepository, "Queries")
+
+Rel(queryHandlers, tenantNotificationRepository, "Queries")
+
+Rel(queryHandlers, tenantAssignmentRepository, "Queries")
+
+Rel(queryHandlers, communicationLogRepository, "Queries")
+
+' ==========================================
+' EVENTS AND ADAPTERS
+' ==========================================
+
+Rel(utilityBillIssuedEventHandler, notificationCommandHandlers, "Invokes notification")
+
+Rel(tenantNotifiedEventHandler, logCommandHandlers, "Invokes log")
+
+Rel(notificationCommandHandlers, pushNotificationAdapter, "Delegates delivery")
+
+Rel(notificationCommandHandlers, emailNotificationAdapter, "Delegates delivery")
+
+' ==========================================
+' PERSISTENCE
+' ==========================================
+
+Rel(tenantAssignmentRepository, database, "Reads and writes data", "MySQL/SQL")
+
+Rel(conversationRepository, database, "Reads and writes data", "MySQL/SQL")
+
+Rel(tenantNotificationRepository, database, "Reads and writes data", "MySQL/SQL")
+
+Rel(communicationLogRepository, database, "Reads and writes data", "MySQL/SQL")
+
+@enduml
