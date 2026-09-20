@@ -1,0 +1,24 @@
+@startuml storepulse-property-management-mobile-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Property Management - Mobile Components
+
+Container_Boundary(mobileApp, "Mobile Application - Flutter") {
+
+    Component(propertyMobileUI, "Property Inspection UI", "Flutter, Dart", "Provides views for field administrators to check commercial unit availability and status.")
+
+    Component(propertyMobileService, "Property Mobile Service", "Dart", "Consumes REST services for gallery and unit information.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(propertyMobileUI, propertyMobileService, "Uses")
+Rel(propertyMobileService, restApi, "Consumes property management services", "HTTPS/JSON")
+
+@enduml
