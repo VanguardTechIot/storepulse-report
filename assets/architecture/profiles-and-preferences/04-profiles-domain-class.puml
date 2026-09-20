@@ -1,0 +1,206 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+title Domain Layer - Profiles and Preferences
+
+package "Model.Aggregates" {
+  class UserProfile <<Aggregate Root>> {
+    - id : UserProfileId
+    - userId : UserId
+    - fullName : FullName
+    - emailAddress : EmailAddress
+    - phoneNumber : PhoneNumber
+    - photo : ProfilePhoto
+    - preferredLanguage : LanguageCode
+    - createdAt : DateTime
+    - updatedAt : DateTime
+    + UpdatePersonalData(name : FullName, email : EmailAddress, phone : PhoneNumber) : void
+    + ChangePreferredLanguage(language : LanguageCode) : void
+    + AttachPhoto(photo : ProfilePhoto) : void
+    + GetPreferredLanguage() : LanguageCode
+  }
+
+  class NotificationPreferences <<Aggregate Root>> {
+    - id : NotificationPreferencesId
+    - userProfileId : UserProfileId
+    - subscribedAlertTypes : Set<AlertType>
+    - createdAt : DateTime
+    - updatedAt : DateTime
+    + SetPreferences(types : Set<AlertType>) : void
+    + DisableChannel(channelId : ChannelId) : void
+    + HasActiveCriticalChannel() : bool
+    + IsEmergency(type : AlertType) : bool
+  }
+}
+
+package "Model.Entities" {
+  class NotificationChannel <<Entity>> {
+    - id : ChannelId
+    - type : ChannelType
+    - destination : string
+    - enabled : bool
+    - carriesEmergency : bool
+    + Enable() : void
+    + Disable() : void
+    + IsLastActive() : bool
+  }
+}
+
+package "Model.ValueObjects" {
+  class UserProfileId <<Value Object>> {
+    - value : Guid
+  }
+
+  class NotificationPreferencesId <<Value Object>> {
+    - value : Guid
+  }
+
+  class ChannelId <<Value Object>> {
+    - value : Guid
+  }
+
+  class UserId <<Value Object>> {
+    - value : Guid
+  }
+
+  class FullName <<Value Object>> {
+    - firstName : string
+    - lastName : string
+    + ToString() : string
+  }
+
+  class EmailAddress <<Value Object>> {
+    - value : string
+    + IsValid() : bool
+  }
+
+  class PhoneNumber <<Value Object>> {
+    - value : string
+    + IsValid() : bool
+  }
+
+  class ProfilePhoto <<Value Object>> {
+    - url : string
+    - format : string
+    - sizeInBytes : long
+    + IsWithinSizeLimit() : bool
+  }
+
+  enum LanguageCode {
+    EN_US
+    ES_419
+  }
+
+  enum ChannelType {
+    PUSH
+    EMAIL
+  }
+
+  enum AlertCategory {
+    EMERGENCY
+    INFORMATIONAL
+  }
+
+  enum AlertType {
+    INTRUSION
+    SMOKE
+    CONSUMPTION_DEVIATION
+    DEVICE_FAILURE
+    BILLING
+  }
+}
+
+package "Model.Events" {
+  class UserProfileCreatedEvent <<Domain Event>> {
+    + userProfileId : UserProfileId
+    + occurredOn : DateTime
+  }
+
+  class UserProfileUpdatedEvent <<Domain Event>> {
+    + userProfileId : UserProfileId
+    + occurredOn : DateTime
+  }
+
+  class ProfilePhotoUploadedEvent <<Domain Event>> {
+    + userProfileId : UserProfileId
+    + photoUrl : string
+    + occurredOn : DateTime
+  }
+
+  class PreferredLanguageChangedEvent <<Domain Event>> {
+    + userProfileId : UserProfileId
+    + language : LanguageCode
+    + occurredOn : DateTime
+  }
+
+  class NotificationPreferencesSetEvent <<Domain Event>> {
+    + notificationPreferencesId : NotificationPreferencesId
+    + subscribedAlertTypes : Set<AlertType>
+    + occurredOn : DateTime
+  }
+
+  class NotificationChannelDisabledEvent <<Domain Event>> {
+    + channelId : ChannelId
+    + occurredOn : DateTime
+  }
+
+  class UserRegisteredEvent <<Integration Event>> {
+    + userId : UserId
+    + fullName : string
+    + emailAddress : string
+    + occurredOn : DateTime
+  }
+}
+
+package "Model.Repositories" {
+  interface IUserProfileRepository <<Repository>> {
+    + FindById(id : UserProfileId) : UserProfile
+    + FindByUserId(userId : UserId) : UserProfile
+    + ExistsByEmail(email : EmailAddress) : bool
+    + Save(profile : UserProfile) : void
+  }
+
+  interface INotificationPreferencesRepository <<Repository>> {
+    + FindByUserProfileId(id : UserProfileId) : NotificationPreferences
+    + Save(preferences : NotificationPreferences) : void
+  }
+}
+
+package "Services.Acl" {
+  interface IProfilesAndPreferencesFacade <<ACL>> {
+    + GetPreferredLanguage(userId : UserId) : LanguageCode
+    + GetEnabledChannels(userId : UserId, alertType : AlertType) : List<ChannelType>
+  }
+}
+
+UserProfile "1" *-- "1" UserProfileId : identificado por >
+UserProfile "1" *-- "1" FullName : nombrado como >
+UserProfile "1" *-- "1" EmailAddress : contactado en >
+UserProfile "1" *-- "0..1" PhoneNumber : contactado en >
+UserProfile "1" *-- "0..1" ProfilePhoto : ilustrado por >
+UserProfile "1" --> "1" LanguageCode : prefiere >
+UserProfile "1" --> "1" UserId : referencia a >
+
+UserProfile "1" --> "1" NotificationPreferences : configura >
+NotificationPreferences "1" *-- "1" NotificationPreferencesId : identificado por >
+NotificationPreferences "1" *-- "1..*" NotificationChannel : entrega por >
+NotificationPreferences "1" --> "0..*" AlertType : habilita >
+
+NotificationChannel "1" *-- "1" ChannelId : identificado por >
+NotificationChannel "1" --> "1" ChannelType : es de tipo >
+AlertType "1..*" --> "1" AlertCategory : clasificado como >
+
+UserProfile ..> UserProfileCreatedEvent : emite >
+UserProfile ..> UserProfileUpdatedEvent : emite >
+UserProfile ..> ProfilePhotoUploadedEvent : emite >
+UserProfile ..> PreferredLanguageChangedEvent : emite >
+NotificationPreferences ..> NotificationPreferencesSetEvent : emite >
+NotificationPreferences ..> NotificationChannelDisabledEvent : emite >
+UserRegisteredEvent ..> UserProfile : dispara creacion de >
+
+IUserProfileRepository ..> UserProfile : gestiona >
+INotificationPreferencesRepository ..> NotificationPreferences : gestiona >
+IProfilesAndPreferencesFacade ..> UserProfile : consulta >
+IProfilesAndPreferencesFacade ..> NotificationPreferences : consulta >
+
+@enduml
