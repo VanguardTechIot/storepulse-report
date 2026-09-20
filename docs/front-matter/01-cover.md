@@ -15,7 +15,7 @@ NRC
 
 ### **8741**
 
-## Informe del Trabajo Final
+### Informe del Trabajo Final
 
 Docente
 
