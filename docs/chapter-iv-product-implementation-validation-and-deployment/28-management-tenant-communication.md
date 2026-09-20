@@ -269,15 +269,11 @@ En esta capa se implementan los repositorios con Entity Framework Core sobre MyS
 
 # 4.2.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección, explicamos los Component Diagrams de C4 Model para cada uno de los Containers considerados para el bounded context Management-Tenant Communication.
-
-En estos diagramas el buscamos reflejar la descomposición de cada Container para identificar los bloques estructurales principales y sus interacciones. Cada Component Diagram muestra cómo un container está conformado por components, qué son cada uno de dichos components, sus responsabilidades y los detalles de implementación y tecnología.
-
-Los diagramas se elaboran con Structurizr DSL.
+Los diagramas de componentes muestran la estructura interna de la Web Application, Mobile Application y REST API del Bounded Context Management-Tenant Communication, identificando sus principales componentes, responsabilidades y relaciones.
 
 ## 4.2.4.5.1. Component Diagram — Web Application Container
 
-Este diagrama descompone el container Web Application (Angular) y muestra cómo está conformado por components que permiten al Gallery Administrator gestionar conversaciones, notificaciones y asignaciones. Se identifican los bloques estructurales del container y las interacciones que establece con los controladores del REST API.
+Este diagrama muestra la estructura interna de la Web Application, desarrollada con Angular, y los componentes que permiten al Gallery Administrator gestionar conversaciones, notificaciones y asignaciones. También se muestran las relaciones con los controladores de la REST API.
 
 ![Web Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/02_Component_Web_Application.puml&fmt=svg&v=4)
 
@@ -302,7 +298,7 @@ Este diagrama descompone el container Web Application (Angular) y muestra cómo 
 
 ## 4.2.4.5.2. Component Diagram — Mobile Application Container
 
-Este diagrama descompone el container Mobile Application (Flutter + Dart) y muestra cómo está conformado por components que permiten al Tenant consultar sus conversaciones, recibir notificaciones y consultar el estado de su asignación desde dispositivos móviles.
+Este diagrama muestra la estructura interna de la Mobile Application, desarrollada con Flutter y Dart, y los componentes que permiten al Tenant consultar sus conversaciones, recibir notificaciones y visualizar el estado de su asignación.
 
 ![Mobile Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/01_Component_Mobile_Application.puml&fmt=svg&v=4)
 
@@ -325,10 +321,9 @@ Este diagrama descompone el container Mobile Application (Flutter + Dart) y mues
 
 ## 4.2.4.5.3. Component Diagram — REST API Container
 
-Este diagrama descompone el container REST API (ASP.NET Core + .NET) y muestra cómo está conformado por components que implementan la lógica del bounded context Management-Tenant Communication, sus repositorios, adapters, handlers de eventos y la fachada ACL que expone hacia otros bounded contexts.
+Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP.NET Core y .NET, y los componentes que gestionan las operaciones del Bounded Context Management-Tenant Communication, incluyendo controladores, handlers, repositorios, adaptadores y la fachada de integración con otros Bounded Contexts.
 
-![Backend Component Management-Tenant Communication](../../assets/architecture/management-tenant-communication/MTC-Backend-Components.png)
-
+![Backend Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/05_Component_REST_API_Backend.puml&fmt=svg&v=4)
 ### Componentes
 
 | Componente | Responsabilidad | Tecnología |

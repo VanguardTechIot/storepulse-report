@@ -132,29 +132,29 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 ## 4.2.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/profiles-and-preferences/profiles-and-preferences.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+Los siguientes diagramas muestran la estructura de componentes del Bounded Context Profiles and Preferences, considerando las aplicaciones Web, Mobile y la REST API.
 
 ### Web Application
 
-La aplicación web, desarrollada con Angular, contiene la interfaz de gestión de perfil y preferencias, junto con el servicio encargado de consumir los servicios REST correspondientes.
+La aplicación web permite al Gallery Administrator y al Tenant gestionar la información de su perfil y las preferencias de notificación.
 
 ![StorePulse - Profiles and Preferences - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/01_Profiles_Web_Component.puml&fmt=svg&v=4)
 
 ### Mobile Application
 
-La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de perfil y preferencias, junto con el servicio encargado de consumir la API REST y de acceder a la galería del dispositivo para la carga de la fotografía.
+La aplicación móvil permite al Tenant consultar y actualizar su perfil, configurar sus preferencias y gestionar la fotografía asociada a su cuenta.
 
 ![StorePulse - Profiles and Preferences - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/02_Profiles_Mobile_Component.puml&fmt=svg&v=4)
 
 ### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos, consultas y eventos, dominio, repositorios, la fachada ACL y el adaptador hacia el servicio de almacenamiento de imágenes.
+La REST API gestiona las operaciones relacionadas con los perfiles y las preferencias, incluyendo los controladores, handlers, dominio, repositorios y servicios necesarios para su funcionamiento.
 
 ![StorePulse - Profiles and Preferences - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/03_Profiles_REST_API_Component.puml&fmt=svg&v=4)
 
 ## 4.2.6.6. Bounded Context Software Architecture Code Level Diagrams
 
-Los diagramas de nivel de código se elaboran con **PlantUML**.
+A continuación se presenta el modelo de clases correspondiente al dominio del Bounded Context.
 
 ### 4.2.6.6.1. Bounded Context Domain Layer Class Diagrams
 
