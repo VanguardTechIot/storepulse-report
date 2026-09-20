@@ -1,5 +1,5 @@
-# 4.2.5. Bounded Context: Analytics
-El **Bounded Context de Analytics** concentra la generación de notificaciones a partir de eventos críticos de otros Bounded Contexts y el registro de las lecturas de consumo de agua y electricidad capturadas por los medidores IoT. Con esta información alimenta el Notification Center, el Consolidated Dashboard (Gallery Administrator) y el Local Dashboard (Tenant).
+# 4.2.5. Bounded Context: Dashboard and Analytics
+El **Bounded Context de Dashboard and Analytics** concentra la generación de notificaciones a partir de eventos críticos de otros Bounded Contexts y el registro de las lecturas de consumo de agua y electricidad capturadas por los medidores IoT. Con esta información alimenta el Notification Center, el Consolidated Dashboard (Gallery Administrator) y el Local Dashboard (Tenant).
 
 Este contexto no origina Commands desde un actor: reacciona a eventos externos (alertas de seguridad, pérdida de conectividad, desviaciones de consumo) y a la llegada de lecturas de los medidores. La gestión de los medidores como activo físico pertenece a **Resource and Assets Management**; el cálculo de la Baseline de consumo y la facturación pertenecen a **Consumption and Billing**, que consume el evento de consumo registrado por este contexto.
 
@@ -113,19 +113,19 @@ Se conserva además `assets/architecture/analytics/analytics.dsl`, la descripci�
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de Analytics y el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Analytics - Web Components](../../assets/architecture/analytics/01-analytics-web-component.png)
+![StorePulse - Analytics - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/01-analytics-web-component.puml&fmt=svg&v=4)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de Analytics y el servicio encargado de consumir la API REST.
 
-![StorePulse - Analytics - Mobile Components](../../assets/architecture/analytics/02-analytics-mobile-component.png)
+![StorePulse - Analytics - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/02-analytics-mobile-component.puml&fmt=svg&v=4)
 
 ### REST API
 
 La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de consultas y de eventos, dominio y repositorios del contexto.
 
-![StorePulse - Analytics - REST API Components](../../assets/architecture/analytics/03-analytics-rest-api-component.png)
+![StorePulse - Analytics - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/03-analytics-rest-api-component.puml&fmt=svg&v=4)
 
 ## 4.2.5.6. Bounded Context Software Architecture Code Level Diagrams
 
