@@ -41,10 +41,6 @@ Proyecto
     <th style="border: none; text-align: left;">Apellidos y Nombres</th>
   </tr>
   <tr>
-    <td style="border: none; text-align: left;">u202113612</td>
-    <td style="border: none; text-align: left;">Araujo Ingunza, Renzo José</td>
-  </tr>
-  <tr>
     <td style="border: none; text-align: left;">u20191b935</td>
     <td style="border: none; text-align: left;">Carranza Tesén, Joaquín Enrique</td>
   </tr>
@@ -59,10 +55,6 @@ Proyecto
   <tr>
     <td style="border: none; text-align: left;">u201819674</td>
     <td style="border: none; text-align: left;">Diaz Gutierrez, Henry Kevin</td>
-  </tr>
-  <tr>
-    <td style="border: none; text-align: left;">u202310837</td>
-    <td style="border: none; text-align: left;">Esquivel León, Miguel Juan Diego</td>
   </tr>
   <tr>
     <td style="border: none; text-align: left;">u202214864</td>
