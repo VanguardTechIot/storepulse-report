@@ -54,6 +54,10 @@ System_Ext(iotDevice, "IoT Device", "Physical devices, sensors, and meters used 
 
 System_Ext(stripe, "Stripe", "External service used to process subscription payments.")
 
+System_Ext(resend, "Resend", "External email delivery service used to send transactional emails and notifications.")
+
+System_Ext(firebaseCloudMessaging, "Firebase Cloud Messaging", "External push notification service used to deliver real-time notifications to mobile devices.")
+
 ' ==========================================
 ' RELATIONSHIPS
 ' ==========================================
@@ -68,9 +72,13 @@ Rel(maintenanceTechnician, storePulse, "Monitors and maintains")
 
 Rel(supportStaff, storePulse, "Handles incidents")
 
-Rel(iotDevice, storePulse, "Sends telemetry and events")
+Rel(storePulse, iotDevice, "Communicates with physical devices")
 
 Rel(storePulse, stripe, "Processes subscription payments")
+
+Rel(storePulse, resend, "Sends transactional emails")
+
+Rel(storePulse, firebaseCloudMessaging, "Sends push notifications")
 
 ' ==========================================
 ' VISUAL ORGANIZATION
@@ -82,4 +90,7 @@ Lay_D(visitor, galleryAdministrator)
 Lay_D(galleryAdministrator, tenant)
 
 Lay_D(iotDevice, stripe)
+Lay_D(stripe, resend)
+Lay_D(resend, firebaseCloudMessaging)
+
 @enduml
