@@ -387,3 +387,106 @@ lecturas en su buffer local. Al restablecerse la conexión, el Edge Gateway sinc
 que conservan su fecha y hora originales. Las lecturas sincronizadas llegan a Dashboard and Analytics (5) y, si entre
 ellas hay un incidente, el contexto lo publica de forma diferida (6) para que Property Communication emita la alerta
 correspondiente (7).
+### 4.1.1.3. Bounded Context Canvases
+
+En esta sección se presentan los **Bounded Context Canvases** desarrollados para la solución **StorePulse**, siguiendo la plantilla estándar de diseño estratégico **Bounded Context Canvas V4 (DDD-Crew)**. Cada lienzo delimita formalmente el propósito de negocio, su clasificación estratégica, el lenguaje ubicuo context-specific, las decisiones y reglas de negocio, las dependencias de comunicación entrante/saliente con otros contextos o actores, y las métricas de verificación y supuestos operacionales.
+
+---
+
+#### Commercial Gallery Management Context - Canvas
+
+Gestiona la infraestructura física y arquitectónica de la galería comercial: el registro del inmueble comercial, la delimitación y catalogación de unidades comerciales (locales), sus especificaciones técnicas (metraje cuadrado, ubicación física por piso y pasillo, capacidad de carga eléctrica) y su estado operativo (disponible, ocupado, en mantenimiento). Resuelve la formalización de las entidades que en el diseño preliminar del EventStorming permanecían como precondiciones compartidas sin contexto asignado (*Commercial Gallery Registered* y *Commercial Unit Registered*). No gestiona contratos de arrendamiento ni comunicación directa con inquilinos, responsabilidades delegadas a Management-Tenant Communication.
+
+![Commercial Gallery Management Context Canvas](../../assets/ddd/canvas-commercial-gallery-management.jpg)
+
+El Bounded Context de Commercial Gallery Management se clasifica como un **Supporting Subdomain**: aunque no constituye la propuesta de valor diferencial de StorePulse, es el cimiento físico y administrativo indispensable que provee la topología espacial de locales sobre la cual operan los sensores IoT, los medidores y las asignaciones de usuarios. Actúa primordialmente como **Execution Context**, sirviendo como fuente primaria de verdad espacial consumida por Safety & Emergencies, Utility Consumption Monitoring, Management-Tenant Communication y Analytics.
+
+---
+
+#### Safety & Emergencies Context - Canvas
+
+Gestiona la supervisión en tiempo real de la seguridad física y la mitigación de riesgos ambientales en la galería: captura eventos de intrusión no autorizada en locales comerciales y concentración anómala de humo o temperatura provenientes de la capa de sensores IoT Edge, así como reportes manuales emitidos por inquilinos vía aplicación móvil. Administra el ciclo de vida del incidente, la validación presencial obligatoria por parte del personal de seguridad dentro de un SLA estipulado (máximo 15 minutos), el escalamiento a brigadas de auxilio y la emisión coordinada de alertas de emergencia masivas y la notificación final de All-Clear. No gestiona la persistencia ni configuración física de los dispositivos sensores, ni administra perfiles de guardias.
+
+![Safety & Emergencies Context Canvas](../../assets/ddd/canvas-safety-emergencies.jpg)
+
+Safety & Emergencies constituye el **Core Domain** primordial de StorePulse: representa el principal factor diferenciador y la razón de ser competitiva de la plataforma frente a soluciones tradicionales de facturación de centros comerciales, mitigando pérdidas humanas y materiales. Actúa como **Execution Context** y **Gateway Context** ante eventos físicos del entorno, gobernando el evento pivote `Security Incident Noticed` e interactuando como upstream directo de Management-Tenant Communication y Analytics.
+
+---
+
+#### Utility Consumption Monitoring Context - Canvas
+
+Se especializa en la captura continua, validación y evaluación de telemetría proveniente de medidores inteligentes IoT de energía eléctrica y agua potable instalados por cada local comercial. Administra la vinculación de medidores a unidades físicas, calcula la línea base histórica de consumo (*Baseline Consumption*) a partir de un mínimo de tres periodos y detecta en tiempo real desviaciones y anomalías (fugas, sobreconsumos) disparando eventos de alerta. Respecto al diseño preliminar conjunto de *Consumption and Billing*, se independizó de la emisión monetaria de recibos, centrándose exclusivamente en la ingestión y análisis métrico del consumo.
+
+![Utility Consumption Monitoring Context Canvas](../../assets/ddd/canvas-utility-consumption-monitoring.jpg)
+
+Se clasifica como un **Supporting Subdomain**: es esencial para la eficiencia energética y la recopilación de datos operacionales de la galería, reduciendo costos por desperdicio de suministros y facilitando la transparencia de consumo. Opera como **Execution Context** y **Analysis Context**, sirviendo como proveedor directo (*Upstream*) de periodos de consumo cerrados hacia Billing & Invoicing, y notificando anomalías instantáneas a Management-Tenant Communication y Analytics.
+
+---
+
+#### Billing & Invoicing Context - Canvas
+
+Administra el ciclo de vida financiero y de facturación de servicios básicos por local comercial: procesa los cierres mensuales de consumo provenientes de Utility Consumption Monitoring, aplica las tablas tarifarias vigentes autorizadas por la administración (tarifas por kWh y m³), emite las liquidaciones formales de cobro (*Utility Bills*) e implementa el flujo de registro, revisión y resolución de disputas de facturación iniciadas por inquilinos. Nació de la separación estratégica del antiguo bloque *Consumption and Billing*, desacoplando la lógica de negocio financiero de la recolección física de telemetría IoT. No procesa pagos con tarjetas ni suscripciones del software StorePulse (gestionados por Subscriptions & Payments).
+
+![Billing & Invoicing Context Canvas](../../assets/ddd/canvas-billing-invoicing.jpg)
+
+Billing & Invoicing se clasifica como un **Supporting Subdomain** enfocado en el modelo de *Revenue & Compliance*: asegura la sostenibilidad económica de la administración de la galería y la resolución auditada de cobros internos. Gobierna dos eventos pivote determinantes: `Utility Bill Issued` y `Billing Dispute Raised`. Actúa como **Execution Context**, publicando eventos consumidos directamente por Management-Tenant Communication para la entrega de recibos a inquilinos y por Analytics para análisis de recaudación.
+
+---
+
+#### Management-Tenant Communication Context - Canvas
+
+Centraliza los canales oficiales de interacción bidireccional y comunicación auditada entre el Gallery Administrator y los inquilinos (Tenants): gestiona la vinculación operativa de inquilinos a unidades disponibles (*Tenant Assignment*), hilos conversacionales estructurados con soporte de adjuntos probatorios (fotos, actas, comprobantes) y el registro inmutable de auditoría (*Communication Log*). Asimismo, actúa como el concentrador de notificaciones automáticas prioritarias originadas por incidentes de seguridad, recibos emitidos y resoluciones de reclamos. No administra credenciales de inicio de sesión ni resuelve técnicamente los reclamos.
+
+![Management-Tenant Communication Context Canvas](../../assets/ddd/canvas-management-tenant-communication.jpg)
+
+Es un **Supporting Subdomain** clave para el *Engagement* y la convivencia operativa del ecosistema de la galería: reduce drásticamente las fricciones y tiempos muertos en la atención de requerimientos cotidianos entre propietarios y arrendatarios. Actúa simultáneamente como **Execution Context** y **Gateway Context** de notificaciones salientes, consumiendo eventos provenientes de Safety & Emergencies, Billing & Invoicing y Commercial Gallery Management, y alimentando los tableros de satisfacción en Analytics.
+
+---
+
+#### Business Continuity Context - Canvas
+
+Garantiza la alta disponibilidad, la continuidad operativa y la tolerancia a fallos del sistema StorePulse ante cortes imprevistos en la infraestructura de telecomunicaciones o energía eléctrica en la galería comercial. Gobierna la transición automática a modo de operación degradado (lectura en caché sin conexión en aplicaciones clientes), el encolamiento y almacenamiento en búfer persistente de eventos IoT en el hardware Edge bajo políticas de prioridad (preservación incondicional de alertas de seguridad frente a lecturas rutinarias), y la sincronización ordenada e idempotente de datos acumulados hacia la nube una vez estabilizado el enlace de red.
+
+![Business Continuity Context Canvas](../../assets/ddd/canvas-business-continuity.jpg)
+
+Se clasifica como un **Generic Subdomain**: responde a un problema de ingeniería de resiliencia y sincronización distribuida común a sistemas IoT de misión crítica, resoluble mediante patrones estándares de colas, almacenamiento local y reconexión diferida. Gobierna el evento pivote `Connectivity Lost Detected`. Actúa funcionalmente como **Gateway Context** y **Execution Context**, salvaguardando la integridad de datos de Safety & Emergencies y Utility Consumption Monitoring durante incidentes de conectividad.
+
+---
+
+#### Identity & Access Management (IAM) Context - Canvas
+
+Gestiona de forma centralizada las identidades digitales, la autenticación de credenciales, la emisión y renovación de tokens criptográficos JWT y el control de autorización basado en roles (Role-Based Access Control - RBAC) tanto para los usuarios humanos del sistema (administradores, inquilinos, personal de seguridad física y técnicos de mantenimiento) como para las credenciales de dispositivos IoT y gateways de borde. No almacena datos biográficos ni información de perfiles de negocio, delegando toda esa información al contexto de Profiles & Preferences.
+
+![Identity & Access Management Context Canvas](../../assets/ddd/canvas-identity-access-management.jpg)
+
+IAM es un **Generic Subdomain** fundamental orientado al *Compliance* y a la seguridad informática: implementa estándares universales de autenticación de industria (OAuth2, hashing de contraseñas con Argon2id/BCrypt, mitigación de fuerza bruta) que no representan lógica de negocio específica del dominio de galerías comerciales pero son mandatorios. Actúa como **Gateway Context** y **Enforcer**, protegiendo las fronteras de todos los endpoints de la API y garantizando que las decisiones de acceso sean consistentes en toda la arquitectura.
+
+---
+
+#### Profiles & Preferences Context - Canvas
+
+Administra la información detallada de perfil de personas naturales y razones sociales de los usuarios de la plataforma (nombres, números de documento DNI/RUC, teléfonos de contacto móvil, números telefónicos de emergencia) y sus preferencias operativas personalizadas (canales preferidos para notificaciones push, correo o mensajería, y horarios de atención). Se desacopló de IAM para mantener una estricta separación de responsabilidades entre la autenticación técnica de cuentas y la gestión de datos demográficos y preferencias de contacto.
+
+![Profiles & Preferences Context Canvas](../../assets/ddd/canvas-profiles-preferences.jpg)
+
+Se clasifica como un **Generic / Supporting Subdomain** enfocado en el *Engagement* del usuario: permite adaptar la experiencia de comunicación a las necesidades de cada actor del ecosistema comercial. Opera como **Execution Context**, reaccionando a la creación de credenciales en IAM y proveyendo datos de contacto y configuraciones de alerta prioritarias a Management-Tenant Communication.
+
+---
+
+#### Subscriptions & Payments Context - Canvas
+
+Administra el modelo de negocio SaaS de StorePulse a través de la gestión de planes comerciales de suscripción contratados por las galerías comerciales (planes diferenciados por número de locales monitoreados y retención de historial), el control de ciclos de facturación de la licencia y la integración segura con la pasarela de pagos externa Stripe. Controla upgrades/downgrades de planes, periodos de gracia ante fallos de cobro y estados de suspensión del servicio por morosidad. No participa en la facturación interna de servicios públicos entre administración e inquilinos (responsabilidad de Billing & Invoicing).
+
+![Subscriptions & Payments Context Canvas](../../assets/ddd/canvas-subscriptions-payments.jpg)
+
+Subscriptions & Payments se clasifica como un **Generic / Supporting Subdomain** enmarcado en el modelo de *Revenue & Compliance*: externaliza el procesamiento de transacciones financieras en un estándar de industria (Stripe) cumpliendo normativas PCI-DSS, al tiempo que habilita la monetización de la plataforma. Actúa como **Execution Context** y **Gateway Context**, coordinando la habilitación de cuotas de locales con Commercial Gallery Management y gobernando el estado operativo de la cuenta de la galería ante IAM.
+
+---
+
+#### Analytics Context - Canvas
+
+Recopila, estructura y procesa asíncronamente el histórico de eventos de telemetría de consumo, incidentes de seguridad atendidos, tiempos de respuesta a alertas y registros de comunicación generados en todos los contextos operacionales. Genera modelos estadísticos, curvas de tendencia comparativa de consumo energético e hídrico entre locales y zonas, y reportes ejecutivos consolidados mensuales que evalúan la eficiencia y el cumplimiento operativo en la galería comercial. No realiza transacciones operativas en tiempo real ni altera el estado de locales o facturas.
+
+![Analytics Context Canvas](../../assets/ddd/canvas-analytics.jpg)
+
+Analytics se clasifica como un **Supporting Subdomain** de alto valor enfocado en la reducción de costos (*Cost Reduction*) y la toma de decisiones informada para los propietarios y administradores: transforma los datos crudos capturados por los sensores IoT en inteligencia de negocio aplicable. Actúa estrictamente como **Analysis Context**, consumiendo eventos en modo suscriptor (*Downstream*) de todos los contextos de la plataforma para alimentar los tableros ejecutivos y disparar reportes consolidados mensuales.
