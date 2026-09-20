@@ -1,0 +1,46 @@
+@startuml storepulse-iam-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Database Design
+
+entity "users" as users {
+    * id : CHAR(36) <<PK>>
+    --
+    email : VARCHAR(150)
+    password_hash : VARCHAR(255)
+    role : VARCHAR(30)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "password_recovery_codes" as recoveryCodes {
+    * id : CHAR(36) <<PK>>
+    --
+    user_id : CHAR(36) <<FK>>
+    code : VARCHAR(6)
+    requested_at : DATETIME
+    expires_at : DATETIME
+    used_at : DATETIME
+    created_at : DATETIME
+}
+
+entity "unauthorized_access_attempts" as attempts {
+    * id : CHAR(36) <<PK>>
+    --
+    user_id : CHAR(36) <<FK, nullable>>
+    attempted_role : VARCHAR(30)
+    required_role : VARCHAR(30)
+    resource : VARCHAR(150)
+    attempted_at : DATETIME
+}
+
+users ||--o{ recoveryCodes : requests
+users |o--o{ attempts : attempts
+
+@enduml
