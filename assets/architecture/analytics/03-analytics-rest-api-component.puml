@@ -1,0 +1,57 @@
+@startuml storepulse-analytics-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_TOP_DOWN()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Analytics - REST API Components
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+
+    Component(notificationsController, "NotificationsController", "ASP.NET Core Controller", "Exposes the Notification Center query endpoint.")
+
+    Component(dashboardController, "DashboardController", "ASP.NET Core Controller", "Exposes the Consolidated Dashboard and the Local Dashboard query endpoints.")
+
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the Notification Center, Consolidated Dashboard and Local Dashboard queries.")
+
+    Component(eventHandlers, "Event Handlers", "Application Layer", "Reacts to critical events from other Bounded Contexts and to utility meter readings to build Notification and ConsumptionRegistration.")
+
+    Component(analyticsDomain, "Analytics Domain", "Domain Layer", "Contains the Notification and ConsumptionRegistration aggregates and their domain rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores notifications and consumption registrations.")
+
+System_Ext(utilityMeter, "Utility Meter (IoT)", "Captures the water and electricity readings of each commercial unit.")
+
+System_Ext(sedapal, "Sedapal", "Confirms the water consumption of the billing period.")
+
+System_Ext(luzDelSur, "Luz del Sur", "Confirms the electricity consumption of the billing period.")
+
+System_Ext(fcm, "Firebase Cloud Messaging", "Delivers the generated push notifications to the Web and Mobile Applications.")
+
+Rel(notificationsController, queryHandlers, "Invokes")
+
+Rel(dashboardController, queryHandlers, "Invokes")
+
+Rel(queryHandlers, analyticsDomain, "Queries domain data")
+
+Rel(eventHandlers, analyticsDomain, "Executes domain operations")
+
+Rel(analyticsDomain, repositoryImplementations, "Uses repository abstractions")
+
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(utilityMeter, eventHandlers, "Sends utility meter reading", "HTTPS/JSON")
+
+Rel(sedapal, eventHandlers, "Confirms water consumption for the period", "HTTPS/JSON")
+
+Rel(luzDelSur, eventHandlers, "Confirms electricity consumption for the period", "HTTPS/JSON")
+
+Rel(eventHandlers, fcm, "Sends push notification", "HTTPS")
+
+@enduml
