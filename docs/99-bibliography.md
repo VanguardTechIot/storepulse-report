@@ -1,1 +1,13 @@
 # Bibliografía
+
+- Bourgau, P. (2024). *The best agenda for Design-Level Event Storming*. Event Storming Journal. https://www.eventstormingjournal.com/software%20design/the-best-agenda-for-design-level-event-storming/
+- ComexPerú. (2025). *Las micro y pequeñas empresas en el Perú: resultados en 2024*. https://comex-assets.s3.amazonaws.com/comex-assets/web/posts/9750/reporte-mypes-2024.pdf
+- El Comercio. (2024, 26 de septiembre). *Inseguridad ciudadana: cómo amenaza a los pequeños negocios*. https://elcomercio.pe/economia/inseguridad-ciudadana-asociacion-de-bodegueros-inseguridad-ciudadana-amenaza-a-los-pequenos-negocios-en-cuanto-los-afecta-y-como-impacta-en-su-reactivacion-crimen-negocios-delincuencia-extorsion-robos-noticia/
+- Gestión. (2025, 3 de febrero). *Negocios puerta a calle pierden más de S/ 450,000 diarios por inseguridad*. https://gestion.pe/economia/negocios-puerta-a-calle-pierden-mas-de-s-450000-diarios-por-inseguridad-la-radiografia-extorsiones-cobro-de-cupos-noticia/
+- Gestión. (2026). *Delincuencia golpea negocios en Lima: los cinco distritos con mayores incidencias*. https://gestion.pe/economia/delincuencia-golpea-negocios-en-lima-los-cinco-distritos-con-mayores-incidencias-noticia/
+- Infobae. (2024, 23 de mayo). *Incendio en Mesa Redonda: bomberos intentan controlar el fuego en almacén de galería del jirón Andahuaylas*. https://www.infobae.com/peru/2024/05/23/incendio-en-mesa-redonda-bomberos-intentan-controlar-el-fuego-en-almacen-de-galeria-del-jiron-andahuaylas/
+- Instituto Nacional de Estadística e Informática. (2018). *Características de las empresas del Emporio Comercial de Gamarra, 2017*. INEI. https://www.inei.gob.pe/media/MenuRecursivo/publicaciones_digitales/Est/Lib1555/
+- Instituto Nacional de Estadística e Informática. (2025). *Estadísticas de las tecnologías de información y comunicación en los hogares* (Informe Técnico N.º 03). INEI. https://www.gob.pe/institucion/inei/informes-publicaciones/6914428-las-tecnologias-de-informacion-y-comunicacion-en-los-hogares-ene-feb-mar-2025
+- Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2025). *Encuesta Residencial de Servicios de Telecomunicaciones (ERESTEL) 2025*. OSIPTEL. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-aumenta-a-96-los-hogares-peruanos-que-tienen-acceso-a-internet-fijo-o-movil/
+- Rivero, M. (2025). *La digitalización como oportunidad para las mypes peruanas*. https://especialistas.mercadonegro.pe/el-futuro-de-las-mypes-peruanas-en-la-era-digital/
+- Silupú, B. (2026, 15 de mayo). *Mypes: gestión empresarial y crecimiento sostenible*. Diario Correo / Universidad de Piura. https://www.udep.edu.pe/hoy/2026/05/dia-nacional-de-las-mype-2/
