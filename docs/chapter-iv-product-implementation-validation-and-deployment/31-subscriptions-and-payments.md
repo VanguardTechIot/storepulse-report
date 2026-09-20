@@ -138,3 +138,48 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 | Evento saliente hacia Resource and Asset Management | Integration Event | Publica `SubscriptionActivatedEvent` para habilitar el registro de dispositivos hasta el límite del plan. |
 | Evento saliente hacia los contextos operativos | Integration Event | Publica `SubscriptionExpiredEvent` para restringir el acceso a modo de solo lectura. |
 
+## 4.2.7.5. Bounded Context Software Architecture Component Level Diagrams
+
+Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/subscriptions-and-payments/subscriptions-and-payments.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+
+> **Pendiente:** las imágenes deben generarse abriendo `subscriptions-and-payments.dsl` en Structurizr Lite (o en el workspace en línea de structurizr.com) y exportando cada vista como PNG a `assets/architecture/subscriptions-and-payments/`, con los nombres referenciados abajo.
+
+### Web Application
+
+La aplicación web, desarrollada con Angular, contiene la interfaz de contratación y gestión de la suscripción, junto con el servicio encargado de consumir los servicios REST correspondientes.
+
+![StorePulse - Subscriptions and Payments - Web Components](../../assets/architecture/subscriptions-and-payments/01-subscriptions-web-component.png)
+
+### Mobile Application
+
+La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de consulta del estado y la vigencia de la suscripción, junto con el servicio encargado de consumir la API REST.
+
+![StorePulse - Subscriptions and Payments - Mobile Components](../../assets/architecture/subscriptions-and-payments/02-subscriptions-mobile-component.png)
+
+### REST API
+
+La REST API, desarrollada con ASP.NET Core, concentra los controladores, el webhook de la pasarela, los manejadores de comandos, consultas y eventos, el dominio, los repositorios, la fachada ACL y el adaptador hacia la pasarela de pagos.
+
+![StorePulse - Subscriptions and Payments - REST API Components](../../assets/architecture/subscriptions-and-payments/03-subscriptions-rest-api-component.png)
+
+## 4.2.7.6. Bounded Context Software Architecture Code Level Diagrams
+
+Los diagramas de nivel de código se elaboran con **PlantUML**.
+
+### 4.2.7.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama de clases presenta los agregados raíz `SubscriptionPlan`, `Subscription` y `Payment`, sus objetos de valor, las enumeraciones del contexto, los repositorios, los eventos de dominio y la interfaz de Anti-Corruption Layer. `Subscription` referencia al plan contratado mediante su identificador, y `Payment` referencia a la suscripción que sustenta, sin compartir referencias directas entre sus entidades internas.
+
+![StorePulse - Subscriptions and Payments - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/04-subscriptions-domain-class.puml&fmt=svg&v=2)
+
+### 4.2.7.6.2. Bounded Context Database Design Diagram
+
+El modelo de datos representa la persistencia de los principales elementos del contexto.
+
+| Tabla | Propósito | Relación principal |
+|---|---|---|
+| `subscription_plans` | Almacenar el catálogo de planes publicados con su límite de locales y su precio. | Independiente; referenciada por `subscriptions`. |
+| `subscriptions` | Almacenar la suscripción de cada galería con su estado, vigencia y locales monitoreados. | `gallery_id` es una referencia externa a Resource and Asset Management, sin FK física entre contextos. |
+| `payments` | Almacenar los cobros asociados a cada suscripción y su resultado. | Relación uno a muchos con `subscriptions` mediante FK física. |
+
+![StorePulse - Subscriptions and Payments - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/05-subscriptions-database.puml&fmt=svg&v=2)
