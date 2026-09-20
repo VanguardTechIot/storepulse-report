@@ -133,3 +133,31 @@ La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de 
 La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, dominio, repositorios y los servicios de seguridad (`TokenService`, `PasswordHasher`) del contexto.
 
 ![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=4)
+
+#### 4.2.1.6. Bounded Context Software Architecture Code Level Diagrams
+
+Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.
+
+##### 4.2.1.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama de clases presenta los agregados raíz `UserAccount`, `PasswordRecovery` y `UnauthorizedAccessAttempt`, sus objetos de valor, las enumeraciones de rol y estado, los repositorios y los eventos de dominio. Las relaciones muestran cómo cada agregado permanece independiente y se referencia únicamente por identificador (`UserId`), siguiendo el límite de consistencia transaccional recomendado entre agregados.
+
+![StorePulse - Identity and Access Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/04-iam-domain-class.puml&fmt=svg&v=4)
+
+##### 4.2.1.6.2. Bounded Context Database Design Diagram
+
+El modelo de datos representa la persistencia de los principales elementos del contexto.
+
+| Tabla | Propósito | Relación principal |
+|---|---|---|
+| `users` | Almacenar las cuentas de usuario, su correo, contraseña protegida, rol y estado. | Un usuario puede tener múltiples códigos de recuperación e intentos no autorizados registrados. |
+| `password_recovery_codes` | Almacenar los códigos de recuperación de contraseña generados, su vigencia y uso. | Cada código pertenece a un usuario. |
+| `unauthorized_access_attempts` | Almacenar los intentos de acceso que no cumplieron con el rol requerido. | Cada intento puede estar asociado a un usuario autenticado. |
+
+Las relaciones del modelo de datos son:
+
+- `users` → `password_recovery_codes`
+- `users` → `unauthorized_access_attempts`
+
+![StorePulse - Identity and Access Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/05-iam-database.puml&fmt=svg&v=4)
+
