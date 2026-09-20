@@ -70,3 +70,63 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. S
 | `NotificationChannelDisabledEvent` | `NotificationPreferences` | Representa la desactivación de un canal de notificación. |
 | `UserRegisteredEvent` | Identity and Access Management | Evento entrante que dispara la creación automática del perfil. |
 
+## 4.2.6.2. Interface Layer
+
+La **Interface Layer** expone las capacidades del contexto hacia la Web Application y la Mobile Application mediante la **REST API**, utilizando HTTPS y JSON, y recibe los eventos publicados por otros Bounded Contexts a través de un consumidor.
+
+| Componente | Tecnología | Responsabilidad |
+|---|---|---|
+| `UserProfilesController` | ASP.NET Core | Expone la consulta y actualización del perfil, la carga de fotografía y el cambio de idioma. |
+| `NotificationPreferencesController` | ASP.NET Core | Expone la consulta y configuración de preferencias y la desactivación de canales. |
+| `UserRegisteredEventConsumer` | ASP.NET Core | Recibe el evento de registro publicado por Identity and Access Management. |
+| `IProfilesAndPreferencesFacade` | ASP.NET Core | Anti-Corruption Layer que expone a otros contextos el idioma preferido del usuario y los canales habilitados para un tipo de alerta. |
+| Profiles UI | Angular | Permite al Gallery Administrator y al Tenant administrar su perfil y sus preferencias desde el navegador. |
+| Profiles UI | Flutter / Dart | Permite al Tenant administrar su perfil y sus preferencias desde la aplicación móvil. |
+
+## 4.2.6.3. Application Layer
+
+La **Application Layer** coordina los comandos emitidos por los actores, resuelve las consultas de los read models y reacciona a los eventos provenientes de otros contextos.
+
+| Componente | Responsabilidad |
+|---|---|
+| `Command Handlers` | Orquestar la creación y actualización del perfil, la carga de la fotografía, el cambio de idioma, la configuración de preferencias y la desactivación de canales. |
+| `Query Handlers` | Resolver las consultas de Profile Settings, Language Options y Notification Settings. |
+| `Event Handlers` | Reaccionar al evento `UserRegisteredEvent` para crear el perfil con preferencias por defecto, y al evento `NotificationPreferencesSetEvent` para publicar la actualización del enrutamiento hacia Safety and Emergencies. |
+| `Profiles and Preferences Domain` | Ejecutar las reglas y operaciones definidas en el dominio. |
+| `Repository Implementations` | Persistir los cambios mediante las abstracciones de repositorio. |
+
+El flujo general es:
+
+```text
+Gallery Administrator / Tenant          Identity and Access Management
+              ↓                                        ↓
+     REST API Controllers                     Event Consumer
+              ↓                                        ↓
+       Command Handlers  ←──────────────────  Event Handlers
+              ↓
+  Profiles and Preferences Domain
+              ↓
+   Repository Implementations
+              ↓
+        MySQL Database
+              ↓
+        Query Handlers
+              ↓
+      REST API Controllers
+              ↓
+Aplicación Web / Aplicación Móvil
+```
+
+## 4.2.6.4. Infrastructure Layer
+
+La **Infrastructure Layer** proporciona las implementaciones técnicas necesarias para persistir la información y comunicarse con los servicios externos y con los demás Bounded Contexts.
+
+| Componente | Tecnología | Responsabilidad |
+|---|---|---|
+| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
+| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| MySQL | MySQL | Persiste perfiles, preferencias y canales de notificación. |
+| `ImageStorageServiceAdapter` | HTTPS/JSON | Envía la fotografía al servicio externo de almacenamiento y recupera la URL generada. |
+| Evento entrante desde Identity and Access Management | Integration Event | Recibe `UserRegisteredEvent` para disparar la creación automática del perfil. |
+| Evento saliente hacia Safety and Emergencies | Integration Event | Publica `NotificationPreferencesSetEvent` para actualizar el enrutamiento de alertas. |
+
