@@ -1,8 +1,8 @@
-# 4.2.4. Bounded Context: Management-Tenant Communication
+# 4.2.4. Bounded Context: Property Communication
 
 ## 4.2.4.1. Domain Layer
 
-La capa de dominio representa el núcleo del Bounded Context Management-Tenant Communication. En esta capa se encapsulan las reglas de negocio relacionadas con la comunicación directa entre el Gallery Administrator y los Tenants, el registro de notificaciones y logs de comunicación, y la asignación de Tenants a Commercial Units. Este contexto reacciona a eventos externos —en particular `UtilityBillIssued` proveniente de Consumption and Billing— para notificar al Tenant correspondiente, y administra el ciclo de vida de cada conversación desde su inicio hasta su resolución.
+La capa de dominio representa el núcleo del Bounded Context Property Communication. En esta capa se encapsulan las reglas de negocio relacionadas con la comunicación directa entre el Gallery Administrator y los Tenants, el registro de notificaciones y logs de comunicación, y la asignación de Tenants a Commercial Units. Este contexto reacciona a eventos externos —en particular `UtilityBillIssued` proveniente de Consumption and Billing— para notificar al Tenant correspondiente, y administra el ciclo de vida de cada conversación desde su inicio hasta su resolución.
 
 La capa se mantiene independiente de frameworks, mecanismos de persistencia y servicios externos. Se compone de Aggregate Roots, Entities, Value Objects, Commands, Queries y Domain Events.
 
@@ -85,7 +85,7 @@ La capa se mantiene independiente de frameworks, mecanismos de persistencia y se
 
 ## 4.2.4.2. Interface Layer
 
-La capa de interfaz del Bounded Context Management-Tenant Communication expone los endpoints RESTful necesarios para que los actores del sistema gestionen las conversaciones, consulten el historial de notificaciones y logs, y administren las asignaciones de Tenants a Commercial Units. Esta capa recibe solicitudes desde la Web Application y la Mobile Application, las transforma en Commands o Queries y delega su ejecución a la capa de aplicación.
+La capa de interfaz del Bounded Context Property Communication expone los endpoints RESTful necesarios para que los actores del sistema gestionen las conversaciones, consulten el historial de notificaciones y logs, y administren las asignaciones de Tenants a Commercial Units. Esta capa recibe solicitudes desde la Web Application y la Mobile Application, las transforma en Commands o Queries y delega su ejecución a la capa de aplicación.
 
 Adicionalmente, aloja la interfaz del Anti-Corruption Layer (ACL) que permite a otros bounded contexts —en particular Consumption and Billing— notificar al Tenant sin acoplarse al modelo interno de este contexto.
 
@@ -174,7 +174,7 @@ Adicionalmente, aloja la interfaz del Anti-Corruption Layer (ACL) que permite a 
 
 ## 4.2.4.3. Application Layer
 
-La capa de aplicación del Bounded Context Management-Tenant Communication orquesta los casos de uso relacionados con la gestión de conversaciones, notificaciones, logs y asignaciones.
+La capa de aplicación del Bounded Context Property Communication orquesta los casos de uso relacionados con la gestión de conversaciones, notificaciones, logs y asignaciones.
 
 En esta capa residen los Command Handlers, Query Handlers y Event Handlers que coordinan el flujo entre la capa de interfaz, el dominio y la infraestructura.
 
@@ -228,7 +228,7 @@ Esta capa no contiene reglas puras de dominio: su responsabilidad es reaccionar 
 
 ## 4.2.4.4. Infrastructure Layer
 
-La capa de infraestructura del Bounded Context Management-Tenant Communication resuelve los detalles técnicos necesarios para materializar las abstracciones definidas en el dominio.
+La capa de infraestructura del Bounded Context Property Communication resuelve los detalles técnicos necesarios para materializar las abstracciones definidas en el dominio.
 
 En esta capa se implementan los repositorios con Entity Framework Core sobre MySQL, se configura el contexto de base de datos y se integran los adapters necesarios para el envío de notificaciones por los canales in-app, email y push.
 
@@ -269,13 +269,13 @@ En esta capa se implementan los repositorios con Entity Framework Core sobre MyS
 
 # 4.2.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-Los diagramas de componentes muestran la estructura interna de la Web Application, Mobile Application y REST API del Bounded Context Management-Tenant Communication, identificando sus principales componentes, responsabilidades y relaciones.
+Los diagramas de componentes muestran la estructura interna de la Web Application, Mobile Application y REST API del Bounded Context Property Communication, identificando sus principales componentes, responsabilidades y relaciones.
 
 ## 4.2.4.5.1. Component Diagram — Web Application Container
 
 Este diagrama muestra la estructura interna de la Web Application, desarrollada con Angular, y los componentes que permiten al Gallery Administrator gestionar conversaciones, notificaciones y asignaciones. También se muestran las relaciones con los controladores de la REST API.
 
-![Web Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/02_Component_Web_Application.puml&fmt=svg&v=4)
+![Web Component Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/02_Component_Web_Application.puml&fmt=svg&v=4)
 
 ### Componentes
 
@@ -300,7 +300,7 @@ Este diagrama muestra la estructura interna de la Web Application, desarrollada 
 
 Este diagrama muestra la estructura interna de la Mobile Application, desarrollada con Flutter y Dart, y los componentes que permiten al Tenant consultar sus conversaciones, recibir notificaciones y visualizar el estado de su asignación.
 
-![Mobile Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/01_Component_Mobile_Application.puml&fmt=svg&v=4)
+![Mobile Component Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/01_Component_Mobile_Application.puml&fmt=svg&v=4)
 
 ### Componentes
 
@@ -321,9 +321,9 @@ Este diagrama muestra la estructura interna de la Mobile Application, desarrolla
 
 ## 4.2.4.5.3. Component Diagram — REST API Container
 
-Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP.NET Core y .NET, y los componentes que gestionan las operaciones del Bounded Context Management-Tenant Communication, incluyendo controladores, handlers, repositorios, adaptadores y la fachada de integración con otros Bounded Contexts.
+Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP.NET Core y .NET, y los componentes que gestionan las operaciones del Bounded Context Property Communication, incluyendo controladores, handlers, repositorios, adaptadores y la fachada de integración con otros Bounded Contexts.
 
-![Backend Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/05_Component_REST_API_Backend.puml&fmt=svg&v=4)
+![Backend Component Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/05_Component_REST_API_Backend.puml&fmt=svg&v=4)
 ### Componentes
 
 | Componente | Responsabilidad | Tecnología |
@@ -370,13 +370,13 @@ Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP
 
 # 4.2.4.6. Bounded Context Software Architecture Code Level Diagrams
 
-En esta sección, el equipo presenta y explica los diagramas que presentan un mayor detalle sobre la implementación de componentes en el bounded context Management-Tenant Communication.
+En esta sección, el equipo presenta y explica los diagramas que presentan un mayor detalle sobre la implementación de componentes en el bounded context Property Communication.
 
 Se incluyen como secciones internas el Domain Layer Class Diagram y el Database Design Diagram. Los diagramas se elaboran con PlantUML en modo Diagram-as-Code.
 
 ## 4.2.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-En esta sección se presenta el Diagrama de Clases detallado para la Domain Layer del Bounded Context Management-Tenant Communication. El diagrama evidencia cómo el contexto organiza la lógica de comunicación entre Tenants y Gallery Administrators, así como la gestión de notificaciones, logs y asignaciones.
+En esta sección se presenta el Diagrama de Clases detallado para la Domain Layer del Bounded Context Property Communication. El diagrama evidencia cómo el contexto organiza la lógica de comunicación entre Tenants y Gallery Administrators, así como la gestión de notificaciones, logs y asignaciones.
 
 Para mantener la claridad del modelo, el diagrama se organiza visualmente en los siguientes sub-paquetes lógicos:
 
@@ -390,13 +390,13 @@ El modelo es un Modelo de Dominio Rico: los agregados exponen métodos con lógi
 
 Los Value Objects garantizan el tipado estricto de identificadores y contenidos, evitando el uso de tipos primitivos en las operaciones del dominio.
 
-![Class Diagram Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/04_Domain_Layer.puml&fmt=svg&v=4)
+![Class Diagram Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/04_Domain_Layer.puml&fmt=svg&v=4)
 
 ---
 
 ## 4.2.4.6.2. Bounded Context Database Design Diagram
 
-En esta sección se presenta el diagrama de Base de Datos del Bounded Context Management-Tenant Communication, diseñado sobre un modelo relacional en MySQL.
+En esta sección se presenta el diagrama de Base de Datos del Bounded Context Property Communication, diseñado sobre un modelo relacional en MySQL.
 
 El esquema agrupa las entidades del contexto en seis tablas:
 
@@ -413,7 +413,7 @@ Los campos `tenant_id`, `gallery_administrator_id` y `commercial_unit_id` son re
 
 Los identificadores se modelan como `CHAR(36)` para almacenar valores `Guid` generados por la aplicación.
 
-![Database Diagram Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/03_Database_Diagram.puml&fmt=svg&v=4)
+![Database Diagram Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/03_Database_Diagram.puml&fmt=svg&v=4)
 
 ### Database Tables
 
