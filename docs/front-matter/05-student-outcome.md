@@ -1,8 +1,11 @@
-## Student Outcome
+El curso contribuye al cumplimiento del Student Outcome ABET:
 
-### Párrafo Introductorio Oficial
-> **ABET EAC Student Outcome 5:** *An ability to function effectively on a team whose 
-members together provide leadership, create a collaborative and inclusive environment,
-establish goals, plan tasks, and meet objectives.*
+**ABET - EAC - Student Outcome 5**
+Criterio: La capacidad de funcionar efectivamente en un equipo cuyos miembros juntos proporcionan liderazgo, crean un entorno de colaboración e inclusivo, establecen objetivos, planifican tareas y cumplen objetivos.
 
-### Tabla de Sustento del Student Outcome 5
+En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET - EAC - Student Outcome 5.
+
+| Criterio específico | Acciones realizadas                                                                                                                                                                                                                                                                                                                                                                                      | Conclusiones |
+| :--- |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| :--- |
+| **Trabaja en equipo para proporcionar liderazgo en forma conjunta** | **Renzo Araujo Ingunza**<br><br>**AV1**<br>Conduje una de las entrevistas de needfinding y desarrollé la parte inicial del punto 4.1, sentando la base de Strategic-Level DDD sobre la que trabajó el resto del equipo. Luego asumí dos de los nueve Bounded Contexts (Identity and Access Management y Analytics), llevándolos desde el EventStorming hasta el diseño táctico con sus diagramas C4.     | El liderazgo fue compartido: cada integrante condujo sus propios contextos y yo aporté en las decisiones transversales que nos permitieron avanzar en paralelo. |
+| **Crea un entorno colaborativo e inclusivo, establece metas, planifica tareas y cumple objetivos.** | **Renzo Araujo Ingunza**<br><br>**AV1**<br>Alineé mi trabajo con la convención de diagramas que ya usaban mis compañeros en el repositorio, en lugar de imponer una propia. Planifiqué mi avance en ramas de feature independientes para no interferir con develop, y dejé documentados los puntos que dependían de terceros en vez de resolverlos unilateralmente.                                      | Cumplí lo comprometido: la sección 4.2.1 y 4.2.5 quedaron completas y con sus diagramas verificados. |
