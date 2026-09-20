@@ -41,8 +41,8 @@ Proyecto
     <th style="border: none; text-align: left;">Apellidos y Nombres</th>
   </tr>
   <tr>
-    <td style="border: none; text-align: left;">u20191b935</td>
-    <td style="border: none; text-align: left;">Carranza Tesén, Joaquín Enrique</td>
+    <td style="border: none; text-align: left;">U202113612</td>
+    <td style="border: none; text-align: left;">Araujo Ingunza, Renzo José</td>
   </tr>
   <tr>
     <td style="border: none; text-align: left;">u202111041</td>
@@ -58,7 +58,7 @@ Proyecto
   </tr>
   <tr>
     <td style="border: none; text-align: left;">u202214864</td>
-    <td style="border: none; text-align: left;">Quiroz Caceres, Adrian</td>
+    <td style="border: none; text-align: left;">Quiroz Cáceres, Adrian</td>
   </tr>
 </table>
 
