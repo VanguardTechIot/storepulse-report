@@ -142,25 +142,23 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/subscriptions-and-payments/subscriptions-and-payments.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
 
-> **Pendiente:** las imágenes deben generarse abriendo `subscriptions-and-payments.dsl` en Structurizr Lite (o en el workspace en línea de structurizr.com) y exportando cada vista como PNG a `assets/architecture/subscriptions-and-payments/`, con los nombres referenciados abajo.
-
 ### Web Application
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de contratación y gestión de la suscripción, junto con el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Subscriptions and Payments - Web Components](../../assets/architecture/subscriptions-and-payments/01-subscriptions-web-component.png)
+![StorePulse - Subscriptions and Payments - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/01_Subscriptions_Web_Component.puml&fmt=svg&v=1)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de consulta del estado y la vigencia de la suscripción, junto con el servicio encargado de consumir la API REST.
 
-![StorePulse - Subscriptions and Payments - Mobile Components](../../assets/architecture/subscriptions-and-payments/02-subscriptions-mobile-component.png)
+![StorePulse - Subscriptions and Payments - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/02_Subscriptions_Mobile_Component.puml&fmt=svg&v=1)
 
 ### REST API
 
 La REST API, desarrollada con ASP.NET Core, concentra los controladores, el webhook de la pasarela, los manejadores de comandos, consultas y eventos, el dominio, los repositorios, la fachada ACL y el adaptador hacia la pasarela de pagos.
 
-![StorePulse - Subscriptions and Payments - REST API Components](../../assets/architecture/subscriptions-and-payments/03-subscriptions-rest-api-component.png)
+![StorePulse - Subscriptions and Payments - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/03_Subscriptions_REST_API_Component.puml&fmt=svg&v=1)
 
 ## 4.2.7.6. Bounded Context Software Architecture Code Level Diagrams
 
