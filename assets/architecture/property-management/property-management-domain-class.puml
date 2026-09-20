@@ -1,0 +1,109 @@
+@startuml storepulse-property-management-domain-class
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Property Management - Domain Layer Class Diagram
+
+package "Gallery Management" {
+
+    class CommercialGallery <<Aggregate Root>> {
+        - galleryId: CommercialGalleryId
+        - name: String
+        - address: String
+        - totalUnits: int
+        + registerUnit(unitNumber: String, floor: String, dimensions: UnitDimensions): CommercialUnit
+        + updateGalleryInfo(name: String, address: String): void
+    }
+
+    class CommercialGalleryId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+}
+
+package "Unit Management" {
+
+    class CommercialUnit <<Aggregate Root>> {
+        - unitId: CommercialUnitId
+        - galleryId: CommercialGalleryId
+        - unitNumber: String
+        - floor: String
+        - dimensions: UnitDimensions
+        - status: UnitStatus
+        + assignTenant(): void
+        + vacateUnit(): void
+        + markUnderMaintenance(): void
+    }
+
+    class CommercialUnitId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class UnitDimensions <<Value Object>> {
+        - areaSquareMeters: double
+        + validate(): boolean
+    }
+
+    enum UnitStatus {
+        AVAILABLE
+        OCCUPIED
+        MAINTENANCE
+        RESERVED
+    }
+}
+
+package "Repositories" {
+
+    interface ICommercialGalleryRepository {
+        + save(gallery: CommercialGallery): void
+        + findById(id: CommercialGalleryId): CommercialGallery
+        + findAll(): List<CommercialGallery>
+    }
+
+    interface ICommercialUnitRepository {
+        + save(unit: CommercialUnit): void
+        + findById(id: CommercialUnitId): CommercialUnit
+        + findByGallery(galleryId: CommercialGalleryId): List<CommercialUnit>
+    }
+}
+
+package "Domain Events" {
+
+    class CommercialGalleryCreatedEvent <<Domain Event>> {
+        - galleryId: CommercialGalleryId
+        - occurredAt: DateTime
+    }
+
+    class CommercialUnitRegisteredEvent <<Domain Event>> {
+        - unitId: CommercialUnitId
+        - galleryId: CommercialGalleryId
+        - occurredAt: DateTime
+    }
+
+    class CommercialUnitStatusChangedEvent <<Domain Event>> {
+        - unitId: CommercialUnitId
+        - newStatus: UnitStatus
+        - occurredAt: DateTime
+    }
+}
+
+CommercialGallery "1" o-- "0..*" CommercialUnit : manages
+
+CommercialGallery --> CommercialGalleryId
+
+CommercialUnit --> CommercialUnitId
+CommercialUnit --> CommercialGalleryId
+CommercialUnit --> UnitDimensions
+CommercialUnit --> UnitStatus
+
+ICommercialGalleryRepository ..> CommercialGallery
+ICommercialUnitRepository ..> CommercialUnit
+
+CommercialGallery ..> CommercialGalleryCreatedEvent : raises
+CommercialUnit ..> CommercialUnitRegisteredEvent : raises
+CommercialUnit ..> CommercialUnitStatusChangedEvent : raises
+
+@enduml
