@@ -57,16 +57,16 @@ Las principales operaciones del dominio son:
 | Interfaz | Responsabilidad |
 |---|---|
 | `ITelemetryRepository` | Guardar telemetría y recuperar telemetría asociada a un dispositivo. |
-| `IMeasurementRepository` | Guardar mediciones y recuperarlas por dispositivo. |
 | `IMonitoringRuleRepository` | Guardar reglas y recuperar las reglas activas. |
 | `IAlertRepository` | Guardar alertas y recuperar las alertas activas. |
+
 
 #### Domain Events
 
 | Evento | Origen | Propósito |
 |---|---|---|
 | `TelemetryReceivedEvent` | `Telemetry` | Representa la recepción de nueva telemetría. |
-| `MeasurementRecordedEvent` | `Measurement` | Representa el registro de una nueva medición. |
+| `MeasurementRecordedEvent` | `Telemetry` | Representa el registro de una nueva medición. |
 | `ThresholdExceededEvent` | `MonitoringRule` | Representa la superación de una condición de umbral. |
 | `AlertCreatedEvent` | `Alert` | Representa la creación de una alerta. |
 | `AlertAcknowledgedEvent` | `Alert` | Representa el reconocimiento de una alerta. |
@@ -74,8 +74,7 @@ Las principales operaciones del dominio son:
 
 El modelo completo de relaciones se representa en el siguiente diagrama:
 
-![StorePulse - Resource and Asset Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4)
-
+![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=4)
 ### 4.2.3.2. Interface Layer
 
 La **Interface Layer** proporciona los puntos de entrada mediante los cuales las aplicaciones y la infraestructura Edge interactúan con el contexto.

@@ -27,7 +27,7 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. E
 | Enumeración | Valores representados | Propósito |
 |---|---|---|
 | `ResourceStatus` | `ACTIVE`, `INACTIVE`, `MAINTENANCE` | Controla el estado operativo de un recurso. |
-| `AssetType` | `IOT_DEVICE`, `SENSOR`, `METER` | Clasifica el tipo de activo administrado. |
+| `AssetType` | `IOT_DEVICE` | Clasifica el tipo de activo administrado. |
 | `AssetStatus` | `ACTIVE`, `INACTIVE`, `MAINTENANCE` | Controla el estado del activo. |
 | `SensorType` | `HUMIDITY`, `TEMPERATURE`, `WATER`, `ELECTRICITY` | Identifica el tipo de variable asociada a un sensor. |
 | `MeterType` | `WATER`, `ELECTRICITY` | Identifica el tipo de medición asociada a un medidor. |
@@ -61,7 +61,8 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. E
 
 El modelo de relaciones se encuentra representado en el siguiente diagrama:
 
-![StorePulse - Resource and Asset Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/06-resource-asset-database.puml&fmt=svg&v=4)
+![StorePulse - Resource and Asset Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/05-resource-asset-domain-class.puml&fmt=svg&v=4)
+
 
 ### 4.2.2.2. Interface Layer
 

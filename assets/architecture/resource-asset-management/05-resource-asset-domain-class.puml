@@ -60,8 +60,6 @@ package "Asset Management" {
 
     enum AssetType {
         IOT_DEVICE
-        SENSOR
-        METER
     }
 
     enum AssetStatus {

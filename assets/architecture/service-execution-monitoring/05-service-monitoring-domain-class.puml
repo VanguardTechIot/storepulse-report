@@ -10,7 +10,7 @@ package "Telemetry and Measurement" {
 
     class Telemetry <<Aggregate Root>> {
         - telemetryId: TelemetryId
-        - deviceId: DeviceId
+        - deviceId: UUID
         - receivedAt: DateTime
         - measurements: List<Measurement>
         + addMeasurement(measurement: Measurement): void
@@ -117,11 +117,6 @@ package "Repositories" {
         + findByDevice(deviceId: UUID): List<Telemetry>
     }
 
-    interface IMeasurementRepository {
-        + save(measurement: Measurement): void
-        + findByDevice(deviceId: UUID): List<Measurement>
-    }
-
     interface IMonitoringRuleRepository {
         + save(rule: MonitoringRule): void
         + findActive(): List<MonitoringRule>
@@ -170,7 +165,7 @@ package "Domain Events" {
 Telemetry "1" o-- "1..*" Measurement : contains
 
 Telemetry --> TelemetryId
-Telemetry --> DeviceId
+Telemetry --> Measurement
 
 Measurement --> MeasurementId
 Measurement --> MeasurementValue
@@ -189,12 +184,11 @@ MonitoringRule ..> Alert : creates
 Consumption --> MeasurementType
 
 ITelemetryRepository ..> Telemetry
-IMeasurementRepository ..> Measurement
 IMonitoringRuleRepository ..> MonitoringRule
 IAlertRepository ..> Alert
 
 Telemetry ..> TelemetryReceivedEvent : raises
-Measurement ..> MeasurementRecordedEvent : raises
+Telemetry ..> MeasurementRecordedEvent : raises
 MonitoringRule ..> ThresholdExceededEvent : raises
 Alert ..> AlertCreatedEvent : raises
 Alert ..> AlertAcknowledgedEvent : raises
