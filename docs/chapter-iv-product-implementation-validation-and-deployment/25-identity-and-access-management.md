@@ -112,3 +112,24 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 | MySQL | MySQL | Persiste cuentas de usuario, códigos de recuperación e intentos no autorizados. |
 | Servicio de envío de código | Firebase Authentication | Envía por correo el código de 6 dígitos de recuperación de contraseña generado internamente por el backend. |
 
+#### 4.2.1.5. Bounded Context Software Architecture Component Level Diagrams
+
+Los siguientes diagramas muestran cómo se distribuyen los componentes del Bounded Context dentro de los contenedores de StorePulse.
+
+##### Web Application
+
+La aplicación web, desarrollada con Angular, contiene la interfaz de identidad y acceso y el servicio encargado de consumir los servicios REST correspondientes.
+
+![StorePulse - Identity and Access Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/01-iam-web-component.puml&fmt=svg&v=4)
+
+##### Mobile Application
+
+La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de identidad y acceso y el servicio encargado de consumir la API REST.
+
+![StorePulse - Identity and Access Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/02-iam-mobile-component.puml&fmt=svg&v=4)
+
+##### REST API
+
+La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, dominio, repositorios y los servicios de seguridad (`TokenService`, `PasswordHasher`) del contexto.
+
+![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=4)
