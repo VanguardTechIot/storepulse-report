@@ -132,7 +132,7 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 ## 4.2.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-Los diagramas [research](../../assets/research)de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/profiles-and-preferences/profiles-and-preferences.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/profiles-and-preferences/profiles-and-preferences.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
 
 ### Web Application
 
