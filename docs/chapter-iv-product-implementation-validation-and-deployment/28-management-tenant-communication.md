@@ -279,7 +279,7 @@ Los diagramas se elaboran con Structurizr DSL.
 
 Este diagrama descompone el container Web Application (Angular) y muestra cómo está conformado por components que permiten al Gallery Administrator gestionar conversaciones, notificaciones y asignaciones. Se identifican los bloques estructurales del container y las interacciones que establece con los controladores del REST API.
 
-![Web Component Management-Tenant Communication](../../assets/architecture/management-tenant-communication/Component_Diagram-Web_Application.png)
+![Web Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/02_Component_Web_Application.puml&fmt=svg&v=4)
 
 ### Componentes
 
@@ -304,7 +304,7 @@ Este diagrama descompone el container Web Application (Angular) y muestra cómo 
 
 Este diagrama descompone el container Mobile Application (Flutter + Dart) y muestra cómo está conformado por components que permiten al Tenant consultar sus conversaciones, recibir notificaciones y consultar el estado de su asignación desde dispositivos móviles.
 
-![Mobile Component Management-Tenant Communication](../../assets/architecture/management-tenant-communication/Component_diagram_for_the_Mobile_Application_container.png)
+![Mobile Component Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/01_Component_Mobile_Application.puml&fmt=svg&v=4)
 
 ### Componentes
 
@@ -395,7 +395,7 @@ El modelo es un Modelo de Dominio Rico: los agregados exponen métodos con lógi
 
 Los Value Objects garantizan el tipado estricto de identificadores y contenidos, evitando el uso de tipos primitivos en las operaciones del dominio.
 
-![Class Diagram Management-Tenant Communication](../../assets/architecture/management-tenant-communication/ManagementTenantCommunication_DomainLayer.png)
+![Class Diagram Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/04_Domain_Layer.puml&fmt=svg&v=4)
 
 ---
 
@@ -418,7 +418,7 @@ Los campos `tenant_id`, `gallery_administrator_id` y `commercial_unit_id` son re
 
 Los identificadores se modelan como `CHAR(36)` para almacenar valores `Guid` generados por la aplicación.
 
-![Database Diagram Management-Tenant Communication](../../assets/architecture/management-tenant-communication/ManagementTenantCommunication_DatabaseDiagram.png)
+![Database Diagram Management-Tenant Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/management-tenant-communication/03_Database_Diagram.puml&fmt=svg&v=4)
 
 ### Database Tables
 
