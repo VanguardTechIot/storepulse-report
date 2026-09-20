@@ -118,6 +118,6 @@ A continuación, se presenta el Lean UX Canvas elaborado por el equipo VanguardT
 
 El canvas fue elaborado en Figma y puede consultarse en el siguiente enlace:
 
-**Lean UX Canvas:** [Figma – StorePulse](https://www.figma.com/design/jTuNZACYcl08INpbeTyAol/lean-ux-canvas-v2?node-id=0-1&t=Yqwn63SJRlKfXyZw-1)
+**Lean UX Canvas:** [https://shorturl.fm/UI0pZ](https://shorturl.fm/UI0pZ)
 
 <div class="page"></div>
