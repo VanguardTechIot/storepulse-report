@@ -1,0 +1,22 @@
+@startuml storepulse-utility-billing-web-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Utility Billing - Web Components
+
+Container_Boundary(webApp, "Web Application - Angular") {
+    Component(utilityBillingUI, "Utility Billing UI", "Angular", "Provides the interface for generating utility bills, reviewing billing information and managing billing disputes.")
+    Component(utilityBillingService, "Utility Billing Service", "Angular Service", "Consumes REST endpoints related to utility bills, billing breakdowns and billing disputes.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(utilityBillingUI, utilityBillingService, "Uses")
+Rel(utilityBillingService, restApi, "Consumes utility billing services", "HTTPS/JSON")
+
+@enduml
