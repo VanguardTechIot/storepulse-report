@@ -33,6 +33,10 @@ System_Ext(iotDevice, "IoT Device", "Physical devices, sensors, and meters used 
 
 System_Ext(stripe, "Stripe", "External service used to process subscription payments.")
 
+System_Ext(resend, "Resend", "External email delivery service used to send transactional emails and notifications.")
+
+System_Ext(firebaseCloudMessaging, "Firebase Cloud Messaging", "External push notification service used to deliver real-time notifications to mobile devices.")
+
 ' ==========================================
 ' RELATIONSHIPS
 ' ==========================================
@@ -43,7 +47,12 @@ Rel(galleryAdministrator, storePulse, "Supervises the premises and manages infor
 
 Rel(tenant, storePulse, "Monitors their premises and checks information")
 
-Rel(storePulse, iotDevice, "Sends commands and configuration")
+Rel(storePulse, iotDevice, "Communicates with physical devices")
 
 Rel(storePulse, stripe, "Processes subscription payments")
+
+Rel(storePulse, resend, "Sends transactional emails")
+
+Rel(storePulse, firebaseCloudMessaging, "Sends push notifications")
+
 @enduml
