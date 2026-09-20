@@ -1,0 +1,25 @@
+@startuml storepulse-iam-mobile-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Mobile Components
+
+Container_Boundary(mobileApp, "Mobile Application - Flutter") {
+
+    Component(iamMobileUI, "Identity & Access UI", "Flutter, Dart", "Provides sign-up, sign-in and password recovery screens for the Tenant.")
+
+    Component(iamMobileService, "Identity & Access Service", "Dart", "Consumes authentication and password recovery REST endpoints, and stores the access token.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(iamMobileUI, iamMobileService, "Uses")
+
+Rel(iamMobileService, restApi, "Consumes authentication services", "HTTPS/JSON")
+
+@enduml

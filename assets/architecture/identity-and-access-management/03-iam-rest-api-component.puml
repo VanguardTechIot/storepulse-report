@@ -1,0 +1,57 @@
+@startuml storepulse-iam-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - REST API Components
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+
+    Component(authController, "AuthenticationController", "ASP.NET Core Controller", "Exposes sign-up, sign-in and sign-out endpoints.")
+
+    Component(passwordRecoveryController, "PasswordRecoveryController", "ASP.NET Core Controller", "Exposes password reset request and confirmation endpoints.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates sign-up, sign-in, sign-out and password recovery use cases.")
+
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves session and basic user information queries.")
+
+    Component(domainModel, "Identity & Access Domain", "Domain Layer", "Contains UserAccount, PasswordRecovery, UnauthorizedAccessAttempt and domain rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+
+    Component(tokenService, "TokenService", "JWT", "Generates and validates the access tokens consumed by the rest of the Bounded Contexts.")
+
+    Component(passwordHasher, "PasswordHasher", "Infrastructure Layer", "Protects the password before it is persisted.")
+
+    Component(authorizationMiddleware, "Authorization Middleware", "ASP.NET Core Middleware", "Validates the access token on protected requests and enforces role-based access control.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores user accounts, password recovery codes and unauthorized access attempts.")
+
+System_Ext(notificationProvider, "Firebase Authentication", "External service used to deliver the password recovery code generated internally by the backend.")
+
+Rel(authController, commandHandlers, "Invokes")
+
+Rel(passwordRecoveryController, commandHandlers, "Invokes")
+
+Rel(commandHandlers, domainModel, "Executes domain operations")
+
+Rel(queryHandlers, domainModel, "Queries domain data")
+
+Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
+
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(authController, tokenService, "Requests access token generation")
+
+Rel(authController, passwordHasher, "Validates and protects passwords")
+
+Rel(authorizationMiddleware, tokenService, "Validates access token")
+
+Rel(passwordRecoveryController, notificationProvider, "Sends recovery code", "HTTPS")
+
+@enduml
