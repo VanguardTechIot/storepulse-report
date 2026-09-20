@@ -75,3 +75,66 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio del contexto. S
 | `SubscriptionCancelledEvent` | `Subscription` | Representa la cancelación solicitada por el administrador. |
 | `SubscriptionExpiredEvent` | `Subscription` | Representa el vencimiento de la suscripción; los contextos operativos lo consumen para restringir el acceso a modo de solo lectura. |
 
+## 4.2.7.2. Interface Layer
+
+La **Interface Layer** expone las capacidades del contexto hacia la Web Application y la Mobile Application mediante la **REST API**, utilizando HTTPS y JSON, y recibe la confirmación de la pasarela de pagos a través de un webhook.
+
+| Componente | Tecnología | Responsabilidad |
+|---|---|---|
+| `SubscriptionPlansController` | ASP.NET Core | Expone la publicación y la consulta del catálogo de planes. |
+| `SubscriptionsController` | ASP.NET Core | Expone la solicitud, consulta, renovación y cancelación de la suscripción de una galería. |
+| `PaymentsController` | ASP.NET Core | Expone el registro del pago y la consulta del histórico de cobros. |
+| `PaymentGatewayWebhookController` | ASP.NET Core | Recibe la confirmación o el rechazo del cobro enviado por la pasarela de pagos externa. |
+| `ISubscriptionsFacade` | ASP.NET Core | Anti-Corruption Layer que expone a otros contextos el estado de la suscripción de una galería y su límite de locales monitoreados. |
+| Subscriptions UI | Angular | Permite al Gallery Administrator consultar los planes, contratar, pagar, renovar y cancelar la suscripción de su galería. |
+| Subscriptions UI | Flutter / Dart | Permite al Gallery Administrator consultar el estado y la vigencia de su suscripción desde la aplicación móvil. |
+
+## 4.2.7.3. Application Layer
+
+La **Application Layer** coordina los comandos emitidos por los actores, resuelve las consultas de los read models y reacciona a la respuesta de la pasarela de pagos y al vencimiento de las suscripciones.
+
+| Componente | Responsabilidad |
+|---|---|
+| `Command Handlers` | Orquestar la publicación de planes, la solicitud de suscripción, el registro del pago, la renovación y la cancelación. |
+| `Query Handlers` | Resolver las consultas de Plan Catalog, Available Plans, Payment Summary, Subscription Status y Payment History. |
+| `Event Handlers` | Activar la suscripción al confirmarse el cobro, notificar al administrador y marcarla en riesgo al rechazarse, publicar la habilitación de dispositivos tras la activación, y verificar el límite de locales cuando Resource and Asset Management solicita registrar uno nuevo. |
+| `Subscription Expiration Scheduler` | Tarea programada que detecta las suscripciones cuya fecha de vencimiento se ha alcanzado y emite el evento de expiración. |
+| `Subscriptions and Payments Domain` | Ejecutar las reglas y operaciones definidas en el dominio. |
+| `Repository Implementations` | Persistir los cambios mediante las abstracciones de repositorio. |
+
+El flujo general es:
+
+```text
+Platform Operator / Gallery Administrator          Pasarela de pagos
+                    ↓                                      ↓
+           REST API Controllers                    Webhook Controller
+                    ↓                                      ↓
+             Command Handlers  ←────────────────   Event Handlers
+                    ↓                                      ↑
+  Subscriptions and Payments Domain          Expiration Scheduler
+                    ↓
+        Repository Implementations
+                    ↓
+              MySQL Database
+                    ↓
+              Query Handlers
+                    ↓
+            REST API Controllers
+                    ↓
+      Aplicación Web / Aplicación Móvil
+```
+
+## 4.2.7.4. Infrastructure Layer
+
+La **Infrastructure Layer** proporciona las implementaciones técnicas necesarias para persistir la información y comunicarse con la pasarela de pagos y con los demás Bounded Contexts.
+
+| Componente | Tecnología | Responsabilidad |
+|---|---|---|
+| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
+| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| MySQL | MySQL | Persiste planes, suscripciones y pagos. |
+| `PaymentGatewayAdapter` | HTTPS/JSON | Envía la orden de cobro a la pasarela de pagos y recupera la referencia de la transacción. |
+| `SubscriptionExpirationJob` | Hosted Service | Ejecuta periódicamente la verificación de suscripciones vencidas. |
+| Evento saliente hacia Resource and Asset Management | Integration Event | Publica `SubscriptionActivatedEvent` para habilitar el registro de dispositivos hasta el límite del plan. |
+| Evento saliente hacia los contextos operativos | Integration Event | Publica `SubscriptionExpiredEvent` para restringir el acceso a modo de solo lectura. |
+
