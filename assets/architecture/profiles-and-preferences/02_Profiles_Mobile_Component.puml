@@ -1,0 +1,24 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Mobile Application Component View - Profiles and Preferences
+
+Container_Boundary(mobileApplication, "Mobile Application") {
+    Component(profilesUI, "Profiles UI", "Flutter, Dart", "Displays the profile editor and the notification settings.")
+    Component(profilesService, "Profiles Service", "Dart", "Consumes the profile and notification preference REST endpoints.")
+    Component(photoPickerAdapter, "Photo Picker Adapter", "Flutter Plugin", "Accesses the device gallery to select the profile photo.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes StorePulse business logic.")
+
+Rel(profilesUI, profilesService, "Uses")
+Rel(profilesUI, photoPickerAdapter, "Selects photo through")
+Rel(profilesService, restApi, "Consumes profile and preference services", "HTTPS/JSON")
+
+@enduml

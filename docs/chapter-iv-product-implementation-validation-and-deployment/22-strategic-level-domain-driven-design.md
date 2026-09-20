@@ -300,3 +300,90 @@ sincronización resoluble con soluciones genéricas de mensajería o colas, sin 
 Con la aplicación de ambas técnicas quedan confirmados los 4 Bounded Contexts candidatos —Safety and Emergencies (Core),
 Consumption and Billing (Supporting), Management Tenant Communication (Supporting) y Business Continuity (Generic),
 que sirven de base para el Domain Message Flows Modeling y las Bounded Context Canvases desarrollados a continuación.
+
+#### 4.1.1.2. Domain Message Flows Modeling
+
+En esta sección se visualiza cómo colaboran los Bounded Contexts para resolver los casos que se presentan a los
+usuarios de StorePulse. Para ello se aplicó la técnica de **Domain Storytelling**: cada escenario se narra como una
+historia con actores, en la que cada paso lleva un número que indica el orden en que ocurre. Sobre esa narración se usó
+la notación de Domain Message Flow, en la que cada flecha es un mensaje entre un actor, un Bounded Context o un sistema
+externo: **command** (azul), **domain event** (naranja) o **query** (verde). Los actores se muestran en amarillo, los
+sistemas externos en rosado y los Bounded Contexts con el color de su clasificación (core en naranja, supporting en
+celeste, generic en gris). Cuando un actor participa en dos momentos distintos de la historia se dibuja dos veces para
+que las flechas no se crucen.
+
+Se modelaron 7 escenarios, elegidos para cubrir el contexto core, el ciclo de vida de la cuenta, la facturación y la
+pérdida de conectividad.
+
+**Scenario 1: Sign up, register the gallery and subscribe to a plan**
+
+![dmf-1.png](../../assets/ddd/dmf-1.png)
+
+El Gallery Administrator se registra en Identity and Access Management (1), que publica User Signed Up para que
+Profiles and Preferences Management cree su perfil (2). Luego registra la galería y sus locales en Property Management
+(3) y selecciona un plan en Subscriptions and Payments (4), que consulta a Property Management cuántos locales hay
+registrados para determinar el nivel del plan (5). El contexto envía el command Process Payment a Stripe (6) y, cuando
+Stripe responde Payment Succeeded (7), publica Subscription Activated (8), con lo que Resource and Asset Management
+conoce el límite de dispositivos de la galería.
+
+**Scenario 2: Onboard the IoT devices and a tenant**
+
+![dmf-2.png](../../assets/ddd/dmf-2.png)
+
+El Maintenance Technician registra y vincula cada dispositivo en Resource and Asset Management (1), que consulta a
+Property Management el local al que pertenece (2). Para incorporar a un inquilino, el Gallery Administrator lo invita
+desde Identity and Access Management (3); el evento Tenant Invited (4) llega a Property Communication, que envía la
+invitación (5). El Tenant activa su cuenta (6) y el administrador lo asigna a su local en Property Management (7), que
+publica Tenant Assigned to Commercial Unit (8) para que Property Communication sepa a quién dirigir los mensajes de ese
+local.
+
+**Scenario 3: Intrusion detected and emergency alert**
+
+![dmf-3.png](../../assets/ddd/dmf-3.png)
+
+El Edge Gateway reporta Intrusion Detected a Service Execution and Monitoring (1), que consulta a Resource and Asset
+Management dónde está instalado el dispositivo (2). El Security Team Member verifica el incidente (3) y el contexto
+publica Security Incident Verified (4). Property Communication consulta a Property Management qué Tenant ocupa el local
+(5) y envía la alerta de emergencia al Tenant afectado y al Gallery Administrator (6). El mismo evento llega a
+Dashboard and Analytics (7), que registra la métrica del incidente.
+
+**Scenario 4: Smoke event, fire risk and all-clear**
+
+![dmf-4.png](../../assets/ddd/dmf-4.png)
+
+Ante un Smoke Event Detected (1), Service Execution and Monitoring evalúa el riesgo de incendio de forma automática y
+publica Fire Risk Assessed sin esperar verificación humana (2), que Property Communication entrega como alerta urgente
+(3). Cuando el Security Team Member resuelve el riesgo (4), el contexto publica Fire Risk Resolved (5) y Property
+Communication envía la notificación All-Clear (6). Dashboard and Analytics usa el mismo evento para calcular el tiempo
+de respuesta (7).
+
+**Scenario 5: Consumption recorded and utility bill issued**
+
+![dmf-5.png](../../assets/ddd/dmf-5.png)
+
+El Edge Gateway envía las lecturas de los medidores (1) y Service Execution and Monitoring publica Utility Consumption
+Recorded, con el que Dashboard and Analytics actualiza el consumo y lo compara contra la Baseline Consumption (2).
+Cerrado el periodo, el Gallery Administrator emite la factura en Utility Billing (3), que consulta el resumen de
+consumo a Dashboard and Analytics (4) y publica el evento pivote Utility Bill Issued (5). Property Communication
+consulta qué Tenant ocupa el local (6) y le notifica la factura sin intervención adicional del administrador (7).
+
+**Scenario 6: Billing dispute raised and resolved**
+
+![dmf-6.png](../../assets/ddd/dmf-6.png)
+
+El Tenant levanta una disputa desde la aplicación móvil (1). Utility Billing publica el evento pivote Billing Dispute
+Raised (2) y Property Communication notifica al Gallery Administrator (3). A partir de ese punto la responsabilidad
+pasa a la administración, que resuelve la disputa (4) usando como evidencia la Baseline Consumption que Utility Billing
+consulta a Dashboard and Analytics (5). El evento Billing Dispute Resolved (6) cierra la conversación y notifica al
+Tenant (7).
+
+**Scenario 7: Connectivity lost and buffered events synchronized**
+
+![dmf-7.png](../../assets/ddd/dmf-7.png)
+
+Cuando se detecta la pérdida de conectividad (1), Service Execution and Monitoring publica Connectivity Lost Detected
+(2) y Property Communication avisa al Gallery Administrator (3), mientras el Edge Gateway sigue almacenando las
+lecturas en su buffer local. Al restablecerse la conexión, el Edge Gateway sincroniza los eventos acumulados (4),
+que conservan su fecha y hora originales. Las lecturas sincronizadas llegan a Dashboard and Analytics (5) y, si entre
+ellas hay un incidente, el contexto lo publica de forma diferida (6) para que Property Communication emita la alerta
+correspondiente (7).

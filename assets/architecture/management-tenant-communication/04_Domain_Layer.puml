@@ -1,0 +1,163 @@
+@startuml
+title Management-Tenant Communication - Domain Layer
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+
+skinparam class {
+    BackgroundColor #FFFCCF
+    BorderColor #D85B5B
+    FontColor #222222
+}
+
+package "Management-Tenant Communication" {
+
+    package "Aggregates" {
+
+        class ConversationAggregate <<Aggregate Root>> {
+            - id : UUID
+            - tenantId : UUID
+            - galleryAdministratorId : UUID
+            - subject : String
+            - status : ConversationStatus
+            - startedAt : DateTime
+            - resolvedAt : DateTime
+            --
+            + start()
+            + addMessage()
+            + resolve()
+        }
+
+        class TenantAssignmentAggregate <<Aggregate Root>> {
+            - id : UUID
+            - tenantId : UUID
+            - commercialUnitId : UUID
+            - galleryAdministratorId : UUID
+            - assignedAt : DateTime
+            - terminatedAt : DateTime
+            - status : AssignmentStatus
+            --
+            + assign()
+            + terminate()
+        }
+
+        class TenantNotificationAggregate <<Aggregate Root>> {
+            - id : UUID
+            - tenantId : UUID
+            - type : String
+            - title : String
+            - body : String
+            - status : NotificationStatus
+            - channel : NotificationChannel
+            --
+            + create()
+            + send()
+            + markAsSent()
+        }
+
+        class CommunicationLogAggregate <<Aggregate Root>> {
+            - id : UUID
+            - referenceId : UUID
+            - referenceType : String
+            - tenantId : UUID
+            - channel : String
+            - loggedAt : DateTime
+            - detail : String
+            --
+            + record()
+        }
+    }
+
+    package "Entities / Value Objects" {
+
+        class Message <<Entity>> {
+            - id : UUID
+            - conversationId : UUID
+            - senderId : UUID
+            - senderRole : String
+            - content : String
+            - sentAt : DateTime
+        }
+
+        class Attachment <<Value Object>> {
+            - fileName : String
+            - url : String
+            - mimeType : String
+            - sizeInBytes : Long
+        }
+
+        enum ConversationStatus {
+            OPEN
+            RESOLVED
+        }
+
+        enum AssignmentStatus {
+            ACTIVE
+            TERMINATED
+        }
+
+        enum NotificationStatus {
+            PENDING
+            SENT
+        }
+
+        enum NotificationChannel {
+            PUSH
+            EMAIL
+        }
+    }
+
+    package "Domain Events" {
+
+        class UtilityBillIssuedEvent <<Domain Event>> {
+            + referenceId : UUID
+            + tenantId : UUID
+            + issuedAt : DateTime
+        }
+
+        class TenantNotifiedEvent <<Domain Event>> {
+            + notificationId : UUID
+            + tenantId : UUID
+            + occurredAt : DateTime
+        }
+    }
+
+    package "Services" {
+
+        class CommunicationService <<Domain Service>> {
+            + createConversation()
+            + sendMessage()
+            + notifyTenant()
+            + recordCommunication()
+        }
+    }
+}
+
+' ==========================================
+' AGGREGATE RELATIONSHIPS
+' ==========================================
+
+ConversationAggregate "1" *-- "0..*" Message : contains
+
+Message "1" *-- "0..*" Attachment : attachments
+
+' ==========================================
+' DOMAIN EVENTS
+' ==========================================
+
+UtilityBillIssuedEvent ..> TenantNotificationAggregate : creates
+
+TenantNotificationAggregate ..> TenantNotifiedEvent : raises
+
+' ==========================================
+' DOMAIN SERVICE
+' ==========================================
+
+ConversationAggregate ..> CommunicationService : uses
+
+TenantNotificationAggregate ..> CommunicationService : uses
+
+CommunicationLogAggregate ..> CommunicationService : records
+@enduml

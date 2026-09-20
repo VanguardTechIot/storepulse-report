@@ -1,0 +1,53 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title Management-Tenant Communication - Web Application Component View
+
+' ==========================================
+' EXTERNAL PEOPLE
+' ==========================================
+
+Person(galleryAdministrator, "Gallery Administrator", "Administrator of the commercial gallery.")
+
+' ==========================================
+' CONTAINER IN SCOPE
+' ==========================================
+
+Container_Boundary(webApplication, "Web Application") {
+
+    Component(webComponents, "WebComponents", "Web Component", "Web interface for managing conversations, notifications and assignments.")
+
+    Component(conversationsController, "Conversations Controller", "Controller", "Manages conversations.")
+
+    Component(conversationMessagesController, "Conversation Messages Controller", "Controller", "Manages conversation messages.")
+
+    Component(tenantNotificationsController, "Tenant Notifications Controller", "Controller", "Manages tenant notifications.")
+
+    Component(communicationLogsController, "Communication Logs Controller", "Controller", "Manages communication logs.")
+
+    Component(tenantAssignmentsController, "Tenant Assignments Controller", "Controller", "Manages assignments between tenants and administrators.")
+}
+
+' ==========================================
+' RELATIONSHIPS
+' ==========================================
+
+Rel(galleryAdministrator, webComponents, "Manages conversations, notifications and assignments")
+
+Rel(webComponents, conversationsController, "Queries and manages conversations", "HTTPS/JSON")
+
+Rel(webComponents, conversationMessagesController, "Sends and queries messages", "HTTPS/JSON")
+
+Rel(webComponents, tenantNotificationsController, "Manages notifications", "HTTPS/JSON")
+
+Rel(webComponents, communicationLogsController, "Queries communication logs", "HTTPS/JSON")
+
+Rel(webComponents, tenantAssignmentsController, "Manages assignments", "HTTPS/JSON")
+
+@enduml

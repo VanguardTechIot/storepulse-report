@@ -132,25 +132,25 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 ## 4.2.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-Los diagramas [research](../../assets/research)de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/profiles-and-preferences/profiles-and-preferences.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
+Los diagramas de componentes de este Bounded Context se elaboran con **Structurizr DSL** (`assets/architecture/profiles-and-preferences/profiles-and-preferences.dsl`), siguiendo la misma herramienta utilizada en los demás contextos. El archivo `.dsl` es el código fuente; las imágenes siguientes son la exportación de cada vista.
 
 ### Web Application
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de gestión de perfil y preferencias, junto con el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Profiles and Preferences - Web Components](../../assets/architecture/profiles-and-preferences/01-profiles-web-component.png)
+![StorePulse - Profiles and Preferences - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/01_Profiles_Web_Component.puml&fmt=svg&v=4)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de perfil y preferencias, junto con el servicio encargado de consumir la API REST y de acceder a la galería del dispositivo para la carga de la fotografía.
 
-![StorePulse - Profiles and Preferences - Mobile Components](../../assets/architecture/profiles-and-preferences/02-profiles-mobile-component.png)
+![StorePulse - Profiles and Preferences - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/02_Profiles_Mobile_Component.puml&fmt=svg&v=4)
 
 ### REST API
 
 La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos, consultas y eventos, dominio, repositorios, la fachada ACL y el adaptador hacia el servicio de almacenamiento de imágenes.
 
-![StorePulse - Profiles and Preferences - REST API Components](../../assets/architecture/profiles-and-preferences/03-profiles-rest-api-component.png)
+![StorePulse - Profiles and Preferences - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/03_Profiles_REST_API_Component.puml&fmt=svg&v=4)
 
 ## 4.2.6.6. Bounded Context Software Architecture Code Level Diagrams
 
