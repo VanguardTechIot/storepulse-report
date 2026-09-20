@@ -4,7 +4,7 @@ skinparam classAttributeIconSize 0
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Analytics - Domain Layer Class Diagram
+title StorePulse - Dashboard and Analytics - Domain Layer Class Diagram
 
 package "Notification Management" {
 

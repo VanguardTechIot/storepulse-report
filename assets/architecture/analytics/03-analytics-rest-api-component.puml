@@ -7,7 +7,7 @@ HIDE_STEREOTYPE()
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Analytics - REST API Components
+title StorePulse - Dashboard and Analytics - REST API Components
 
 Container_Boundary(restApi, "REST API - ASP.NET Core") {
 

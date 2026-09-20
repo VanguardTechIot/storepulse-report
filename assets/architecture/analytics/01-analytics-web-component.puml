@@ -7,7 +7,7 @@ HIDE_STEREOTYPE()
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Analytics - Web Components
+title StorePulse - Dashboard and Analytics - Web Components
 
 Container_Boundary(webApp, "Web Application - Angular") {
 

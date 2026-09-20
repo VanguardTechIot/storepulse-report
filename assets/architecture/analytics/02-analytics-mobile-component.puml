@@ -7,7 +7,7 @@ HIDE_STEREOTYPE()
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Analytics - Mobile Components
+title StorePulse - Dashboard and Analytics - Mobile Components
 
 Container_Boundary(mobileApp, "Mobile Application - Flutter") {
 

@@ -6,7 +6,7 @@ skinparam linetype ortho
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Analytics - Database Design
+title StorePulse - Dashboard and Analytics - Database Design
 
 entity "notifications" as notifications {
     * id : CHAR(36) <<PK>>
