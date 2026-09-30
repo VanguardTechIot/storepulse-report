@@ -24,55 +24,67 @@ Sabremos que hemos tenido éxito cuando observemos que **el 30 % de las galería
 
 En esta sección se presentan las creencias que sustentan la propuesta de StorePulse. Los assumptions se organizan en las cinco categorías establecidas por Lean UX: Business Assumptions, Business Outcome Assumptions, User Assumptions, User Outcome and Benefit Assumptions y Feature Assumptions.
 
-Estos enunciados representan las creencias resultantes de la discusión del equipo y no preguntas de exploración. Los Feature Assumptions sirven como base para la formulación de los Hypothesis Statements.
+Estos enunciados representan las creencias resultantes de la discusión del equipo y no preguntas de exploración. Cada uno se identifica con un código para permitir su referencia posterior. Los Feature Assumptions sirven como base directa para la formulación de los Hypothesis Statements de la sección 1.2.2.3.
 
 **1. Business Assumptions**
 
-- Creemos que existe un mercado sostenible en las galerías comerciales de Lima Metropolitana, debido al volumen de locales agrupados por inmueble y a la necesidad de mejorar la seguridad y gestión operativa.
-- Creemos que el administrador de la galería es quien toma la decisión de compra y asume el costo de la suscripción, mientras que el inquilino es el usuario beneficiario.
-- Creemos que un modelo de suscripción mensual escalonado por número de locales monitoreados se ajusta a la capacidad de pago de una administración de galería.
-- Creemos que la venta por inmueble completo, y no por local individual, reduce el costo de adquisición y hace escalable el crecimiento del negocio.
-- Creemos que ningún competidor local ofrece hoy la detección de intrusión, la detección de humo y la medición de consumo integradas en una misma plataforma para el formato de galería.
-- Creemos que el uso de tecnologías open-source mantiene el costo de operación por debajo del precio de las alternativas de monitoreo disponibles en el mercado.
+| Código | Enunciado |
+| :--- | :--- |
+| BA-01 | Creemos que en los cuatro conglomerados comerciales del segmento inicial existen al menos cien galerías con veinte o más locales, volumen suficiente para sostener el negocio durante sus dos primeros años de operación. |
+| BA-02 | Creemos que el administrador de la galería es quien toma la decisión de compra y asume el costo de la suscripción, mientras que el inquilino es el usuario beneficiario sin participación en esa decisión. |
+| BA-03 | Creemos que una suscripción mensual escalonada de entre S/ 15 y S/ 30 por local monitoreado se encuentra dentro de la capacidad de pago de una administración de galería, por representar menos del 5 % de lo que ya destina a vigilancia y mantenimiento. |
+| BA-04 | Creemos que la venta por inmueble completo, y no por local individual, reduce el costo de adquisición por local en al menos un 60 % frente a una venta uno a uno. |
+| BA-05 | Creemos que ningún competidor local ofrece hoy la detección de intrusión, la detección de humo y la medición de consumo integradas en una misma plataforma para el formato de galería. |
+| BA-06 | Creemos que el uso de tecnologías open-source mantiene el costo mensual de operación por local por debajo del 30 % del precio de suscripción, permitiendo un margen sostenible. |
 
 
 **2. Business Outcome Assumptions**
 
-- Creemos que las disputas por cobros de servicios entre administradores e inquilinos se reducirán en un 30 % durante los primeros seis meses de uso de la plataforma.
-- Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 %, al disponer ambas partes del mismo registro de consumo.
-- Creemos que la tasa de rotación de inquilinos en las galerías suscritas se reducirá en un 15 % anual, al disminuir las pérdidas por robo y los conflictos por cobros.
-- Creemos que el 70 % de los inquilinos con un local monitoreado usará la aplicación móvil al menos una vez por semana.
-- Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa.
-- Creemos que la retención de suscripciones tras el tercer mes superará el 70 %.
+| Código | Enunciado |
+| :--- | :--- |
+| BO-01 | Creemos que las disputas por cobros de servicios entre administradores e inquilinos se reducirán en un 30 % durante los primeros seis meses de uso de la plataforma. |
+| BO-02 | Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 %, al disponer ambas partes del mismo registro de consumo. |
+| BO-03 | Creemos que la tasa de rotación de inquilinos en las galerías suscritas se reducirá en un 15 % anual, al disminuir las pérdidas por robo. |
+| BO-04 | Creemos que el 70 % de los inquilinos con un local monitoreado usará la aplicación móvil al menos una vez por semana al término del primer trimestre posterior a la instalación. |
+| BO-05 | Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa. |
+| BO-06 | Creemos que la retención de suscripciones tras el tercer mes superará el 70 %. |
+| BO-07 | Creemos que el tiempo transcurrido entre la detección de humo y la primera acción de respuesta del administrador se reducirá en un 50 % frente a la detección visual actual. |
+| BO-08 | Creemos que las cancelaciones de suscripción atribuidas a fallas de disponibilidad del servicio se mantendrán por debajo del 5 % durante el primer año. |
 
 **3. User Assumptions**
 
-- Creemos que el administrador de galería es un adulto entre 35 y 60 años, encargado de la infraestructura general del inmueble, que gestiona las operaciones desde una oficina y prefiere una vista consolidada en computadora.
-- Creemos que el inquilino de local es un microempresario entre 25 y 55 años cuyo capital de trabajo está invertido en la mercadería almacenada y que opera principalmente desde su teléfono móvil mientras atiende proveedores y clientes.
-- Creemos que ambos segmentos poseen un teléfono inteligente con acceso a internet móvil, dado que la penetración de este dispositivo en Lima Metropolitana alcanza el 99,2 % (OSIPTEL, 2025).
-- Creemos que ninguno de los dos segmentos posee formación técnica, por lo que la información debe presentarse sin terminología especializada ni exigir configuración.
-- Creemos que el inquilino desconfía de que el administrador acceda a información sobre la actividad interna de su local, por lo que el alcance de los datos debe estar delimitado por rol de forma explícita.
-- Creemos que el administrador es quien autoriza la instalación del hardware en el inmueble, por lo que la adopción del inquilino depende de una decisión previa que no controla.
+| Código | Enunciado |
+| :--- | :--- |
+| UA-01 | Creemos que el administrador de galería es un adulto entre 35 y 60 años, encargado de la infraestructura general del inmueble, que gestiona las operaciones desde una oficina y prefiere una vista consolidada en computadora. |
+| UA-02 | Creemos que el inquilino de local es un microempresario entre 25 y 55 años cuyo capital de trabajo está invertido en la mercadería almacenada y que opera principalmente desde su teléfono móvil mientras atiende proveedores y clientes. |
+| UA-03 | Creemos que ambos segmentos poseen un teléfono inteligente con acceso a internet móvil, dado que la penetración de este dispositivo en Lima Metropolitana alcanza el 99,2 % (OSIPTEL, 2025). |
+| UA-04 | Creemos que ninguno de los dos segmentos posee formación técnica, por lo que la información debe presentarse sin terminología especializada ni exigir configuración. |
+| UA-05 | Creemos que el inquilino desconfía de que el administrador acceda a información sobre la actividad interna de su local, por lo que el alcance de los datos debe estar delimitado por rol de forma explícita. |
+| UA-06 | Creemos que el administrador es quien autoriza la instalación del hardware en el inmueble, por lo que la adopción del inquilino depende de una decisión previa que no controla. |
 
 **4. User Outcome and Benefit Assumptions**
 
-- Creemos que el administrador desea reducir las horas de trabajo manual que dedica a recorrer el inmueble y a elaborar los recibos de servicios.
-- Creemos que el administrador desea sustentar el cobro de servicios con evidencia verificable, para reducir el estrés de la gestión operativa y las fricciones con sus inquilinos.
-- Creemos que el inquilino desea enterarse de una intrusión en su local mientras ocurre y  no al abrir al día siguiente.
-- Creemos que el inquilino desea comprobar que el importe de servicios que se le imputa corresponde únicamente a lo que efectivamente consumió.
-- Creemos que ambos desean ser advertidos de la presencia de humo con antelación suficiente para actuar antes de que el fuego alcance los locales contiguos.
-- Creemos que ambos valoran la tranquilidad de contar con vigilancia permanente sobre el inmueble por encima de la sofisticación de las funcionalidades ofrecidas.
+| Código | Enunciado |
+| :--- | :--- |
+| UOB-01 | Creemos que el administrador desea reducir a la mitad las horas semanales que hoy destina a recorridos de supervisión y a la elaboración manual de los recibos de servicios. |
+| UOB-02 | Creemos que el administrador desea responder un reclamo mostrando el histórico de consumo del local en lugar de negociar sin evidencia, para reducir las fricciones con sus inquilinos. |
+| UOB-03 | Creemos que el inquilino desea enterarse de una intrusión en su local dentro del minuto en que ocurre, y no al abrir al día siguiente. |
+| UOB-04 | Creemos que el inquilino desea comprobar, antes de pagar, que el importe de servicios que se le imputa corresponde únicamente a lo que efectivamente consumió. |
+| UOB-05 | Creemos que ambos desean ser advertidos de la presencia de humo con antelación suficiente para evacuar o actuar antes de que el fuego alcance los locales contiguos. |
+| UOB-06 | Creemos que ambos valoran la tranquilidad de contar con vigilancia permanente sobre el inmueble por encima de la cantidad de funcionalidades que ofrezca la plataforma. |
 
 **5. Feature Assumptions**
 
-- Creemos que la detección de intrusión mediante sensores de movimiento y activación por proximidad, con notificación inmediata y captura de imagen asociada al evento, permitirá al inquilino reaccionar durante el evento y distinguir una alerta real de una falsa sin trasladarse al local.
-- Creemos que la detección de humo y el envío simultáneo de la alerta al inquilino y al administrador permitirá reducir el tiempo entre la detección del evento y la respuesta.
-- Creemos que los medidores inteligentes de energía y agua instalados en cada local permitirán sustituir el prorrateo estimado por una facturación basada en el consumo real verificable por ambas partes.
-- Creemos que un tablero de control web con visualización de consumo acumulado, promedio histórico y desviación respecto de la línea base permitirá a ambos segmentos interpretar la información sin formación técnica.
-- Creemos que el control de acceso por rol, que limita al inquilino a su propio local y otorga al administrador la vista consolidada del inmueble, es condición para que el inquilino acepte el uso de la plataforma.
-- Creemos que una aplicación móvil nativa con push notifications de emergencias permitirá al inquilino supervisar su local mientras se encuentra fuera de la galería.
-- Creemos que el procesamiento y almacenamiento local en el Edge API mantendrá la detección y el registro operativos aun cuando se interrumpa la conectividad con la nube.
-- Creemos que una Landing Page estática con contenido y calls to action diferenciados por segmento permitirá comunicar la propuesta de valor y dirigir a cada usuario hacia el punto de acceso correspondiente..
+| Código | Enunciado |
+| :--- | :--- |
+| FA-01 | Creemos que la detección de intrusión mediante sensores de movimiento y activación por proximidad, con notificación inmediata y captura de imagen asociada al evento, permitirá al inquilino reaccionar durante el evento y distinguir una alerta real de una falsa sin trasladarse al local. |
+| FA-02 | Creemos que la detección de humo y el envío simultáneo de la alerta al inquilino y al administrador permitirá reducir el tiempo entre la detección del evento y la respuesta. |
+| FA-03 | Creemos que los medidores inteligentes de energía y agua instalados en cada local permitirán sustituir el prorrateo estimado por una facturación basada en el consumo real verificable por ambas partes. |
+| FA-04 | Creemos que un tablero de control web con visualización de consumo acumulado, promedio histórico y desviación respecto de la línea base permitirá a ambos segmentos interpretar la información sin formación técnica. |
+| FA-05 | Creemos que el control de acceso por rol, que limita al inquilino a su propio local y otorga al administrador la vista consolidada del inmueble, es condición para que el inquilino acepte el uso de la plataforma. |
+| FA-06 | Creemos que una aplicación móvil nativa con push notifications de emergencias permitirá al inquilino supervisar su local mientras se encuentra fuera de la galería. |
+| FA-07 | Creemos que el procesamiento y almacenamiento local en el Edge API mantendrá la detección y el registro operativos aun cuando se interrumpa la conectividad con la nube. |
+| FA-08 | Creemos que una Landing Page estática con contenido y calls to action diferenciados por segmento permitirá comunicar la propuesta de valor y dirigir a cada usuario hacia el punto de acceso correspondiente. |
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
