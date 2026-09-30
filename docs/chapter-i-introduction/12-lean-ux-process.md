@@ -88,39 +88,52 @@ Estos enunciados representan las creencias resultantes de la discusión del equi
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-A partir de los Feature Assumptions definidos anteriormente, se formula un Hypothesis Statement por cada funcionalidad propuesta. Cada hipótesis relaciona un resultado de negocio esperado con los usuarios, el beneficio que buscan obtener y la solución propuesta.
+Conforme a lo establecido por el Lean UX Process, se formula **un Hypothesis Statement por cada Feature Assumption**, en una relación uno a uno. Cada hipótesis declara explícitamente el Feature Assumption del que deriva y el Business Outcome Assumption cuyo cumplimiento busca verificar, de modo que la trazabilidad entre supuestos, hipótesis y resultados esperados quede establecida.
 
-*Hypothesis 1 — Detección de intrusión con registro visual*
+La siguiente tabla resume dicha correspondencia.
 
-* Creemos que lograremos **reducir en un 15 % la tasa de rotación de inquilinos** si **los inquilinos de local** alcanzan **la capacidad de reaccionar ante una intrusión mientras ocurre y de distinguir una alerta real de una falsa sin trasladarse al inmueble** con **la detección por sensores de movimiento y proximidad, con notificación inmediata y captura de imagen asociada al evento**.
+| Hypothesis | Deriva de | Verifica |
+| :--- | :--- | :--- |
+| HS-01 | FA-01 | BO-03 |
+| HS-02 | FA-02 | BO-07 |
+| HS-03 | FA-03 | BO-01 |
+| HS-04 | FA-04 | BO-02 |
+| HS-05 | FA-05 | BO-06 |
+| HS-06 | FA-06 | BO-04 |
+| HS-07 | FA-07 | BO-08 |
+| HS-08 | FA-08 | BO-05 |
 
-*Hypothesis 2 — Detección temprana de humo*
+**HS-01 — Detección de intrusión con registro visual** *(deriva de FA-01, verifica BO-03)*
 
-* Creemos que lograremos **una conversión del 30 % de las galerías que reciben una demostración hacia una suscripción activa** si **los administradores de galería** alcanzan **la advertencia de humo con antelación suficiente para actuar antes de que el fuego alcance los locales contiguos** con **el sensor de humo y el escalamiento simultáneo de la alerta al inquilino y al administrador**.
+Creemos que lograremos **reducir en un 15 % la tasa anual de rotación de inquilinos** si **los inquilinos de local** alcanzan **la capacidad de reaccionar ante una intrusión mientras ocurre y de distinguir una alerta real de una falsa sin trasladarse al inmueble** con **la detección por sensores de movimiento y proximidad, con notificación inmediata y captura de imagen asociada al evento**.
 
-*Hypothesis 3 — Medición individual de consumo*
+**HS-02 — Detección temprana de humo** *(deriva de FA-02, verifica BO-07)*
 
-* Creemos que lograremos **reducir en un 30 % las disputas por cobros de servicios** si **los administradores de galería y los inquilinos de local** alcanzan **una facturación sustentada en consumo real y no en estimaciones** con **los medidores inteligentes de energía y agua instalados por local**.
+Creemos que lograremos **reducir en un 50 % el tiempo transcurrido entre la detección de humo y la primera acción de respuesta** si **los administradores de galería y los inquilinos de local** alcanzan **la advertencia de humo con antelación suficiente para evacuar o actuar antes de que el fuego alcance los locales contiguos** con **el sensor de humo y el escalamiento simultáneo de la alerta a ambos roles**.
 
-*Hypothesis 4 — Tablero de control y visualización cuantitativa*
+**HS-03 — Medición individual de consumo** *(deriva de FA-03, verifica BO-01)*
 
-* Creemos que lograremos **reducir en un 50 % el tiempo de resolución de reclamos por facturación** si **los administradores de galería y los inquilinos de local** alcanzan **la comprensión de su consumo y de sus desviaciones sin formación técnica** con **la visualización de consumo acumulado, promedio histórico y desviación respecto de la línea base en el tablero de control**.
+Creemos que lograremos **reducir en un 30 % las disputas por cobros de servicios** si **los administradores de galería y los inquilinos de local** alcanzan **una facturación sustentada en consumo real y no en estimaciones** con **los medidores inteligentes de energía y agua instalados por local**.
 
-*Hypothesis 5 — Control de acceso por rol*
+**HS-04 — Tablero de control y visualización cuantitativa** *(deriva de FA-04, verifica BO-02)*
 
-* Creemos que lograremos **una retención de suscripciones superior al 70 % tras el tercer mes** si **los inquilinos de local** alcanzan **la certeza de que el administrador no accede a la actividad interna de su local** con **el control de acceso por rol que delimita el alcance de la información para cada perfil**.
+Creemos que lograremos **reducir en un 50 % el tiempo de resolución de reclamos por facturación** si **los administradores de galería y los inquilinos de local** alcanzan **la comprensión de su consumo y de sus desviaciones sin formación técnica** con **la visualización de consumo acumulado, promedio histórico y desviación respecto de la línea base en el tablero de control**.
 
-*Hypothesis 6 — Aplicación móvil con notificaciones push*
+**HS-05 — Control de acceso por rol** *(deriva de FA-05, verifica BO-06)*
 
-* Creemos que lograremos **que el 70 % de los inquilinos use la aplicación al menos una vez por semana** si **los inquilinos de local** alcanzan **la posibilidad de supervisar su local mientras se desplazan atendiendo proveedores y clientes** con **la aplicación móvil nativa y las notificaciones push de emergencias en tiempo real**.
+Creemos que lograremos **una retención de suscripciones superior al 70 % tras el tercer mes** si **los inquilinos de local** alcanzan **la certeza de que el administrador no accede a la actividad interna de su local** con **el control de acceso por rol que delimita el alcance de la información para cada perfil**.
 
-*Hypothesis 7 — Procesamiento en el borde*
+**HS-06 — Aplicación móvil con notificaciones push** *(deriva de FA-06, verifica BO-04)*
 
-* Creemos que lograremos **una retención de suscripciones superior al 70 % tras el tercer mes** si **los administradores de galería y los inquilinos de local** alcanzan **la certeza de que la detección y el registro continúan operando ante una caída de conexión** con **el procesamiento y almacenamiento local en el Edge API**.
+Creemos que lograremos **que el 70 % de los inquilinos use la aplicación al menos una vez por semana** si **los inquilinos de local** alcanzan **la posibilidad de supervisar su local mientras se desplazan atendiendo proveedores y clientes** con **la aplicación móvil nativa y las notificaciones push de emergencias en tiempo real**.
 
-*Hypothesis 8 — Landing Page diferenciado por segmento*
+**HS-07 — Procesamiento en el borde** *(deriva de FA-07, verifica BO-08)*
 
-* Creemos que lograremos **una conversión del 30 % de las galerías que reciben una demostración hacia una suscripción activa** si **los administradores de galería** alcanzan **la comprensión de la propuesta de valor aplicada a su formato de negocio** con **el Landing Page de contenido y llamadas a la acción diferenciados por segmento**.
+Creemos que lograremos **mantener por debajo del 5 % las cancelaciones atribuidas a fallas de disponibilidad del servicio** si **los administradores de galería y los inquilinos de local** alcanzan **la certeza de que la detección y el registro continúan operando ante una caída de conexión** con **el procesamiento y almacenamiento local en el Edge API**.
+
+**HS-08 — Landing Page diferenciado por segmento** *(deriva de FA-08, verifica BO-05)*
+
+Creemos que lograremos **una conversión del 30 % de las galerías que reciben una demostración hacia una suscripción activa** si **los administradores de galería** alcanzan **la comprensión de la propuesta de valor aplicada a su formato de negocio** con **el Landing Page de contenido y llamadas a la acción diferenciados por segmento**.
 
 #### 1.2.2.4. Lean UX Canvas
 
