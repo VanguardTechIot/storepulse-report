@@ -2,23 +2,23 @@
 
 En esta sección se presenta el proceso de Lean UX aplicado por el equipo para definir la propuesta de StorePulse. A partir de las creencias iniciales sobre el negocio y los usuarios, se identifican los principales problemas, supuestos y resultados esperados, los cuales se transforman en hipótesis que pueden ser validadas durante el desarrollo del proyecto.
 
-Este proceso permite relacionar las necesidades de los administradores de galerías y los inquilinos de los locales con los resultados esperados del negocio y las funcionalidades propuestas para el producto.
+Este proceso permite relacionar las necesidades de los administradores de galerías y los inquilinos de los locales con los resultados esperados del negocio y las funcionalidades propuestas para el producto. Para garantizar la trazabilidad, cada supuesto se identifica con un código y cada Hypothesis Statement declara explícitamente el Feature Assumption del que se deriva.
 
 #### 1.2.2.1. Lean UX Problem Statements
 
-Para representar la problemática general del proyecto se elaboró un único Problem Statement que considera los dos segmentos objetivo: administradores de galerías comerciales e inquilinos de los locales. De acuerdo con las indicaciones del Lean UX Process, se utiliza la plantilla correspondiente a una iniciativa nueva (Brand new initiative).
+Para representar la problemática general del proyecto se elaboró un único Problem Statement que considera los dos segmentos objetivo: administradores de galerías comerciales e inquilinos de los locales. De acuerdo con las indicaciones del Lean UX Process, se utiliza la plantilla correspondiente a una iniciativa nueva (Brand new initiative), que comprende cinco enunciados: dominio y estado actual, brecha no atendida, estrategia del producto, segmento inicial y criterios de éxito medibles.
 
 **Problem Statement**
 
-El estado actual de **la gestión operativa de galerías comerciales en Lima Metropolitana** se ha enfocado principalmente en **la vigilancia presencial de áreas comunes, la inspección manual periódica y el prorrateo estimado de los servicios básicos, atendiendo a administradores e inquilinos únicamente después de que un incidente ha ocurrido**.
+El estado actual de **la gestión operativa de galerías comerciales en Lima Metropolitana** se ha enfocado principalmente en **la vigilancia presencial de áreas comunes y la inspección manual periódica, que no cubren la totalidad de los locales ni del horario; en el prorrateo estimado de los servicios básicos, que el inquilino no puede verificar ni el administrador sustentar; y en la atención reactiva de los incidentes, que administradores e inquilinos conocen recién horas después de ocurridos**.
 
-Lo que los productos y servicios existentes no logran atender es **la falta de información individual y verificable por local, ya que las soluciones de seguridad electrónica suelen estar diseñadas para comercios independientes y no para galerías comerciales. Además, no existe una solución integrada que permita gestionar la detección de intrusiones, la detección temprana de humo y el consumo verificable de servicios desde una misma plataforma**.
+Lo que los productos y servicios existentes no logran atender es **la falta de información individual y verificable por local, ya que las soluciones de seguridad electrónica suelen estar diseñadas para comercios independientes y no para inmuebles de propiedad compartida. Además, no existe una solución integrada que permita gestionar la detección de intrusiones, la detección temprana de humo y el consumo verificable de servicios desde una misma plataforma**.
 
 Nuestro producto atenderá esta brecha mediante **una plataforma IoT que instala dispositivos de bajo costo en cada local, procesa la telemetría en el edge para mantener la detección y el registro ante interrupciones de conectividad, y presenta la información mediante aplicaciones web y móviles con acceso diferenciado según el rol del usuario**.
 
 Nuestro enfoque inicial será **los administradores e inquilinos de galerías comerciales de alta densidad de locales en Lima Metropolitana, específicamente en Gamarra, Mesa Redonda, Las Malvinas y el jirón Wilson**.
 
-Sabremos que hemos tenido éxito cuando observemos que **los administradores sustituyen la inspección manual por la revisión del tablero de control, los inquilinos consultan el consumo de su local antes de cuestionar la facturación, y ambos actúan sobre una alerta durante el evento y no después de él**.
+Sabremos que hemos tenido éxito cuando observemos que **el 30 % de las galerías que reciben una demostración contrata una suscripción activa; que la retención de suscripciones supera el 70 % tras el tercer mes; que el 70 % de los inquilinos con local monitoreado abre la aplicación al menos una vez por semana; que los reclamos mensuales por facturación se reducen en un 30 % y su tiempo de resolución en un 50 %; y que la tasa anual de rotación de inquilinos en las galerías suscritas disminuye en un 15 %**.
 
 #### 1.2.2.2. Lean UX Assumptions
 
