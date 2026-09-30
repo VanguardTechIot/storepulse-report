@@ -11,9 +11,12 @@ los soportarán.
 
 * **Etapa 1: Open & Explore**
 
-En esta etapa el equipo hizo una lluvia de ideas con el objetivo de capturar todos los hechos relevantes posibles 
-que ocurren en el negocio de manera que fueron capturadas en *Domain Events* con notas de color naranja.<br>
-![big-picture-eventstorming-stage-1.png](../../assets/research/big-picture-eventstorming-stage-1.png)
+En esta etapa inicial, el equipo realizó una lluvia de ideas divergente para capturar todos los hechos relevantes 
+posibles que ocurren en el negocio, sin preocuparse por el orden. Estos hechos fueron documentados como Domain Events 
+(notas naranjas), asegurando que todos estuvieran redactados estrictamente en tiempo pasado como hechos consumados. 
+Se mapearon desde acciones operativas hasta incidentes físicos imprevistos (ej. "Intrusion Occurred", "Utility Bill 
+Issued"), abarcando toda la realidad de la galería comercial..<br>
+![big-picture-event-storming-step-1.png](../../assets/research/big-picture-event-storming-step-1.png)
 
 Como se observa esta representación del brainstorming muestra todos los procesos por los que atraviesa el negocio,
 desde que se aperturan los locales, tomando en cuenta eventos como el inicio del humo en el local, eventos de ingreso 
