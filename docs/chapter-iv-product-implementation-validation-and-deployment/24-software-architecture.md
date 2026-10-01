@@ -25,7 +25,7 @@ Fuera del límite organizacional se encuentran los siguientes actores y sistemas
 
 Esta perspectiva permite comprender el contexto organizacional de StorePulse y las principales entidades que forman parte de su ecosistema.
 
-![StorePulse - System Landscape](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=4)
+![StorePulse - System Landscape](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/01-storepulse-system-landscape.puml&fmt=svg&v=5)
 
 #### 4.1.3.2. Software Architecture Context Level Diagram
 
@@ -44,7 +44,7 @@ Los principales elementos que interactúan con StorePulse son:
 
 - **Firebase Cloud Messaging:** servicio externo utilizado por StorePulse para enviar notificaciones push a los dispositivos móviles.
 El diagrama permite visualizar las principales interacciones externas de StorePulse sin profundizar en la implementación interna del sistema.
-![StorePulse - System Context](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=4)
+![StorePulse - System Context](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/02-storepulse-system-context.puml&fmt=svg&v=5)
 #### 4.1.3.3. Software Architecture Container Level Diagram
 
 El Container Level Diagram representa la estructura interna de alto nivel de StorePulse, mostrando los principales contenedores de software que conforman el sistema, las tecnologías utilizadas y las relaciones existentes entre ellos.
@@ -64,7 +64,7 @@ El flujo principal de información proveniente de los dispositivos IoT se desarr
 Por otro lado, el **Gallery Administrator** utiliza la **Web Application** y el **Tenant** utiliza la **Mobile Application**. Ambas aplicaciones consumen los servicios proporcionados por la **REST API** mediante HTTPS/JSON. La **REST API** también se comunica con **Stripe** mediante HTTPS/REST para procesar los pagos asociados a las suscripciones, con **Resend** para el envío de correos electrónicos transaccionales y con **Firebase Cloud Messaging** para el envío de notificaciones push.
 
 El diagrama permite visualizar la estructura lógica de StorePulse, los principales contenedores que conforman la solución, las tecnologías utilizadas y las relaciones de comunicación entre sus componentes.
-![StorePulse - Container Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=4)
+![StorePulse - Container Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=5)
 #### 4.1.3.4. Software Architecture Deployment Diagram
 
 El **Deployment Diagram** representa la distribución física de los contenedores de software de StorePulse sobre la infraestructura donde serán ejecutados. Esta vista permite identificar los nodos físicos y de infraestructura asociados al entorno de la galería comercial, el procesamiento Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
@@ -95,4 +95,4 @@ La comunicación entre los elementos desplegados se realiza mediante los siguien
 - **REST API → Database:** Entity Framework Core.
 
 Esta distribución permite mantener el procesamiento de los datos IoT cercano a los dispositivos mediante **Edge Computing**, mientras que la lógica de negocio y la persistencia centralizada se mantienen en la infraestructura **Cloud**.
-![StorePulse - Deployment Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=4)
+![StorePulse - Deployment Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=5)
