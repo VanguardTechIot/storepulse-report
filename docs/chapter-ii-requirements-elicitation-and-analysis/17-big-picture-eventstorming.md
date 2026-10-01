@@ -33,4 +33,14 @@ seguridad, el control de incendios y la continuidad del negocio frente a caídas
 debajo de otro, avanzando simultáneamente hacia la derecha.<br>
 ![big-picture-eventstorming-step-2.png](../../assets/research/big-picture-eventstorming-step-2.png)
 
+* **Paso 3: Explicit Walkthrough (Narrativa)**
+
+Con la línea de tiempo consolidada, se procedió a realizar una narración explícita del proceso de negocio a través de
+todo el landscape de la galería. Durante este recorrido, el equipo identificó y agregó al tablero los Actores (notas
+amarillas, ej. Gallery Administrator, Tenant, Security Team Member) que inician o participan en procesos clave.
+Asimismo, se incluyeron los Sistemas Externos (notas azules, ej. Sedapal / Luz del Sur, Private Security Company,
+Internet Service Provider) que proveen información o interactúan con el dominio de la galería pero que operan fuera del
+control del software propuesto.
+
+![big-picture-eventstorming-step-3.png](../../assets/research/big-picture-eventstorming-step-3.png)
 
