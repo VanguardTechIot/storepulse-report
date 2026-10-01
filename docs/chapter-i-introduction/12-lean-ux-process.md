@@ -55,10 +55,10 @@ Estos enunciados representan las creencias resultantes de la discusión del equi
 | Código | Enunciado |
 | :--- | :--- |
 | BO-01 | Creemos que las disputas por cobros de servicios entre administradores e inquilinos se reducirán en un 30 % durante los primeros seis meses de uso de la plataforma. |
-| BO-02 | Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 %, al disponer ambas partes del mismo registro de consumo. |
+| BO-02 | Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 % durante los primeros seis meses de uso, al disponer ambas partes del mismo registro de consumo. |
 | BO-03 | Creemos que la tasa de rotación de inquilinos en las galerías suscritas se reducirá en un 15 % anual, al disminuir las pérdidas por robo. |
 | BO-04 | Creemos que el 70 % de los inquilinos con un local monitoreado usará la aplicación móvil al menos una vez por semana al término del primer trimestre posterior a la instalación. |
-| BO-05 | Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa. |
+| BO-05 | Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa durante los primeros seis meses de operación comercial. |
 | BO-06 | Creemos que la retención de suscripciones tras el tercer mes superará el 70 %. |
 | BO-07 | Creemos que el tiempo transcurrido entre la detección de humo y la primera acción de respuesta del administrador se reducirá en un 50 % frente a la detección visual actual. |
 | BO-08 | Creemos que las cancelaciones de suscripción atribuidas a fallas de disponibilidad del servicio se mantendrán por debajo del 5 % durante el primer año. |
