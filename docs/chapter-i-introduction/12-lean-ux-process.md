@@ -151,10 +151,10 @@ Creemos que lograremos **una conversión del 30 % de las galerías que reciben u
 
 A continuación, se presenta el Lean UX Canvas elaborado por el equipo VanguardTech. Este canvas resume los principales elementos analizados durante el proceso de Lean UX y permite visualizar la relación entre el problema identificado, los usuarios, las necesidades, las soluciones propuestas y los resultados esperados.
 
-![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas-v2.png)
+![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas-v3.png)
 
 El canvas fue elaborado en Figma y puede consultarse en el siguiente enlace:
 
-**Lean UX Canvas:** [https://shorturl.fm/UI0pZ](https://shorturl.fm/UI0pZ)
+**Lean UX Canvas:** [shorturl.ly/HGlCE](shorturl.ly/HGlCE)
 
 <div class="page"></div>
