@@ -1,74 +1,65 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
 
-LAYOUT_TOP_DOWN()
+LAYOUT_LEFT_RIGHT()
 HIDE_STEREOTYPE()
 
 skinparam shadowing false
 skinparam defaultFontName Arial
 
-title StorePulse - Deployment Diagram
 
-' ==========================================
-' COMMERCIAL GALLERY INFRASTRUCTURE
-' ==========================================
+Person(visitor, "Visitor", "User who browses the public information of StorePulse.")
 
-Deployment_Node(gallery, "Commercial Gallery", "Physical infrastructure of the commercial gallery.") {
+Person(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the gallery, monitoring resources, reviewing alerts and managing operational information.")
 
-    Deployment_Node(iotNode, "IoT Device", "Physical device with sensors and meters.") {
+Person(tenant, "Tenant", "User who monitors their premises, checks consumption and billing information, and receives alerts.")
 
-        Container(embeddedApplication, "Embedded Application", "C++", "Embedded application that controls the IoT device, collects sensor information, and transmits data to the Edge environment.")
+Deployment_Node(gallery, "Commercial Gallery", "Physical Infrastructure", "Physical infrastructure where IoT devices and Edge processing are deployed.") {
+
+    Deployment_Node(iotNode, "IoT Device", "ESP32", "Physical devices, sensors and meters used to collect security, environmental and consumption information.") {
+
+        Container(embeddedApplication, "Embedded Application", "C++", "Collects information from sensors and meters and transmits IoT data to the Edge environment.")
     }
 
-    Deployment_Node(edgeNode, "Edge Device", "Local device responsible for Edge processing.") {
+    Deployment_Node(edgeNode, "Edge Device", "Local Computer / Raspberry Pi", "Local infrastructure responsible for Edge processing.") {
 
-        Container(edgeApi, "Edge API", "Python, Flask", "API running in the Edge environment that receives, validates, and processes IoT device information before synchronizing it with the cloud.")
-    }
-}
-
-' ==========================================
-' CLOUD INFRASTRUCTURE
-' ==========================================
-
-Deployment_Node(cloud, "Cloud", "Cloud computing infrastructure.") {
-
-    Deployment_Node(appServer, "Application Server", "Server where the main API is deployed.") {
-
-        Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes business logic and provides services for the Web and Mobile Applications.")
-    }
-
-    Deployment_Node(databaseServer, "Database Server", "Server where persistent information is stored.") {
-
-        ContainerDb(database, "Database", "MySQL", "Stores user, consumption, security, statistics, and other StorePulse information.")
-    }
-
-    Deployment_Node(webServer, "Web Server", "Server where the public webpage is deployed.") {
-
-        Container(landingPage, "Landing Page", "HTML5, CSS3, JavaScript", "Public webpage providing information and presentation of StorePulse.")
+        Container(edgeApi, "Edge API", "Python, Flask", "Receives, validates and processes IoT information in the Edge environment before synchronizing it with the central platform.")
     }
 }
 
-' ==========================================
-' ADMINISTRATOR DEVICE
-' ==========================================
+Deployment_Node(cloud, "Cloud", "Cloud Infrastructure", "Central infrastructure where the StorePulse platform is deployed.") {
 
-Deployment_Node(adminComputer, "Administrator Computer", "Computer used by the Gallery Administrator.") {
+    Deployment_Node(appServer, "Application Server", "Cloud Server", "Server responsible for executing the central StorePulse backend.") {
 
-    Container(webApplication, "Web Application", "Angular", "Application used by the Gallery Administrator to supervise the premises and manage system information.")
+        Container(restApi, "REST API", "ASP.NET Core, .NET", "Central backend application responsible for the business logic and services of StorePulse.")
+    }
+
+    Deployment_Node(databaseServer, "Database Server", "MySQL Server", "Server responsible for persistent StorePulse data.") {
+
+        ContainerDb(database, "Database", "MySQL", "Stores users, premises, resources, measurements, consumption, security events, alerts, billing and other StorePulse information.")
+    }
+
+    Deployment_Node(webServer, "Web Server", "Web Server", "Server responsible for publishing the public StorePulse website.") {
+
+        Container(landingPage, "Landing Page", "HTML5, CSS3, JavaScript", "Public webpage providing information about StorePulse and access to the platform.")
+    }
 }
 
-' ==========================================
-' TENANT DEVICE
-' ==========================================
+Deployment_Node(adminComputer, "Administrator Computer", "Personal Computer", "Computer used by the Gallery Administrator.") {
 
-Deployment_Node(tenantMobile, "Tenant Mobile Device", "Mobile device used by the tenant.") {
-
-    Container(mobileApplication, "Mobile Application", "Flutter, Dart", "Application used by tenants to monitor their premises, check consumption, and receive alerts.")
+    Container(webApplication, "Web Application", "Angular", "Application used by the Gallery Administrator to supervise the gallery, monitor resources, review alerts and manage operational information.")
 }
 
-' ==========================================
-' DEPLOYMENT RELATIONSHIPS
-' ==========================================
+Deployment_Node(tenantMobile, "Tenant Mobile Device", "Smartphone", "Mobile device used by the Tenant.") {
+
+    Container(mobileApplication, "Mobile Application", "Flutter, Dart", "Application used by Tenants to monitor their premises, check consumption and billing information, and receive alerts.")
+}
+
+Rel(visitor, landingPage, "Browses public information", "HTTPS")
+
+Rel(galleryAdministrator, webApplication, "Uses", "HTTPS")
+
+Rel(tenant, mobileApplication, "Uses", "HTTPS")
 
 Rel(embeddedApplication, edgeApi, "Sends telemetry and events", "HTTP/JSON")
 
