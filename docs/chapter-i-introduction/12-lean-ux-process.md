@@ -155,6 +155,6 @@ A continuación, se presenta el Lean UX Canvas elaborado por el equipo VanguardT
 
 El canvas fue elaborado en Figma y puede consultarse en el siguiente enlace:
 
-**Lean UX Canvas:** [shorturl.ly/HGlCE](shorturl.ly/HGlCE)
+**Lean UX Canvas:** [Ver en Figma](https://www.figma.com/board/Ve7fG9wg5OyzZneKkhMLxP/Lean-UX-Canvas--v2---Community-?node-id=0-1&t=rXoIKtDzO5D6iOE2-1)
 
 <div class="page"></div>
