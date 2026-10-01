@@ -44,3 +44,31 @@ control del software propuesto.
 
 ![big-picture-eventstorming-step-3.png](../../assets/research/big-picture-eventstorming-step-3.png)
 
+* **Paso 4: Problems and Opportunities (Hotspots)**
+
+Durante la validación de la narrativa de negocio, el equipo detuvo el recorrido exhaustivo cada vez que se identificaron
+puntos de fricción, preguntas sin resolver, vulnerabilidades operativas o cuellos de botella en la gestión tradicional
+de las galerías comerciales. Estos hallazgos críticos se documentaron como Hotspots (notas rosadas) agregadas a la 
+línea de tiempo.
+
+La identificación de estos puntos evidencia el pensamiento innovador del equipo para detectar necesidades ocultas, 
+transformando deficiencias operativas en oportunidades directas de valor para StorePulse. Los conflictos detectados y 
+las oportunidades de solución fueron:
+
+    - Fricción en la conciliación: Se identificó la duda sobre si existe un límite de tiempo entre que un inquilino 
+    cuestiona un recibo y escala a una disputa formal. Oportunidad: StorePulse automatizará estos plazos y utilizará la 
+    data inmutable de los sensores (historial de consumo) para resolver disputas de forma objetiva y rápida.<br>
+    - Riesgo en gestión de crisis múltiples: Existe un vacío sobre cómo se priorizan las alertas si dos eventos 
+    críticos ocurren simultáneamente (ej. incendio e intrusión detectados al mismo tiempo). Oportunidad: Implementar 
+    en la plataforma un motor de reglas que priorice automáticamente el riesgo de vida (incendio) sobre el riesgo de 
+    propiedad (intrusión).
+    - Incertidumbre en protocolos de seguridad: Falta de certeza sobre si el protocolo de evacuación está definido y 
+    comunicado previamente a los inquilinos. Oportunidad: Digitalizar e integrar los planes de evacuación 
+    directamente en la app del inquilino, disparándolos automáticamente ante una alerta verificada.
+    - Vulnerabilidad de infraestructura técnica: Se detectó la grave interrogante sobre qué sucede con las alertas de 
+    seguridad si se pierde la conectividad a internet durante un incidente activo. Oportunidad: Diseñar una 
+    arquitectura resiliente con Edge Computing y sincronización diferida (buffers locales) para garantizar la 
+    continuidad del negocio sin pérdida de datos vitales.
+
+![big-picture-eventstorming-step-4.png](../../assets/research/big-picture-eventstorming-step-4.png)
+
