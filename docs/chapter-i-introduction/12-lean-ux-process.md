@@ -100,20 +100,20 @@ Estos enunciados representan las creencias resultantes de la discusión del equi
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-Conforme a lo establecido por el Lean UX Process, se formula **un Hypothesis Statement por cada Feature Assumption**, en una relación uno a uno. Cada hipótesis declara explícitamente el Feature Assumption del que deriva y el Business Outcome Assumption cuyo cumplimiento busca verificar, de modo que la trazabilidad entre supuestos, hipótesis y resultados esperados quede establecida.
+Conforme a lo establecido por el Lean UX Process, se formula **un Hypothesis Statement por cada Feature Assumption**, en una relación uno a uno. Cada hipótesis declara explícitamente el Feature Assumption del que deriva, el Business Outcome Assumption cuyo cumplimiento busca verificar y el criterio de éxito del Problem Statement al que responde. De este modo, las ocho hipótesis cubren la totalidad de los criterios de éxito declarados en el Problem Statement, y cada uno de sus pain points —intrusión, humo, opacidad en el cobro de servicios y atención reactiva— queda respaldado por al menos una hipótesis.
 
 La siguiente tabla resume dicha correspondencia.
 
-| Hypothesis | Deriva de | Verifica |
-| :--- | :--- | :--- |
-| HS-01 | FA-01 | BO-03 |
-| HS-02 | FA-02 | BO-07 |
-| HS-03 | FA-03 | BO-01 |
-| HS-04 | FA-04 | BO-02 |
-| HS-05 | FA-05 | BO-06 |
-| HS-06 | FA-06 | BO-04 |
-| HS-07 | FA-07 | BO-08 |
-| HS-08 | FA-08 | BO-05 |
+| Hypothesis | Deriva de | Verifica | Criterio de éxito del Problem Statement | Pain point que atiende |
+| :--- | :--- | :--- | :--- | :--- |
+| HS-01 | FA-01 | BO-03 | Rotación anual de inquilinos −15 % | Intrusión |
+| HS-02 | FA-02 | BO-07 | Tiempo de respuesta ante humo −50 % | Humo |
+| HS-03 | FA-03 | BO-01 | Reclamos mensuales por facturación −30 % | Cobro de servicios |
+| HS-04 | FA-04 | BO-02 | Tiempo de resolución de reclamos −50 % | Cobro de servicios |
+| HS-05 | FA-05 | BO-06 | Retención de suscripciones > 70 % | Adopción del inquilino |
+| HS-06 | FA-06 | BO-04 | 70 % de inquilinos activos semanalmente | Atención reactiva |
+| HS-07 | FA-07 | BO-08 | Cancelaciones por indisponibilidad < 5 % | Atención reactiva |
+| HS-08 | FA-08 | BO-05 | Conversión de demostraciones del 30 % | Brecha de la oferta actual |
 
 **HS-01 — Detección de intrusión con registro visual** *(deriva de FA-01, verifica BO-03)*
 
