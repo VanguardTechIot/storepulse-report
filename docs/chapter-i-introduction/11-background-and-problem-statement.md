@@ -12,7 +12,7 @@ Para comprender y delimitar la problemática, el equipo aplicó previamente **la
 
   **Usuarios principales:**
 
-    - **Administrador de galería:** Responsable de la rentabilidad, el mantenimiento y la seguridad de las áreas comunes del inmueble, así como del cobro de los      gastos comunes a los inquilinos. Su problema es que la supervisión depende de recorridos presenciales que no cubren todos los locales ni todo el horario, y que no dispone de evidencia para sustentar los importes que factura.
+    - **Administrador de galería:** Responsable de la rentabilidad, el mantenimiento y la seguridad de las áreas comunes del inmueble, así como del cobro de los gastos comunes a los inquilinos. Su problema es que la supervisión depende de recorridos presenciales que no cubren todos los locales ni todo el horario, y que no dispone de evidencia para sustentar los importes que factura.
     - **Inquilino del local:** Comerciante que alquila un espacio dentro de la galería y cuyo capital de trabajo está invertido en la mercadería almacenada. Su problema es que se entera de una intrusión al abrir su local al día siguiente, y que no puede verificar si el importe de servicios que se le imputa corresponde a su consumo real.
     - **Afectados indirectos:** Trabajadores del local, clientes visitantes y comercios colindantes, dado que un siniestro dentro de un local se propaga al resto del inmueble.
 
