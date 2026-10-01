@@ -2,23 +2,35 @@
 
 En esta sección se presenta el proceso de Lean UX aplicado por el equipo para definir la propuesta de StorePulse. A partir de las creencias iniciales sobre el negocio y los usuarios, se identifican los principales problemas, supuestos y resultados esperados, los cuales se transforman en hipótesis que pueden ser validadas durante el desarrollo del proyecto.
 
-Este proceso permite relacionar las necesidades de los administradores de galerías y los inquilinos de los locales con los resultados esperados del negocio y las funcionalidades propuestas para el producto. Para garantizar la trazabilidad, cada supuesto se identifica con un código y cada Hypothesis Statement declara explícitamente el Feature Assumption del que se deriva.
+Este proceso permite relacionar las necesidades de los administradores de galerías y los inquilinos de los locales con los resultados esperados del negocio y las funcionalidades propuestas para el producto. Para garantizar la trazabilidad, cada supuesto se identifica con un código y cada Hypothesis Statement declara explícitamente el Feature Assumption del que se deriva y el criterio de éxito del Problem Statement al que responde.
 
 #### 1.2.2.1. Lean UX Problem Statements
 
 Para representar la problemática general del proyecto se elaboró un único Problem Statement que considera los dos segmentos objetivo: administradores de galerías comerciales e inquilinos de los locales. De acuerdo con las indicaciones del Lean UX Process, se utiliza la plantilla correspondiente a una iniciativa nueva (Brand new initiative), que comprende cinco enunciados: dominio y estado actual, brecha no atendida, estrategia del producto, segmento inicial y criterios de éxito medibles.
 
+El Problem Statement sintetiza los hallazgos del análisis 5W+2H de la sección 1.2.1: incorpora a los actores afectados (Who), el problema central (What), el entorno y el segmento inicial (Where), el momento en que ocurren los incidentes (When), sus causas (Why), la forma en que hoy se gestiona el problema (How) y la magnitud del daño y de la brecha de adopción (How Much). Asimismo, recoge las restricciones de alcance definidas en esa misma sección.
+
 **Problem Statement**
 
-El estado actual de **la gestión operativa de galerías comerciales en Lima Metropolitana** se ha enfocado principalmente en **la vigilancia presencial de áreas comunes y la inspección manual periódica, que no cubren la totalidad de los locales ni del horario; en el prorrateo estimado de los servicios básicos, que el inquilino no puede verificar ni el administrador sustentar; y en la atención reactiva de los incidentes, que administradores e inquilinos conocen recién horas después de ocurridos**.
+El estado actual de **la gestión operativa de galerías comerciales en Lima Metropolitana, un formato que solo en el Emporio Comercial de Gamarra reúne 39 630 establecimientos, de los cuales el 99,6 % son micro y pequeñas empresas,** se ha enfocado principalmente en **administradores de galería e inquilinos de local que dependen de una vigilancia presencial y una inspección manual que no cubren la totalidad de los locales ni el horario nocturno; de un prorrateo estimado de los servicios básicos que el inquilino no puede verificar ni el administrador sustentar; y de una atención reactiva en la que los incidentes se conocen horas después de ocurridos, en un contexto donde la inseguridad genera pérdidas superiores a S/ 450 000 diarios a los pequeños comercios de Lima**.
 
-Lo que los productos y servicios existentes no logran atender es **la falta de información individual y verificable por local, ya que las soluciones de seguridad electrónica suelen estar diseñadas para comercios independientes y no para inmuebles de propiedad compartida. Además, no existe una solución integrada que permita gestionar la detección de intrusiones, la detección temprana de humo y el consumo verificable de servicios desde una misma plataforma**.
+Lo que los productos y servicios existentes no logran atender es **que, aunque las galerías comerciales figuran entre los cinco tipos de negocio más vulnerables al delito, la penetración de videovigilancia monitoreada en negocios apenas alcanza el 15 %, porque la oferta de seguridad electrónica está diseñada para comercios independientes con costos y contratos individuales, fuera del alcance del microempresario promedio, y no para inmuebles de propiedad compartida. Ninguna solución disponible integra en una misma plataforma la detección de intrusiones, la detección temprana de humo y la medición verificable del consumo por local, lo que abre la oportunidad de atender a todos los locales de una galería mediante una única contratación por inmueble**.
 
-Nuestro producto atenderá esta brecha mediante **una plataforma IoT que instala dispositivos de bajo costo en cada local, procesa la telemetría en el edge para mantener la detección y el registro ante interrupciones de conectividad, y presenta la información mediante aplicaciones web y móviles con acceso diferenciado según el rol del usuario**.
+Nuestro producto atenderá esta brecha mediante **una plataforma IoT que instala dispositivos de bajo costo en cada local, procesa la telemetría en el edge para mantener la detección y el registro ante interrupciones de conectividad, y presenta la información mediante aplicaciones web y móviles con acceso diferenciado según el rol del usuario. La propuesta opera dentro de restricciones definidas: se limita a detectar, notificar, medir y visualizar, sin reemplazar la respuesta física de vigilancia ni los sistemas de extinción de incendios; su validación se circunscribe a galerías de Lima Metropolitana; y el tratamiento de los datos, en particular del registro visual asociado a eventos de seguridad, se sujeta a términos y condiciones que restringen el acceso a la información de cada local a su propio inquilino**.
 
-Nuestro enfoque inicial será **los administradores e inquilinos de galerías comerciales de alta densidad de locales en Lima Metropolitana, específicamente en Gamarra, Mesa Redonda, Las Malvinas y el jirón Wilson**.
+Nuestro enfoque inicial será **los administradores e inquilinos de galerías comerciales con veinte o más locales en Gamarra, Mesa Redonda, Las Malvinas y el jirón Wilson, donde la contigüidad de los locales y la densidad de mercadería almacenada concentran los riesgos de robo e incendio, y donde la acometida compartida de servicios hace inevitable el prorrateo**.
 
-Sabremos que hemos tenido éxito cuando observemos que **el 30 % de las galerías que reciben una demostración contrata una suscripción activa; que la retención de suscripciones supera el 70 % tras el tercer mes; que el 70 % de los inquilinos con local monitoreado abre la aplicación al menos una vez por semana; que los reclamos mensuales por facturación se reducen en un 30 % y su tiempo de resolución en un 50 %; y que la tasa anual de rotación de inquilinos en las galerías suscritas disminuye en un 15 %**.
+Sabremos que hemos tenido éxito cuando observemos que **el 30 % de las galerías que reciben una demostración contrata una suscripción activa durante los primeros seis meses de operación comercial; que la retención de suscripciones supera el 70 % tras el tercer mes; que las cancelaciones atribuidas a fallas de disponibilidad del servicio se mantienen por debajo del 5 %; que el 70 % de los inquilinos con local monitoreado abre la aplicación al menos una vez por semana; que los reclamos mensuales por facturación se reducen en un 30 % y su tiempo de resolución en un 50 %; que el tiempo entre la detección de humo y la primera acción de respuesta se reduce en un 50 %; y que la tasa anual de rotación de inquilinos en las galerías suscritas disminuye en un 15 %**.
+
+**Relación con el análisis 5W+2H**
+
+| Enunciado del Problem Statement | Elementos del 5W+2H que sintetiza |
+| :--- | :--- |
+| Estado actual | **Who** (administradores e inquilinos), **Where** (galerías de Lima), **When** (horario nocturno, atención horas después del incidente), **How** (vigilancia presencial, inspección manual, prorrateo) y **How Much** (39 630 establecimientos, S/ 450 000 diarios en pérdidas) |
+| Brecha no atendida | **Why** (oferta diseñada para el comercio independiente y fuera del alcance del microempresario) y **How Much** (15 % de penetración de videovigilancia monitoreada) |
+| Estrategia del producto | **What** (ausencia de datos medidos y compartidos) y las restricciones de alcance funcional, geográfico y ético de la sección 1.2.1 |
+| Segmento inicial | **Who** y **Where** (conglomerados de alta densidad de locales con acometida compartida) |
+| Criterios de éxito | **How Much**, expresado como metas cuantitativas verificables |
 
 #### 1.2.2.2. Lean UX Assumptions
 
@@ -43,10 +55,10 @@ Estos enunciados representan las creencias resultantes de la discusión del equi
 | Código | Enunciado |
 | :--- | :--- |
 | BO-01 | Creemos que las disputas por cobros de servicios entre administradores e inquilinos se reducirán en un 30 % durante los primeros seis meses de uso de la plataforma. |
-| BO-02 | Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 %, al disponer ambas partes del mismo registro de consumo. |
+| BO-02 | Creemos que el tiempo de resolución de un reclamo por facturación se reducirá en un 50 % durante los primeros seis meses de uso, al disponer ambas partes del mismo registro de consumo. |
 | BO-03 | Creemos que la tasa de rotación de inquilinos en las galerías suscritas se reducirá en un 15 % anual, al disminuir las pérdidas por robo. |
 | BO-04 | Creemos que el 70 % de los inquilinos con un local monitoreado usará la aplicación móvil al menos una vez por semana al término del primer trimestre posterior a la instalación. |
-| BO-05 | Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa. |
+| BO-05 | Creemos que el 30 % de las galerías que reciban una demostración del producto contratará una suscripción activa durante los primeros seis meses de operación comercial. |
 | BO-06 | Creemos que la retención de suscripciones tras el tercer mes superará el 70 %. |
 | BO-07 | Creemos que el tiempo transcurrido entre la detección de humo y la primera acción de respuesta del administrador se reducirá en un 50 % frente a la detección visual actual. |
 | BO-08 | Creemos que las cancelaciones de suscripción atribuidas a fallas de disponibilidad del servicio se mantendrán por debajo del 5 % durante el primer año. |
@@ -88,20 +100,20 @@ Estos enunciados representan las creencias resultantes de la discusión del equi
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
-Conforme a lo establecido por el Lean UX Process, se formula **un Hypothesis Statement por cada Feature Assumption**, en una relación uno a uno. Cada hipótesis declara explícitamente el Feature Assumption del que deriva y el Business Outcome Assumption cuyo cumplimiento busca verificar, de modo que la trazabilidad entre supuestos, hipótesis y resultados esperados quede establecida.
+Conforme a lo establecido por el Lean UX Process, se formula **un Hypothesis Statement por cada Feature Assumption**, en una relación uno a uno. Cada hipótesis declara explícitamente el Feature Assumption del que deriva, el Business Outcome Assumption cuyo cumplimiento busca verificar y el criterio de éxito del Problem Statement al que responde. De este modo, las ocho hipótesis cubren la totalidad de los criterios de éxito declarados en el Problem Statement, y cada uno de sus pain points —intrusión, humo, opacidad en el cobro de servicios y atención reactiva— queda respaldado por al menos una hipótesis.
 
 La siguiente tabla resume dicha correspondencia.
 
-| Hypothesis | Deriva de | Verifica |
-| :--- | :--- | :--- |
-| HS-01 | FA-01 | BO-03 |
-| HS-02 | FA-02 | BO-07 |
-| HS-03 | FA-03 | BO-01 |
-| HS-04 | FA-04 | BO-02 |
-| HS-05 | FA-05 | BO-06 |
-| HS-06 | FA-06 | BO-04 |
-| HS-07 | FA-07 | BO-08 |
-| HS-08 | FA-08 | BO-05 |
+| Hypothesis | Deriva de | Verifica | Criterio de éxito del Problem Statement | Pain point que atiende |
+| :--- | :--- | :--- | :--- | :--- |
+| HS-01 | FA-01 | BO-03 | Rotación anual de inquilinos −15 % | Intrusión |
+| HS-02 | FA-02 | BO-07 | Tiempo de respuesta ante humo −50 % | Humo |
+| HS-03 | FA-03 | BO-01 | Reclamos mensuales por facturación −30 % | Cobro de servicios |
+| HS-04 | FA-04 | BO-02 | Tiempo de resolución de reclamos −50 % | Cobro de servicios |
+| HS-05 | FA-05 | BO-06 | Retención de suscripciones > 70 % | Adopción del inquilino |
+| HS-06 | FA-06 | BO-04 | 70 % de inquilinos activos semanalmente | Atención reactiva |
+| HS-07 | FA-07 | BO-08 | Cancelaciones por indisponibilidad < 5 % | Atención reactiva |
+| HS-08 | FA-08 | BO-05 | Conversión de demostraciones del 30 % | Brecha de la oferta actual |
 
 **HS-01 — Detección de intrusión con registro visual** *(deriva de FA-01, verifica BO-03)*
 
@@ -139,10 +151,10 @@ Creemos que lograremos **una conversión del 30 % de las galerías que reciben u
 
 A continuación, se presenta el Lean UX Canvas elaborado por el equipo VanguardTech. Este canvas resume los principales elementos analizados durante el proceso de Lean UX y permite visualizar la relación entre el problema identificado, los usuarios, las necesidades, las soluciones propuestas y los resultados esperados.
 
-![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas-v2.png)
+![Lean-UX-Canvas - VanguardTech](../../assets/lean-ux/lean-ux-canvas-v3.png)
 
 El canvas fue elaborado en Figma y puede consultarse en el siguiente enlace:
 
-**Lean UX Canvas:** [https://shorturl.fm/UI0pZ](https://shorturl.fm/UI0pZ)
+**Lean UX Canvas:** [Ver en Figma](https://www.figma.com/board/Ve7fG9wg5OyzZneKkhMLxP/Lean-UX-Canvas--v2---Community-?node-id=0-1&t=rXoIKtDzO5D6iOE2-1)
 
 <div class="page"></div>
