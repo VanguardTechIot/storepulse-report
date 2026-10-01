@@ -4,6 +4,8 @@ En esta sección se presenta el Impact Mapping, cuya finalidad es alinear los ob
 
 Los Business Goals que estructuran ambos mapas se derivan de los Business Outcome Assumptions declarados durante el proceso de Lean UX (sección 1.2.2.2), lo que asegura la trazabilidad entre las creencias iniciales del equipo y la planificación del producto. Los artefactos fueron elaborados en UXPressia, tomando como base las fichas de User Persona construidas previamente en la misma herramienta. Al cierre de cada mapa se indican los identificadores de las Stories correspondientes, según la tabla de la sección 3.1.
 
+De los ocho Business Outcome Assumptions declarados en el proceso de Lean UX, seis se adoptan como Business Goals de los mapas. Los dos restantes, BO-07 (reducción del tiempo de respuesta ante humo) y BO-08 (cancelaciones por indisponibilidad del servicio), se tratan como indicadores operativos de soporte: el primero contribuye a la reducción de la rotación de inquilinos y el segundo a la retención de suscripciones, por lo que sus deliverables se incluyen dentro de esos objetivos.
+
 ### Administrador de Galería Comercial
 
 El Impact Mapping asociado a Benjamín Montenegro representa la alineación estratégica entre los objetivos comerciales y operativos de StorePulse, las necesidades reales del responsable del inmueble y los entregables funcionales que permitirán generar valor medible. Este mapa permite visualizar cómo cada iniciativa tecnológica responde directamente a los retos operativos del administrador, asegurando que el desarrollo de la plataforma no se enfoque en funcionalidades aisladas, sino en resultados concretos que impulsen la adopción, la reducción del trabajo manual y la transparencia en la gestión del inmueble.
