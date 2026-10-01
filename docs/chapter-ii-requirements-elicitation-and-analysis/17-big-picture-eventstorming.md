@@ -72,3 +72,21 @@ las oportunidades de solución fueron:
 
 ![big-picture-eventstorming-step-4.png](../../assets/research/big-picture-eventstorming-step-4.png)
 
+* **Paso 5: Pivotal Events & Boundaries (Contextos y Límites de Negocio)**
+
+Finalmente, el equipo realizó una síntesis convergente de la línea de tiempo completa. Se identificaron los eventos 
+clave de cambio de estado (Pivotal Events) y, utilizándolos como fronteras naturales, se agruparon las 
+secuencias de eventos en 4 grandes Bounded Contexts candidatos de negocio:
+
+    - Safety and Emergencies: Su evento pivote es Security Incident Noticed, porque marca la transición crítica de una 
+    detección externa (la empresa de vigilancia) a una responsabilidad interna directa, donde el Gallery Administrator 
+    o el sistema deben actuar obligatoriamente.
+    - Consumption and Billing: Su evento pivote es Billing Dispute Raised, porque traslada la iniciativa del proceso 
+    operativo desde el Tenant hacia el Gallery Administrator para la resolución formal del problema.
+    - Management-Tenant Communication: Su evento pivote principal es Utility Bill Issued, marcando el punto exacto donde 
+    el proceso deja de ser gestionado por un sistema externo (Sedapal / Luz del Sur) y pasa a requerir una interacción 
+    y notificación directa con el Tenant.
+    - Business Continuity: Su evento pivote es Connectivity Lost, un evento técnico pero con profundo impacto de 
+    negocio, ya que interrumpe la capacidad de respuesta en tiempo real de todos los demás módulos de la galería comercial.
+
+![big-picture-eventstorming-step-5.png](../../assets/research/big-picture-eventstorming-step-5.png)
