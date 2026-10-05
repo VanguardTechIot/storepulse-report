@@ -365,4 +365,19 @@ Los precios son referenciales del mercado peruano, consultados en octubre de 202
 | LED RGB | R / G / B | GPIO 14 / GPIO 15 / GPIO 2 | PWM | Resistencia de 220 Ω por canal |
 | Alimentación | 5 V / GND | 5V / GND | — | Fuente de 5 V / 2 A con respaldo por batería |
 
+#### Diseño físico
+
+El nodo de local se aloja en una caja plástica instalada en el interior del local. El LED de estado queda visible en la cara frontal. Los sensores que requieren otra ubicación se conectan por cable a la caja.
+
+| Componente | Ubicación | Razón |
+|---|---|---|
+| Caja del nodo (ESP32, RTC, batería y LED) | Pared interior, a la vista del inquilino | El LED debe verse desde el puesto de atención |
+| PIR y cámara | Esquina superior, frente al acceso | Cubren la entrada y el interior con un solo ángulo |
+| Reed magnético | Marco de la cortina metálica | Confirma la apertura física del local |
+| Sensor de humo y DHT22 | Techo o parte alta del local | El humo y el calor ascienden |
+| Medidor eléctrico PZEM-004T | Tablero eléctrico del local | Mide en la acometida del local |
+| Caudalímetro YF-S201 | Tubería de entrada de agua | Solo en locales con punto de agua |
+
+El nodo de área común se instala en la parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito. El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
+
 
