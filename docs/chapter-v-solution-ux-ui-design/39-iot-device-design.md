@@ -334,3 +334,35 @@ Los precios son referenciales del mercado peruano, consultados en octubre de 202
 
 **Diagrama en Cirkit Designer:** [Link del proyecto](https://app.cirkitdesigner.com/project/3838e553-00e1-4f53-9355-31c742b3d46e)
 
+#### Asignación de pines
+
+**Nodo de local (ESP32 DevKit V1)**
+
+| Componente | Pin del componente | Pin del ESP32 | Señal | Observación |
+|---|---|---|---|---|
+| PIR HC-SR501 | OUT | GPIO 27 | Entrada digital | — |
+| Reed MC-38 | Contacto | GPIO 26 | Entrada digital | Pull-up interno; el otro terminal va a GND |
+| MQ-2 | AO | GPIO 34 | Entrada analógica (ADC1) | Salida de 5 V (ver nota) |
+| DHT22 | DATA | GPIO 4 | Bus único | Resistencia pull-up de 10 kΩ |
+| YF-S201 | Señal | GPIO 35 | Entrada con interrupción | Salida de 5 V (ver nota) |
+| PZEM-004T | TX / RX | GPIO 16 (RX2) / GPIO 17 (TX2) | UART | Salida de 5 V (ver nota) |
+| SCT-013 (segunda opción) | Salida | GPIO 36 | Entrada analógica (ADC1) | Reemplaza al PZEM-004T; requiere circuito de offset a 1,65 V |
+| RTC DS3231 | SDA / SCL | GPIO 21 / GPIO 22 | I2C | Alimentado a 3,3 V |
+| LED RGB | R / G / B | GPIO 25 / GPIO 33 / GPIO 32 | PWM | Resistencia de 220 Ω por canal |
+| ESP32-CAM | Disparo | GPIO 14 | Salida digital | GND común entre ambas placas |
+| Alimentación | 5 V / GND | VIN / GND | — | Fuente de 5 V / 2 A con respaldo por batería |
+
+**Notas** 
+- El MQ-2, el YF-S201 y el PZEM-004T entregan señales de 5 V y los pines del ESP32 operan a 3,3 V. Para mantener legible el diagrama, las conexiones se muestran directas; en la implementación física, cada una de esas tres señales pasa por un divisor resistivo (10 kΩ y 20 kΩ) que la adapta a 3,3 V.
+
+- La tabla identifica cada pin por su número de GPIO. Según la placa o la herramienta de modelado, el mismo pin puede aparecer rotulado como `GPIO 27`, `D27`, `G27` o `IO27`; todas las etiquetas se refieren al mismo pin. En el ESP32 DevKit V1, el GPIO 16 y el GPIO 17 aparecen además como `RX2` y `TX2`.
+
+**Nodo de área común (ESP32-CAM)**
+
+| Componente | Pin del componente | Pin del ESP32-CAM | Señal | Observación |
+|---|---|---|---|---|
+| PIR HC-SR501 | OUT | GPIO 13 | Entrada digital | — |
+| LED RGB | R / G / B | GPIO 14 / GPIO 15 / GPIO 2 | PWM | Resistencia de 220 Ω por canal |
+| Alimentación | 5 V / GND | 5V / GND | — | Fuente de 5 V / 2 A con respaldo por batería |
+
+
