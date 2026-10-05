@@ -380,4 +380,62 @@ El nodo de local se aloja en una caja plástica instalada en el interior del loc
 
 El nodo de área común se instala en la parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito. El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
 
+#### Flujos de interacción del dispositivo
+
+El dispositivo no tiene pantalla, botones ni alarma sonora: las alertas llegan al inquilino y al administrador como notificación push (US-20, US-21, US-22). Su interfaz física es un LED que comunica cinco estados, conforme a la guía de estilos de la sección 5.1.2. Si coinciden varios estados, se muestra el de mayor prioridad.
+
+| Prioridad | Estado | LED |
+|:-:|---|---|
+| 1 | Evento detectado (intrusión o humo) | Rojo intermitente |
+| 2 | Error | Morado fijo |
+| 3 | Sin red | Ámbar intermitente |
+| 4 | Respaldo por batería | Azul fijo |
+| 5 | Normal | Verde fijo |
+
+**Flujo 1. Arranque y conexión** (MS-01, MS-02)
+
+| Paso | Qué ocurre | LED |
+|:-:|---|---|
+| 1 | El nodo se enciende, conserva o genera su identificador único y verifica sus sensores. Si alguno no responde, pasa a error. | Morado fijo si hay falla |
+| 2 | Se conecta al WiFi de la galería y se autentica ante el Edge API con su API Key. | Ámbar intermitente |
+| 3 | Sincroniza la hora y queda en operación. | Verde fijo |
+
+**Flujo 2. Intrusión fuera del horario de atención** (MS-04)
+
+| Paso | Qué ocurre | LED |
+|:-:|---|---|
+| 1 | El sensor detecta movimiento o la apertura de la cortina. | Verde fijo |
+| 2 | El nodo confirma la detección con tres lecturas seguidas y verifica que está fuera del horario de atención. | Verde fijo |
+| 3 | Genera el evento de intrusión, captura la imagen y los envía al Edge Device. | Rojo intermitente |
+| 4 | El inquilino y el administrador reciben la notificación push (US-20, US-21). | Rojo intermitente |
+| 5 | Sin nuevas detecciones durante el tiempo de espera, el nodo vuelve al estado previo. | Verde fijo |
+
+Dentro del horario de atención, el movimiento no genera evento y el LED permanece en verde.
+
+**Flujo 3. Detección de humo** (MS-05)
+
+| Paso | Qué ocurre | LED |
+|:-:|---|---|
+| 1 | El sensor de humo supera el umbral configurado en dos lecturas seguidas. | Verde fijo |
+| 2 | El nodo genera el evento de inmediato y lo envía al Edge Device. | Rojo intermitente |
+| 3 | El administrador y el inquilino del local afectado reciben la alerta de forma simultánea (US-22). | Rojo intermitente |
+| 4 | Cuando la lectura se mantiene bajo el umbral, el nodo vuelve al estado previo. | Verde fijo |
+
+**Flujo 4. Pérdida y recuperación de la red** (MS-07, MS-08)
+
+| Paso | Qué ocurre | LED |
+|:-:|---|---|
+| 1 | El nodo pierde la conexión con el Edge API. | Ámbar intermitente |
+| 2 | Sigue detectando y guarda cada evento con su hora en el almacenamiento local. | Ámbar, o rojo si hay un evento |
+| 3 | Reintenta el envío tras un intervalo definido, sin bloquear nuevas mediciones. | Ámbar intermitente |
+| 4 | Al reconectar, envía los registros pendientes en orden y con su hora original. | Verde fijo |
+
+**Flujo 5. Corte de energía** (TS-14)
+
+| Paso | Qué ocurre | LED |
+|:-:|---|---|
+| 1 | Se interrumpe la alimentación de red y el nodo pasa a batería. | Azul fijo |
+| 2 | Mantiene la detección de intrusión y de humo, y suspende la medición de consumo. | Azul fijo |
+| 3 | Reporta su voltaje en las métricas de salud del dispositivo. | Azul fijo |
+| 4 | Al volver la energía, retoma la medición de consumo y recarga la batería. | Verde fijo |
 
