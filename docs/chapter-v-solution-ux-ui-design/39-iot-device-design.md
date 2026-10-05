@@ -17,3 +17,132 @@ La organización del dispositivo sigue la arquitectura de información de la sec
 Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical Layer, Data Exchange Layer, Information Integration Layer y Application Service Layer.
 
 ![Metodología IoT en 12 pasos](../../assets/iot-device-design/design-steps.png)
+
+##### Paso 1. Definition of the system requirements
+
+**Suministro de energía**
+
+| ID | Requisito |
+|---|---|
+| PS-01 | Los nodos se alimentan de la red eléctrica (220 V AC / 60 Hz) mediante una fuente de 5 V / 2 A. |
+| PS-02 | Cada nodo tiene respaldo con batería Li-ion 18650 (3,7 V / 2600 mAh, 9,6 Wh), porque el corte de energía coincide con los escenarios de intrusión e incendio. |
+| PS-03 | Durante el respaldo se mantienen la detección de intrusión y la de humo. Solo se suspende la medición de consumo, porque sin energía en el local no hay consumo que medir. |
+| PS-04 | Autonomía mínima de 3 horas en respaldo (9,6 Wh × 0,8 ÷ 2,1 W ≈ 3,7 h). |
+| PS-05 | El Edge Device cuenta con un UPS de al menos 30 minutos. |
+
+**Presupuesto de potencia del nodo de local** (valores de referencia de hojas de datos)
+
+| Carga | Potencia |
+|---|---:|
+| ESP32 con WiFi activo | 0,80 W |
+| Sensor de humo MQ-2 (calefactor permanente) | 0,75 W |
+| Medidor eléctrico, caudalímetro, DHT22, PIR, RTC y LED (estimado) | 0,50 W |
+| **Total nominal** | **≈ 2,1 W** |
+| ESP32-CAM durante la captura | + 1,20 W |
+| **Total pico** | **≈ 3,3 W** |
+
+**Restricciones de time-delay**
+
+| ID | Restricción | Límite |
+|---|---|---|
+| TD-01 | Detección de humo → evento generado | ≤ 1,5 s |
+| TD-02 | Detección de humo → notificación push | ≤ 5 s |
+| TD-03 | Detección de intrusión → evento generado | ≤ 1 s |
+| TD-04 | Detección de intrusión → notificación push | ≤ 5 s |
+| TD-05 | Imagen adjunta al evento de intrusión | ≤ 10 s |
+| TD-06 | Envío de la lectura de consumo eléctrico y de agua | cada 60 s |
+| TD-07 | Sincronización del Edge Device con la nube | ≤ 30 s |
+
+**Restricción de continuidad.** Las restricciones TD-01 y TD-03 se resuelven en el nodo y en el Edge Device, sin depender de la nube. Ante una caída de internet, el evento se genera y se registra localmente (EP-09).
+
+##### Paso 2. Selection of the IoT system typology
+
+Se adopta una tipología de tres niveles. El Edge Device de la galería cumple la función de gateway concentrador del método:
+
+```
+Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de usuario
+  (por local y área común)       (1 por galería)       (REST API)     (Web / Mobile)
+```
+
+| Alternativa | Decisión |
+|---|---|
+| Nodo conectado a la nube por red celular | Descartada. Exige una SIM y un plan de datos por local. |
+| Nodo conectado a la nube por el WiFi de cada local | Descartada. Depende del router de cada inquilino y deja de operar sin internet. |
+| Nodos → Edge Device → nube | **Aceptada.** Una sola salida a internet por galería y operación local durante cortes de red. |
+
+##### Paso 3. Definition of physical layer requirements
+
+**Perfiles de nodo**
+
+| Perfil | Cantidad | Función |
+|---|---|---|
+| Nodo de local | 1 por local | Intrusión, humo, consumo eléctrico y consumo de agua |
+| Nodo de área común | 1 por pasillo o acceso | Intrusión con imagen en zonas compartidas |
+
+**Sensores y actuadores**
+
+| # | Función | Tipo | Nodo de local | Nodo de área común |
+|---|---|---|:-:|:-:|
+| N1 | Movimiento | Sensor | ● | ● |
+| N2 | Apertura de puerta o cortina | Sensor | ● | |
+| N3 | Humo | Sensor | ● | |
+| N4 | Imagen del evento | Sensor | ● | ● |
+| N5 | Energía eléctrica | Sensor | ● | |
+| N6 | Caudal de agua | Sensor | ● (si tiene punto de agua) | |
+| N7 | Temperatura y humedad | Sensor | ● | |
+| N8 | Indicador de estado | Actuador | ● | ● |
+
+**Target uncertainty de los sensores**
+
+| Nodo | Magnitud | Target uncertainty | Razón |
+|---|---|---|---|
+| N1 | Presencia | Binaria; falsos positivos < 5 % en 24 h | La falsa alarma reduce la confianza del inquilino |
+| N2 | Apertura | Conmutación a 15 ± 5 mm | Solo distingue abierto de cerrado |
+| N3 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada local |
+| N5 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
+| N6 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
+| N7 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
+
+**Target accuracy de los actuadores**
+
+| Nodo | Requisito |
+|---|---|
+| N8 LED RGB | Cinco estados distinguibles: normal, sin red, evento detectado, respaldo por batería y error. Cambio de estado en ≤ 50 ms |
+
+**Interfaces digitales**
+
+| Nodo | Interfaz |
+|---|---|
+| N1 PIR, N2 reed | GPIO digital |
+| N3 MQ-2 | ADC de 12 bits (ADC1) |
+| N4 ESP32-CAM | GPIO de disparo desde el ESP32 principal; envío de la imagen por WiFi |
+| N5 PZEM-004T | UART / Modbus-RTU a 9600 bps |
+| N6 YF-S201 | GPIO con interrupción (conteo de pulsos) |
+| N7 DHT22 | Bus único |
+| N8 LED RGB | PWM de 3 canales |
+| Reloj DS3231 | I2C |
+
+**Esfuerzo computacional y time-delay en el nodo.** El esfuerzo es bajo: filtrado, comparación contra umbral, conteo de pulsos y armado del mensaje. Las cargas mayores son la compresión JPEG, que resuelve el ESP32-CAM, y el envío de datos por WiFi. La decisión local (comparación contra el umbral) se resuelve en ≤ 50 ms.
+
+**Requisitos adicionales.** Cada nodo tiene reloj propio (RTC) y almacenamiento no volátil, para sellar y conservar los eventos cuando no hay conexión.
+
+##### Paso 4. Definition of exchange layer requirements
+
+| Requisito | Definición |
+|---|---|
+| Máximo time-delay por paquete | Nodo → Edge Device: ≤ 200 ms. Edge Device → nube: ≤ 2 s. |
+| Tipología de comunicaciones | Inalámbrica entre nodos y Edge Device (WiFi 2,4 GHz). Alámbrica (Ethernet) entre el Edge Device y el router de la galería. |
+| Topología de red | Estrella. Los nodos no se comunican entre sí. |
+| Distancia máxima | Nodo ↔ punto de acceso: 25 m con muros y cortinas metálicas (un punto de acceso por piso). Punto de acceso ↔ Edge Device: 80 m por Ethernet. |
+| Consumo máximo en comunicación | ≤ 0,6 W por nodo en transmisión. |
+| Criptografía | WPA2 en el enlace WiFi entre los nodos y el Edge Device, dentro de la red local de la galería. HTTPS entre el Edge Device y la nube. El dispositivo se autentica con API Key (MS-02, SP-06). |
+
+**Protocolo nodo → Edge Device (SP-04)**
+
+| Criterio | HTTP/JSON | MQTT |
+|---|---|---|
+| Modelo | Petición/respuesta contra el Edge API | Publicación/suscripción con conexión persistente |
+| Componentes adicionales | Ninguno: el Edge API ya expone endpoints REST | Requiere instalar y mantener un broker |
+| Overhead por mensaje | ~200 bytes de cabeceras | 2 bytes de cabecera fija |
+| Entrega garantizada | Con reintentos en el nodo (MS-08) | QoS 0, 1 y 2 |
+| Decisión | **Seleccionado.** Coherente con la arquitectura de la sección 4.1.3 y suficiente para el volumen de una galería | Se documenta como evolución si crece el número de nodos |
