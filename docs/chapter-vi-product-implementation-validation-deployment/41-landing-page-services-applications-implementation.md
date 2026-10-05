@@ -9,3 +9,17 @@ se establece el canal digital inicial para presentar el modelo de negocio a los 
 y a los inquilinos, cumpliendo con la meta técnica de implementar y desplegar exitosamente las primeras versiones del 
 sitio web estático y de las Frontend Web Applications.
 
+## 6.2.1. Sprint 1
+
+En esta sección se registra y explica el avance de la solución StorePulse en términos de producto y trabajo 
+colaborativo correspondiente al Sprint 1. Para esta primera iteración, alineada con los objetivos de evaluación. 
+El esfuerzo del equipo se enfoca en establecer los cimientos digitales e informativos de 
+la plataforma. De acuerdo con la priorización definida en el Product Backlog, el alcance principal de este sprint 
+abarca la implementación y el despliegue de la primera versión del Landing Page como primer entregable del
+proyecto, así como el despliegue inicial de las Frontend Web Applications. A lo largo de este apartado se detallarán
+las actividades realizadas por VanguardTech, abarcando la planificación de la iteración, la asignación de tareas 
+en el Sprint Backlog, y las evidencias concretas de desarrollo, pruebas, ejecución, documentación de servicios 
+y configuración de despliegue.
+
+
+
