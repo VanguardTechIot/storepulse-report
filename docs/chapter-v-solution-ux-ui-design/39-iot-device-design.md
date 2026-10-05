@@ -320,3 +320,17 @@ Los precios son referenciales del mercado peruano, consultados en octubre de 202
 - El inquilino solo ve la información de su local.
 - Las alertas críticas llegan como notificación push, sin que el usuario deba buscarlas.
 
+#### Diagrama del circuito
+
+**Nodo de local**
+
+![Circuito del nodo de local](../../assets/iot-device-design/local-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Link del proyecto](https://app.cirkitdesigner.com/project/34d4ffbe-3294-44f1-8500-297d1d525873)
+
+**Nodo de área común**
+
+![Circuito del nodo de área común](../../assets/iot-device-design/common-area-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Link del proyecto](https://app.cirkitdesigner.com/project/3838e553-00e1-4f53-9355-31c742b3d46e)
+
