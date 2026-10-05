@@ -146,3 +146,53 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 | Overhead por mensaje | ~200 bytes de cabeceras | 2 bytes de cabecera fija |
 | Entrega garantizada | Con reintentos en el nodo (MS-08) | QoS 0, 1 y 2 |
 | Decisión | **Seleccionado.** Coherente con la arquitectura de la sección 4.1.3 y suficiente para el volumen de una galería | Se documenta como evolución si crece el número de nodos |
+
+##### Paso 5. Definition of information layer requirements
+
+**Usuarios finales:** Gallery Administrator (opera desde computadora) y Tenant (opera desde el móvil). Ninguno tiene formación técnica.
+
+**Servicios e información integrada**
+
+| ID | Servicio | Admin | Tenant | Información que integra |
+|---|---|:-:|:-:|---|
+| SV-01 | Alerta de intrusión con imagen | ● | ● | Movimiento confirmado, estado de apertura, imagen, horario de atención y local |
+| SV-02 | Alerta de humo | ● | ● | Concentración de humo, temperatura y local afectado |
+| SV-03 | Consumo del periodo | ● | ● | Energía y agua acumuladas en el periodo de facturación |
+| SV-04 | Histórico y línea base | ● | ● | Serie histórica, línea base y desviación del periodo actual |
+| SV-05 | Tablero de la galería | ● | | Incidentes activos, consumo y estado de conexión de todos los locales |
+| SV-06 | Tablero del local | | ● | Estado de seguridad y consumo del propio local |
+| SV-07 | Centro de notificaciones | ● | ● | Alertas en orden cronológico, agrupadas por tipo y local |
+| SV-08 | Reporte de incidentes | ● | ● | Incidente, evidencia, estado y responsable |
+
+**Arquitectura de la capa de integración**
+
+| Algoritmo | Dónde se ejecuta | Complejidad | Tiempo objetivo |
+|---|---|---|---|
+| Confirmación de movimiento y de humo, generación del evento | Nodo | O(1) | ≤ 1 s |
+| Evaluación de reglas y agrupación de alertas | Edge Device | O(r), r = reglas activas | ≤ 50 ms |
+| Consumo del periodo | Nube | O(m), m = mediciones | ≤ 2 s |
+| Línea base y desviación | Nube | O(p), p = periodos | ≤ 3 s |
+| Tablero consolidado de la galería | Nube | O(L), L = locales | ≤ 5 s |
+
+##### Paso 6. Definition of application service layer requirements
+
+| Requisito | Definición |
+|---|---|
+| Interfaz por servicio | SV-01 y SV-02: notificación push con acción directa. SV-03 a SV-06: tableros. SV-07: listado cronológico. SV-08: formulario con seguimiento de estado. |
+| Complejidad en el dispositivo final | Mínima. La aplicación solo presenta información ya calculada por la nube. |
+| Plataformas | Web responsiva en Angular para el administrador, aplicación móvil multiplataforma en Flutter para el inquilino y Landing Page para el visitante. |
+| Transversal | La vista se restringe según el rol: el inquilino solo ve su local. |
+
+##### Paso 7. Selection of the architectures of data exchange and information integration layers
+
+```
+Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) ──HTTPS/JSON──► REST API (ASP.NET Core + MySQL)
+        Nodo IoT                              Edge Device                              Cloud
+```
+
+| Decisión | Sustento |
+|---|---|
+| Edge API en el Edge Device de la galería | Los nodos siguen enviando eventos y las reglas siguen evaluándose sin internet (EP-09). El Edge API almacena en su base de datos local y reenvía en cola (MS-07, MS-08, TS-25). |
+| HTTP/JSON entre el nodo y el Edge API | Coherente con el diagrama de despliegue de la sección 4.1.3; no requiere componentes adicionales. |
+| REST API monolítica con MySQL | Coherente con la arquitectura de la sección 4.1.3: un despliegue y un modelo transaccional únicos. |
+
