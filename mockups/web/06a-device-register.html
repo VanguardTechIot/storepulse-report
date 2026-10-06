@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Registrar dispositivo</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="devices" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Galería Central #04 / Devices</div><h1>Dispositivos IoT</h1><p>Nodos registrados en la galería: estado, conectividad, voltaje de alimentación y último reporte.</p></div>
+    <div class="actions"><a href="06a-device-register.html" class="btn btn-primary"><i data-i="plus" data-s="16"></i>Registrar Dispositivo</a></div>
+  </div>
+  <div class="grid g-4">
+    <div class="card kpi"><div class="top"><span class="ico ico-cyan"><i data-i="chip"></i></span>Registrados</div><div class="val">94</div><div class="delta muted">91 activos · 1 inactivo</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-amber"><i data-i="wifioff"></i></span>Desconectados</div><div class="val">3</div><div class="delta warn">Sin reporte por más de 15 min</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-violet"><i data-i="alert"></i></span>Con falla técnica</div><div class="val">1</div><div class="delta muted">Voltaje fuera de 4.5 – 5.5 V</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-blue"><i data-i="refresh"></i></span>Eventos por sincronizar</div><div class="val">149</div><div class="delta muted">Se guardan en el Edge y se sincronizan al reconectar</div></div>
+  </div>
+  <div class="callout warn"><i data-i="wifioff" data-s="18"></i><span><b>3 dispositivos sin conexión.</b> Siguen detectando intrusión y humo localmente; los eventos se sincronizarán automáticamente con su fecha y hora original cuando recuperen la conexión. Último reintento: 22:40 · 0 registros confirmados.</span></div>
+  <div class="card">
+    <div class="toolbar">
+      <div class="search" style="width:250px"><i data-i="search" data-s="16"></i>Buscar por ID o local…</div>
+      <div class="tabs"><span class="on">Todos</span><span>Activos</span><span>Inactivos</span><span>Con falla</span><span>Desconectados</span></div>
+      <span class="select" style="margin-left:auto">Orden: desconectados primero<i data-i="chevdown" data-s="16"></i></span>
+    </div>
+    <table><thead><tr><th>Dispositivo</th><th>Local</th><th>Estado</th><th class="sort">Conectividad / último reporte<span class="arrow"><i data-i="chevdown" data-s="14" data-w="2.2"></i></span></th><th>Voltaje</th><th class="t-right">Acción</th></tr></thead><tbody><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0466</b><span class="sub">Seguridad + humo</span><span class="sub" style="color:var(--amber-t)">Offline · buffering · 37 eventos retenidos</span></td><td class="mono">B-07</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-amber">Desconectado</span><span class="sub">21:58 · hace 16 min</span></td><td class="mono" style="">—</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0391</b><span class="sub">Seguridad + humo</span><span class="sub" style="color:var(--amber-t)">Offline · buffering · 112 eventos retenidos</span></td><td class="mono">C-04</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-amber">Desconectado</span><span class="sub">20:12 · hace 2 h</span></td><td class="mono" style="">—</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class="hover"><td><b class="mono" style="font-size:13px">SP-ESP32-0417</b><span class="sub">Seguridad + humo</span><span class="sub" style="color:var(--violet-t)">Voltaje fuera de rango · Ticket TK-0091</span></td><td class="mono">C-07</td><td><span class="badge b-violet">Con falla</span></td><td><span class="badge b-green">Conectado</span><span class="sub">22:41 · hace 4 s</span></td><td class="mono" style="color:var(--violet-t);font-weight:700">4.31 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0388</b><span class="sub">Seguridad + humo</span><span class="sub" style="color:var(--blue-t)">Respaldo de batería · autonomía 3 h 20 min</span></td><td class="mono">A-05</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-green">Conectado</span><span class="sub">22:41 · hace 6 s</span></td><td class="mono" style="">5.02 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0452</b><span class="sub">Seguridad + humo</span></td><td class="mono">B-12</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-green">Conectado</span><span class="sub">22:41 · hace 3 s</span></td><td class="mono" style="">5.04 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">MTR-E-1003</b><span class="sub">Medidor de energía</span></td><td class="mono">A-03</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-green">Conectado</span><span class="sub">22:41 · hace 5 s</span></td><td class="mono" style="">5.01 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">MTR-W-2009</b><span class="sub">Medidor de agua</span></td><td class="mono">B-09</td><td><span class="badge b-green">Activo</span></td><td><span class="badge b-green">Conectado</span><span class="sub">22:41 · hace 9 s</span></td><td class="mono" style="">4.98 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Desactivar</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0480</b><span class="sub">Seguridad + humo</span><span class="sub" style="color:var(--muted)">Desactivado por Carmen Mendoza · sin recepción de datos</span></td><td class="mono">A-07</td><td><span class="badge b-gray">Inactivo</span></td><td><span class="badge b-gray nodot">—</span><span class="sub">01/10 09:14</span></td><td class="mono" style="">—</td><td class="t-right"><a href="#" class="btn btn-outline btn-sm"><i data-i="refresh" data-s="14"></i>Reactivar</a></td></tr></tbody></table>
+    <div class="pager">Mostrando 1–8 de 94<div class="pages"><span><i data-i="arrowleft" data-s="14"></i></span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>12</span><span><i data-i="arrowright" data-s="14"></i></span></div></div>
+  </div>
+  <div class="card card-pad" style="display:flex;align-items:center;gap:24px">
+    <b class="small">Indicador LED del nodo</b>
+    <div class="legend" style="gap:22px"><span><i style="background:var(--green);border-radius:50%"></i>Verde fijo · Normal</span><span><i style="background:var(--red);border-radius:50%"></i>Rojo intermitente · Evento detectado</span><span><i style="background:var(--violet);border-radius:50%"></i>Morado fijo · Falla de hardware</span><span><i style="background:var(--amber);border-radius:50%"></i>Ámbar intermitente · Sin conexión</span><span><i style="background:var(--blue);border-radius:50%"></i>Azul fijo · Respaldo de batería</span></div>
+  </div>
+</div>
+<div class="backdrop"></div>
+<div class="modal ">
+  <div class="modal-head"><span class="li-ico ico-cyan"><i data-i="chip"></i></span><div><h3>Registrar dispositivo IoT</h3><p>Vincula un nodo o medidor a un local</p></div><span class="close"><i data-i="x" data-s="20"></i></span></div>
+  <div class="modal-body">
+  <div class="field"><label>Identificador del dispositivo <span class="req">*</span></label><div class="input error focus"><i data-i="chip" data-s="18" style="color:var(--muted)"></i>SP-ESP32-0452</div><span class="hint">Figura en la etiqueta del equipo y en su certificado de autenticación.</span><span class="err"><i data-i="alert" data-s="14"></i>El identificador SP-ESP32-0452 ya está registrado (Local B-12).</span></div>
+  <div class="grid g-2" style="gap:16px"><div class="field"><label>Tipo <span class="req">*</span></label><div class="input" style="justify-content:space-between">Nodo seguridad + humo<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div><div class="field"><label>Local <span class="req">*</span></label><div class="input" style="justify-content:space-between">A-07 · Piso 1<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div></div>
+  <div class="callout info"><i data-i="shieldok" data-s="18"></i><span>Al confirmar, el dispositivo se autentica con su identificador único y empieza a reportar a la galería.</span></div>
+</div>
+  <div class="modal-foot"><a href="06-devices.html" class="btn btn-outline">Cancelar</a><a href="06-devices.html" class="btn btn-primary">Registrar y vincular</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Registrar área común</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="units" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Galería Central #04 / Commercial Units / Inmueble</div><h1>Información del inmueble</h1><p>Resumen de la galería, sus locales por piso y las áreas comunes.</p></div>
+    <div class="actions"><span class="btn btn-outline"><i data-i="edit" data-s="16"></i>Editar galería</span><a href="05e-common-area.html" class="btn btn-primary"><i data-i="plus" data-s="16"></i>Registrar área común</a></div>
+  </div>
+  <div class="card card-pad" style="display:flex;align-items:center;gap:24px">
+    <div class="ph-img" style="width:140px;height:96px;border-radius:10px;background:linear-gradient(135deg,var(--cyan-50),var(--bg));display:flex;align-items:center;justify-content:center;color:var(--cyan-t)"><i data-i="building" data-s="40" data-w="1.4"></i></div>
+    <div style="flex:1" class="kv" ><div><span>Galería</span><b style="font-size:18px">Galería Central #04</b></div><div><span>Dirección</span><b>Jr. de la Unión 845, Cercado de Lima</b></div><div><span>Administradora</span><b>Carmen Mendoza</b></div><div><span>Horario de la galería</span><b>08:00 – 22:00</b></div></div>
+    <div style="display:flex;gap:24px">
+      <div><div class="small muted">Locales</div><div style="font-size:28px;font-weight:700">92</div></div>
+      <div><div class="small muted">Áreas comunes</div><div style="font-size:28px;font-weight:700">4</div></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card grow">
+      <div class="card-head"><div><h3>Locales por piso</h3><p>Estado de los locales registrados</p></div><div class="right"><a href="05-commercial-units.html" class="btn btn-ghost btn-sm">Ver listado completo</a></div></div>
+      <table><thead><tr><th>Piso</th><th>Total</th><th>Ocupados</th><th>Disp.</th><th>Mant.</th><th>Ocupación</th></tr></thead><tbody><tr><td><b>Piso 1</b></td><td class="mono">30</td><td class="mono">28</td><td class="mono">1</td><td class="mono">1</td><td><div class="progress" style="width:80px"><i style="width:93%"></i></div></td></tr><tr><td><b>Piso 2</b></td><td class="mono">32</td><td class="mono">29</td><td class="mono">2</td><td class="mono">1</td><td><div class="progress" style="width:80px"><i style="width:90%"></i></div></td></tr><tr><td><b>Piso 3</b></td><td class="mono">30</td><td class="mono">27</td><td class="mono">3</td><td class="mono">0</td><td><div class="progress" style="width:80px"><i style="width:90%"></i></div></td></tr></tbody></table>
+    </div>
+    <div class="card grow">
+      <div class="card-head"><div><h3>Áreas comunes</h3><p>Sin inquilino asignado · monitoreadas por la administración</p></div></div>
+      <table><thead><tr><th>Nombre / dispositivo</th><th>Ubicación</th><th>Estado</th><th></th></tr></thead><tbody><tr><td><b>Hall principal</b><span class="sub mono">SP-ESP32-0901</span></td><td>Piso 1</td><td><span class="badge b-green">Activo</span></td><td><div class="row-actions"><span><i data-i="edit" data-s="15"></i></span></div></td></tr><tr><td><b>Pasillo norte</b><span class="sub mono">SP-ESP32-0902</span></td><td>Piso 2</td><td><span class="badge b-green">Activo</span></td><td><div class="row-actions"><span><i data-i="edit" data-s="15"></i></span></div></td></tr><tr><td><b>Escalera de emergencia</b><span class="sub mono">SP-ESP32-0903</span></td><td>Pisos 1–3</td><td><span class="badge b-green">Activo</span></td><td><div class="row-actions"><span><i data-i="edit" data-s="15"></i></span></div></td></tr><tr><td><b>Baños públicos</b><span class="sub mono">—</span></td><td>Piso 2</td><td><span class="badge b-gray">Sin monitoreo</span></td><td><div class="row-actions"><span><i data-i="edit" data-s="15"></i></span></div></td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+<div class="backdrop"></div>
+<div class="modal ">
+  <div class="modal-head"><span class="li-ico ico-cyan"><i data-i="layers"></i></span><div><h3>Registrar área común</h3><p>Se crea sin inquilino asignado</p></div><span class="close"><i data-i="x" data-s="20"></i></span></div>
+  <div class="modal-body">
+  <div class="field"><label>Nombre del área común <span class="req">*</span></label><div class="input error focus">Hall principal</div><span class="err"><i data-i="alert" data-s="14"></i>El nombre "Hall principal" ya está en uso en esta galería.</span></div>
+  <div class="field"><label>Ubicación <span class="req">*</span></label><div class="input" style="justify-content:space-between">Piso 1<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div>
+  <div class="field"><label>Descripción</label><div class="input ">Ingreso por Jr. de la Unión</div></div>
+  <div class="callout info"><i data-i="eye" data-s="18"></i><span>Las alertas de intrusión en áreas comunes incluyen la imagen capturada por el dispositivo.</span></div>
+</div>
+  <div class="modal-foot"><a href="05d-property.html" class="btn btn-outline">Cancelar</a><a href="05d-property.html" class="btn btn-primary">Registrar área común</a></div>
+</div>
+</body>
+</html>

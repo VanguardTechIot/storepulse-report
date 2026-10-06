@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Communication</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+<style>.msg{max-width:72%;padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:6px}.msg span{font-size:11px;align-self:flex-end}.msg.in span{color:var(--muted)}.msg.in{background:var(--card);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}.msg.out{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.msg.out span{color:#CBD5E1}.msg .file{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg)}</style>
+</head>
+<body data-page="communication" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Galería Central #04 / Communication</div><h1>Comunicación</h1><p>Mensajes y reclamos de inquilinos, y anuncios para la galería.</p></div>
+    <div class="actions"><span class="btn btn-primary"><i data-i="megaphone" data-s="16"></i>Nuevo anuncio</span></div>
+  </div>
+  <div class="card" style="display:flex;min-height:700px">
+    <div style="width:300px;border-right:1px solid var(--border);display:flex;flex-direction:column">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:10px">
+        <div class="tabs" style="gap:0"><span class="on" style="flex:1;text-align:center;padding:6px 8px">Mensajes</span><span style="flex:1;text-align:center;padding:6px 8px">Reclamos</span><span style="flex:1;text-align:center;padding:6px 8px">Anuncios</span></div>
+        <div class="search" style="width:100%;background:var(--card)"><i data-i="search" data-s="16"></i>Buscar inquilino…</div>
+      </div>
+      <div class="list-item" style="background:var(--cyan-25);align-items:flex-start;padding:14px 16px"><div class="avatar">AS</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Ana Salazar</b><span class="badge b-violet nodot" style="padding:1px 8px;font-size:11px">Reclamo</span><span class="time" style="margin-left:auto">10:24</span></div><small>B-12 · Ópticas Visión</small><small style="color:var(--slate);font-weight:600">El consumo de agua no corresponde…</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">RH</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Rosa Huamán</b><span class="time" style="margin-left:auto">09:58</span></div><small>A-03 · Calzados Roma</small><small style="color:var(--slate);font-weight:600">¿Por qué me llegó una alerta de consumo?</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">MT</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Miguel Torres</b><span class="time" style="margin-left:auto">Ayer</span></div><small>B-09 · Joyería Inca Gold</small><small style="color:var(--slate);">Gracias, ya registré el pago.</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">LP</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Lucía Paredes</b><span class="badge b-green nodot" style="padding:1px 8px;font-size:11px">Resuelto</span><span class="time" style="margin-left:auto">Ayer</span></div><small>A-01 · Boutique Lucía</small><small style="color:var(--slate);">Perfecto, quedo atenta.</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">JQ</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Jorge Quispe</b><span class="time" style="margin-left:auto">Lun</span></div><small>A-02 · TecnoCell Perú</small><small style="color:var(--slate);">¿Cuándo es la fumigación?</small></div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+      <div class="card-head"><div class="avatar">AS</div><div><h3>Ana Salazar</h3><p>Local B-12 · Reclamo sobre REC-0024</p></div><div class="right"><span class="badge b-violet">Reclamo pendiente</span></div></div>
+      <div style="flex:1;padding:24px;display:flex;flex-direction:column;gap:14px;background:var(--bg)">
+        <div style="text-align:center"><span class="badge b-gray nodot">Hoy</span></div>
+        <div class="msg in">Buenos días. El recibo de agua de setiembre no corresponde: el local estuvo cerrado 3 días por inventario y me cobran 3.3 m³.<span>10:12</span></div>
+        <div class="msg in">Adjunto el comunicado del cierre.<div class="file"><i data-i="clip" data-s="15"></i>cierre-inventario.pdf · 210 KB</div><span>10:13</span></div>
+        <div class="msg out">Hola Ana, revisamos la telemetría del medidor MTR-W-2012: entre el 14 y el 16/09 hubo flujo continuo de 0.2 L/min con el local cerrado, lo que indica una posible fuga.<span>10:20 · Leído</span></div>
+        <div class="msg in">Entiendo, no lo sabía. Lo haré revisar hoy mismo.<span>10:24</span></div>
+      </div>
+      <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center">
+        <span class="icon-btn"><i data-i="clip" data-s="18"></i></span>
+        <div class="input ph" style="flex:1">Escribe una respuesta…</div>
+        <span class="btn btn-primary" style="height:44px"><i data-i="send" data-s="16"></i>Enviar</span>
+      </div>
+    </div>
+    <div style="width:310px;border-left:1px solid var(--border);display:flex;flex-direction:column">
+      <div class="card-head"><div><h3>Desglose de consumo</h3><p>Local B-12 · Setiembre 2026</p></div></div>
+      <div class="card-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="kv"><div><span>Energía</span><b>286.1 kWh</b><span>S/ 194.55</span></div><div><span>Agua</span><b>3.3 m³</b><span>S/ 17.89</span></div><div><span>Lectura inicial agua</span><b class="mono">1,204.6 m³</b></div><div><span>Lectura final agua</span><b class="mono">1,207.9 m³</b></div></div>
+        <div><div class="small muted" style="margin-bottom:6px">Consumo de agua diario · 10 – 21/09</div><div style="display:flex;align-items:flex-end;gap:3px;height:56px"><i style="flex:1;height:62%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:58%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:64%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:60%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:22%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:21%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:23%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:61%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:65%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:59%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:63%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:60%;background:var(--blue);border-radius:2px;opacity:.85"></i></div><div class="legend" style="margin-top:6px"><span><i style="background:var(--amber)"></i>Local cerrado</span></div></div>
+        <div class="callout info"><i data-i="receipt" data-s="18"></i><span>Fórmula: 3.3 m³ × S/ 5.42 = S/ 17.89. Tarifa vigente desde el 01/09.</span></div>
+        <div class="field"><label>Resolución <span class="req">*</span></label><div class="input" style="justify-content:space-between">Se mantiene el cobro<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div>
+        <span class="btn btn-dark btn-block"><i data-i="check" data-s="16"></i>Resolver reclamo</span>
+        <span class="hint" style="text-align:center">La inquilina recibirá la respuesta y el reclamo pasará a Resuelto.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

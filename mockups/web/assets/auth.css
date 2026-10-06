@@ -1,0 +1,50 @@
+/* Layout de pantallas pre-login (bienvenida, login, registro) */
+.auth { display: flex; width: 1440px; min-height: 900px; }
+.auth-side {
+  width: 620px; background: var(--navy); color: #fff; padding: 48px 56px;
+  display: flex; flex-direction: column; gap: 32px; position: relative; overflow: hidden;
+}
+.auth-side .brand-name { color: #fff; }
+.auth-side h2 { font-size: 36px; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+.auth-side h2 span { color: var(--cyan); }
+.auth-side p { color: #CBD5E1; font-size: 16px; }
+.auth-side .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(14,165,233,.15); color: #7DD3FC; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; align-self: flex-start; }
+html.wire .auth-side .eyebrow { background: #333; color: #ddd; }
+.console { background: #111C33; border: 1px solid #1E293B; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+html.wire .console { background: #2A2A2A; border-color: #3A3A3A; }
+.console-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #94A3B8; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+.units { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.unit { height: 58px; border-radius: 10px; background: #1A2744; padding: 10px; display: flex; flex-direction: column; justify-content: space-between; font-family: var(--font-mono); font-size: 12px; color: #CBD5E1; }
+.unit i { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; }
+.unit.alert { background: var(--red-fill); color: #fff; }
+.unit.alert i { background: #fff; }
+html.wire .unit { background: #3A3A3A; }
+html.wire .unit.alert { background: #8A8A8A; }
+.auth-foot { margin-top: auto; display: flex; gap: 24px; color: #94A3B8; font-size: 13px; }
+.auth-foot span { display: flex; align-items: center; gap: 8px; }
+
+.auth-main { flex: 1; display: flex; flex-direction: column; padding: 32px 56px; background: var(--card); }
+.auth-top { display: flex; justify-content: flex-end; align-items: center; gap: 16px; font-size: 14px; color: var(--slate-500); }
+.auth-form { width: 440px; margin: auto; display: flex; flex-direction: column; gap: 20px; }
+.auth-form h1 { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
+.auth-form > p { color: var(--slate-500); margin-top: -12px; }
+.divider { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.check { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--slate); }
+.check i, .check .box { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; }
+.check .box.on { background: var(--cyan); border-color: var(--cyan); color: #fff; }
+.stepper { display: flex; align-items: center; gap: 10px; }
+.step { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.step b { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.step.done b { background: var(--green); border-color: var(--green); color: #fff; }
+.step.on { color: var(--navy); }
+.step.on b { background: var(--cyan-fill); border-color: var(--cyan-fill); color: #fff; }
+.step-line { flex: 1; height: 2px; background: var(--border); }
+.step-line.done { background: var(--green); }
+.role-card { border: 1.5px solid var(--border); border-radius: 12px; padding: 16px; display: flex; gap: 12px; align-items: flex-start; }
+.role-card.on { border-color: var(--cyan); background: var(--cyan-25); }
+.role-card b { display: block; font-size: 14px; }
+.role-card small { font-size: 12px; color: var(--slate-500); }
+.radio { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); margin-left: auto; flex-shrink: 0; }
+.role-card.on .radio { border: 5px solid var(--cyan); }
+.auth-side .brand .live { display: none; }
