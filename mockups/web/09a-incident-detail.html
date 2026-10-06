@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Detalle de incidente</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="security" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Galería Central #04 / Security &amp; Incidents / INC-0412</div><h1>Incidente INC-0412</h1><p>Intrusión · Local B-12 · Ópticas Visión</p></div>
+    <div class="actions"><a href="09-security-incidents.html" class="btn btn-outline"><i data-i="arrowleft" data-s="16"></i>Volver al historial</a><span class="btn btn-dark"><i data-i="send" data-s="16"></i>Notificar al inquilino</span></div>
+  </div>
+  <div class="callout ok"><i data-i="checkcircle" data-s="18"></i><span>Atención confirmada a las <b>22:43:02</b> (1 min 55 s después de la detección). Se notificó a la inquilina Ana Salazar.</span></div>
+  <div class="row">
+    <div class="grow" style="display:flex;flex-direction:column;gap:24px">
+      <div class="card">
+        <div class="card-head"><div><h3>Detalle del incidente</h3></div><div class="right"><span class="badge b-blue">En atención</span></div></div>
+        <div class="card-pad"><div class="kv" style="grid-template-columns:repeat(3,1fr)">
+          <div><span>Tipo</span><b>Intrusión · sensor magnético</b></div>
+          <div><span>Ubicación</span><b>Local B-12 · Piso 2</b></div>
+          <div><span>Dispositivo</span><b class="mono">SP-ESP32-0452</b></div>
+          <div><span>Fecha</span><b>06/10/2026</b></div>
+          <div><span>Hora de detección</span><b class="mono">22:41:07</b></div>
+          <div><span>Horario de atención del local</span><b>09:00 – 21:00</b></div>
+        </div></div>
+        <div class="card-pad" style="border-top:1px solid var(--border)"><div class="callout info"><i data-i="eye" data-s="18"></i><span>Imagen no disponible: por privacidad, las imágenes capturadas dentro de un local no se muestran a la administración.</span></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><div><h3>Registrar resultado de la atención</h3><p>Al guardar, el incidente pasa a Resuelto</p></div></div>
+        <div class="card-pad" style="display:flex;flex-direction:column;gap:16px">
+          <div class="field"><label>Resultado <span class="req">*</span></label><div class="input" style="justify-content:space-between">Falsa alarma · cortina mal cerrada<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div>
+          <div class="field"><label>Observaciones</label><div class="input focus" style="height:88px;align-items:flex-start;padding-top:12px">Se verificó el local con la inquilina por llamada; la cortina quedó entreabierta al cierre. Se aseguró a las 22:52.</div></div>
+          <div style="display:flex;justify-content:flex-end;gap:10px"><span class="btn btn-primary"><i data-i="check" data-s="16"></i>Marcar como resuelto</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="width:380px;align-self:flex-start">
+      <div class="card-head"><div><h3>Línea de tiempo</h3><p>Trazabilidad del evento</p></div></div>
+      <div class="card-pad"><div class="timeline">
+        <div class="tl"><span class="dotc ico-red"><i data-i="door" data-s="14"></i></span><div><b>Intrusión detectada</b><small>22:41:07 · SP-ESP32-0452</small></div></div>
+        <div class="tl"><span class="dotc ico-amber"><i data-i="bell" data-s="14"></i></span><div><b>Alerta enviada</b><small>22:41:19 · administradora e inquilina (12 s)</small></div></div>
+        <div class="tl"><span class="dotc ico-blue"><i data-i="checkcircle" data-s="14"></i></span><div><b>Atención confirmada</b><small>22:43:02 · Carmen Mendoza · Pendiente → En atención</small></div></div>
+        <div class="tl"><span class="dotc ico-cyan"><i data-i="send" data-s="14"></i></span><div><b>Inquilina notificada</b><small>22:43:03 · Ana Salazar · push y correo</small></div></div>
+        <div class="tl"><span class="dotc ico-violet"><i data-i="clock" data-s="14"></i></span><div><b>Pendiente de resultado</b><small>Registra el resultado para resolver</small></div></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
