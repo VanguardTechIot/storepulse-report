@@ -270,3 +270,125 @@ Un conjunto seleccionado de palabras y frases clave que abarca tanto el público
     `<meta name="author" content="Equipo VanguardTech – Diseño UX/UI y Desarrollo Web 2026">`
 
 Incluye una referencia al equipo responsable del diseño y desarrollo del producto, lo cual apoya en términos de confianza y atribución de contenido.
+
+### 5.2.4. Searching Systems
+
+Con el objetivo de permitir que los usuarios encuentren rápidamente la información que necesitan dentro de cada plataforma de StorePulse, se ha definido un sistema de búsqueda contextual y simple, ajustado al rol del usuario y al tipo de contenido manejado en cada vista. La búsqueda se complementa con filtros, ordenamientos y una codificación visual de estados para facilitar la interpretación de los resultados.
+
+**Aplicación Móvil**
+
+En la aplicación móvil, el sistema de búsqueda está pensado para ofrecer acceso rápido a la información relevante según el rol del usuario. Para el **inquilino**, la búsqueda se aplica dentro del historial de consumos y recibos mensuales mediante un selector de calendario que permite filtrar por rango de fechas personalizado, así como la consulta de eventos de seguridad registrados en su local comercial. Para el **personal de seguridad**, la búsqueda se aplica sobre el listado de alertas e incidentes asignados al turno actual, permitiendo localizar rápidamente un local o sector específico para verificar conatos de incendio o intrusión en tiempo real. Para el **administrador de la galería**, la búsqueda permite filtrar la bandeja de alertas críticas y novedades operativas pendientes desde el dispositivo móvil.
+
+<p align="center">
+  <img src="../../assets/ux/search_mobile.png" alt="Sistema de búsqueda en Aplicación Móvil" width="600px" height="auto"/>
+</p>
+
+**Resultados de búsqueda**
+
+Los resultados se presentan en un formato visual basado en **Cards**, optimizado para la consulta rápida desde el dispositivo móvil. Cada Card incluye información clave como:
+
+- Identificador y número del local comercial
+- Razón social o nombre del inquilino asignado
+- Estado de seguridad del local (cortina metálica cerrada, ausencia de humo)
+- Últimos valores registrados de telemetría (consumo acumulado de energía y agua)
+- Hora de la última actualización del nodo sensor
+- Indicador visual de alertas críticas pendientes
+
+Se implementa una codificación por colores para facilitar la interpretación visual del estado del local comercial:
+
+- **Verde:** Indica operación normal, cortina asegurada y consumos dentro de la línea base histórica.
+- **Amarillo:** Indica advertencia o aviso de consumo elevado cercano al umbral configurado.
+- **Rojo:** Indica alerta crítica activa por apertura indebida fuera de horario o detección de partículas de humo.
+
+---
+
+**Aplicación Web**
+
+En la aplicación web, el sistema de búsqueda está integrado de forma simple pero efectiva para que el administrador de la galería y el personal técnico de mantenimiento puedan localizar rápidamente la información que necesitan. Cada módulo principal del sidenav incluye un campo de búsqueda ubicado en la parte superior de la vista, construido con `<mat-form-field>` y prefijo de ícono `search`, acompañado de un botón `close` para limpiar el término ingresado. El placeholder de cada campo se adapta al tipo de información que gestiona el módulo activo.
+
+En el módulo **Commercial Units**, el campo presenta el placeholder `Search commercial unit...` y filtra el directorio de locales a partir del número de local o el nombre del comerciante asociado:
+
+<p align="center">
+  <img src="../../assets/ux/search_commercial_units.png" alt="Búsqueda en Commercial Units" width="600px" height="auto"/>
+</p>
+
+En el módulo **Devices**, el campo presenta el placeholder `Search device ID...` y filtra la lista de dispositivos IoT por su identificador único MAC o código de nodo ESP32:
+
+<p align="center">
+  <img src="../../assets/ux/search_devices.png" alt="Búsqueda en Devices" width="600px" height="auto"/>
+</p>
+
+**Resultados de búsqueda**
+
+Los resultados se presentan en dos formatos según el módulo, diseñados para mostrar la información de cada elemento de forma clara y fácil de escanear:
+
+- **Grilla de Cards (Commercial Units y Personal de Seguridad):** Cada Card muestra la identificación del local, el estado operativo (activo / desocupado) y los botones de acción contextual (Ver Detalle, Editar, Asignar Inquilino, Ver Medidores Vinculados).
+- **Tabla ordenable (Devices, Utility Meters y Recibos de Facturación):** Cada fila muestra los datos clave del registro y permite ordenar los resultados al hacer clic en la cabecera de cada columna, con íconos `unfold_more`, `arrow_drop_up` y `arrow_drop_down` para indicar el estado del ordenamiento.
+
+Se implementa una codificación por colores para facilitar la interpretación visual del estado dentro de los listados y tablas:
+
+- **Verde (`#4CAF50`):** Indica estado activo, nodo en línea, conexión normal o consumo dentro del rango esperado.
+- **Amarillo (`#FFC107`):** Indica advertencia, batería baja en nodo sensor o consumo próximo a superar la línea base.
+- **Rojo (`#F44336`):** Indica alerta crítica, conato de incendio, intrusión nocturna o falla de comunicación del nodo.
+- **Gris:** Indica unidades desocupadas, medidores desvinculados o registros históricos cerrados.
+
+---
+
+**Landing Page**
+
+El Landing Page de StorePulse no incluye un sistema de búsqueda integrado, dado que está diseñado como un sitio estático orientado al descubrimiento secuencial mediante scroll. La navegación entre secciones se resuelve con anchors del menú principal (`#home`, `#what-we-offer`, `#features`, `#benefits`, `#about-us`, `#plans`), el botón flotante de scroll-to-top que aparece tras 300 px de desplazamiento y el menú hamburguesa en dispositivos móviles, lo cual hace innecesario un campo de búsqueda dedicado.
+
+---
+
+### 5.2.5. Navigation Systems
+
+Con el objetivo de que cada usuario encuentre con facilidad las funcionalidades que necesita según su rol, "StorePulse" implementa sistemas de navegación adaptados a cada una de sus plataformas. La navegación es persistente, consistente y respeta la jerarquía de la información definida en los puntos anteriores, permitiendo al usuario ubicarse en todo momento dentro del producto.
+
+**Aplicación Móvil**
+
+En la aplicación móvil, la navegación principal se ofrece a través de una **bottom navigation bar** fija en la parte inferior de la pantalla. Está compuesta por cinco accesos rápidos con ícono y etiqueta, diseñados para que el inquilino, el personal de seguridad y el administrador de la galería puedan llegar a las funciones más usadas en un solo gesto. El ítem activo se resalta visualmente con el color primario de la marca (`#0EA5E9`) y un fondo diferenciado.
+
+<p align="center">
+  <img src="../../assets/ux/nav_mobile.png" alt="Bottom navigation bar de la aplicación móvil" width="650px" height="auto"/>
+</p>
+
+Los accesos disponibles en la bottom navigation bar son:
+
+- **Mi Local (Home)**: Pantalla principal del usuario. Para el inquilino muestra el estado de seguridad y telemetría de su puesto comercial; para el guardia, la lista de emergencias activas del turno; para el administrador, un resumen general de la galería.
+- **Consumos**: Acceso a la sección de telemetría de luz (kWh) y agua (m³) en tiempo real, con gráficas comparativas frente a la línea base histórica.
+- **Alertas**: Centro unificado de notificaciones de seguridad crítica (intrusión por sensores magnéticos y detección de humo) con botón de reporte manual.
+- **Mensajes**: Canal de comunicación bidireccional entre la administración de la galería y los comerciantes para avisos oficiales y atención de reclamos.
+- **Perfil**: Acceso a los datos comerciales del usuario (RUC/DNI), configuración de notificaciones push y cierre de sesión.
+
+---
+
+**Aplicación Web**
+
+En la aplicación web, la navegación principal se ofrece mediante un **sidenav lateral** persistente que acompaña al usuario en todas las vistas operativas. El sidenav está construido con Angular Material (`<mat-sidenav>`), se comporta de manera responsive (modo `side` en escritorio y `over` en móvil bajo el breakpoint de 768 px) y se complementa con un **toolbar superior** que contiene el botón hamburguesa, el logo de StorePulse, los botones de autenticación y el selector de idioma EN/ES. El sidenav está dirigido al administrador de la galería comercial y al técnico de mantenimiento, quienes comparten el mismo layout pero acceden a las secciones más relevantes según su rol.
+
+<p align="center">
+  <img src="../../assets/ux/nav_web.png" alt="Sidenav lateral de la aplicación web" width="300px" height="auto"/>
+</p>
+
+Los accesos disponibles en el sidenav son:
+
+- **Dashboard**: Panel analítico con KPIs operativos (Locales Activos, Recaudación Mensual, Consumo Total de Energía, Incidentes del Mes) y gráficas filtrables por año, usado por el administrador para la supervisión global.
+- **Commercial Units**: Listado y gestión integral de los locales comerciales de la galería, asignación de inquilinos y control de contratos de arrendamiento.
+- **Devices**: Listado y monitoreo de los dispositivos IoT instalados en los locales, con búsqueda por Device ID y ordenamiento por columnas (estado de batería, señal WiFi, conectividad).
+- **Utility Meters**: Registro y monitoreo de medidores de energía eléctrica y agua potable, con definición de líneas base y detección de consumos atípicos fuera de horario.
+- **Billing**: Módulo de emisión automática y masiva de recibos individuales de consumo de luz y agua, configuración tarifaria y gestión de cobranzas.
+- **Security & Incidents**: Centro de comando y auditoría de eventos de seguridad (intrusión y conatos de incendio), supervisión de tiempos de respuesta de guardias (SLA) y confirmaciones All-Clear.
+- **Communication**: Bandeja de mensajería directa con inquilinos y canal de anuncios generales para toda la comunidad de la galería.
+- **Subscription**: Administración del plan SaaS de StorePulse mediante integración con Stripe (detalles del plan, facturación y cambio de cobertura de locales).
+
+El sidenav incluye además un pie con la marca **VanguardTech** y el año de copyright, junto con un encabezado superior etiquetado como **Gallery Management** que identifica el ámbito funcional de la plataforma.
+
+---
+
+**Landing Page**
+
+En el Landing Page, la navegación principal se ofrece a través de un **header fijo en la parte superior** (*sticky header*) que acompaña al visitante durante todo el scroll. El header contiene el logotipo oficial de StorePulse a la izquierda, un menú de navegación de cinco enlaces directos a las secciones del sitio (`Home`, `Benefits`, `Features`, `About Us`, `Plans`) y dos botones de autenticación (`Sign In` y `Sign Up` / `Get Started`) que redirigen a la aplicación web. En dispositivos móviles, el menú se colapsa en un ícono hamburguesa que despliega los enlaces verticalmente y se cierra automáticamente al seleccionar un destino o hacer scroll.
+
+<p align="center">
+  <img src="../../assets/ux/nav_landing.png" alt="Header de navegación del Landing Page" width="850px" height="auto"/>
+</p>
