@@ -47,3 +47,32 @@ esfuerzo total estimado en Story Points.
 | Sprint n Velocity | 13 story Points                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | Sum of Story Points | 13 Story Points (Incluyendo Visitor Stories como VS-01, VS-02, VS-03, VS-04, VS-05, VS-06, VS-07, VS-08 y VS-09 correspondientes al Landing Page).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
+
+### 6.2.1.2. Aspect Leaders and Collaborators
+
+En esta sección se presenta el Leadership-and-Collaboration Matrix (LACX) correspondiente al Sprint 1, el cual detalla 
+quién asume el rol de líder (L) y quiénes actúan como colaboradores (C) para cada aspecto dentro del alcance de la 
+iteración. Esta matriz tiene como fin brindar mayor claridad y efectividad en la comunicación al interior del 
+equipo durante el desarrollo de las tareas planificadas.
+
+Para este primer Sprint, el alcance funcional y técnico se ha dividido en tres aspectos principales alineados al Sprint Goal:
+1. **Landing Page Implementation:** Abarca el desarrollo con HTML5, CSS3 y JavaScript del sitio web estático informativo
+de StorePulse. Cabe resaltar que, por lineamientos del proyecto, todos los participantes deben colaborar activamente en 
+la implementación de este aspecto.
+2. **Frontend Web Applications Configuration:** Involucra la configuración inicial del entorno de desarrollo para las 
+aplicaciones web (Angular) y la estructuración base del proyecto.
+3. **Software Deployment & Environment Setup:** Comprende la configuración de repositorios en GitHub, estrategias de 
+ramificación (GitFlow) y el despliegue inicial en la nube de la Landing Page y el entorno Frontend.
+
+A continuación, se presenta la matriz LACX con la distribución de responsabilidades del equipo de VanguardTech:
+
+| Team Member (Last Name, First Name) | GitHub Username | Landing Page Implementation Leader (L) / Collaborator (C) | Frontend Web Applications Configuration Leader (L) / Collaborator (C) | Software Deployment & Environment Setup Leader (L) / Collaborator (C) |
+|:------------------------------------|:----------------| :---: | :---: | :---: |
+| Araujo Ingunza, Renzo               | RnArauj0        | C | C | L |
+| Díaz Gutierrez, Henry Kevin         | HenryDiaz12     | C | L | C |
+| Córdova Valdivia, Sebastián         | Sevas04         | L | C | C |
+| Curi Marcelo, Angelo                | AngeloC12       | C | C | C |
+| Miguel Esquirva, Miguel             | juandyoff  | C | C | C |
+| Carranza, Joaquín                   | thepima         | C | C | C |
+
+
