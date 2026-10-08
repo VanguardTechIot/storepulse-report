@@ -229,17 +229,17 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 ##### Paso 10. Definition of the data processing for each node and in Cloud
 
-**Nodo**
+**Nodos**
 
-| # | Algoritmo | Descripción |
-|---|---|---|
-| 1 | Identidad | Genera un identificador único a partir de la MAC del ESP32 (MS-01). |
-| 2 | Confirmación de movimiento | Tres lecturas activas consecutivas del PIR a 10 Hz. |
-| 3 | Filtro de horario | Fuera del horario de atención genera el evento; dentro del horario no (MS-04). |
-| 4 | Confirmación de humo | Dos lecturas consecutivas sobre el umbral, a 2 Hz; genera el evento de inmediato (MS-05). |
-| 5 | Evento primero, imagen después | Envía el evento de inmediato; el ESP32-CAM captura y envía la imagen, que se adjunta al evento. |
-| 6 | Medición de consumo | Cuenta pulsos del caudalímetro y consulta el medidor eléctrico cada 60 s (MS-06). |
-| 7 | Persistencia y reintento | Guarda cada registro con su hora antes de enviarlo y reintenta ante fallos (MS-07, MS-08). |
+| # | Algoritmo | Nodo | Descripción |
+|---|---|---|---|
+| 1 | Identidad | Todos | Genera un identificador único a partir de la MAC del ESP32 (MS-01). |
+| 2 | Confirmación de movimiento | Intrusión y área común | Tres lecturas activas consecutivas del PIR a 10 Hz. |
+| 3 | Filtro de horario | Intrusión | Fuera del horario de atención genera el evento; dentro del horario no (MS-04). |
+| 4 | Captura de imagen | Cámara | Consulta al Edge API si hay una captura pendiente para su stand; si la hay, toma la imagen y la envía. |
+| 5 | Confirmación de humo | Humo | Dos lecturas consecutivas sobre el umbral, a 2 Hz; genera el evento de inmediato (MS-05). |
+| 6 | Medición de consumo | Consumo | Cuenta pulsos del caudalímetro y consulta el medidor eléctrico cada 60 s (MS-06). |
+| 7 | Persistencia y reintento | Todos | Guarda cada registro con su hora antes de enviarlo y reintenta ante fallos (MS-07, MS-08). |
 
 **Edge Device**
 
@@ -247,8 +247,9 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 |---|---|---|
 | 1 | Validación de API Key | Rechaza telemetría de dispositivos no registrados (MS-02). |
 | 2 | Evaluación de reglas | Compara cada medición contra su umbral y genera la alerta sin conexión externa. |
-| 3 | Agrupación de alertas | Consolida alertas del mismo tipo y local en una ventana de 5 minutos. |
-| 4 | Cola de sincronización | Acumula sin internet y reenvía en orden, conservando la hora original. |
+| 3 | Coordinación de la captura | Al recibir un evento de intrusión, deja una captura pendiente para el nodo de cámara del mismo stand y adjunta al evento la imagen que recibe. |
+| 4 | Agrupación de alertas | Consolida alertas del mismo tipo y stand en una ventana de 5 minutos. |
+| 5 | Cola de sincronización | Acumula sin internet y reenvía en orden, conservando la hora original. |
 
 **Nube**
 
@@ -258,7 +259,7 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 | 2 | Consumo del periodo | Diferencia entre la lectura de cierre y la de apertura. |
 | 3 | Línea base y desviación | Promedia los periodos anteriores y alerta si el actual supera el margen. |
 | 4 | Agregación de la galería | Precalcula los indicadores del tablero consolidado. |
-| 5 | Notificaciones | Resuelve el destinatario según el local y envía la notificación push. |
+| 5 | Notificaciones | Resuelve el destinatario según el stand y envía la notificación push. |
 
 ##### Paso 11. Analysis of the processing time
 
@@ -266,9 +267,11 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 |---|---|---|
 | Nodo | Confirmación de movimiento (3 lecturas a 10 Hz) | 200 ms |
 | Nodo | Confirmación de humo (2 lecturas a 2 Hz) | 1 000 ms |
-| Nodo | Captura y compresión JPEG | 400 ms |
+| Nodo de cámara | Consulta de captura pendiente al Edge API | ≤ 1 000 ms |
+| Nodo de cámara | Captura y compresión JPEG | 400 ms |
+| Nodo de cámara | Envío de la imagen al Edge API | 1 000 ms |
 | Nodo | Consulta Modbus al medidor | 40 ms |
-| Nodo → Edge Device | Envío HTTP en la red local | 50 ms |
+| Nodo → Edge Device | Envío HTTP del evento en la red de la galería | 50 ms |
 | Edge Device | Validación, reglas y escritura en cola | 30 ms |
 | Edge Device → nube | Petición HTTPS | 500 ms |
 | Nube | Persistencia y enrutamiento | 300 ms |
@@ -282,24 +285,25 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 | Humo, notificación | 1 000 + 50 + 30 + 500 + 300 + 2 000 | ≈ 3,9 s | TD-02: 5 s ✔ |
 | Intrusión, evento | 200 | 0,2 s | TD-03: 1 s ✔ |
 | Intrusión, notificación | 200 + 50 + 30 + 500 + 300 + 2 000 | ≈ 3,1 s | TD-04: 5 s ✔ |
+| Intrusión, imagen | 200 + 50 + 30 + 1 000 + 400 + 1 000 | ≈ 2,7 s | TD-05: 10 s ✔ |
 | Consumo | 40 + 50 + 30 + 500 + 300 | ≈ 0,9 s | TD-07: 30 s ✔ |
 
-**Conclusión.** La etapa dominante es la entrega de la notificación push (2 s), que no controla el equipo. Por eso el evento se genera y se registra en el nodo en 1 s o menos, sin esperar confirmación remota, y la imagen se adjunta después del evento para no retrasar la alerta.
+**Conclusión.** La etapa dominante es la entrega de la notificación push (2 s), que no controla el equipo. Por eso el evento se genera y se registra en el nodo en 1 s o menos, sin esperar confirmación remota, y la imagen la aporta el nodo de cámara después del evento, para no retrasar la alerta.
 
 ##### Paso 12. Definition of the graphical user interface
 
 | Plataforma | Usuario | Contenido |
 |---|---|---|
-| Web Application (Angular) | Gallery Administrator | Tablero de la galería, alertas con evidencia, consumo por local frente a la línea base, incidentes y gestión de locales. |
-| Mobile Application (Flutter) | Tenant | Estado del local, centro de notificaciones, detalle del incidente con imagen y consumo propio. |
+| Web Application (Angular) | Gallery Administrator | Tablero de la galería, alertas con evidencia, consumo por stand frente a la línea base, incidentes y gestión de stands. |
+| Mobile Application (Flutter) | Tenant | Estado del stand, centro de notificaciones, detalle del incidente con imagen y consumo propio. |
 | Landing Page | Visitante | Propósito, beneficios por segmento, planes y registro. |
-| Dispositivo IoT | Tenant (en el local) | LED RGB con cinco estados, según la guía de la sección 5.1.2. |
+| Nodos IoT | Tenant (en el stand) | Un LED RGB por nodo, con cinco estados, según la guía de la sección 5.1.2. |
 
 **Criterios transversales**
 
 - Se muestra el estado antes que el dato crudo, con color según la severidad.
 - El consumo se presenta comparado contra la línea base.
-- El inquilino solo ve la información de su local.
+- El inquilino solo ve la información de su stand.
 - Las alertas críticas llegan como notificación push, sin que el usuario deba buscarlas.
 
 #### Diagrama del circuito
