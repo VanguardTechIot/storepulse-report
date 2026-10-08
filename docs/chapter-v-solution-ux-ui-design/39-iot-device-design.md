@@ -1,16 +1,18 @@
 # 5.6. IoT Device Design
 
-Esta sección presenta el diseño de los dispositivos IoT de StorePulse: el nodo de local, el nodo de área común y el Edge Device de la galería. El diseño se sustenta en la metodología de doce pasos para sistemas IoT propuesta por Balestrieri et al. (2018) y se modela en Cirkit Designer.
+Esta sección presenta el diseño de los dispositivos IoT de StorePulse: los cuatro nodos de stand (intrusión, cámara, humo y consumo), el nodo de área común y el Edge Device de la galería. El diseño se sustenta en la metodología de doce pasos para sistemas IoT propuesta por Balestrieri et al. (2018) y se modela en Cirkit Designer.
 
-Las decisiones de diseño responden a cuatro criterios:
+En esta sección se denomina **stand** a cada local comercial de la galería, para no confundirlo con el uso técnico del término "local" (red local, almacenamiento local). Un **nodo** es un microcontrolador con sus propios sensores y su actuador.
 
+Las decisiones de diseño responden a cinco criterios:
+
+- **Un nodo por función:** cada nodo tiene su propio ESP32, sus sensores y su actuador, y cumple una sola función. Así cada uno se instala donde mide mejor y una falla no afecta a los demás.
 - **Continuidad:** la detección y el registro de eventos funcionan sin internet y durante un corte de energía (EP-09).
-- **Trazabilidad con los requisitos:** cada función del dispositivo responde a una historia de la sección 3.1 (MS-01 a MS-09).
-- **Bajo costo por local:** un mismo nodo reúne seguridad, humo y consumo, con componentes disponibles en el mercado local.
-- **Instalación no invasiva:** el nodo se comunica por WiFi y se alimenta de un tomacorriente, sin cableado nuevo entre locales.
-- **Interfaz física mínima:** el inquilino no configura nada en el dispositivo. Solo percibe su estado mediante un LED, definido en la guía de estilos de la sección 5.1.2.
+- **Trazabilidad con los requisitos:** cada nodo responde a una historia de la sección 3.1 (MS-01 a MS-09).
+- **Instalación no invasiva:** los nodos se comunican por WiFi y se alimentan de un tomacorriente, sin cableado nuevo entre stands.
+- **Interfaz física mínima:** el inquilino no configura nada en los nodos. Solo percibe su estado mediante un LED, definido en la guía de estilos de la sección 5.1.2.
 
-La organización del dispositivo sigue la arquitectura de información de la sección 5.2: cada nodo pertenece a un local o a un área común, y el estado que muestra el LED es el mismo que las aplicaciones presentan para ese local.
+La organización de los nodos sigue la arquitectura de información de la sección 5.2: cada nodo pertenece a un stand o a un área común, y el estado que muestra su LED es el mismo que las aplicaciones presentan para ese stand.
 
 #### Metodología de diseño IoT en 12 pasos
 
