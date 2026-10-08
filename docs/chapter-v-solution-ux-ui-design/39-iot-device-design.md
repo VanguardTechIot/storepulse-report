@@ -308,17 +308,37 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 #### Diagrama del circuito
 
-**Nodo de local**
+Cada nodo tiene su propio diagrama: un microcontrolador, sus sensores, su actuador y la protoboard que distribuye la alimentación.
 
-![Circuito del nodo de local](../../assets/iot-device-design/local-node-circuit.png)
+**Nodo de intrusión del stand**
 
-**Diagrama en Cirkit Designer:** [Link del proyecto](https://app.cirkitdesigner.com/project/34d4ffbe-3294-44f1-8500-297d1d525873)
+![Circuito del nodo de intrusión del stand](../../assets/iot-device-design/stand-intrusion-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Enlace al proyecto](https://app.cirkitdesigner.com/project/0b01b373-3681-454b-ba4d-d6ffc6dfcca4)
+
+**Nodo de cámara del stand**
+
+![Circuito del nodo de cámara del stand](../../assets/iot-device-design/stand-camera-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Enlace al proyecto](https://app.cirkitdesigner.com/project/aea88226-0961-4408-b4e3-6fb5b76cec52)
+
+**Nodo de humo del stand**
+
+![Circuito del nodo de humo del stand](../../assets/iot-device-design/stand-smoke-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Enlace al proyecto](https://app.cirkitdesigner.com/project/5e0a17fe-886c-4f8c-a806-e14caf8b1d1a)
+
+**Nodo de consumo del stand**
+
+![Circuito del nodo de consumo del stand](../../assets/iot-device-design/stand-consumption-node-circuit.png)
+
+**Diagrama en Cirkit Designer:** [Enlace al proyecto](https://app.cirkitdesigner.com/project/21816cca-7a7c-481e-b02a-16f376c71835)
 
 **Nodo de área común**
 
 ![Circuito del nodo de área común](../../assets/iot-device-design/common-area-node-circuit.png)
 
-**Diagrama en Cirkit Designer:** [Link del proyecto](https://app.cirkitdesigner.com/project/3838e553-00e1-4f53-9355-31c742b3d46e)
+**Diagrama en Cirkit Designer:** [Enlace al proyecto](https://app.cirkitdesigner.com/project/3838e553-00e1-4f53-9355-31c742b3d46e)
 
 #### Asignación de pines
 
