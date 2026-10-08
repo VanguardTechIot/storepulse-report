@@ -203,52 +203,29 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 ##### Paso 8. Selection of the sensors and the actuators
 
-| Función | Componente | Características metrológicas | Alimentación | Precio ref. | Alternativa descartada |
-|---|---|---|---|---:|---|
-| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | S/ 8 | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01) |
-| Apertura | Reed magnético MC-38 | Conmuta a 15 ± 5 mm | Contacto seco | S/ 6 * | — |
-| Humo | MQ-2 | 300–10 000 ppm | 5 V | S/ 10 | MQ-135: orientado a calidad del aire (SP-02) |
-| Imagen | ESP32-CAM (OV2640) | 2 MP, JPEG | 5 V | S/ 55 | — |
-| Energía | PZEM-004T v3 (100 A) | 80–260 V, 0–100 A, ± 0,5 % | 5 V | S/ 70 * | Pinza SCT-013 100 A/1 V (S/ 34): solo mide corriente (SP-03). Queda como segunda opción |
-| Agua | YF-S201 | 1–30 L/min, ± 10 % | 5 V | S/ 20 | — |
-| Temperatura y humedad | DHT22 | ± 0,5 °C, ± 3 % HR | 3,3 V | S/ 34 | — |
-| Estado | LED RGB | 5 estados | 3,3 V | S/ 5 * | — |
-
-Los precios son referenciales del mercado peruano, consultados en octubre de 2026. Los marcados con * son estimados.
+| Función | Componente | Características metrológicas | Alimentación | Alternativa descartada |
+|---|---|---|---|---|
+| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01) |
+| Apertura | Reed magnético MC-38 | Conmuta a 15 ± 5 mm | Contacto seco | — |
+| Humo | MQ-2 | 300–10 000 ppm | 5 V | MQ-135: orientado a calidad del aire (SP-02) |
+| Imagen | ESP32-CAM (OV2640) | 2 MP, JPEG | 5 V | — |
+| Energía | PZEM-004T v3 (100 A) | 80–260 V, 0–100 A, ± 0,5 % | 5 V | Pinza SCT-013 100 A/1 V: solo mide corriente (SP-03). Queda como segunda opción |
+| Agua | YF-S201 | 1–30 L/min, ± 10 % | 5 V | — |
+| Temperatura y humedad | DHT22 | ± 0,5 °C, ± 3 % HR | 3,3 V | — |
+| Estado | LED RGB | 5 estados | 3,3 V | — |
 
 **Limitaciones declaradas.** El MQ-2 no es un detector certificado; el producto comercial deberá usar un detector fotoeléctrico homologado. El PZEM-004T se conecta al lado de 220 V y debe instalarlo personal con conocimiento eléctrico. Si el PZEM-004T no está disponible, el prototipo usa la pinza SCT-013 como segunda opción: mide solo corriente, por lo que el consumo se estima con 220 V nominales y sirve para mostrar tendencias, no para sustentar el cobro.
 
 ##### Paso 9. Selection of the microcontroller and radio transceivers
 
-| Rol | Componente | Justificación | Precio ref. |
-|---|---|---|---:|
-| Nodo de local | ESP32 DevKit V1 | WiFi integrado, ADC, UART, I2C, PWM y acelerador de cifrado por hardware. | S/ 35 |
-| Cámara y nodo de área común | ESP32-CAM | Integra microcontrolador, cámara y compresión JPEG. En el nodo de local va separada para que la captura no interrumpa la detección. | S/ 55 |
-| Reloj | RTC DS3231 | Mantiene la hora sin conexión, necesaria para el filtro de horario y el sellado de eventos. | S/ 16 |
-| Almacenamiento del nodo | Memoria flash del ESP32 | Conserva los eventos pendientes tras un reinicio (MS-07). | — |
-| Edge Device | Computador dedicado, instalado en la galería | Ejecuta el Edge API y su base de datos local. Debe correr Python y permanecer encendido; en el prototipo se usa una laptop del equipo. | — |
-| Transceptor | WiFi 2,4 GHz integrado en el ESP32 | Las distancias del paso 4 no justifican un transceptor externo. | — |
-
-**Costo referencial del prototipo** (1 nodo de local; el Edge API se ejecuta en una laptop del equipo)
-
-| Cant. | Componente | Precio |
-|---:|---|---:|
-| 1 | ESP32 DevKit V1 | S/ 35 |
-| 1 | Sensor PIR HC-SR501 | S/ 8 |
-| 1 | Sensor de humo MQ-2 | S/ 10 |
-| 1 | Reed magnético MC-38 | S/ 6 * |
-| 1 | RTC DS3231 | S/ 16 |
-| 1 | LED RGB y resistencias | S/ 5 * |
-| 1 | Protoboard, jumpers y caja plástica | S/ 25 * |
-| | **Subtotal: seguridad y humo** | **≈ S/ 105** |
-| 1 | Caudalímetro YF-S201 | S/ 20 |
-| 1 | PZEM-004T v3 (segunda opción: pinza SCT-013, S/ 34) | S/ 70 * |
-| 1 | DHT22 | S/ 34 |
-| 1 | ESP32-CAM | S/ 55 |
-| 1 | Adaptador USB-serial para programar la ESP32-CAM | S/ 12 * |
-| 1 | Fuente 5 V / 2 A | S/ 18 * |
-| 1 | TP4056, batería 18650 y elevador MT3608 | S/ 33 * |
-| | **Total: nodo de local completo** | **≈ S/ 347** |
+| Rol | Componente | Justificación |
+|---|---|---|
+| Nodos de intrusión, humo y consumo | ESP32 DevKit V1 (uno por nodo) | WiFi integrado, ADC, UART, I2C, PWM y acelerador de cifrado por hardware. |
+| Nodo de cámara y nodo de área común | ESP32-CAM (uno por nodo) | Integra microcontrolador, cámara y compresión JPEG, por lo que funciona como un nodo independiente con su propio programa. |
+| Reloj del nodo de intrusión | RTC DS3231 | Mantiene la hora sin conexión, necesaria para el filtro de horario de atención. |
+| Almacenamiento de cada nodo | Memoria flash del ESP32 | Conserva los eventos pendientes tras un reinicio (MS-07). |
+| Edge Device | Computador dedicado, instalado en la galería | Ejecuta el Edge API y su base de datos. Debe correr Python y permanecer encendido; en el prototipo se usa una laptop del equipo. |
+| Transceptor | WiFi 2,4 GHz integrado en el ESP32 | Las distancias del paso 4 no justifican un transceptor externo. |
 
 ##### Paso 10. Definition of the data processing for each node and in Cloud
 
