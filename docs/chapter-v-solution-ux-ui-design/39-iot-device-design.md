@@ -26,22 +26,21 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 
 | ID | Requisito |
 |---|---|
-| PS-01 | Los nodos se alimentan de la red eléctrica (220 V AC / 60 Hz) mediante una fuente de 5 V / 2 A. |
-| PS-02 | Cada nodo tiene respaldo con batería Li-ion 18650 (3,7 V / 2600 mAh, 9,6 Wh), porque el corte de energía coincide con los escenarios de intrusión e incendio. |
-| PS-03 | Durante el respaldo se mantienen la detección de intrusión y la de humo. Solo se suspende la medición de consumo, porque sin energía en el local no hay consumo que medir. |
-| PS-04 | Autonomía mínima de 3 horas en respaldo (9,6 Wh × 0,8 ÷ 2,1 W ≈ 3,7 h). |
+| PS-01 | Cada nodo se alimenta de la red eléctrica (220 V AC / 60 Hz) mediante una fuente de 5 V / 2 A. |
+| PS-02 | Los nodos de intrusión, cámara, humo y área común tienen respaldo con batería Li-ion 18650 (3,7 V / 2600 mAh, 9,6 Wh), porque el corte de energía coincide con los escenarios de intrusión e incendio. |
+| PS-03 | El nodo de consumo no tiene respaldo: sin energía en el stand no hay consumo que medir. |
+| PS-04 | Autonomía mínima de 4 horas en respaldo. El nodo de humo es el de mayor consumo: 9,6 Wh × 0,8 ÷ 1,6 W ≈ 4,8 h. |
 | PS-05 | El Edge Device cuenta con un UPS de al menos 30 minutos. |
 
-**Presupuesto de potencia del nodo de local** (valores de referencia de hojas de datos)
+**Presupuesto de potencia por nodo** (valores de referencia de hojas de datos)
 
-| Carga | Potencia |
-|---|---:|
-| ESP32 con WiFi activo | 0,80 W |
-| Sensor de humo MQ-2 (calefactor permanente) | 0,75 W |
-| Medidor eléctrico, caudalímetro, DHT22, PIR, RTC y LED (estimado) | 0,50 W |
-| **Total nominal** | **≈ 2,1 W** |
-| ESP32-CAM durante la captura | + 1,20 W |
-| **Total pico** | **≈ 3,3 W** |
+| Nodo | Cargas | Potencia |
+|---|---|---:|
+| Intrusión del stand | ESP32 con WiFi, PIR, reed, RTC y LED | ≈ 0,9 W |
+| Cámara del stand | ESP32-CAM con WiFi y LED; el valor corresponde a la captura | ≈ 1,2 W |
+| Humo del stand | ESP32 con WiFi, MQ-2 (calefactor permanente, 0,75 W), DHT22 y LED | ≈ 1,6 W |
+| Consumo del stand | ESP32 con WiFi, PZEM-004T, YF-S201 y LED | ≈ 1,2 W |
+| Área común | ESP32-CAM con WiFi, PIR y LED | ≈ 1,2 W |
 
 **Restricciones de time-delay**
 
@@ -55,7 +54,7 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 | TD-06 | Envío de la lectura de consumo eléctrico y de agua | cada 60 s |
 | TD-07 | Sincronización del Edge Device con la nube | ≤ 30 s |
 
-**Restricción de continuidad.** Las restricciones TD-01 y TD-03 se resuelven en el nodo y en el Edge Device, sin depender de la nube. Ante una caída de internet, el evento se genera y se registra localmente (EP-09).
+**Restricción de continuidad.** Las restricciones TD-01 y TD-03 se resuelven en el nodo y en el Edge Device, sin depender de la nube. Ante una caída de internet, el evento se genera y se registra dentro de la galería (EP-09).
 
 ##### Paso 2. Selection of the IoT system typology
 
@@ -63,36 +62,39 @@ Se adopta una tipología de tres niveles. El Edge Device de la galería cumple l
 
 ```
 Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de usuario
-  (por local y área común)       (1 por galería)       (REST API)     (Web / Mobile)
+  (por stand y área común)   (1 por galería)  (REST API)   (Web / Mobile)
 ```
 
 | Alternativa | Decisión |
 |---|---|
-| Nodo conectado a la nube por red celular | Descartada. Exige una SIM y un plan de datos por local. |
-| Nodo conectado a la nube por el WiFi de cada local | Descartada. Depende del router de cada inquilino y deja de operar sin internet. |
-| Nodos → Edge Device → nube | **Aceptada.** Una sola salida a internet por galería y operación local durante cortes de red. |
+| Nodo conectado a la nube por red celular | Descartada. Exige una SIM y un plan de datos por nodo. |
+| Nodo conectado a la nube por el WiFi de cada stand | Descartada. Depende del router de cada inquilino y deja de operar sin internet. |
+| Nodos → Edge Device → nube | **Aceptada.** Una sola salida a internet por galería, y operación sin internet durante cortes de red. |
 
 ##### Paso 3. Definition of physical layer requirements
 
-**Perfiles de nodo**
+**Nodos del sistema**
 
-| Perfil | Cantidad | Función |
-|---|---|---|
-| Nodo de local | 1 por local | Intrusión, humo, consumo eléctrico y consumo de agua |
-| Nodo de área común | 1 por pasillo o acceso | Intrusión con imagen en zonas compartidas |
+| Nodo | Microcontrolador | Sensores | Actuador | Cantidad | Historia |
+|---|---|---|---|---|---|
+| Intrusión del stand | ESP32 DevKit V1 | PIR, reed y reloj RTC | LED RGB | 1 por stand | MS-04 |
+| Cámara del stand | ESP32-CAM | Cámara OV2640 integrada | LED RGB | 1 por stand | MS-04 |
+| Humo del stand | ESP32 DevKit V1 | MQ-2 y DHT22 | LED RGB | 1 por stand | MS-05 |
+| Consumo del stand | ESP32 DevKit V1 | PZEM-004T y YF-S201 | LED RGB | 1 por stand | MS-06 |
+| Área común | ESP32-CAM | PIR y cámara OV2640 integrada | LED RGB | 1 por pasillo o acceso | MS-04 |
 
 **Sensores y actuadores**
 
-| # | Función | Tipo | Nodo de local | Nodo de área común |
-|---|---|---|:-:|:-:|
-| N1 | Movimiento | Sensor | ● | ● |
-| N2 | Apertura de puerta o cortina | Sensor | ● | |
-| N3 | Humo | Sensor | ● | |
-| N4 | Imagen del evento | Sensor | ● | ● |
-| N5 | Energía eléctrica | Sensor | ● | |
-| N6 | Caudal de agua | Sensor | ● (si tiene punto de agua) | |
-| N7 | Temperatura y humedad | Sensor | ● | |
-| N8 | Indicador de estado | Actuador | ● | ● |
+| # | Función | Tipo | Nodo que lo incorpora |
+|---|---|---|---|
+| N1 | Movimiento | Sensor | Intrusión del stand y área común |
+| N2 | Apertura de puerta o cortina | Sensor | Intrusión del stand |
+| N3 | Humo | Sensor | Humo del stand |
+| N4 | Imagen del evento | Sensor | Cámara del stand y área común |
+| N5 | Energía eléctrica | Sensor | Consumo del stand |
+| N6 | Caudal de agua | Sensor | Consumo del stand (si tiene punto de agua) |
+| N7 | Temperatura y humedad | Sensor | Humo del stand |
+| N8 | Indicador de estado | Actuador | Todos los nodos |
 
 **Target uncertainty de los sensores**
 
@@ -100,7 +102,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 |---|---|---|---|
 | N1 | Presencia | Binaria; falsos positivos < 5 % en 24 h | La falsa alarma reduce la confianza del inquilino |
 | N2 | Apertura | Conmutación a 15 ± 5 mm | Solo distingue abierto de cerrado |
-| N3 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada local |
+| N3 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada stand |
 | N5 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
 | N6 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
 | N7 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
@@ -117,16 +119,16 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 |---|---|
 | N1 PIR, N2 reed | GPIO digital |
 | N3 MQ-2 | ADC de 12 bits (ADC1) |
-| N4 ESP32-CAM | GPIO de disparo desde el ESP32 principal; envío de la imagen por WiFi |
+| N4 Cámara OV2640 | Integrada en el ESP32-CAM; la imagen se envía por WiFi |
 | N5 PZEM-004T | UART / Modbus-RTU a 9600 bps |
 | N6 YF-S201 | GPIO con interrupción (conteo de pulsos) |
 | N7 DHT22 | Bus único |
 | N8 LED RGB | PWM de 3 canales |
 | Reloj DS3231 | I2C |
 
-**Esfuerzo computacional y time-delay en el nodo.** El esfuerzo es bajo: filtrado, comparación contra umbral, conteo de pulsos y armado del mensaje. Las cargas mayores son la compresión JPEG, que resuelve el ESP32-CAM, y el envío de datos por WiFi. La decisión local (comparación contra el umbral) se resuelve en ≤ 50 ms.
+**Esfuerzo computacional y time-delay en el nodo.** El esfuerzo es bajo: filtrado, comparación contra umbral, conteo de pulsos y armado del mensaje. Las cargas mayores son la compresión JPEG, que resuelve el ESP32-CAM, y el envío de datos por WiFi. La decisión en el nodo (comparación contra el umbral) se resuelve en ≤ 50 ms.
 
-**Requisitos adicionales.** Cada nodo tiene reloj propio (RTC) y almacenamiento no volátil, para sellar y conservar los eventos cuando no hay conexión.
+**Requisitos adicionales.** Todos los nodos tienen almacenamiento no volátil para conservar los eventos cuando no hay conexión, y sincronizan su hora con el Edge API al conectarse. El nodo de intrusión incorpora además un reloj RTC, porque debe aplicar el horario de atención aunque no haya red.
 
 ##### Paso 4. Definition of exchange layer requirements
 
@@ -134,7 +136,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 |---|---|
 | Máximo time-delay por paquete | Nodo → Edge Device: ≤ 200 ms. Edge Device → nube: ≤ 2 s. |
 | Tipología de comunicaciones | Inalámbrica entre nodos y Edge Device (WiFi 2,4 GHz). Alámbrica (Ethernet) entre el Edge Device y el router de la galería. |
-| Topología de red | Estrella. Los nodos no se comunican entre sí. |
+| Topología de red | Estrella. Los nodos no se comunican entre sí: toda la coordinación pasa por el Edge API. |
 | Distancia máxima | Nodo ↔ punto de acceso: 25 m con muros y cortinas metálicas (un punto de acceso por piso). Punto de acceso ↔ Edge Device: 80 m por Ethernet. |
 | Consumo máximo en comunicación | ≤ 0,6 W por nodo en transmisión. |
 | Criptografía | WPA2 en el enlace WiFi entre los nodos y el Edge Device, dentro de la red local de la galería. HTTPS entre el Edge Device y la nube. El dispositivo se autentica con API Key (MS-02, SP-06). |
