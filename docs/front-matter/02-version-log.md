@@ -193,4 +193,10 @@
     <td>Joaquín Carranza</td>
     <td>Se actualizó el equipo a seis integrantes en la carátula, el README, los perfiles, el Collaboration Insights y el Student Outcome, y se agregó el perfil y los outcomes de Joaquín Carranza.</td>
   </tr>
+  <tr>
+    <td>2.17</td>
+    <td>09/10/26</td>
+    <td>Renzo Araujo</td>
+    <td>Se actualizaron las conclusiones y recomendaciones con los resultados del Sprint 1 y la integración de la aplicación web.</td>
+  </tr>
 </table>
