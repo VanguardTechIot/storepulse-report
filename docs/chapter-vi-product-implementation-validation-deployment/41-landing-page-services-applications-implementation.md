@@ -361,6 +361,56 @@ link de nuestra Landing Page es el siguiente:
 Link:
 [<u>https://vanguardtechiot.github.io/storepulse-landing-page/</u>](https://vanguardtechiot.github.io/storepulse-landing-page/)
 
+##### Despliegue del frontend web
+
+Para publicar la aplicación, se configuró Firebase Hosting en el proyecto de Firebase `storepulse-web-app` y se utilizó Firebase CLI desde la carpeta del proyecto frontend. La aplicación se compiló para producción y los archivos generados se publicaron en Firebase Hosting.
+
+El proceso realizado fue el siguiente:
+
+1. Se instaló y utilizó Firebase CLI para administrar el despliegue desde la terminal.
+2. Se inició sesión en Firebase CLI con una cuenta autorizada.
+3. Se inicializó Firebase Hosting en el proyecto local y se guardó su configuración.
+4. Se generó la compilación de producción de la aplicación Angular.
+5. Se ejecutó `firebase deploy --only hosting` para publicar los archivos compilados.
+6. Se verificó la finalización del despliegue y se abrió la URL pública para comprobar el acceso al frontend.
+
+link:
+[<u>https://storepulse-web-app.web.app</u>](https://storepulse-web-app.web.app)
+
+##### Evidencias del proceso de despliegue
+
+La Figura 1 muestra la pantalla de configuración de Firebase Hosting, donde se indican los pasos para instalar Firebase CLI e inicializar el proyecto.
+
+![Figura 1. Configuración de Firebase Hosting](../../assets/evidence_deployment/01-firebase-hosting-setup.jpeg)
+
+La Figura 2 presenta la terminal del entorno de desarrollo durante la autenticación y la inicialización de Firebase en el proyecto local.
+
+![Figura 2. Inicialización de Firebase CLI](../../assets/evidence_deployment/02-firebase-cli-initialization.jpeg)
+
+La Figura 3 muestra la ejecución del comando de despliegue y el resultado exitoso reportado por Firebase CLI. La salida identifica el sitio `storepulse-web-app` y la URL pública de Hosting.
+
+![Figura 3. Despliegue exitoso del frontend en Firebase Hosting](../../assets/evidence_deployment/03-firebase-hosting-deployment.jpeg)
+
+La Figura 4 presenta el panel de Firebase Hosting con la versión publicada y los dominios asociados al sitio.
+
+
+![Figura 4. Panel de administración de Firebase Hosting](../../assets/evidence_deployment/04-firebase-hosting-console.jpeg)
+
+##### Verificación del frontend publicado
+
+Después de completar el despliegue, se accedió a la aplicación mediante la URL pública `https://storepulse-web-app.web.app`. La Figura 5 muestra la pantalla de inicio de sesión cargada en el navegador, lo que permite comprobar que la ruta de acceso al frontend está disponible.
+
+![Figura 5. Pantalla de inicio de sesión de StorePulse en producción](../../assets/evidence_deployment/05-storepulse-login-production.jpeg)
+
+La Figura 6 corresponde al apartado de uso de Firebase Hosting. En la captura no se muestran datos de consumo en el periodo consultado; por ello, se incluye como referencia del panel de administración y no como evidencia de tráfico o uso efectivo por parte de usuarios.
+
+![Figura 6. Métricas de uso de Firebase Hosting](../../assets/evidence_deployment/06-firebase-hosting-usage.jpeg)
+
+Finalmente, la Figura 7 muestra el dashboard de StorePulse cargado en el navegador. Esta captura evidencia la disponibilidad visual de la interfaz principal publicada, con sus módulos de navegación, indicadores y panel de consumo.
+
+![Figura 7. Dashboard de StorePulse en el entorno publicado](../../assets/evidence_deployment/07-storepulse-dashboard-production.jpeg)
+
+
 #### 6.2.1.9. Team Collaboration Insights during Sprint.
 
 ![Team-collaborate.png](../../assets/execution_team/Team-collaborate.png)
