@@ -438,5 +438,6 @@
     <td>09/10/26</td>
     <td>Renzo Araujo</td>
     <td>Se completaron el registro de versiones de TB1, la configuración de hosting y de versiones (6.1.2 y 6.1.4), la tabla de commits del Sprint 1 y la referencia de Balestrieri et al. (2018).</td>
+
   </tr>
 </table>
