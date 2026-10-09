@@ -189,7 +189,7 @@
   </tr>
   <tr>
     <td>2.16</td>
-    <td>[COMPLETAR: 09/10/26]</td>
+    <td>09/10/26</td>
     <td>Joaquín Carranza</td>
     <td>Se actualizó el equipo a seis integrantes en la carátula, el README, los perfiles, el Collaboration Insights y el Student Outcome, y se agregó el perfil y los outcomes de Joaquín Carranza.</td>
   </tr>
