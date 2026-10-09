@@ -1,0 +1,80 @@
+# Exportación del informe StorePulse a PDF con Pandoc + Typst
+# Uso (desde la raíz del repo):  pandoc --defaults=config/build.yaml
+
+from: markdown-markdown_in_html_blocks
+to: pdf
+pdf-engine: typst
+
+input-files:
+  - docs/front-matter/01-cover.md
+  - docs/front-matter/02-version-log.md
+  - docs/front-matter/03-collaboration-insights.md
+  - docs/front-matter/04-content.md
+  - docs/front-matter/05-student-outcome.md
+  - docs/chapter-i-introduction/10-startup-profile.md
+  - docs/chapter-i-introduction/11-background-and-problem-statement.md
+  - docs/chapter-i-introduction/12-lean-ux-process.md
+  - docs/chapter-i-introduction/13-target-audience.md
+  - docs/chapter-ii-requirements-elicitation-and-analysis/14-competitors.md
+  - docs/chapter-ii-requirements-elicitation-and-analysis/15-interviews.md
+  - docs/chapter-ii-requirements-elicitation-and-analysis/16-needfinding.md
+  - docs/chapter-ii-requirements-elicitation-and-analysis/17-big-picture-eventstorming.md
+  - docs/chapter-ii-requirements-elicitation-and-analysis/18-ubiquitous-language.md
+  - docs/chapter-iii-requirements-specification/19-user-stories.md
+  - docs/chapter-iii-requirements-specification/20-impact-mapping.md
+  - docs/chapter-iii-requirements-specification/21-product-backlog.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/22-strategic-level-domain-driven-design.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/23-context-mapping.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/24-software-architecture.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/25-identity-and-access-management.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/26-resource-and-asset-management.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/27-service-execution-and-monitoring.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/28-property-communication.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/29-dashboard-and-analytics.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/30-profiles-and-preferences.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/31-subscriptions-and-payments.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/32-property-management.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/33-utility-billing.md
+  - docs/chapter-v-solution-ux-ui-design/34-style-guidelines.md
+  - docs/chapter-v-solution-ux-ui-design/35-information-architecture.md
+  - docs/chapter-v-solution-ux-ui-design/36-landing-page-ui-design.md
+  - docs/chapter-v-solution-ux-ui-design/37-applications-ux-ui-design.md
+  - docs/chapter-v-solution-ux-ui-design/38-applications-prototyping.md
+  - docs/chapter-v-solution-ux-ui-design/39-iot-device-design.md
+  - docs/chapter-vi-product-implementation-validation-deployment/40-software-configuration-management.md
+  - docs/chapter-vi-product-implementation-validation-deployment/41-landing-page-services-applications-implementation.md
+  - docs/chapter-vi-product-implementation-validation-deployment/42-validation-interviews.md
+  - docs/chapter-vi-product-implementation-validation-deployment/43-video-about-the-product.md
+  - docs/98-conclusions.md
+  - docs/99-bibliography.md
+  - docs/annexes/annex-a-presentation-videos.md
+  - docs/annexes/annex-b-iot-system-design-steps.md
+
+output-file: dist/storepulse-report.pdf
+
+file-scope: true
+# Las imágenes usan rutas ../../assets/... relativas a cada capítulo;
+# buscar desde docs/front-matter hace que esas rutas apunten a assets/.
+resource-path: [".", "docs", "docs/front-matter"]
+
+filters:
+  - config/html-to-pdf.lua
+
+# El índice se genera solo, en el lugar de 04-content.md (ver filtro).
+table-of-contents: false
+
+metadata:
+  pagetitle: "Informe del Trabajo Final - StorePulse"
+  lang: es-PE
+
+variables:
+  papersize: a4
+  margin:
+    x: 2.5cm
+    y: 2.5cm
+  mainfont: "Libertinus Serif"
+  fontsize: 11pt
+  header-includes: |
+    #show figure: set block(breakable: true)
+    #set table(inset: 5pt)
+    #show table: set text(size: 9pt)
