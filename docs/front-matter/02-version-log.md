@@ -187,4 +187,10 @@
     <td>Adrian Quiroz</td>
     <td>Se agregó el archivo explain.md en cada carpeta de assets (architecture, branding, iot, lean-ux, requirements, research, sprints, team, ui, ux, videos), documentando su propósito y convención de nombres.</td>
   </tr>
+  <tr>
+    <td>2.16</td>
+    <td>09/10/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se actualizó el equipo a seis integrantes en la carátula, el README, los perfiles, el Collaboration Insights y el Student Outcome, y se agregó el perfil y los outcomes de Joaquín Carranza.</td>
+  </tr>
 </table>

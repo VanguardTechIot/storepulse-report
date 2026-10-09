@@ -45,6 +45,10 @@ Proyecto
     <td style="border: none; text-align: left;">Araujo Ingunza, Renzo José</td>
   </tr>
   <tr>
+    <td style="border: none; text-align: left;">u20191b935</td>
+    <td style="border: none; text-align: left;">Carranza Tesén, Joaquín Enrique</td>
+  </tr>
+  <tr>
     <td style="border: none; text-align: left;">u202111041</td>
     <td style="border: none; text-align: left;">Cordova Valdivia, Sebastián</td>
   </tr>
@@ -57,8 +61,8 @@ Proyecto
     <td style="border: none; text-align: left;">Diaz Gutierrez, Henry Kevin</td>
   </tr>
   <tr>
-    <td style="border: none; text-align: left;">u202214864</td>
-    <td style="border: none; text-align: left;">Quiroz Cáceres, Adrian</td>
+    <td style="border: none; text-align: left;">u202310837</td>
+    <td style="border: none; text-align: left;">Esquivel León, Miguel Juan Diego</td>
   </tr>
 </table>
 

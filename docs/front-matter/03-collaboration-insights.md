@@ -24,9 +24,9 @@ Henry participó en la elicitación de requisitos mediante el diseño y conducci
 
 Angelo desarrolló el Ubiquitous Language y el análisis competitivo del proyecto, incluyendo el Competitive Analysis Landscape, la matriz FODA y las estrategias frente a los competidores. También elaboró los diagramas C4 de System Landscape, System Context y Container, y asumió el desarrollo de los Bounded Contexts Resource and Asset Management y Service Execution and Monitoring. Organizó su trabajo mediante ramas de feature para evitar interferencias con el desarrollo del equipo y realizó correcciones y mejoras en el informe para mantener la consistencia entre la documentación y los diagramas.
 
-**Adrian Quiroz Cáceres**
+**Joaquín Enrique Carranza Tesén**
 
-Adrian desarrolló y refactorizó los User Stories del proyecto, alineándolos con los requisitos identificados durante la elicitación. También analizó los resultados de las entrevistas y elaboró los User Personas, Empathy Maps y User Task Matrix para representar las necesidades, perspectivas y actividades de los segmentos objetivo. Asimismo, desarrolló el Context Mapping y asumió el diseño del Bounded Context Property Management, contribuyendo a la estructuración del modelo de dominio y al desarrollo del Capítulo IV.
+Joaquín desarrolló los Bounded Context Canvases de la sección 4.1.1.3, elaborando los diez lienzos de los contextos candidatos con la plantilla Bounded Context Canvas V4 de DDD-Crew y documentando para cada uno su propósito, clasificación estratégica, lenguaje ubicuo, reglas de negocio y comunicaciones entrantes y salientes. Este trabajo sirvió de base para el diseño táctico que cada integrante realizó en el Capítulo IV. Organizó sus contribuciones en ramas de feature independientes y las integró a develop siguiendo GitFlow y Conventional Commits.
 
 ### Evidencias de Analíticos y Commits en GitHub
 
