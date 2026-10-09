@@ -338,3 +338,32 @@ Característica: Consulta de documentos legales
     Cuando accede a la sección "Política de Privacidad"
     Entonces puede visualizar la información relacionada con el tratamiento y protección de sus datos personales
 ```
+#### 6.2.1.6. Execution Evidence for Sprint Review 
+
+![evidence1.png](../../assets/execution_team/evidence1.png)
+
+![evidence2.png](../../assets/execution_team/evidence2.png)
+
+![evidence3.png](../../assets/execution_team/evidence3.png)
+
+![evidence4.png](../../assets/execution_team/evidence4.png)
+
+#### 6.2.1.7. Services Documentation Evidence for Sprint Review
+
+Este sprint 1 solo trata la implementación del landing page, por lo
+que no hay un servicio adicinal.
+
+#### 6.2.1.8. Software Deployment Evidence for Sprint Review. 
+
+El despliegue del Landing Page se realizó a través de GitHub pages. El
+link de nuestra Landing Page es el siguiente:
+
+Link:
+[<u>https://vanguardtechiot.github.io/storepulse-landing-page/</u>](https://vanguardtechiot.github.io/storepulse-landing-page/)
+
+#### 6.2.1.9. Team Collaboration Insights during Sprint.
+
+![Team-collaborate.png](../../assets/execution_team/Team-collaborate.png)
+
+![Team-collaborate.png](../../assets/execution_team/Team-collaborate-2.png)
+
