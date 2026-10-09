@@ -1,0 +1,24 @@
+@startuml storepulse-property-management-web-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Property Management - Web Components
+
+Container_Boundary(webApp, "Web Application - Angular") {
+
+    Component(propertyManagementUI, "Property Management UI", "Angular", "Interface for managing commercial galleries, units, floor layouts, and unit statuses.")
+
+    Component(propertyService, "Property Service", "Angular Service", "Consumes REST endpoints related to galleries and commercial units.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(propertyManagementUI, propertyService, "Uses")
+Rel(propertyService, restApi, "Consumes property management services", "HTTPS/JSON")
+
+@enduml

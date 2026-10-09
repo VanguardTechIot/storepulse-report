@@ -1,0 +1,66 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - REST API Component View - Profiles and Preferences
+
+Container_Boundary(restApi, "REST API") {
+    Component(userProfilesController, "UserProfilesController", "ASP.NET Core Controller", "Exposes the profile query, update, photo upload and language change endpoints.")
+    Component(notificationPreferencesController, "NotificationPreferencesController", "ASP.NET Core Controller", "Exposes the notification preference query, update and channel disable endpoints.")
+    Component(userRegisteredEventConsumer, "UserRegisteredEventConsumer", "ASP.NET Core", "Receives the user registration event published by Identity and Access Management.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Orchestrates profile creation and update, photo upload, language change and preference configuration.")
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the Profile Settings, Language Options and Notification Settings read models.")
+    Component(eventHandlers, "Event Handlers", "Application Layer", "Creates the profile on user registration and publishes preference changes to Safety and Emergencies.")
+
+    Component(profilesAndPreferencesFacade, "ProfilesAndPreferencesFacade", "Application Layer", "Anti-Corruption Layer that exposes the preferred language and enabled channels to other Bounded Contexts.")
+
+    Component(imageStorageServiceAdapter, "ImageStorageServiceAdapter", "Infrastructure Layer", "Sends the profile photo to the external storage service and retrieves its URL.")
+
+    Component(profilesAndPreferencesDomain, "Profiles and Preferences Domain", "Domain Layer", "Contains the UserProfile and NotificationPreferences aggregates and domain rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+}
+
+System_Ext(identityAccessManagement, "Identity and Access Management", "Publishes the UserRegisteredEvent that triggers profile creation.")
+
+System_Ext(imageStorageService, "Image Storage Service", "Stores profile photos and returns the generated URL.")
+
+System_Ext(safetyEmergencies, "Safety and Emergencies", "Consumes preference changes to update alert routing.")
+
+Container(database, "Database", "MySQL", "Stores user profiles, notification preferences and channels.")
+
+Rel(identityAccessManagement, userRegisteredEventConsumer, "Publishes UserRegisteredEvent", "Integration Event")
+Rel(userRegisteredEventConsumer, eventHandlers, "Delegates")
+
+Rel(userProfilesController, commandHandlers, "Invokes")
+Rel(userProfilesController, queryHandlers, "Invokes")
+
+Rel(notificationPreferencesController, commandHandlers, "Invokes")
+Rel(notificationPreferencesController, queryHandlers, "Invokes")
+
+Rel(userRegisteredEventConsumer, eventHandlers, "Invokes")
+
+Rel(commandHandlers, profilesAndPreferencesDomain, "Executes domain operations")
+Rel(commandHandlers, imageStorageServiceAdapter, "Uploads photo through")
+
+Rel(queryHandlers, profilesAndPreferencesDomain, "Queries domain data")
+
+Rel(eventHandlers, profilesAndPreferencesDomain, "Creates and updates aggregates")
+
+Rel(profilesAndPreferencesDomain, repositoryImplementations, "Uses repository abstractions")
+
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(imageStorageServiceAdapter, imageStorageService, "Sends the profile photo", "HTTPS/JSON")
+
+Rel(eventHandlers, safetyEmergencies, "Publishes NotificationPreferencesSetEvent", "Integration Event")
+
+Rel(profilesAndPreferencesFacade, safetyEmergencies, "Queries language and channels")
+
+@enduml

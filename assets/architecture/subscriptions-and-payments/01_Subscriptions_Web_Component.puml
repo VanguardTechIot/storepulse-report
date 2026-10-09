@@ -1,0 +1,23 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Web Application Component View - Subscriptions and Payments
+
+Container_Boundary(webApplication, "Web Application") {
+    Component(subscriptionsUI, "Subscriptions UI", "Angular", "Displays the plan catalog, the subscription form, the payment form and the subscription status.")
+    Component(subscriptionsService, "Subscriptions Service", "Angular Service", "Consumes the plan, subscription and payment REST endpoints.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes StorePulse business logic.")
+
+Rel(subscriptionsUI, subscriptionsService, "Uses")
+Rel(subscriptionsService, restApi, "Consumes plan, subscription and payment services", "HTTPS/JSON")
+
+@enduml

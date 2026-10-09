@@ -1,0 +1,62 @@
+@startuml
+hide circle
+skinparam linetype ortho
+title Database Design - Subscriptions and Payments
+
+entity "subscription_plans" as plans {
+  * id : CHAR(36) <<PK>>
+  --
+  * name : VARCHAR(80) <<unique>>
+  * monitored_unit_limit : INT
+  * price_amount : DECIMAL(10,2)
+  * price_currency : CHAR(3)
+  * billing_cycle : VARCHAR(20)
+  * published : BOOLEAN <<default false>>
+  * created_at : DATETIME
+  * updated_at : DATETIME
+}
+
+entity "subscriptions" as subs {
+  * id : CHAR(36) <<PK>>
+  --
+  * gallery_id : CHAR(36)
+  * gallery_administrator_id : CHAR(36)
+  * subscription_plan_id : CHAR(36) <<FK>>
+  * status : VARCHAR(20)
+  * start_date : DATETIME
+  * end_date : DATETIME
+  * monitored_unit_count : INT <<default 0>>
+  * created_at : DATETIME
+  * updated_at : DATETIME
+}
+
+entity "payments" as pays {
+  * id : CHAR(36) <<PK>>
+  --
+  * subscription_id : CHAR(36) <<FK>>
+  * amount : DECIMAL(10,2)
+  * currency : CHAR(3)
+  * method : VARCHAR(20)
+  * status : VARCHAR(20)
+  gateway_transaction_id : VARCHAR(120)
+  * registered_at : DATETIME
+  resolved_at : DATETIME
+}
+
+plans ||--{ subs : "es contratado en"
+subs ||--{ pays : "es sustentada por"
+
+note right of subs
+  gallery_id y gallery_administrator_id
+  son referencias externas a
+  Resource and Asset Management e
+  Identity and Access Management.
+  Se validan mediante ACL,
+  sin FK fisica entre contextos.
+
+  Indice unico parcial sobre gallery_id
+  cuando status = ACTIVE, para impedir
+  dos suscripciones activas simultaneas.
+end note
+
+@enduml

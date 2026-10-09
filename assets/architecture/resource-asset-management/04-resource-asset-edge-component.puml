@@ -1,0 +1,33 @@
+@startuml storepulse-resource-asset-edge-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - Edge Components
+
+Container_Boundary(edgeApi, "Edge API - Python Flask") {
+
+    Component(deviceGateway, "Device Gateway", "Python, Flask", "Receives communication from IoT devices.")
+
+    Component(deviceConfiguration, "Device Configuration", "Python", "Processes device configuration commands received from the cloud.")
+
+    Component(edgeCommunication, "Cloud Synchronization", "Python", "Synchronizes device-related information with the REST API.")
+}
+
+Container(embeddedApplication, "Embedded Application", "C++", "Controls the IoT device and communicates with sensors and meters.")
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Central StorePulse backend.")
+
+Rel(embeddedApplication, deviceGateway, "Communicates with", "HTTP/JSON")
+
+Rel(deviceGateway, deviceConfiguration, "Provides device information")
+
+Rel(deviceConfiguration, edgeCommunication, "Processes configuration")
+
+Rel(edgeCommunication, restApi, "Synchronizes device information", "HTTPS/JSON")
+
+@enduml

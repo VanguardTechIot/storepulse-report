@@ -1,0 +1,60 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam backgroundColor #FFFFFF
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - REST API Component View - Subscriptions and Payments
+
+Container_Boundary(restApi, "REST API") {
+    Component(plansController, "SubscriptionPlansController", "ASP.NET Core Controller", "Exposes the publication and query of the subscription plan catalog.")
+    Component(subscriptionsController, "SubscriptionsController", "ASP.NET Core Controller", "Exposes the request, query, renewal and cancellation of a subscription.")
+    Component(paymentsController, "PaymentsController", "ASP.NET Core Controller", "Exposes the payment registration and the payment history query.")
+    Component(webhookController, "PaymentGatewayWebhookController", "ASP.NET Core Controller", "Receives the payment confirmation or rejection sent by the gateway.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Orchestrates plan publication, subscription request, payment registration, renewal and cancellation.")
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the plan catalog, subscription status and payment history read models.")
+    Component(eventHandlers, "Event Handlers", "Application Layer", "Activates the subscription on payment confirmation and publishes integration events.")
+    Component(expirationScheduler, "Subscription Expiration Scheduler", "Hosted Service", "Detects subscriptions whose end date has been reached and emits the expiration event.")
+
+    Component(subscriptionsDomain, "Subscriptions and Payments Domain", "Domain Layer", "Contains the SubscriptionPlan, Subscription and Payment aggregates and domain rules.")
+    Component(subscriptionsFacade, "SubscriptionsFacade", "Application Layer", "Anti-Corruption Layer that exposes the subscription status and the monitored unit limit to other Bounded Contexts.")
+
+    Component(repositories, "Repository Implementations", "Entity Framework Core", "Implements domain repository abstractions.")
+    Component(gatewayAdapter, "PaymentGatewayAdapter", "Infrastructure Layer", "Sends the payment order to the external gateway and retrieves the transaction reference.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores subscription plans, subscriptions and payments.")
+
+System_Ext(paymentGateway, "Payment Gateway", "Processes subscription payments and confirms or rejects the transaction.")
+System_Ext(resourceAssetManagement, "Resource and Asset Management", "Consumes the activation event to enable device registration up to the plan limit.")
+System_Ext(operationalContexts, "Operational Bounded Contexts", "Consume the expiration event to restrict access to read-only mode.")
+
+Rel(plansController, commandHandlers, "Invokes")
+Rel(plansController, queryHandlers, "Invokes")
+Rel(subscriptionsController, commandHandlers, "Invokes")
+Rel(subscriptionsController, queryHandlers, "Invokes")
+Rel(paymentsController, commandHandlers, "Invokes")
+Rel(paymentsController, queryHandlers, "Invokes")
+Rel(webhookController, eventHandlers, "Delegates")
+
+Rel(commandHandlers, subscriptionsDomain, "Executes domain operations")
+Rel(queryHandlers, subscriptionsDomain, "Queries domain data")
+Rel(eventHandlers, subscriptionsDomain, "Activates and updates aggregates")
+Rel(expirationScheduler, subscriptionsDomain, "Expires due subscriptions")
+Rel(subscriptionsFacade, subscriptionsDomain, "Queries status and unit limit")
+
+Rel(commandHandlers, gatewayAdapter, "Sends payment order through")
+Rel(subscriptionsDomain, repositories, "Uses repository abstractions")
+Rel(repositories, database, "Reads and writes", "Entity Framework Core")
+
+Rel(gatewayAdapter, paymentGateway, "Sends the payment order", "HTTPS/JSON")
+Rel(paymentGateway, webhookController, "Confirms or rejects the payment", "HTTPS/JSON")
+Rel(eventHandlers, resourceAssetManagement, "Publishes SubscriptionActivatedEvent", "Integration Event")
+Rel(expirationScheduler, operationalContexts, "Publishes SubscriptionExpiredEvent", "Integration Event")
+
+@enduml

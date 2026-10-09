@@ -1,0 +1,40 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+
+Person(visitor, "Visitor", "User who browses the public information of StorePulse.")
+
+Person(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the premises, managing consumption and billing information, and receiving alerts.")
+
+Person(tenant, "Tenant", "User who monitors their premises, checks consumption and billing, and receives alerts.")
+
+System(storePulse, "StorePulse", "IoT system for security, consumption, billing and operational monitoring of commercial premises.")
+
+System_Ext(iotDevice, "IoT Device", "Physical devices, sensors and meters used to collect security, environmental and consumption information.")
+
+System_Ext(stripe, "Stripe", "External service used to process subscription and payment operations.")
+
+System_Ext(resend, "Resend", "External email delivery service used to send transactional emails and notifications.")
+
+System_Ext(firebaseCloudMessaging, "Firebase Cloud Messaging", "External push notification service used to deliver notifications to mobile devices.")
+
+Rel(visitor, storePulse, "Browses public information")
+
+Rel(galleryAdministrator, storePulse, "Supervises premises and manages information")
+
+Rel(tenant, storePulse, "Monitors premises and checks information")
+
+Rel(storePulse, iotDevice, "Communicates with physical devices")
+
+Rel(storePulse, stripe, "Processes subscription payments")
+
+Rel(storePulse, resend, "Sends transactional emails")
+
+Rel(storePulse, firebaseCloudMessaging, "Sends push notifications")
+@enduml

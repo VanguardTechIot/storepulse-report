@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Generate billing</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="billing" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Gallery Central #04 / Billing</div><h1>Electricity and water receipts</h1><p>Generation of receipts based on each unit’s actual consumption, tariffs, and payment records.</p></div>
+    <div class="actions"><a href="08b-tariffs.html" class="btn btn-outline"><i data-i="sliders" data-s="16"></i>Configure tariffs</a><a href="08c-generate.html" class="btn btn-primary"><i data-i="receipt" data-s="16"></i>Generate billing</a></div>
+  </div>
+  <div class="grid g-4">
+    <div class="card kpi"><div class="top"><span class="ico ico-cyan"><i data-i="receipt"></i></span>Receipts for the period</div><div class="val">86</div><div class="delta muted">September 2026 · issued 01/10</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-green"><i data-i="checkcircle"></i></span>Paid</div><div class="val">78</div><div class="delta up">S/ 15,940 collected</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-amber"><i data-i="clock"></i></span>Pending</div><div class="val">6</div><div class="delta warn">S/ 1,318.50 outstanding</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-red"><i data-i="alert"></i></span>Overdue</div><div class="val">2</div><div class="delta down">Tenants notified</div></div>
+  </div>
+  <div class="row">
+    <div class="card grow">
+      <div class="toolbar">
+        <div class="search" style="width:200px"><i data-i="search" data-s="16"></i>Receipt or unit…</div>
+        <span class="select"><i data-i="calendar" data-s="15"></i>01/08/2026 – 06/10/2026</span>
+        <div class="tabs"><span class="on">All</span><span>Paid</span><span>Pending</span><span>Overdue</span></div>
+      </div>
+      <table><thead><tr><th>Receipt / unit</th><th class="sort">Period / issue date<span class="arrow"><i data-i="chevdown" data-s="14" data-w="2.2"></i></span></th><th>Amount</th><th>Status</th><th class="t-right">Actions</th></tr></thead><tbody><tr class=""><td><b class="mono" style="font-size:12px">REC-0012</b><span class="sub" style="white-space:nowrap">A-01 · Boutique Lucía</span></td><td style="white-space:nowrap">Setiembre 2026<span class="sub">Issued 01/10/2026</span></td><td><b>S/ 142.80</b></td><td><span class="badge b-green">Paid</span></td><td><div class="row-actions" style="align-items:center"><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr><tr class=""><td><b class="mono" style="font-size:12px">REC-0014</b><span class="sub" style="white-space:nowrap">A-03 · Calzados Roma</span></td><td style="white-space:nowrap">Setiembre 2026<span class="sub">Issued 01/10/2026</span></td><td><b>S/ 309.70</b></td><td><span class="badge b-amber">Pending</span></td><td><div class="row-actions" style="align-items:center"><a href="08a-payment.html" class="btn btn-soft btn-sm">Register payment</a><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr><tr class="hover"><td><b class="mono" style="font-size:12px">REC-0021</b><span class="sub" style="white-space:nowrap">B-09 · Joyería Inca Gold</span></td><td style="white-space:nowrap">Setiembre 2026<span class="sub">Issued 01/10/2026</span></td><td><b>S/ 151.20</b></td><td><span class="badge b-red">Overdue</span></td><td><div class="row-actions" style="align-items:center"><a href="08a-payment.html" class="btn btn-soft btn-sm">Register payment</a><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr><tr class=""><td><b class="mono" style="font-size:12px">REC-0024</b><span class="sub" style="white-space:nowrap">B-12 · Ópticas Visión</span></td><td style="white-space:nowrap">Setiembre 2026<span class="sub">Issued 01/10/2026</span></td><td><b>S/ 212.44</b></td><td><span class="badge b-amber">Pending</span><span class="badge b-violet nodot" style="margin-top:4px;display:flex;width:max-content">Open claim</span></td><td><div class="row-actions" style="align-items:center"><a href="08a-payment.html" class="btn btn-soft btn-sm">Register payment</a><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr><tr class=""><td><b class="mono" style="font-size:12px">REC-0031</b><span class="sub" style="white-space:nowrap">C-11 · Moda Urbana</span></td><td style="white-space:nowrap">Setiembre 2026<span class="sub">Issued 01/10/2026</span></td><td><b>S/ 251.40</b></td><td><span class="badge b-green">Paid</span></td><td><div class="row-actions" style="align-items:center"><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr><tr class=""><td><b class="mono" style="font-size:12px">REC-0899</b><span class="sub" style="white-space:nowrap">B-09 · Joyería Inca Gold</span></td><td style="white-space:nowrap">Agosto 2026<span class="sub">Emitido 01/09/2026</span></td><td><b>S/ 147.60</b></td><td><span class="badge b-green">Paid</span></td><td><div class="row-actions" style="align-items:center"><span title="Descargar PDF"><i data-i="download" data-s="15"></i></span></div></td></tr></tbody></table>
+      <div class="pager">Mostrando 1–6 de 172<div class="pages"><span><i data-i="arrowleft" data-s="14"></i></span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>29</span><span><i data-i="arrowright" data-s="14"></i></span></div></div>
+    </div>
+    <div class="card" style="width:300px;align-self:flex-start">
+      <div class="card-head"><div><h3>Current tariffs</h3><p>Since the September period</p></div><div class="right"><a href="08b-tariffs.html" class="btn btn-ghost btn-sm"><i data-i="edit" data-s="14"></i></a></div></div>
+      <div class="list-item"><span class="li-ico ico-amber"><i data-i="bolt"></i></span><div class="grow"><b>Energy</b><small>per kWh</small></div><b class="mono">S/ 0.68</b></div>
+      <div class="list-item"><span class="li-ico ico-blue"><i data-i="drop"></i></span><div class="grow"><b>Water</b><small>per m³</small></div><b class="mono">S/ 5.42</b></div>
+      <div class="list-item"><span class="li-ico ico-cyan"><i data-i="calendar"></i></span><div class="grow"><b>Period close</b><small>day of the month</small></div><b class="mono">30</b></div>
+      <div class="card-pad" style="border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px">
+        <b class="small">Open claim · REC-0024 (B-12)</b>
+        <span class="small muted">The tenant reports the unit was closed for 3 days.</span>
+        <a href="10-communication.html" class="btn btn-dark btn-sm">Review claim</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="backdrop"></div>
+<div class="modal ">
+  <div class="modal-head"><span class="li-ico ico-cyan"><i data-i="receipt"></i></span><div><h3>Generate billing · October 2026</h3><p>Calculation by unit based on actual measured consumption</p></div><span class="close"><i data-i="x" data-s="20"></i></span></div>
+  <div class="modal-body">
+  <div class="kv"><div><span>Units to bill</span><b>84</b></div><div><span>Period</span><b>01/10 – 30/10/2026</b></div><div><span>Total energy</span><b>12,480 kWh · S/ 8,860.80</b></div><div><span>Total water</span><b>684 m³ · S/ 3,707.28</b></div></div>
+  <div class="callout warn"><i data-i="alert" data-s="18"></i><span><b>1 unit with incomplete measurements:</b> C-07 (Librería El Saber) has no energy readings from 03/10 to 06/10 due to device technical fault. Review before confirming.</span></div>
+  <div class="check"><span class="box on"><i data-i="check" data-s="12" data-w="3"></i></span>I understand and want to generate billing for the remaining units</div>
+</div>
+  <div class="modal-foot"><a href="08-billing.html" class="btn btn-outline">Cancel</a><a href="08-billing.html" class="btn btn-primary">Confirm and generate</a></div>
+</div>
+</body>
+</html>

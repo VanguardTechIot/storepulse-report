@@ -1,0 +1,165 @@
+@startuml storepulse-iam-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Domain Layer Class Diagram
+
+package "User Account Management" {
+
+    class UserAccount <<Aggregate Root>> {
+        - userId: UserId
+        - email: Email
+        - passwordHash: PasswordHash
+        - role: Role
+        - status: UserStatus
+        + register(email: Email, password: String, role: Role): void
+        + signIn(password: String): void
+        + signOut(): void
+        + deactivate(): void
+        + isActive(): boolean
+    }
+
+    class UserId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class Email <<Value Object>> {
+        - value: String
+        + validate(): boolean
+    }
+
+    class PasswordHash <<Value Object>> {
+        - value: String
+    }
+
+    enum Role {
+        GALLERY_ADMINISTRATOR
+        TENANT
+    }
+
+    enum UserStatus {
+        ACTIVE
+        INACTIVE
+    }
+}
+
+package "Password Recovery" {
+
+    class PasswordRecovery <<Aggregate Root>> {
+        - passwordRecoveryId: UUID
+        - userId: UserId
+        - code: PasswordResetCode
+        - requestedAt: DateTime
+        - expiresAt: DateTime
+        - used: boolean
+        + generate(userId: UserId): void
+        + isExpired(): boolean
+        + validate(code: String): boolean
+        + markAsUsed(): void
+    }
+
+    class PasswordResetCode <<Value Object>> {
+        - value: String
+        + matches(code: String): boolean
+    }
+}
+
+package "Access Control" {
+
+    class UnauthorizedAccessAttempt <<Aggregate Root>> {
+        - attemptId: UUID
+        - userId: UserId
+        - attemptedRole: Role
+        - requiredRole: Role
+        - resource: String
+        - attemptedAt: DateTime
+        + record(userId: UserId, attemptedRole: Role, requiredRole: Role, resource: String): void
+    }
+}
+
+package "Repositories" {
+
+    interface IUserAccountRepository {
+        + save(user: UserAccount): void
+        + findById(id: UserId): UserAccount
+        + findByEmail(email: Email): UserAccount
+    }
+
+    interface IPasswordRecoveryRepository {
+        + save(recovery: PasswordRecovery): void
+        + findActiveByUserId(id: UserId): PasswordRecovery
+        + findByCode(code: PasswordResetCode): PasswordRecovery
+    }
+
+    interface IUnauthorizedAccessAttemptRepository {
+        + save(attempt: UnauthorizedAccessAttempt): void
+        + findByUserId(id: UserId): List<UnauthorizedAccessAttempt>
+    }
+}
+
+package "Domain Events" {
+
+    class UserRegisteredEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class UserSignedInEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class SessionEndedEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class PasswordResetRequestedEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class PasswordResetCodeGeneratedEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class PasswordChangedEvent <<Domain Event>> {
+        - userId: UserId
+        - occurredAt: DateTime
+    }
+
+    class UnauthorizedAccessAttemptLoggedEvent <<Domain Event>> {
+        - attemptId: UUID
+        - occurredAt: DateTime
+    }
+}
+
+UserAccount --> UserId
+UserAccount --> Email
+UserAccount --> PasswordHash
+UserAccount --> Role
+UserAccount --> UserStatus
+
+PasswordRecovery --> UserId
+PasswordRecovery --> PasswordResetCode
+
+UnauthorizedAccessAttempt --> UserId
+UnauthorizedAccessAttempt --> Role
+
+IUserAccountRepository ..> UserAccount
+IPasswordRecoveryRepository ..> PasswordRecovery
+IUnauthorizedAccessAttemptRepository ..> UnauthorizedAccessAttempt
+
+UserAccount ..> UserRegisteredEvent : raises
+UserAccount ..> UserSignedInEvent : raises
+UserAccount ..> SessionEndedEvent : raises
+PasswordRecovery ..> PasswordResetRequestedEvent : raises
+PasswordRecovery ..> PasswordResetCodeGeneratedEvent : raises
+PasswordRecovery ..> PasswordChangedEvent : raises
+UnauthorizedAccessAttempt ..> UnauthorizedAccessAttemptLoggedEvent : raises
+
+@enduml

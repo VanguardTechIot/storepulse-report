@@ -1,0 +1,53 @@
+@startuml storepulse-service-monitoring-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - REST API Components
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+
+    Component(telemetryController, "TelemetryController", "ASP.NET Core Controller", "Exposes endpoints for receiving and consulting telemetry.")
+
+    Component(measurementController, "MeasurementController", "ASP.NET Core Controller", "Exposes endpoints for measurements and consumption information.")
+
+    Component(monitoringController, "MonitoringController", "ASP.NET Core Controller", "Exposes endpoints for monitoring rules and thresholds.")
+
+    Component(alertController, "AlertController", "ASP.NET Core Controller", "Exposes endpoints for alert lifecycle management.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates telemetry, measurement, monitoring and alert commands.")
+
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Processes monitoring and operational queries.")
+
+    Component(domainModel, "Service Execution & Monitoring Domain", "Domain Layer", "Contains monitoring aggregates, entities, value objects and business rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements monitoring repository abstractions using Entity Framework Core.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores telemetry, measurements, monitoring rules and alerts.")
+
+Container(edgeApi, "Edge API", "Python, Flask", "Processes and forwards local IoT telemetry.")
+
+Rel(telemetryController, commandHandlers, "Invokes")
+
+Rel(measurementController, commandHandlers, "Invokes")
+
+Rel(monitoringController, commandHandlers, "Invokes")
+
+Rel(alertController, commandHandlers, "Invokes")
+
+Rel(commandHandlers, domainModel, "Executes domain operations")
+
+Rel(queryHandlers, domainModel, "Queries domain data")
+
+Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
+
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+Rel(telemetryController, edgeApi, "Receives telemetry from", "HTTPS/JSON")
+
+@enduml

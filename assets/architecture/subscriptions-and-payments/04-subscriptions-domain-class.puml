@@ -1,0 +1,249 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+title Domain Layer - Subscriptions and Payments
+
+package "Model.Aggregates" {
+  class SubscriptionPlan <<Aggregate Root>> {
+    - id : SubscriptionPlanId
+    - name : PlanName
+    - monitoredUnitLimit : MonitoredUnitLimit
+    - price : Money
+    - billingCycle : BillingCycle
+    - published : bool
+    - createdAt : DateTime
+    + Publish() : void
+    + Unpublish() : void
+    + CanBeDeleted() : bool
+    + AllowsUnits(count : int) : bool
+  }
+
+  class Subscription <<Aggregate Root>> {
+    - id : SubscriptionId
+    - galleryId : GalleryId
+    - galleryAdministratorId : GalleryAdministratorId
+    - subscriptionPlanId : SubscriptionPlanId
+    - status : SubscriptionStatus
+    - billingPeriod : BillingPeriod
+    - monitoredUnitCount : int
+    - createdAt : DateTime
+    - updatedAt : DateTime
+    + Request(planId : SubscriptionPlanId) : void
+    + Activate(period : BillingPeriod) : void
+    + Renew(period : BillingPeriod) : void
+    + Cancel() : void
+    + Expire() : void
+    + RegisterMonitoredUnit() : void
+    + HasReachedUnitLimit(limit : MonitoredUnitLimit) : bool
+    + IsActive() : bool
+  }
+
+  class Payment <<Aggregate Root>> {
+    - id : PaymentId
+    - subscriptionId : SubscriptionId
+    - amount : Money
+    - method : PaymentMethod
+    - status : PaymentStatus
+    - gatewayReference : GatewayReference
+    - registeredAt : DateTime
+    - resolvedAt : DateTime
+    + Register(amount : Money, method : PaymentMethod) : void
+    + Accept(reference : GatewayReference) : void
+    + Reject(reference : GatewayReference) : void
+    + IsResolved() : bool
+  }
+}
+
+package "Model.ValueObjects" {
+  class SubscriptionPlanId <<Value Object>> {
+    - value : Guid
+  }
+
+  class SubscriptionId <<Value Object>> {
+    - value : Guid
+  }
+
+  class PaymentId <<Value Object>> {
+    - value : Guid
+  }
+
+  class GalleryId <<Value Object>> {
+    - value : Guid
+  }
+
+  class GalleryAdministratorId <<Value Object>> {
+    - value : Guid
+  }
+
+  class PlanName <<Value Object>> {
+    - value : string
+    + IsValid() : bool
+  }
+
+  class MonitoredUnitLimit <<Value Object>> {
+    - value : int
+    + IsGreaterThanZero() : bool
+  }
+
+  class Money <<Value Object>> {
+    - amount : decimal
+    - currency : string
+    + IsNotNegative() : bool
+  }
+
+  class BillingPeriod <<Value Object>> {
+    - startDate : DateTime
+    - endDate : DateTime
+    + HasExpired(reference : DateTime) : bool
+    + ExtendBy(cycle : BillingCycle) : BillingPeriod
+  }
+
+  class GatewayReference <<Value Object>> {
+    - transactionId : string
+  }
+
+  enum SubscriptionStatus {
+    PENDING_PAYMENT
+    ACTIVE
+    CANCELLED
+    EXPIRED
+  }
+
+  enum PaymentStatus {
+    PENDING
+    ACCEPTED
+    REJECTED
+  }
+
+  enum PaymentMethod {
+    CREDIT_CARD
+    DEBIT_CARD
+    BANK_TRANSFER
+  }
+
+  enum BillingCycle {
+    MONTHLY
+    ANNUAL
+  }
+}
+
+package "Model.Events" {
+  class SubscriptionPlanPublishedEvent <<Domain Event>> {
+    + subscriptionPlanId : SubscriptionPlanId
+    + occurredOn : DateTime
+  }
+
+  class SubscriptionRequestedEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + subscriptionPlanId : SubscriptionPlanId
+    + occurredOn : DateTime
+  }
+
+  class PaymentRegisteredEvent <<Domain Event>> {
+    + paymentId : PaymentId
+    + subscriptionId : SubscriptionId
+    + occurredOn : DateTime
+  }
+
+  class PaymentFailedEvent <<Domain Event>> {
+    + paymentId : PaymentId
+    + subscriptionId : SubscriptionId
+    + occurredOn : DateTime
+  }
+
+  class SubscriptionActivatedEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + galleryId : GalleryId
+    + monitoredUnitLimit : MonitoredUnitLimit
+    + occurredOn : DateTime
+  }
+
+  class MonitoredUnitLimitReachedEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + occurredOn : DateTime
+  }
+
+  class SubscriptionRenewedEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + billingPeriod : BillingPeriod
+    + occurredOn : DateTime
+  }
+
+  class SubscriptionCancelledEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + occurredOn : DateTime
+  }
+
+  class SubscriptionExpiredEvent <<Domain Event>> {
+    + subscriptionId : SubscriptionId
+    + galleryId : GalleryId
+    + occurredOn : DateTime
+  }
+}
+
+package "Model.Repositories" {
+  interface ISubscriptionPlanRepository <<Repository>> {
+    + FindById(id : SubscriptionPlanId) : SubscriptionPlan
+    + FindAllPublished() : List<SubscriptionPlan>
+    + ExistsByName(name : PlanName) : bool
+    + Save(plan : SubscriptionPlan) : void
+  }
+
+  interface ISubscriptionRepository <<Repository>> {
+    + FindById(id : SubscriptionId) : Subscription
+    + FindActiveByGalleryId(galleryId : GalleryId) : Subscription
+    + FindExpiredBefore(reference : DateTime) : List<Subscription>
+    + Save(subscription : Subscription) : void
+  }
+
+  interface IPaymentRepository <<Repository>> {
+    + FindById(id : PaymentId) : Payment
+    + FindBySubscriptionId(id : SubscriptionId) : List<Payment>
+    + Save(payment : Payment) : void
+  }
+}
+
+package "Services.Acl" {
+  interface ISubscriptionsFacade <<ACL>> {
+    + IsGalleryActive(galleryId : GalleryId) : bool
+    + GetMonitoredUnitLimit(galleryId : GalleryId) : MonitoredUnitLimit
+  }
+}
+
+SubscriptionPlan "1" *-- "1" SubscriptionPlanId : identificado por >
+SubscriptionPlan "1" *-- "1" PlanName : nombrado como >
+SubscriptionPlan "1" *-- "1" MonitoredUnitLimit : limitado a >
+SubscriptionPlan "1" *-- "1" Money : cuesta >
+SubscriptionPlan "1" --> "1" BillingCycle : se cobra cada >
+
+Subscription "1" *-- "1" SubscriptionId : identificado por >
+Subscription "1" *-- "1" BillingPeriod : vigente durante >
+Subscription "1" --> "1" SubscriptionStatus : se encuentra en >
+Subscription "1" --> "1" GalleryId : contratada para >
+Subscription "1" --> "1" GalleryAdministratorId : contratada por >
+Subscription "0..*" --> "1" SubscriptionPlan : suscrita a >
+
+Payment "1" *-- "1" PaymentId : identificado por >
+Payment "1" *-- "1" Money : cobra >
+Payment "1" *-- "0..1" GatewayReference : confirmado con >
+Payment "1" --> "1" PaymentStatus : resuelto como >
+Payment "1" --> "1" PaymentMethod : pagado con >
+Payment "0..*" --> "1" Subscription : sustenta >
+
+SubscriptionPlan ..> SubscriptionPlanPublishedEvent : emite >
+Subscription ..> SubscriptionRequestedEvent : emite >
+Subscription ..> SubscriptionActivatedEvent : emite >
+Subscription ..> MonitoredUnitLimitReachedEvent : emite >
+Subscription ..> SubscriptionRenewedEvent : emite >
+Subscription ..> SubscriptionCancelledEvent : emite >
+Subscription ..> SubscriptionExpiredEvent : emite >
+Payment ..> PaymentRegisteredEvent : emite >
+Payment ..> PaymentFailedEvent : emite >
+PaymentRegisteredEvent ..> Subscription : dispara activacion de >
+
+ISubscriptionPlanRepository ..> SubscriptionPlan : gestiona >
+ISubscriptionRepository ..> Subscription : gestiona >
+IPaymentRepository ..> Payment : gestiona >
+ISubscriptionsFacade ..> Subscription : consulta >
+
+@enduml

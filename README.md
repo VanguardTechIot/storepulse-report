@@ -172,7 +172,6 @@ Para insertar imágenes en el informe, se deben usar rutas relativas desde el ar
 | u202022387 | Curi Marcelo, Angelo Marcio |
 | u202310837 | Esquivel León, Miguel Juan Diego |
 | u201819674 | Diaz Gutierrez, Henry Kevin |
-| u202214864 | Quiroz Caceres, Adrian |
 | u20191b935 | Carranza Tesén, Joaquín Enrique |
 
 StorePulse nace frente a un problema real: galerías comerciales que dependen de inspecciones manuales esporádicas y cobros estimados, generando conflictos constantes entre dueños e inquilinos y dejando expuestos locales sin monitoreo de seguridad confiable. Este informe documenta el proceso de análisis, diseño y validación de una solución IoT orientada a transformar esa realidad, conectando sensores, software y decisiones operativas en un mismo ecosistema.

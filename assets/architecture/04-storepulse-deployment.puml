@@ -1,0 +1,73 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Deployment.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+
+Person(visitor, "Visitor", "User who browses the public information of StorePulse.")
+
+Person(galleryAdministrator, "Gallery Administrator", "Responsible for supervising the gallery, monitoring resources, reviewing alerts and managing operational information.")
+
+Person(tenant, "Tenant", "User who monitors their premises, checks consumption and billing information, and receives alerts.")
+
+Deployment_Node(gallery, "Commercial Gallery", "Physical Infrastructure", "Physical infrastructure where IoT devices and Edge processing are deployed.") {
+
+    Deployment_Node(iotNode, "IoT Device", "ESP32", "Physical devices, sensors and meters used to collect security, environmental and consumption information.") {
+
+        Container(embeddedApplication, "Embedded Application", "C++", "Collects information from sensors and meters and transmits IoT data to the Edge environment.")
+    }
+
+    Deployment_Node(edgeNode, "Edge Device", "Local Computer / Raspberry Pi", "Local infrastructure responsible for Edge processing.") {
+
+        Container(edgeApi, "Edge API", "Python, Flask", "Receives, validates and processes IoT information in the Edge environment before synchronizing it with the central platform.")
+    }
+}
+
+Deployment_Node(cloud, "Cloud", "Cloud Infrastructure", "Central infrastructure where the StorePulse platform is deployed.") {
+
+    Deployment_Node(appServer, "Application Server", "Cloud Server", "Server responsible for executing the central StorePulse backend.") {
+
+        Container(restApi, "REST API", "ASP.NET Core, .NET", "Central backend application responsible for the business logic and services of StorePulse.")
+    }
+
+    Deployment_Node(databaseServer, "Database Server", "MySQL Server", "Server responsible for persistent StorePulse data.") {
+
+        ContainerDb(database, "Database", "MySQL", "Stores users, premises, resources, measurements, consumption, security events, alerts, billing and other StorePulse information.")
+    }
+
+    Deployment_Node(webServer, "Web Server", "Web Server", "Server responsible for publishing the public StorePulse website.") {
+
+        Container(landingPage, "Landing Page", "HTML5, CSS3, JavaScript", "Public webpage providing information about StorePulse and access to the platform.")
+    }
+}
+
+Deployment_Node(adminComputer, "Administrator Computer", "Personal Computer", "Computer used by the Gallery Administrator.") {
+
+    Container(webApplication, "Web Application", "Angular", "Application used by the Gallery Administrator to supervise the gallery, monitor resources, review alerts and manage operational information.")
+}
+
+Deployment_Node(tenantMobile, "Tenant Mobile Device", "Smartphone", "Mobile device used by the Tenant.") {
+
+    Container(mobileApplication, "Mobile Application", "Flutter, Dart", "Application used by Tenants to monitor their premises, check consumption and billing information, and receive alerts.")
+}
+
+Rel(visitor, landingPage, "Browses public information", "HTTPS")
+
+Rel(galleryAdministrator, webApplication, "Uses", "HTTPS")
+
+Rel(tenant, mobileApplication, "Uses", "HTTPS")
+
+Rel(embeddedApplication, edgeApi, "Sends telemetry and events", "HTTP/JSON")
+
+Rel(edgeApi, restApi, "Synchronizes processed information", "HTTPS/JSON")
+
+Rel(webApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+Rel(mobileApplication, restApi, "Consumes REST services", "HTTPS/JSON")
+
+Rel(restApi, database, "Reads and writes information", "Entity Framework Core")
+@enduml

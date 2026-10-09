@@ -29,3 +29,4 @@ El Ubiquitous Language define un conjunto de términos propios del dominio de St
 | **Local Event** | Evento relacionado específicamente con un local comercial determinado. |
 | **Gallery Event** | Evento que afecta o puede afectar a varias áreas o locales de la galería comercial. |
 | **Property Owner** | Persona o entidad propietaria de uno o más locales o de la infraestructura de la galería comercial. |
+| **Connectivity** | Estado de conexión de red de los dispositivos y sistemas de la galería, cuya pérdida (*Connectivity Lost*) interrumpe la capacidad de respuesta de los módulos que dependen de ella, como el de seguridad. |

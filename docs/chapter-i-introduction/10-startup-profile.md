@@ -1,8 +1,16 @@
 # Capítulo I: Introducción
 
-En esta sección, se presenta la visión general sobre el origen de VanguardTech, los desafíos que impulsaron su creación y la propuesta de valor que ofrecemos al sector de bienes raíces comerciales. Además, se detalla la misión, visión y el perfil profesional del equipo detrás de esta innovación tecnológica.
+El presente proyecto tiene como finalidad el diseño, desarrollo e implementación de una solución tecnológica basada en el enfoque de Internet de las Cosas (IoT), integrando dispositivos físicos, procesamiento en el edge y servicios en la nube, con el objetivo de resolver problemáticas reales en el sector comercial urbano. Esta solución se construye bajo un enfoque de ingeniería de software moderna, incorporando metodologías ágiles, diseño centrado en el usuario (Lean UX) y arquitecturas empresariales escalables orientadas a servicios.
+
+Actualmente, las galerías comerciales enfrentan diversos problemas relacionados con la vigilancia, la detección tardía de incidentes y el cálculo estimado de los servicios básicos. Estos problemas son más frecuentes en lugares donde todavía se utilizan procesos manuales o sistemas poco digitalizados. Como consecuencia, pueden producirse pérdidas económicas, riesgos para la seguridad de las personas y conflictos entre los administradores de las galerías y sus inquilinos.
+
+Frente a este escenario, el presente proyecto propone desarrollar un ecosistema digital que permita automatizar la detección de eventos y la medición del consumo mediante dispositivos IoT. La información obtenida será procesada en el edge y mostrada a través de aplicaciones web y móviles, facilitando una gestión más segura, transparente y basada en datos.
+
+En esta sección se presenta una visión general de VanguardTech, incluyendo su origen, los problemas que motivaron su creación y la propuesta de valor que ofrece al sector de bienes raíces comerciales. También se presentan la misión, la visión y el perfil profesional del equipo responsable de desarrollar esta solución tecnológica.
 
 ## 1.1. Startup Profile
+
+La presente sección describe el contexto general de la startup encargada de desarrollar la solución propuesta. Se presenta una visión general de la organización, su enfoque tecnológico y su propuesta de valor. Asimismo, se describen los integrantes del equipo, sus perfiles profesionales y los roles que cumplen dentro del proyecto.
 
 ### 1.1.1. Descripción de la Startup
 
@@ -26,8 +34,6 @@ Consolidarnos en los próximos cinco años como la startup líder en la transfor
 | :---: | :---: | :---: | :---: |:---:|
 | ![Renzo Araujo](../../assets/team/renzo-araujo.png) | Renzo José Araujo Ingunza | U202113612 | Ingeniería de Software | Soy estudiante de la ingeniería de Software con conocimientos de desarrollo fullstack y arquitectura de software. Me desempeño por ser un buen colaborador y tener una actitud proactiva en el trabajo en equipo. | 
 | ![Sebastián Córdova](../../assets/team/sebastian-cordova.jpeg) | Sebastián Córdova Valdivia | U202111041 | Ingeniería de Software | Estudiante de Ingeniería de Software con interés en el desarrollo full-stack y el análisis de información. Busca especializarse en ciberseguridad, en las áreas de Pentesting y SOC, con el objetivo de diseñar sistemas eficientes y seguros. |
-| ![Angelo Curi](../../assets/team/angelo-curi.png) | Angelo Marcio Curi Marcelo | U202022387 | Ingeniería de Software | - |
-| ![Miguel Esquirva](../../assets/team/miguel-esquirva.png) | Miguel Juan Diego Esquirva León | U202310837 | Ingeniería de Software | - |
+| ![Angelo Curi](../../assets/team/angelo-curi.png) | Angelo Marcio Curi Marcelo | U202022387 | Ingeniería de Software | Soy Angelo Curi Marcelo, con conocimientos en lenguajes de programación como C++ y Python. Además, manejo herramientas que apoyan el desarrollo eficiente de proyectos de software. Siempre me esfuerzo por adquirir nuevas habilidades y mejorar mis competencias técnicas para afrontar los desafíos del desarrollo de software. Me considero una persona responsable, comprometida y enfocada en la calidad del trabajo. Tengo la capacidad de adaptarme rápidamente a nuevas tecnologías y entornos. Cumplo con los plazos establecidos y tengo una gran disposición para aprender y colaborar en equipo. |
 | ![Henry Diaz](../../assets/team/henry-diaz.png) | Henry Kevin Diaz Gutierrez | U201819674 | Ingeniería de Software | Estudiante de Ingenieria de Software. Me caracterizo por ser creativo , cumplir con lo que se me brinda y ayudar a resolver problemas si se presenta. Desde siempre me intereso el tema de los videojuegos y de el tipo de diseño que se empleaba, eso hizo que me guste el desarrollo de software. |
-| ![Adrian Quiroz](../../assets/team/adrian-quiroz.png) | Adrian Quiroz Caceres | U202214864 | Ingeniería de Software | - |
-| ![Joaquín Carranza](../../assets/team/joaquin-carranza.png) | Joaquín Enrique Carranza Tesén | U20191B935 | Ingeniería de Software | - |
+| ![Joaquín Carranza](../../assets/team/joaquin-carranza.png) | Joaquín Enrique Carranza Tesén | U20191B935 | Ingeniería de Software | Hola, soy Joaquín Carranza. Tengo 25 años y actualmente curso el septimo ciclo de la carrera de Ingeniería de Software. Me gusta la tecnología y la forma en que ayuda a las personas a resolver problemas de manera más rápida y eficiente. Me interesa especialmente el manejo de datos y la ciberseguridad. Siento que puedo aportar a mi equipo ideas desde otra perspectiva, ya que siempre me cuestiono cómo se podría mejorar el producto o hacia qué objetivo estamos apuntando. |

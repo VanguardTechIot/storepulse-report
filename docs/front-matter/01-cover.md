@@ -15,7 +15,7 @@ NRC
 
 ### **8741**
 
-## Informe del Trabajo Final
+### Informe del Trabajo Final
 
 Docente
 
@@ -41,7 +41,7 @@ Proyecto
     <th style="border: none; text-align: left;">Apellidos y Nombres</th>
   </tr>
   <tr>
-    <td style="border: none; text-align: left;">u202113612</td>
+    <td style="border: none; text-align: left;">U202113612</td>
     <td style="border: none; text-align: left;">Araujo Ingunza, Renzo José</td>
   </tr>
   <tr>
@@ -63,10 +63,6 @@ Proyecto
   <tr>
     <td style="border: none; text-align: left;">u202310837</td>
     <td style="border: none; text-align: left;">Esquivel León, Miguel Juan Diego</td>
-  </tr>
-  <tr>
-    <td style="border: none; text-align: left;">u202214864</td>
-    <td style="border: none; text-align: left;">Quiroz Caceres, Adrian</td>
   </tr>
 </table>
 

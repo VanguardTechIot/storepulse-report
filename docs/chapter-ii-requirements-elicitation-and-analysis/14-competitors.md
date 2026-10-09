@@ -1,6 +1,12 @@
 # CAPÍTULO II: REQUIREMENTS ELICITATION & ANALYSIS
 
+En este capítulo, el equipo se enfoca en comprender las necesidades reales de los administradores e inquilinos de galerías comerciales antes de definir los requisitos de StorePulse. Para ello, se desarrolla un proceso de Obtención y Análisis de Requisitos que permite contrastar los supuestos planteados durante el Lean UX Process con evidencia obtenida de los usuarios y del entorno competitivo. De esta manera, se busca determinar si los problemas relacionados con la seguridad, el monitoreo de los locales y la gestión de los servicios básicos representan necesidades reales y relevantes para los segmentos objetivo de StorePulse.
+
 ## 2.1. Competidores
+
+Antes de definir los requisitos de StorePulse, es necesario conocer las alternativas que actualmente existen para atender las necesidades de seguridad y monitoreo en establecimientos comerciales. El estudio de estas alternativas permite identificar las funcionalidades que ofrecen, sus principales propuestas de valor y las necesidades que aún presentan oportunidades de atención.
+
+Este análisis permitirá identificar oportunidades de diferenciación para StorePulse, especialmente en la integración del monitoreo de intrusiones, la detección temprana de humo y la medición individual del consumo de servicios básicos dentro de galerías comerciales.
 
 ### 2.1.1. Análisis competitivo
 
@@ -114,7 +120,9 @@ El objetivo del análisis es responder:
 
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
-A partir del análisis competitivo realizado, VanguardTech plantea estrategias y tácticas orientadas a diferenciar StorePulse frente a las soluciones de seguridad y videovigilancia existentes. Estas estrategias buscan aprovechar las oportunidades identificadas, reducir las debilidades propias de una startup y responder a las fortalezas y amenazas de competidores consolidados.
+A partir del análisis competitivo y del análisis FODA realizado, VanguardTech plantea un conjunto de estrategias y tácticas preliminares para posicionar StorePulse frente a las soluciones existentes de seguridad, monitoreo y videovigilancia. Estas acciones buscan aprovechar las oportunidades identificadas en el mercado, utilizar las fortalezas de la propuesta, reducir las debilidades propias de una startup y responder a las amenazas y fortalezas de competidores consolidados.
+
+Las estrategias se orientan principalmente hacia la diferenciación por especialización, la integración de servicios y la generación de valor para los administradores e inquilinos de galerías comerciales. De esta manera, StorePulse no busca competir únicamente mediante precio o cantidad de funcionalidades, sino mediante una propuesta adaptada al contexto particular de las galerías comerciales.
 
 #### Estrategia 1: Diferenciación mediante la integración de servicios
 
@@ -179,3 +187,72 @@ Debido a que VanguardTech es una startup con una marca y trayectoria comercial a
 - Recoger retroalimentación de administradores e inquilinos durante las primeras implementaciones.
 - Mejorar progresivamente la solución a partir de los resultados obtenidos.
 - Ampliar posteriormente la solución hacia otras galerías y nuevos servicios.
+
+**Matriz CAME para el desarrollo de estrategias a partir del análisis FODA**
+
+La siguiente matriz permite relacionar las fortalezas y debilidades de VanguardTech con las oportunidades y amenazas identificadas en el análisis FODA. A partir de estos cruces se plantean estrategias ofensivas (FO), defensivas (FA), de reorientación (DO) y de supervivencia (DA).
+
+<table border="1" cellpadding="10" cellspacing="0" style="margin-left: auto; margin-right: auto; font-family: sans-serif;">
+<tr>
+<td colspan="2" style="text-align: center;"><b>Análisis FODA cruzado</b></td>
+<td style="text-align: center;"><b>Oportunidades (O)</b></td>
+<td style="text-align: center;"><b>Amenazas (A)</b></td>
+</tr>
+
+<tr>
+<td rowspan="1"><b>Fortalezas (F)</b></td>
+<td>
+1. Integración de seguridad, detección temprana de humo y medición individual de servicios.<br>
+2. Especialización en galerías comerciales.<br>
+3. Información diferenciada para administradores e inquilinos.<br>
+4. Aplicaciones Web y Mobile.<br>
+5. Procesamiento local mediante Edge Computing.
+</td>
+
+<td>
+<b>FO — Estrategias ofensivas</b><br><br>
+1. Aprovechar la especialización en galerías comerciales y la integración de servicios para posicionar StorePulse como una solución integral ante la creciente digitalización de este tipo de establecimientos.<br><br>
+2. Utilizar la medición individual de servicios para atender la necesidad de mayor transparencia en el consumo y diferenciar la propuesta frente a soluciones centradas principalmente en seguridad.<br><br>
+3. Aprovechar las capacidades Web, Mobile y Edge Computing para ofrecer una solución IoT integral y ampliar progresivamente su implementación en nuevas galerías.
+</td>
+
+<td>
+<b>FA — Estrategias defensivas</b><br><br>
+1. Utilizar la especialización en galerías comerciales para diferenciar StorePulse frente a competidores consolidados con una oferta más generalizada.<br><br>
+2. Destacar la integración de seguridad, detección de humo y medición de servicios para evitar competir únicamente mediante precio frente a empresas con mayor trayectoria y reconocimiento.<br><br>
+3. Aprovechar Edge Computing para reducir el impacto de posibles interrupciones de conectividad y fortalecer la continuidad operativa de la solución.<br><br>
+4. Utilizar la experiencia diferenciada por roles para facilitar la adopción y atender las necesidades específicas de administradores e inquilinos.
+</td>
+</tr>
+
+<tr>
+<td><b>Debilidades (D)</b></td>
+<td>
+1. Startup con bajo reconocimiento de marca.<br>
+2. Recursos financieros y operativos limitados frente a competidores consolidados.<br>
+3. Solución en etapa de desarrollo y validación.<br>
+4. Trayectoria comercial aún limitada.
+</td>
+
+<td>
+<b>DO — Estrategias de reorientación</b><br><br>
+1. Aprovechar la creciente adopción de soluciones IoT para realizar proyectos piloto que permitan validar StorePulse y obtener evidencia de su valor.<br><br>
+2. Utilizar los resultados de los primeros pilotos y la retroalimentación de los usuarios para fortalecer el reconocimiento de la marca.<br><br>
+3. Priorizar las funcionalidades con mayor valor para los usuarios antes de ampliar el alcance de la solución, optimizando los recursos disponibles.<br><br>
+4. Establecer alianzas con administradores de galerías y proveedores tecnológicos para facilitar las primeras implementaciones.
+</td>
+
+<td>
+<b>DA — Estrategias de supervivencia</b><br><br>
+1. Mantener un alcance inicial controlado para reducir el impacto de los recursos financieros y operativos limitados.<br><br>
+2. Priorizar las funcionalidades principales de seguridad, detección de humo y medición de servicios antes de incorporar nuevas capacidades.<br><br>
+3. Aplicar pruebas de funcionamiento y mecanismos de respaldo para reducir los riesgos asociados a los dispositivos IoT, la energía y la conectividad.<br><br>
+4. Implementar un proceso de soporte y atención de incidentes para reducir el impacto de posibles fallos durante las primeras implementaciones.<br><br>
+5. Mantener un crecimiento progresivo que permita reducir la exposición financiera y operativa durante la entrada al mercado.
+</td>
+</tr>
+</table>
+
+En conjunto, la matriz FODA cruzada permite traducir el análisis realizado en líneas de acción para StorePulse. Las estrategias resultantes buscan aprovechar las oportunidades del mercado, utilizar las fortalezas de la solución, reducir las debilidades propias de una startup y afrontar las amenazas del entorno competitivo.
+
+A partir de este análisis, VanguardTech plantea competir principalmente mediante la **especialización en galerías comerciales, la integración de servicios, la transparencia de la información y la continuidad operativa**, evitando basar su posicionamiento únicamente en el precio o en la cantidad de funcionalidades ofrecidas. Estas estrategias y tácticas servirán como base para orientar las siguientes actividades de **obtención y análisis de requisitos** de StorePulse.

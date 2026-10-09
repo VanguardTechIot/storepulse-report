@@ -1,0 +1,25 @@
+@startuml storepulse-resource-asset-mobile-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - Mobile Components
+
+Container_Boundary(mobileApp, "Mobile Application - Flutter") {
+
+    Component(assetManagementUI, "Resource & Asset UI", "Flutter, Dart", "Provides screens for consulting resources and associated assets.")
+
+    Component(assetService, "Asset Service", "Dart", "Consumes REST services for resource and asset information.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(assetManagementUI, assetService, "Uses")
+
+Rel(assetService, restApi, "Consumes resource and asset services", "HTTPS/JSON")
+
+@enduml

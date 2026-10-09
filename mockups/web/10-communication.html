@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Communication</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+<style>.msg{max-width:72%;padding:12px 14px;border-radius:12px;font-size:14px;line-height:1.5;display:flex;flex-direction:column;gap:6px}.msg span{font-size:11px;align-self:flex-end}.msg.in span{color:var(--muted)}.msg.in{background:var(--card);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}.msg.out{background:var(--navy);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.msg.out span{color:#CBD5E1}.msg .file{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:12px;background:var(--bg)}</style>
+</head>
+<body data-page="communication" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Gallery Central #04 / Communication</div><h1>Communication</h1><p>Tenant messages and claims, and gallery announcements.</p></div>
+    <div class="actions"><span class="btn btn-primary"><i data-i="megaphone" data-s="16"></i>New announcement</span></div>
+  </div>
+  <div class="card" style="display:flex;min-height:700px">
+    <div style="width:300px;border-right:1px solid var(--border);display:flex;flex-direction:column">
+      <div style="padding:14px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:10px">
+        <div class="tabs" style="gap:0"><span class="on" style="flex:1;text-align:center;padding:6px 8px">Messages</span><span style="flex:1;text-align:center;padding:6px 8px">Claims</span><span style="flex:1;text-align:center;padding:6px 8px">Announcements</span></div>
+        <div class="search" style="width:100%;background:var(--card)"><i data-i="search" data-s="16"></i>Search tenant…</div>
+      </div>
+      <div class="list-item" style="background:var(--cyan-25);align-items:flex-start;padding:14px 16px"><div class="avatar">AS</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Ana Salazar</b><span class="badge b-violet nodot" style="padding:1px 8px;font-size:11px">Claim</span><span class="time" style="margin-left:auto">10:24</span></div><small>B-12 · Ópticas Visión</small><small style="color:var(--slate);font-weight:600">The water consumption does not match…</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">RH</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Rosa Huamán</b><span class="time" style="margin-left:auto">09:58</span></div><small>A-03 · Calzados Roma</small><small style="color:var(--slate);font-weight:600">Why did I receive a consumption alert?</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">MT</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Miguel Torres</b><span class="time" style="margin-left:auto">Yesterday</span></div><small>B-09 · Joyería Inca Gold</small><small style="color:var(--slate);">Thanks, I already registered the payment.</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">LP</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Lucía Paredes</b><span class="badge b-green nodot" style="padding:1px 8px;font-size:11px">Resuelto</span><span class="time" style="margin-left:auto">Yesterday</span></div><small>A-01 · Boutique Lucía</small><small style="color:var(--slate);">Perfect, I’ll stay alert.</small></div></div><div class="list-item" style="align-items:flex-start;padding:14px 16px"><div class="avatar">JQ</div><div class="grow"><div style="display:flex;align-items:center;gap:6px"><b style="font-size:13px">Jorge Quispe</b><span class="time" style="margin-left:auto">Lun</span></div><small>A-02 · TecnoCell Perú</small><small style="color:var(--slate);">When is the fumigation?</small></div></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+      <div class="card-head"><div class="avatar">AS</div><div><h3>Ana Salazar</h3><p>Unit B-12 · Claim about REC-0024</p></div><div class="right"><span class="badge b-violet">Pending claim</span></div></div>
+      <div style="flex:1;padding:24px;display:flex;flex-direction:column;gap:14px;background:var(--bg)">
+        <div style="text-align:center"><span class="badge b-gray nodot">Today</span></div>
+        <div class="msg in">Good morning. The September water bill does not match: the unit was closed for 3 days due to inventory and they charged me 3.3 m³.<span>10:12</span></div>
+        <div class="msg in">Attached is the closure notice.<div class="file"><i data-i="clip" data-s="15"></i>closure-inventory.pdf · 210 KB</div><span>10:13</span></div>
+        <div class="msg out">Hello Ana, we reviewed the telemetry from meter MTR-W-2012: between 14 and 16/09 there was continuous flow of 0.2 L/min while the unit was closed, which suggests a possible leak.<span>10:20 · Read</span></div>
+        <div class="msg in">I understand, I didn’t know. I’ll review it today.<span>10:24</span></div>
+      </div>
+      <div style="padding:14px 20px;border-top:1px solid var(--border);display:flex;gap:10px;align-items:center">
+        <span class="icon-btn"><i data-i="clip" data-s="18"></i></span>
+        <div class="input ph" style="flex:1">Write a response…</div>
+        <span class="btn btn-primary" style="height:44px"><i data-i="send" data-s="16"></i>Send</span>
+      </div>
+    </div>
+    <div style="width:310px;border-left:1px solid var(--border);display:flex;flex-direction:column">
+      <div class="card-head"><div><h3>Consumption breakdown</h3><p>Unit B-12 · September 2026</p></div></div>
+      <div class="card-pad" style="display:flex;flex-direction:column;gap:14px">
+        <div class="kv"><div><span>Energy</span><b>286.1 kWh</b><span>S/ 194.55</span></div><div><span>Water</span><b>3.3 m³</b><span>S/ 17.89</span></div><div><span>Initial water reading</span><b class="mono">1,204.6 m³</b></div><div><span>Final water reading</span><b class="mono">1,207.9 m³</b></div></div>
+        <div><div class="small muted" style="margin-bottom:6px">Daily water consumption · 10 – 21/09</div><div style="display:flex;align-items:flex-end;gap:3px;height:56px"><i style="flex:1;height:62%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:58%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:64%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:60%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:22%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:21%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:23%;background:var(--amber);border-radius:2px;opacity:.85"></i><i style="flex:1;height:61%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:65%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:59%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:63%;background:var(--blue);border-radius:2px;opacity:.85"></i><i style="flex:1;height:60%;background:var(--blue);border-radius:2px;opacity:.85"></i></div><div class="legend" style="margin-top:6px"><span><i style="background:var(--amber)"></i>Unit closed</span></div></div>
+        <div class="callout info"><i data-i="receipt" data-s="18"></i><span>Formula: 3.3 m³ × S/ 5.42 = S/ 17.89. Current rate since 01/09.</span></div>
+        <div class="field"><label>Resolution <span class="req">*</span></label><div class="input" style="justify-content:space-between">The charge is maintained<i data-i="chevdown" data-s="16" style="color:var(--muted)"></i></div></div>
+        <span class="btn btn-dark btn-block"><i data-i="check" data-s="16"></i>Resolve claim</span>
+        <span class="hint" style="text-align:center">The tenant will receive the response and the claim will become Resolved.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

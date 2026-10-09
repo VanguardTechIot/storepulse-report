@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Security & Incidents</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="security" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Gallery Central #04 / Security &amp; Incidents</div><h1>Security and incidents</h1><p>Security status of each unit, intrusion and smoke alerts, and incident history.</p></div>
+    <div class="actions"><span class="btn btn-outline"><i data-i="download" data-s="16"></i>Export history</span></div>
+  </div>
+  <div class="card" style="border:1.5px solid var(--red);background:var(--red-50);box-shadow:none">
+    <div class="card-pad" style="display:flex;align-items:center;gap:20px">
+      <span class="li-ico" style="width:56px;height:56px;border-radius:14px;background:var(--red-fill);color:#fff"><i data-i="door" data-s="28"></i></span>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:10px"><span class="badge b-solid-red">Pending</span><span class="mono small muted">INC-0412 · SP-ESP32-0452</span></div>
+        <h2 style="font-size:22px;margin-top:6px">Intrusion detected in Unit B-12 — verification required immediately</h2>
+        <div class="small" style="margin-top:2px;color:var(--slate)">Magnetic sensor activated outside operating hours (09:00 – 21:00) · 06/10/2026 22:41:07 · Tenant notified</div>
+      </div>
+      <div style="text-align:center;padding:0 24px;border-left:1px solid var(--border)">
+        <div class="small bold" style="color:var(--slate)">UNCONFIRMED</div>
+        <div class="mono" style="font-size:34px;font-weight:600;color:var(--red-t);line-height:1.2">01:48</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px"><a href="09a-incident-detail.html" class="btn btn-danger"><i data-i="checkcircle" data-s="16"></i>Confirm attention</a><a href="09a-incident-detail.html" class="btn btn-outline">View Details</a></div>
+    </div>
+  </div>
+  <div class="grid g-4">
+    <div class="card kpi"><div class="top"><span class="ico ico-green"><i data-i="shield"></i></span>Units without incidents</div><div class="val">86</div><div class="delta muted">of 92 monitored</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-red"><i data-i="alert"></i></span>Active incidents</div><div class="val">1</div><div class="delta down">Pending confirmation</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-violet"><i data-i="wifioff"></i></span>Units without monitoring</div><div class="val">5</div><div class="delta muted">3 disconnected · 2 in maintenance</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-cyan"><i data-i="timer"></i></span>Average time to confirm</div><div class="val">3 min 38 s</div><div class="delta muted">Last 30 days</div></div>
+  </div>
+  <div class="row">
+    <div class="card grow">
+      <div class="card-head"><div><h3>Incident history</h3><p>Type, location, date, time, and status</p></div></div>
+      <div class="toolbar"><div class="search" style="width:220px"><i data-i="search" data-s="16"></i>Search incident…</div><div class="tabs"><span class="on">All</span><span>Intrusión</span><span>Humo</span><span>Manual</span></div><span class="select" style="margin-left:auto">Status: All<i data-i="chevdown" data-s="16"></i></span></div>
+      <table><thead><tr><th>Incident</th><th>Location</th><th class="sort">Date / time<span class="arrow"><i data-i="chevdown" data-s="14" data-w="2.2"></i></span></th><th>Confirmed in</th><th>Status</th><th></th></tr></thead><tbody><tr class="hover"><td><span style="display:flex;align-items:center;gap:10px"><span class="li-ico ico-red" style="width:30px;height:30px"><i data-i="door" data-s="16"></i></span><span><b>Intrusión</b><span class="sub mono">INC-0412</span></span></span></td><td style="white-space:nowrap"><b>Unit B-12</b><span class="sub">Ópticas Visión</span></td><td class="mono" style="white-space:nowrap">06/10/2026<span class="sub">22:41</span></td><td class="mono">—</td><td><span class="badge b-red">Pending</span></td><td><div class="row-actions"><a href="09a-incident-detail.html" title="View Details"><span><i data-i="eye" data-s="15"></i></span></a></div></td></tr><tr class=""><td><span style="display:flex;align-items:center;gap:10px"><span class="li-ico ico-red" style="width:30px;height:30px"><i data-i="flame" data-s="16"></i></span><span><b>Humo</b><span class="sub mono">INC-0411</span></span></span></td><td style="white-space:nowrap"><b>Unit C-03</b><span class="sub">Comida Rápida Max</span></td><td class="mono" style="white-space:nowrap">05/10/2026<span class="sub">18:05</span></td><td class="mono">1:52 min</td><td><span class="badge b-green">Resuelto</span></td><td><div class="row-actions"><a href="09a-incident-detail.html" title="View Details"><span><i data-i="eye" data-s="15"></i></span></a></div></td></tr><tr class=""><td><span style="display:flex;align-items:center;gap:10px"><span class="li-ico ico-red" style="width:30px;height:30px"><i data-i="door" data-s="16"></i></span><span><b>Intrusión</b><span class="sub mono">INC-0410</span></span></span></td><td style="white-space:nowrap"><b>Common area</b><span class="sub">North corridor</span></td><td class="mono" style="white-space:nowrap">04/10/2026<span class="sub">02:14</span></td><td class="mono">3:05 min</td><td><span class="badge b-green">Resuelto</span></td><td><div class="row-actions"><a href="09b-incident-common-area.html" title="View Details"><span><i data-i="eye" data-s="15"></i></span></a></div></td></tr><tr class=""><td><span style="display:flex;align-items:center;gap:10px"><span class="li-ico ico-red" style="width:30px;height:30px"><i data-i="door" data-s="16"></i></span><span><b>Intrusión</b><span class="sub mono">INC-0409</span></span></span></td><td style="white-space:nowrap"><b>Unit A-09</b><span class="sub">Perfumería Aroma</span></td><td class="mono" style="white-space:nowrap">03/10/2026<span class="sub">03:17</span></td><td class="mono">6:55 min</td><td><span class="badge b-green">Resuelto</span></td><td><div class="row-actions"><a href="09a-incident-detail.html" title="View Details"><span><i data-i="eye" data-s="15"></i></span></a></div></td></tr><tr class=""><td><span style="display:flex;align-items:center;gap:10px"><span class="li-ico ico-amber" style="width:30px;height:30px"><i data-i="alert" data-s="16"></i></span><span><b>Reporte manual</b><span class="sub mono">INC-0407</span></span></span></td><td style="white-space:nowrap"><b>Unit B-04</b><span class="sub">Casa de Cambio Sol</span></td><td class="mono" style="white-space:nowrap">01/10/2026<span class="sub">14:22</span></td><td class="mono">2:40 min</td><td><span class="badge b-blue">Under review</span></td><td><div class="row-actions"><a href="09a-incident-detail.html" title="View Details"><span><i data-i="eye" data-s="15"></i></span></a></div></td></tr></tbody></table>
+      <div class="pager">Showing 1–5 of 23<div class="pages"><span><i data-i="arrowleft" data-s="14"></i></span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>5</span><span><i data-i="arrowright" data-s="14"></i></span></div></div>
+    </div>
+    <div class="card" style="width:300px;align-self:flex-start">
+      <div class="card-head"><div><h3>Time to confirm</h3><p>Minutes per incident · 30 days</p></div></div>
+      <div class="card-pad" data-chart="bar" data-h="200" data-max="8" data-colors="var(--cyan)" data-labels='["0405","0407","0409","0410","0411"]' data-series='[[4.2,2.7,6.9,3.1,1.9]]'></div>
+      <div class="card-pad" style="border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px">
+        <b class="small">Incident states</b>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="badge b-red">Pending</span><i data-i="arrowright" data-s="14" style="color:var(--muted)"></i><span class="badge b-blue">Under review</span><i data-i="arrowright" data-s="14" style="color:var(--muted)"></i><span class="badge b-green">Resuelto</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

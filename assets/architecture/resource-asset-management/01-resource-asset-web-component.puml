@@ -1,0 +1,25 @@
+@startuml storepulse-resource-asset-web-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - Web Components
+
+Container_Boundary(webApp, "Web Application - Angular") {
+
+    Component(resourceAssetUI, "Resource & Asset Management UI", "Angular", "Provides the interface for managing resources, assets and IoT devices.")
+
+    Component(resourceAssetService, "Resource & Asset Service", "Angular Service", "Consumes REST endpoints related to resources, assets and IoT devices.")
+}
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+
+Rel(resourceAssetUI, resourceAssetService, "Uses")
+
+Rel(resourceAssetService, restApi, "Consumes resource and asset services", "HTTPS/JSON")
+
+@enduml

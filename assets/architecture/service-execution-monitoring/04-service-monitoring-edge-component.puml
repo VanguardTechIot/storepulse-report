@@ -1,0 +1,33 @@
+@startuml storepulse-service-monitoring-edge-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Edge Components
+
+Container_Boundary(edgeApi, "Edge API - Python Flask") {
+
+    Component(telemetryCollector, "Telemetry Collector", "Python, Flask", "Receives measurements and telemetry from IoT devices.")
+
+    Component(localProcessor, "Local Monitoring Processor", "Python", "Validates and prepares local measurements for synchronization.")
+
+    Component(cloudSynchronization, "Cloud Synchronization", "Python", "Sends telemetry and measurements to the central REST API.")
+}
+
+Container(embeddedApplication, "Embedded Application", "C++", "Reads sensor and meter data from the IoT device.")
+
+Container(restApi, "REST API", "ASP.NET Core, .NET", "Central StorePulse backend.")
+
+Rel(embeddedApplication, telemetryCollector, "Sends telemetry", "HTTP/JSON")
+
+Rel(telemetryCollector, localProcessor, "Provides measurements")
+
+Rel(localProcessor, cloudSynchronization, "Processes telemetry")
+
+Rel(cloudSynchronization, restApi, "Synchronizes telemetry", "HTTPS/JSON")
+
+@enduml

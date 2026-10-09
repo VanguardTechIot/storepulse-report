@@ -1,0 +1,41 @@
+@startuml storepulse-property-management-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Property Management - REST API Components
+
+Container_Boundary(restApi, "REST API - ASP.NET Core") {
+
+    Component(galleryController, "GalleryController", "ASP.NET Core Controller", "Exposes endpoints for commercial gallery management.")
+
+    Component(unitController, "CommercialUnitController", "ASP.NET Core Controller", "Exposes endpoints for commercial unit lifecycle and assignments.")
+
+    Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates gallery registration and unit status change use cases.")
+
+    Component(queryHandlers, "Query Handlers", "Application Layer", "Processes queries for galleries, available units, and floor distributions.")
+
+    Component(domainModel, "Property Management Domain", "Domain Layer", "Contains aggregates (CommercialGallery, CommercialUnit), entities, value objects, and business rules.")
+
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores commercial galleries, units, dimensions, and occupancy states.")
+
+Rel(galleryController, commandHandlers, "Invokes")
+Rel(galleryController, queryHandlers, "Invokes")
+
+Rel(unitController, commandHandlers, "Invokes")
+Rel(unitController, queryHandlers, "Invokes")
+
+Rel(commandHandlers, domainModel, "Executes domain operations")
+Rel(queryHandlers, domainModel, "Queries domain data")
+
+Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
+Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+
+@enduml

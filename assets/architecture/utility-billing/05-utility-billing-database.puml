@@ -1,0 +1,59 @@
+@startuml storepulse-utility-billing-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Utility Billing - Database Design
+
+entity "utility_bills" as utilityBills {
+    * id : CHAR(36) <<PK>>
+    --
+    unit_id : CHAR(36)
+    billing_period_start : DATE
+    billing_period_end : DATE
+    status : VARCHAR(30)
+    total_amount : DECIMAL(12,2)
+    issued_at : DATETIME
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "billing_items" as billingItems {
+    * id : CHAR(36) <<PK>>
+    --
+    utility_bill_id : CHAR(36) <<FK>>
+    utility_type : VARCHAR(30)
+    consumption_value : DECIMAL(12,3)
+    unit : VARCHAR(30)
+    amount : DECIMAL(12,2)
+    created_at : DATETIME
+}
+
+entity "billing_disputes" as billingDisputes {
+    * id : CHAR(36) <<PK>>
+    --
+    utility_bill_id : CHAR(36) <<FK>>
+    tenant_id : CHAR(36)
+    reason : VARCHAR(500)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    resolved_at : DATETIME
+}
+
+utilityBills ||--o{ billingItems : contains
+utilityBills ||--o{ billingDisputes : has
+
+note bottom of utilityBills
+unit_id references Property Management
+without a physical cross-context FK.
+end note
+
+note bottom of billingDisputes
+tenant_id references Identity and Access Management
+without a physical cross-context FK.
+end note
+
+@enduml

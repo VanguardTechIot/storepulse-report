@@ -1,0 +1,60 @@
+@startuml
+hide circle
+skinparam linetype ortho
+title Database Design - Profiles and Preferences
+
+entity "user_profiles" as profiles {
+  * id : CHAR(36) <<PK>>
+  --
+  * user_id : CHAR(36) <<unique>>
+  * first_name : VARCHAR(80)
+  * last_name : VARCHAR(80)
+  * email_address : VARCHAR(120) <<unique>>
+  phone_number : VARCHAR(20)
+  photo_url : VARCHAR(255)
+  photo_format : VARCHAR(10)
+  photo_size_bytes : BIGINT
+  * preferred_language : VARCHAR(10) <<default EN_US>>
+  * created_at : DATETIME
+  * updated_at : DATETIME
+}
+
+entity "notification_preferences" as prefs {
+  * id : CHAR(36) <<PK>>
+  --
+  * user_profile_id : CHAR(36) <<FK, unique>>
+  * created_at : DATETIME
+  * updated_at : DATETIME
+}
+
+entity "notification_channels" as channels {
+  * id : CHAR(36) <<PK>>
+  --
+  * notification_preferences_id : CHAR(36) <<FK>>
+  * channel_type : VARCHAR(20)
+  * destination : VARCHAR(255)
+  * enabled : BOOLEAN <<default true>>
+  * carries_emergency : BOOLEAN <<default false>>
+  * created_at : DATETIME
+}
+
+entity "preference_alert_types" as alerts {
+  * id : CHAR(36) <<PK>>
+  --
+  * notification_preferences_id : CHAR(36) <<FK>>
+  * alert_type : VARCHAR(40)
+  * alert_category : VARCHAR(20)
+}
+
+profiles ||--|| prefs : "tiene configuracion"
+prefs ||--{ channels : "se entrega por"
+prefs ||--{ alerts : "habilita"
+
+note right of profiles
+  user_id es referencia externa a
+  Identity and Access Management.
+  Se valida mediante ACL,
+  sin FK fisica entre contextos.
+end note
+
+@enduml

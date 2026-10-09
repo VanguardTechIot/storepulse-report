@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Deactivate device</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="devices" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Gallery Central #04 / Devices</div><h1>IoT devices</h1><p>Nodes registered in the gallery: status, connectivity, power voltage, and last report.</p></div>
+    <div class="actions"><a href="06a-device-register.html" class="btn btn-primary"><i data-i="plus" data-s="16"></i>Register Device</a></div>
+  </div>
+  <div class="grid g-4">
+    <div class="card kpi"><div class="top"><span class="ico ico-cyan"><i data-i="chip"></i></span>Registered</div><div class="val">94</div><div class="delta muted">91 active · 1 inactive</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-amber"><i data-i="wifioff"></i></span>Disconnected</div><div class="val">3</div><div class="delta warn">No report for more than 15 min</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-violet"><i data-i="alert"></i></span>With technical fault</div><div class="val">1</div><div class="delta muted">Voltage outside 4.5 – 5.5 V</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-blue"><i data-i="refresh"></i></span>Events pending sync</div><div class="val">149</div><div class="delta muted">They are stored on the Edge and sync when reconnected</div></div>
+  </div>
+  <div class="callout warn"><i data-i="wifioff" data-s="18"></i><span><b>3 devices disconnected.</b> They continue to detect intrusion and smoke locally; the events will sync automatically with their original date and time when the connection is restored. Last retry: 22:40 · 0 confirmed records.</span></div>
+  <div class="card">
+    <div class="toolbar">
+      <div class="search" style="width:250px"><i data-i="search" data-s="16"></i>Search by ID or unit…</div>
+      <div class="tabs"><span class="on">All</span><span>Active</span><span>Inactive</span><span>With fault</span><span>Disconnected</span></div>
+      <span class="select" style="margin-left:auto">Order: disconnected first<i data-i="chevdown" data-s="16"></i></span>
+    </div>
+    <table><thead><tr><th>Device</th><th>Unit</th><th>Status</th><th class="sort">Connectivity / last report<span class="arrow"><i data-i="chevdown" data-s="14" data-w="2.2"></i></span></th><th>Voltage</th><th class="t-right">Action</th></tr></thead><tbody><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0466</b><span class="sub">Security + humo</span><span class="sub" style="color:var(--amber-t)">Offline · buffering · 37 retained events</span></td><td class="mono">B-07</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-amber">Disconnected</span><span class="sub">21:58 · 16 min ago</span></td><td class="mono" style="">—</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0391</b><span class="sub">Security + humo</span><span class="sub" style="color:var(--amber-t)">Offline · buffering · 112 eventos retenidos</span></td><td class="mono">C-04</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-amber">Disconnected</span><span class="sub">20:12 · hace 2 h</span></td><td class="mono" style="">—</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class="hover"><td><b class="mono" style="font-size:13px">SP-ESP32-0417</b><span class="sub">Security + humo</span><span class="sub" style="color:var(--violet-t)">Voltage out of range · Ticket TK-0091</span></td><td class="mono">C-07</td><td><span class="badge b-violet">With fault</span></td><td><span class="badge b-green">Connected</span><span class="sub">22:41 · 4s ago</span></td><td class="mono" style="color:var(--violet-t);font-weight:700">4.31 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0388</b><span class="sub">Security + humo</span><span class="sub" style="color:var(--blue-t)">Battery backup · autonomy 3 h 20 min</span></td><td class="mono">A-05</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-green">Connected</span><span class="sub">22:41 · hace 6 s</span></td><td class="mono" style="">5.02 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0452</b><span class="sub">Security + humo</span></td><td class="mono">B-12</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-green">Connected</span><span class="sub">22:41 · hace 3 s</span></td><td class="mono" style="">5.04 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">MTR-E-1003</b><span class="sub">Energy meter</span></td><td class="mono">A-03</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-green">Connected</span><span class="sub">22:41 · hace 5 s</span></td><td class="mono" style="">5.01 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">MTR-W-2009</b><span class="sub">Water meter</span></td><td class="mono">B-09</td><td><span class="badge b-green">Active</span></td><td><span class="badge b-green">Connected</span><span class="sub">22:41 · hace 9 s</span></td><td class="mono" style="">4.98 V</td><td class="t-right"><a href="06b-device-deactivate.html" class="btn btn-soft btn-sm">Deactivate</a></td></tr><tr class=""><td><b class="mono" style="font-size:13px">SP-ESP32-0480</b><span class="sub">Security + humo</span><span class="sub" style="color:var(--muted)">Deactivated by Carmen Mendoza · no data received</span></td><td class="mono">A-07</td><td><span class="badge b-gray">Inactivo</span></td><td><span class="badge b-gray nodot">—</span><span class="sub">01/10 09:14</span></td><td class="mono" style="">—</td><td class="t-right"><a href="#" class="btn btn-outline btn-sm"><i data-i="refresh" data-s="14"></i>Reactivate</a></td></tr></tbody></table>
+    <div class="pager">Mostrando 1–8 de 94<div class="pages"><span><i data-i="arrowleft" data-s="14"></i></span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>12</span><span><i data-i="arrowright" data-s="14"></i></span></div></div>
+  </div>
+  <div class="card card-pad" style="display:flex;align-items:center;gap:24px">
+    <b class="small">Node LED indicator</b>
+    <div class="legend" style="gap:22px"><span><i style="background:var(--green);border-radius:50%"></i>Solid green · Normal</span><span><i style="background:var(--red);border-radius:50%"></i>Blinking red · Event detected</span><span><i style="background:var(--violet);border-radius:50%"></i>Solid purple · Hardware fault</span><span><i style="background:var(--amber);border-radius:50%"></i>Blinking amber · No connection</span><span><i style="background:var(--blue);border-radius:50%"></i>Solid blue · Battery backup</span></div>
+  </div>
+</div>
+<div class="backdrop"></div>
+<div class="modal ">
+  <div class="modal-head"><span class="li-ico ico-amber"><i data-i="chip"></i></span><div><h3>Deactivate SP-ESP32-0388?</h3><p>Unit A-05 · Security + smoke node</p></div><span class="close"><i data-i="x" data-s="20"></i></span></div>
+  <div class="modal-body">
+  <div class="callout warn"><i data-i="alert" data-s="18"></i><span>Data reception will stop and unit A-05 will remain <b>without security monitoring</b> until you reactivate the device.</span></div>
+  <div class="field"><label>Reason</label><div class="input ">Replacement for maintenance</div></div>
+</div>
+  <div class="modal-foot"><a href="06-devices.html" class="btn btn-outline">Cancel</a><a href="06-devices.html" class="btn btn-danger">Deactivate device</a></div>
+</div>
+</body>
+</html>

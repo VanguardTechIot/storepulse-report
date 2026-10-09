@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=1440">
+<title>StorePulse · Utility Meters</title>
+<link rel="stylesheet" href="assets/styles.css">
+<script src="assets/app.js"></script>
+
+</head>
+<body data-page="meters" data-status="alerta" data-menu="">
+<div id="page">
+  <div class="page-head">
+    <div><div class="crumbs">Gallery Central #04 / Utility Meters</div><h1>Electricity and water consumption</h1><p>Consolidated consumption by service and history by unit against its baseline.</p></div>
+    <div class="actions"><span class="select"><i data-i="calendar" data-s="16"></i>Period: Oct 2026<i data-i="chevdown" data-s="16"></i></span><span class="btn btn-outline"><i data-i="download" data-s="16"></i>Export</span></div>
+  </div>
+  <div class="grid g-4">
+    <div class="card kpi"><div class="top"><span class="ico ico-amber"><i data-i="bolt"></i></span>Consolidated energy</div><div class="val">12,480<small>kWh</small></div><div class="delta warn">+3.4% vs. setiembre</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-blue"><i data-i="drop"></i></span>Consolidated water</div><div class="val">684<small>m³</small></div><div class="delta up">−1.2% vs. setiembre</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-red"><i data-i="trend"></i></span>Units above baseline</div><div class="val">2</div><div class="delta down">A-03 energy · B-09 water</div></div>
+    <div class="card kpi"><div class="top"><span class="ico ico-violet"><i data-i="gauge"></i></span>Incomplete measurements</div><div class="val">1</div><div class="delta muted">C-07 · technical fault</div></div>
+  </div>
+  <div class="row">
+    <div class="card grow">
+      <div class="card-head"><div><h3>History · Unit A-03 · Calzados Roma</h3><p>Energy (kWh) per month · meter MTR-E-1003</p></div>
+        <div class="right"><div class="legend"><span><i style="background:var(--cyan)"></i>Consumption</span><span><i style="background:var(--muted)"></i>Historical average</span></div><div class="tabs"><span class="on">Energy</span><span>Water</span></div></div></div>
+      <div class="card-pad" data-chart="line" data-h="340" data-threshold="345" data-max="500"
+        data-tip='{"i":9,"title":"Octubre 2026 · al 06/10 22:41","lines":["412.6 kWh acumulado","+38.0% sobre la línea base"]}'
+        data-labels='["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Set","Oct"]'
+        data-series='[[288,276,301,295,310,305,292,299,302,412.6],[299,299,299,299,299,299,299,299,299,299]]'></div>
+    </div>
+    <div class="card" style="width:360px">
+      <div class="card-head"><div><h3>Period comparison</h3><p>Unit A-03 · October 2026</p></div></div>
+      <div class="card-pad" style="display:flex;flex-direction:column;gap:16px">
+        <div class="kv" style="grid-template-columns:1fr">
+          <div><span>Accumulated consumption</span><b style="font-size:22px">412.6 kWh</b></div>
+          <div><span>Historical average (12 meses)</span><b style="font-size:22px">298.9 kWh</b></div>
+          <div><span>Deviation from baseline</span><b style="font-size:22px;color:var(--amber-t)">+38.0%</b></div>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:14px" class="kv">
+          <div><span>Operating hours</span><b>09:00 – 21:00</b></div>
+          <div><span>Configured by</span><b>Tenant · Rosa Huamán</b></div>
+        </div>
+        <div class="callout warn"><i data-i="bolt" data-s="18"></i><span>64% of the excess occurred outside operating hours (21:00 – 09:00).</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="toolbar"><div class="search" style="width:250px"><i data-i="search" data-s="16"></i>Search unit…</div><div class="tabs"><span class="on">All</span><span>Above baseline</span><span>No history</span></div><span class="select" style="margin-left:auto">Floor: All<i data-i="chevdown" data-s="16"></i></span></div>
+    <table><thead><tr><th>Unit</th><th>Accumulated energy</th><th>Historical average</th><th class="sort">Deviation<span class="arrow"><i data-i="chevdown" data-s="14" data-w="2.2"></i></span></th><th>Water</th><th>Status</th></tr></thead><tbody><tr class="hover"><td><b class="mono">A-03</b><span class="sub">Calzados Roma</span></td><td class="mono">412.6 kWh</td><td class="mono">298.9 kWh</td><td class="mono" style="color:var(--amber-t);font-weight:700">+38.0%</td><td class="mono">6.4 m³</td><td><span class="badge b-amber">Above baseline</span></td></tr><tr class=""><td><b class="mono">B-09</b><span class="sub">Joyería Inca Gold</span></td><td class="mono">148.2 kWh</td><td class="mono">151.0 kWh</td><td class="mono" style="">−1.9%</td><td class="mono">11.9 m³ · +64%</td><td><span class="badge b-green">Normal</span></td></tr><tr class=""><td><b class="mono">B-12</b><span class="sub">Ópticas Visión</span></td><td class="mono">286.1 kWh</td><td class="mono">279.4 kWh</td><td class="mono" style="">+2.4%</td><td class="mono">3.3 m³</td><td><span class="badge b-green">Normal</span></td></tr><tr class=""><td><b class="mono">C-11</b><span class="sub">Moda Urbana</span></td><td class="mono">338.4 kWh</td><td class="mono">344.0 kWh</td><td class="mono" style="">−1.6%</td><td class="mono">5.0 m³</td><td><span class="badge b-green">Normal</span></td></tr><tr class=""><td><b class="mono">A-07</b><span class="sub">Perfumería Aroma</span></td><td class="mono">42.7 kWh</td><td class="mono">—</td><td class="mono" style="">—</td><td class="mono">0.4 m³</td><td><span class="badge b-gray">Comparison not yet available</span></td></tr><tr class=""><td><b class="mono">C-07</b><span class="sub">Librería El Saber</span></td><td class="mono">—</td><td class="mono">201.5 kWh</td><td class="mono" style="">—</td><td class="mono">2.1 m³</td><td><span class="badge b-violet">Incomplete measurements</span></td></tr></tbody></table>
+    <div class="pager">Mostrando 1–6 de 92<div class="pages"><span><i data-i="arrowleft" data-s="14"></i></span><span class="on">1</span><span>2</span><span>3</span><span>…</span><span>16</span><span><i data-i="arrowright" data-s="14"></i></span></div></div>
+  </div>
+</div>
+
+</body>
+</html>

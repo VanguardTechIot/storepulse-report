@@ -1,0 +1,72 @@
+@startuml storepulse-resource-asset-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Resource and Asset Management - Database Design
+
+entity "resources" as resources {
+    * id : CHAR(36) <<PK>>
+    --
+    name : VARCHAR(150)
+    description : VARCHAR(500)
+    address : VARCHAR(255)
+    floor : VARCHAR(50)
+    reference : VARCHAR(255)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "assets" as assets {
+    * id : CHAR(36) <<PK>>
+    --
+    resource_id : CHAR(36) <<FK>>
+    name : VARCHAR(150)
+    asset_type : VARCHAR(30)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "iot_devices" as devices {
+    * id : CHAR(36) <<PK>>
+    --
+    asset_id : CHAR(36) <<FK>>
+    serial_number : VARCHAR(100)
+    manufacturer : VARCHAR(100)
+    firmware_version : VARCHAR(50)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "sensors" as sensors {
+    * id : CHAR(36) <<PK>>
+    --
+    device_id : CHAR(36) <<FK>>
+    sensor_type : VARCHAR(50)
+    unit : VARCHAR(30)
+    status : VARCHAR(30)
+    created_at : DATETIME
+}
+
+entity "meters" as meters {
+    * id : CHAR(36) <<PK>>
+    --
+    device_id : CHAR(36) <<FK>>
+    meter_type : VARCHAR(50)
+    unit : VARCHAR(30)
+    status : VARCHAR(30)
+    created_at : DATETIME
+}
+
+resources ||--o{ assets : contains
+assets ||--o| devices : represents
+devices ||--o{ sensors : contains
+devices ||--o{ meters : contains
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml storepulse-property-management-database-design
+
+hide circle
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Property Management - Database Design
+
+entity "commercial_galleries" as galleries {
+    * id : CHAR(36) <<PK>>
+    --
+    administrator_id : CHAR(36)
+    name : VARCHAR(150)
+    address : VARCHAR(255)
+    total_units : INT
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+entity "commercial_units" as units {
+    * id : CHAR(36) <<PK>>
+    --
+    gallery_id : CHAR(36) <<FK>>
+    unit_number : VARCHAR(50)
+    floor : VARCHAR(20)
+    area_sqm : DECIMAL(10,2)
+    status : VARCHAR(30)
+    created_at : DATETIME
+    updated_at : DATETIME
+}
+
+galleries ||--o{ units : contains
+
+@enduml

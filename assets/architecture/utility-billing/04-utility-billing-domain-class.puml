@@ -1,0 +1,177 @@
+@startuml storepulse-utility-billing-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Utility Billing - Domain Layer Class Diagram
+
+package "Utility Billing" {
+
+    class UtilityBill <<Aggregate Root>> {
+        - utilityBillId: UtilityBillId
+        - unitId: UUID
+        - billingPeriod: BillingPeriod
+        - status: UtilityBillStatus
+        - totalAmount: Decimal
+        - issuedAt: DateTime
+        - breakdown: List<BillingItem>
+        + generate(): void
+        + verifyData(): void
+        + issue(): void
+        + markIncomplete(): void
+    }
+
+    class UtilityBillId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    class BillingPeriod <<Value Object>> {
+        - startDate: Date
+        - endDate: Date
+        + contains(date: Date): boolean
+        + isValid(): boolean
+    }
+
+    class BillingItem <<Entity>> {
+        - billingItemId: BillingItemId
+        - utilityType: UtilityType
+        - consumptionValue: Decimal
+        - unit: String
+        - amount: Decimal
+        + calculateAmount(): Decimal
+    }
+
+    class BillingItemId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    enum UtilityType {
+        WATER
+        ELECTRICITY
+    }
+
+    enum UtilityBillStatus {
+        DRAFT
+        DATA_VERIFIED
+        ISSUED
+        IN_DISPUTE
+        RESOLVED
+    }
+}
+
+package "Billing Disputes" {
+
+    class BillingDispute <<Aggregate Root>> {
+        - disputeId: BillingDisputeId
+        - utilityBillId: UtilityBillId
+        - tenantId: UUID
+        - reason: String
+        - status: BillingDisputeStatus
+        - createdAt: DateTime
+        - resolvedAt: DateTime
+        + raise(): void
+        + review(): void
+        + resolve(): void
+    }
+
+    class BillingDisputeId <<Value Object>> {
+        - value: UUID
+        + getValue(): UUID
+    }
+
+    enum BillingDisputeStatus {
+        OPEN
+        UNDER_REVIEW
+        RESOLVED
+    }
+}
+
+package "Consumption Integration" {
+
+    class ConsumptionSummary <<Value Object>> {
+        - unitId: UUID
+        - period: BillingPeriod
+        - waterConsumption: Decimal
+        - electricityConsumption: Decimal
+        - dataComplete: boolean
+        + isComplete(): boolean
+    }
+
+    class BaselineConsumption <<Value Object>> {
+        - unitId: UUID
+        - period: BillingPeriod
+        - averageWaterConsumption: Decimal
+        - averageElectricityConsumption: Decimal
+        + compare(value: Decimal): Decimal
+    }
+}
+
+package "Repositories" {
+
+    interface IUtilityBillRepository {
+        + save(bill: UtilityBill): void
+        + findById(id: UtilityBillId): UtilityBill
+        + findByUnitAndPeriod(unitId: UUID, period: BillingPeriod): UtilityBill
+        + findByUnit(unitId: UUID): List<UtilityBill>
+    }
+
+    interface IBillingDisputeRepository {
+        + save(dispute: BillingDispute): void
+        + findById(id: BillingDisputeId): BillingDispute
+        + findByBill(id: UtilityBillId): List<BillingDispute>
+        + findActiveByBill(id: UtilityBillId): BillingDispute
+    }
+}
+
+package "Domain Events" {
+
+    class UtilityBillGeneratedEvent <<Domain Event>> {
+        - utilityBillId: UtilityBillId
+        - occurredAt: DateTime
+    }
+
+    class UtilityBillIssuedEvent <<Domain Event>> {
+        - utilityBillId: UtilityBillId
+        - unitId: UUID
+        - occurredAt: DateTime
+    }
+
+    class BillingDisputeRaisedEvent <<Domain Event>> {
+        - disputeId: BillingDisputeId
+        - utilityBillId: UtilityBillId
+        - occurredAt: DateTime
+    }
+
+    class BillingDisputeResolvedEvent <<Domain Event>> {
+        - disputeId: BillingDisputeId
+        - utilityBillId: UtilityBillId
+        - occurredAt: DateTime
+    }
+}
+
+UtilityBill "1" o-- "1..*" BillingItem : contains
+BillingDispute --> UtilityBillId : references
+BillingDispute --> BillingDisputeId
+BillingDispute --> BillingDisputeStatus
+
+UtilityBill --> UtilityBillId
+UtilityBill --> BillingPeriod
+UtilityBill --> UtilityBillStatus
+BillingItem --> BillingItemId
+BillingItem --> UtilityType
+
+ConsumptionSummary --> BillingPeriod
+BaselineConsumption --> BillingPeriod
+
+IUtilityBillRepository ..> UtilityBill
+IBillingDisputeRepository ..> BillingDispute
+
+UtilityBill ..> UtilityBillGeneratedEvent : raises
+UtilityBill ..> UtilityBillIssuedEvent : raises
+BillingDispute ..> BillingDisputeRaisedEvent : raises
+BillingDispute ..> BillingDisputeResolvedEvent : raises
+
+@enduml
