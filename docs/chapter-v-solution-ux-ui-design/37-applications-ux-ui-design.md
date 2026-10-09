@@ -1,8 +1,8 @@
 # 5.4. Applications UX/UI Design
 
-En esta sección se presenta la propuesta visual y de interacción de las aplicaciones que conforman la experiencia de usuario de StorePulse: la **aplicación web**, orientada al administrador de la galería comercial (User Persona *Benjamín Montenegro*), y la **aplicación móvil**, orientada al inquilino del local comercial (User Persona *Juana Flores*). El diseño traduce las decisiones de la arquitectura de información (5.2) y de la guía de estilos (5.1) en pantallas concretas, priorizando la atención inmediata de alertas de seguridad, la lectura clara del consumo de luz y agua y la facturación sustentada en datos medidos.
+En esta sección se presenta la propuesta visual y de interacción de las aplicaciones que conforman la experiencia de usuario de StorePulse: la **aplicación web**, orientada al administrador de la galería comercial, y la **aplicación móvil**, orientada al inquilino del local comercial. El diseño traduce las decisiones de la arquitectura de información y de la guía de estilos en pantallas concretas, priorizando la atención inmediata de alertas de seguridad, la lectura clara del consumo de luz y agua y la facturación sustentada en datos medidos.
 
-Los wireframes, wireflows y mock-ups fueron elaborados en Figma, y se organizan en tres secciones internas: wireframes de las aplicaciones (5.4.1), wireflow diagrams por User Goal (5.4.2) y mock-ups de alta fidelidad (5.4.3).
+Los wireframes, wireflows y mock-ups fueron elaborados en Figma, y se organizan en tres secciones internas: wireframes de las aplicaciones, wireflow diagrams por User Goal y mock-ups de alta fidelidad.
 
 ## 5.4.1. Applications Wireframes
 
@@ -12,7 +12,7 @@ En la propuesta se evidencian los siguientes criterios:
 
 * **Principios y elementos de diseño:** jerarquía visual mediante tamaño y peso tipográfico, proximidad para agrupar datos relacionados (indicadores, tablas y paneles laterales) y alineación a una cuadrícula con espaciado modular de 8 px.
 * **Diseño inclusivo:** etiquetas visibles sobre cada campo, mensajes de validación junto al campo con error, estados que no dependen solo del color (texto + ícono) y áreas táctiles amplias en móvil.
-* **Arquitectura de información:** la web replica el sistema de navegación global definido en 5.2 (sidebar con los módulos Dashboard, Commercial Units, Devices, Utility Meters, Billing, Security & Incidents, Communication y Subscription, y topbar con galería activa, estado global, periodo, idioma y usuario), mientras que la app móvil usa una barra de navegación inferior con cinco destinos (Mi Local, Consumos, Alertas, Mensajes y Perfil).
+* **Arquitectura de información:** la web replica el sistema de navegación global definido en (sidebar con los módulos Dashboard, Commercial Units, Devices, Utility Meters, Billing, Security & Incidents, Communication y Subscription, y topbar con galería activa, estado global, periodo, idioma y usuario), mientras que la app móvil usa una barra de navegación inferior con cinco destinos (Mi Local, Consumos, Alertas, Mensajes y Perfil).
 
 ### 5.4.1.1. Web Application
 
