@@ -84,8 +84,8 @@ unitarias y de integración/aceptación.
 | Producto | Repositorio | Estado |
 |:---|:---|:---|
 | Informe del proyecto | https://github.com/VanguardTechIot/storepulse-report | Activo. Capítulos en Markdown, diagramas `.puml` y `.dsl`, evidencias. |
-| Frontend Web Application | https://github.com/VanguardTechIot/storepulse-web-application | Activo. Proyecto Angular inicializado con su configuración base y ruteo. |
-| Landing Page | `VanguardTechIot/storepulse-landing-page` | Por crear al iniciar su implementación en el Sprint 1. |
+| Frontend Web Application | https://github.com/VanguardTechIot/storepulse-web-application | Activo. Angular organizado por Bounded Contexts; versión 0.1.1 publicada en Firebase Hosting. |
+| Landing Page | https://github.com/VanguardTechIot/storepulse-landing-page | Activo. Sitio estático en HTML5, CSS3 y JavaScript; versión 1.0.0 publicada en GitHub Pages. |
 | REST API (Web Services) | `VanguardTechIot/storepulse-platform` | Por crear en el Sprint que incorpore los primeros endpoints. |
 
 Los repositorios de la Edge API, la Mobile Application y la Embedded Application se crearán bajo la misma organización
@@ -98,15 +98,16 @@ las siguientes:
 
 | Rama | Propósito | Regla |
 |:---|:---|:---|
-| `main` | Versión estable de cada producto. Solo recibe fusiones desde `release/*` y `hotfix/*`. | Cada fusión se etiqueta con una versión semántica (`v1.0.0`). |
+| `main` | Versión estable de cada producto. Solo recibe fusiones desde `release/*` y `hotfix/*`. | Cada fusión se etiqueta con su versión semántica (`v0.1.0`). |
 | `develop` | Rama de integración. Contiene el trabajo validado del Sprint en curso. | Recibe Pull Requests desde `feature/*`; no se hace *commit* directo. |
 | `feature/<story-id>-<short-description>` | Una rama por Story del Sprint Backlog, creada desde `develop`. | Ejemplos: `feature/vs-04-subscription-plans`, `feature/us-20-intrusion-alert`. Se elimina al fusionarse. |
-| `release/<major>.<minor>.<patch>` | Preparación de una versión al cierre de cada Sprint, creada desde `develop`. Solo admite correcciones y ajustes de versión. | Ejemplo: `release/1.0.0`. Se fusiona en `main` y de vuelta en `develop`. |
-| `hotfix/<major>.<minor>.<patch>` | Corrección urgente sobre una versión ya publicada, creada desde `main`. | Ejemplo: `hotfix/1.0.1`. Se fusiona en `main` y en `develop`. |
+| `release/v<major>.<minor>.<patch>` | Preparación de una versión al cierre de cada Sprint, creada desde `develop`. Solo admite correcciones y el ajuste de la versión en `package.json`. | Ejemplo: `release/v0.1.0`. Se fusiona en `main` y de vuelta en `develop`. |
+| `hotfix/v<major>.<minor>.<patch>` | Corrección urgente sobre una versión ya publicada, creada desde `main`. | Ejemplo: `hotfix/v0.1.1`. Se fusiona en `main` y en `develop`. |
 
 En el repositorio del informe, donde no existen Stories, las ramas `feature/` toman el nombre de la sección que
 modifican (`feature/35-information-architecture`, `feature/chapter-4-bounded-contexts`), convención ya aplicada en su
-historial. Ambos repositorios activos cuentan hoy con las ramas `main` y `develop`.
+historial. Los tres repositorios activos cuentan hoy con las ramas `main` y `develop`, y las ramas `release/*` y
+`hotfix/*` se crean y se cierran con la extensión git-flow.
 
 Toda integración a `develop` se realiza mediante **Pull Request** revisado por al menos un integrante distinto al autor.
 
@@ -116,9 +117,23 @@ Las versiones de cada producto siguen **Semantic Versioning 2.0.0** con el forma
 
 - `MAJOR` se incrementa ante cambios incompatibles, por ejemplo un cambio en el contrato de la REST API que obligue a
   actualizar la Web Application.
-- `MINOR` se incrementa al agregar funcionalidad compatible, lo que ocurre al cierre de cada Sprint (`1.0.0` en el
-  Sprint 1, `1.1.0` en el Sprint 2, `1.2.0` en el Sprint 3).
+- `MINOR` se incrementa al agregar funcionalidad compatible, lo que ocurre al cierre de cada Sprint.
 - `PATCH` se incrementa en correcciones compatibles liberadas mediante `hotfix/*`.
+
+Mientras un producto está en desarrollo inicial y su alcance aún no está completo, su versión mayor es `0`: la Web
+Application publica `0.1.0` en el Sprint 1 y `0.2.0` en el Sprint 2, y alcanzará `1.0.0` con la versión final del
+Sprint 3. El Landing Page, cuyo alcance quedó completo en el Sprint 1, se publicó directamente como `1.0.0`.
+
+Las versiones publicadas al cierre del Sprint 1 son las siguientes:
+
+| Producto | Rama de origen | Versión (tag) | Fecha | Contenido |
+|:---|:---|:---|:---|:---|
+| Landing Page | `release/1.0.0` | `1.0.0` | 09/10/2026 | Primera versión completa del sitio informativo. |
+| Web Application | `release/v0.1.0` | `v0.1.0` | 09/10/2026 | Primera versión con los nueve Bounded Contexts del administrador. |
+| Web Application | `hotfix/v0.1.1` | `v0.1.1` | 09/10/2026 | Configuración de Firebase Hosting y de la URL de la API para producción. |
+
+El tag del Landing Page se creó sin el prefijo `v`; a partir de su siguiente versión seguirá la convención
+`v<major>.<minor>.<patch>` de los demás repositorios.
 
 **Mensajes de commit: Conventional Commits**
 
@@ -161,26 +176,44 @@ En esta sección se especifica la configuración del despliegue de la solución 
 de los repositorios de código fuente, se publique cada producto digital. El principio general es que el despliegue se
 realiza desde la rama `main` de cada repositorio, de modo que lo publicado corresponda siempre a una versión etiquetada.
 
-**Landing Page (sitio estático)**
+| Producto | Hosting | URL pública | Origen del despliegue |
+|:---|:---|:---|:---|
+| Landing Page | GitHub Pages | https://vanguardtechiot.github.io/storepulse-landing-page/ | Rama `main` de `storepulse-landing-page` |
+| Frontend Web Application | Firebase Hosting (proyecto `storepulse-web-app`) | https://storepulse-web-app.web.app | Compilación de producción de la rama `main` de `storepulse-web-application` |
+| API simulada (json-server) | Render (Web Service gratuito) | https://storepulse-web-application.onrender.com/api/v1 | Carpeta `server/` de la rama `main` de `storepulse-web-application` |
 
-1. El sitio se compone de archivos HTML, CSS y JavaScript sin paso de compilación, ubicados en la raíz del repositorio
-   `storepulse-landing-page`.
-2. Al fusionar una rama `release/*` en `main`, el servicio de hosting estático toma el contenido del repositorio y lo
-   publica sobre HTTPS.
+**Landing Page (GitHub Pages)**
+
+1. El sitio se compone de archivos HTML, CSS y JavaScript sin paso de compilación (`index.html`, `styles.css`,
+   `script.js`, `terms.html` y `privacy.html`), ubicados en la raíz del repositorio `storepulse-landing-page`.
+2. GitHub Pages publica sobre HTTPS el contenido de la rama `main`, por lo que cada fusión de una rama `release/*` en
+   `main` actualiza el sitio sin pasos adicionales.
 3. Los enlaces de acceso del Landing Page apuntan a las rutas de inicio de sesión y registro de la Web Application.
 
-**Frontend Web Application (Angular)**
+**Frontend Web Application (Firebase Hosting)**
 
-1. El repositorio `storepulse-web-application` se construye con `npm ci && npm run build`, que genera el artefacto de
-   producción en `dist/storepulse-web-application/browser`.
-2. El servicio de hosting publica ese directorio desde la rama `main`; las rutas del lado del cliente se resuelven con
-   una regla de redirección a `index.html`.
-3. La URL base de la REST API se define en los archivos de entorno de Angular (`environment.ts` para desarrollo y
-   `environment.production.ts` para producción).
+1. Desde la rama `main`, el proyecto se construye con `npm ci && npx ng build`, que genera el artefacto de producción
+   en `dist/storepulse-web-application/browser`.
+2. El archivo `firebase.json` define ese directorio como carpeta pública y una regla de reescritura de todas las rutas
+   hacia `index.html`, de modo que las rutas de Angular (por ejemplo `/profile`) no respondan 404 al recargar la página.
+   El archivo `.firebaserc` asocia el repositorio con el proyecto `storepulse-web-app`.
+3. La publicación se realiza con Firebase CLI mediante `firebase deploy --only hosting`, con una cuenta autorizada en
+   el proyecto.
+4. La URL base de la API se define en los archivos de entorno de Angular: `environment.development.ts` apunta al
+   servidor local (`http://localhost:3000/api/v1`) y `environment.ts`, que se usa en la compilación de producción,
+   apunta a la API publicada en Render.
 
-El servicio de hosting del Landing Page y de la Web Application, así como la configuración de despliegue de la REST
-API, la Edge API, la Mobile Application y la Embedded Application, se definirán y documentarán en esta sección en el
-Sprint en que cada producto se despliegue por primera vez.
+**API simulada (Render)**
+
+Mientras la REST API no se implemente, la Web Application consume una API simulada con json-server que respeta las
+rutas y contratos definidos en las Technical Stories (por ejemplo, `GET /api/v1/users/{userId}/profile` de TS-04). Se
+despliega en Render como Web Service con la carpeta `server` como directorio raíz, el comando de construcción
+`npm install json-server@0.17.4` y el comando de inicio
+`npx json-server db.json --routes routes.json --host 0.0.0.0 --port $PORT`. En el plan gratuito el servicio se
+suspende tras 15 minutos sin uso y los datos modificados se restablecen al reiniciarse.
+
+La configuración de despliegue de la REST API, la Edge API, la Mobile Application y la Embedded Application se
+documentará en esta sección en el Sprint en que cada producto se despliegue por primera vez.
 
 **Deployment Diagram**
 

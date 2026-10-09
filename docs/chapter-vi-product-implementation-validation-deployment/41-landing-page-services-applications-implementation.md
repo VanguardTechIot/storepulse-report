@@ -118,42 +118,59 @@ El esfuerzo total estimado asciende a **34 horas**, distribuidas entre los seis 
 
 ### 6.2.1.4. Development Evidence for Sprint Review
 
-En esta sección se explica y presenta los avances en implementación con relación a los productos de la solución según 
-el alcance del Sprint. Durante el Sprint 1, el equipo construyó la primera versión completa del **Landing Page** de 
-StorePulse con HTML5, CSS3 y JavaScript, abarcando las nueve secciones que dan respuesta a las Visitor Stories 
-comprometidas, y configuró la **estructura base de la Web Application** en Angular junto con su ruteo inicial.
+En esta sección se explica y presenta los avances en implementación con relación a los productos de la solución según
+el alcance del Sprint. Durante el Sprint 1, el equipo construyó la primera versión completa del **Landing Page** de
+StorePulse con HTML5, CSS3 y JavaScript, abarcando las secciones que dan respuesta a las Visitor Stories comprometidas,
+y la primera versión de la **Web Application** del Gallery Administrator en Angular, organizada por Bounded Contexts:
+cada integrante implementó al menos un contexto sobre una estructura común definida al inicio del Sprint.
 
-El trabajo se organizó aplicando **GitFlow** como estrategia de ramificación —una rama `feature/` por sección 
-funcional, integrada a `develop` mediante Pull Request— y **Conventional Commits** como convención de mensajes, de 
-modo que el historial permite identificar el aporte individual de cada integrante y el tipo de cambio introducido.
+El trabajo se organizó aplicando **GitFlow** como estrategia de ramificación —una rama `feature/` por funcionalidad o
+Bounded Context, integrada a `develop`— y **Conventional Commits** como convención de mensajes, de modo que el
+historial permite identificar el aporte individual de cada integrante y el tipo de cambio introducido.
 
 Los repositorios que conforman la solución en este Sprint son los siguientes:
 
 | Repository | Propósito | Alcance en el Sprint 1 |
 | :--- | :--- | :--- |
-| `VanguardTechIot/project-report` | Informe académico del proyecto en formato Markdown | Documentación de los capítulos I a VI |
-| `VanguardTechIot/storepulse-landing-page` | Sitio web estático informativo (HTML5, CSS3, JavaScript) | Entregable principal del Sprint |
-| `VanguardTechIot/storepulse-web-application` | Aplicación web del Gallery Administrator (Angular) | Configuración base del entorno y ruteo |
+| `VanguardTechIot/storepulse-report` | Informe académico del proyecto en formato Markdown | Documentación de los capítulos I a VI |
+| `VanguardTechIot/storepulse-landing-page` | Sitio web estático informativo (HTML5, CSS3, JavaScript) | Versión 1.0.0 publicada en GitHub Pages |
+| `VanguardTechIot/storepulse-web-application` | Aplicación web del Gallery Administrator (Angular) | Versión 0.1.1 con nueve Bounded Contexts, publicada en Firebase Hosting |
 
-A continuación se detallan los commits correspondientes al desarrollo del Landing Page y a la configuración del 
-entorno Frontend:
+A continuación se detallan los commits más representativos del desarrollo del Landing Page y de la Web Application.
+Cuando el commit no tiene cuerpo, la columna *Commit Message Body* resume el cambio que introduce.
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| VanguardTechIot/storepulse-landing-page | feature/hero-section | | feat(hero): add header and hero section | Maquetación de la sección principal con la propuesta de valor de StorePulse | |
-| VanguardTechIot/storepulse-landing-page | feature/benefits-section | | feat(benefits): add segmented benefits section | Beneficios diferenciados por perfil de administrador e inquilino | |
-| VanguardTechIot/storepulse-landing-page | feature/how-it-works | | feat(how-it-works): add solution flow section | Sección explicativa con video y contenido alternativo en texto e imágenes | |
-| VanguardTechIot/storepulse-landing-page | feature/pricing-table | | feat(pricing): add subscription plans table | Tabla de planes escalonados por cantidad de locales monitoreados | |
-| VanguardTechIot/storepulse-landing-page | feature/faq-accordion | | feat(faq): add interactive FAQ accordion | Componente de preguntas frecuentes sobre instalación, costo y funcionamiento | |
-| VanguardTechIot/storepulse-landing-page | feature/auth-redirect | | feat(auth): add sign in and sign up redirection | Botones de acceso hacia las rutas base de la Web Application | |
-| VanguardTechIot/storepulse-landing-page | feature/about-us | | feat(about): add team section | Sección del equipo con fotografías, nombres y roles | |
-| VanguardTechIot/storepulse-landing-page | feature/legal-pages | | feat(legal): add terms of service and privacy policy | Páginas legales enlazadas desde el footer | |
-| VanguardTechIot/storepulse-landing-page | main | | chore(deploy): publish landing page to cloud hosting | Despliegue de la primera versión del sitio estático | |
-| VanguardTechIot/storepulse-web-application | develop | | chore(setup): initialize angular project | Configuración base del proyecto, ruteo y dependencias de arquitectura | |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `8fe9a06` | chore: initial commit | Creación del repositorio del Landing Page | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `b8fdac4` | feat(setup): add base layout, header, hero section and iot solutions | Header, Hero Section con la propuesta de valor y sección de soluciones IoT (VS-01, VS-03) | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `04c2619` | feat(setup): add base landing page structure, styles and interactive components | Estructura completa, estilos y componentes interactivos: beneficios, planes y preguntas frecuentes (VS-02, VS-04, VS-05) | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `7b66352` | feat(setup): add base landing page layout, styles and interactive components | Ajustes de maquetación y del comportamiento de los componentes interactivos | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `df1cb03` | feat(setup): add base landing page with resolved assets and pre-launch navigation | Recursos gráficos resueltos y navegación hacia el registro y el inicio de sesión (VS-06) | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | feature/landing-page-setup | `4a16abd` | feat(assets): add team photographs for about us section | Fotografías del equipo para la sección About Us (VS-07) | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | develop | `3c483fc` | Merge branch 'feature/landing-page-setup' into develop | Integración del Landing Page en develop | 2026-10-08 |
+| VanguardTechIot/storepulse-landing-page | main | `14ddb02` | Merge branch 'release/1.0.0' into main | Publicación de la versión 1.0.0 del Landing Page (tag 1.0.0) | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | feature/frontend-directory-structure | `150f23f` | feature: add .gitkeep files to maintain empty directories | Estructura inicial de directorios por Bounded Context | 2026-10-06 |
+| VanguardTechIot/storepulse-web-application | feature/web-application-structure | `94fa1ec` | feature: restructure directories following the DDD statement and add localization files for English and Spanish | Estructura por capas según DDD y archivos de traducción en inglés y español | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/web-billing | `064ab82` | feat: add utility billing functionality | Bounded Context Utility Billing: facturas, desglose de consumo y reclamos | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/monitoring | `28283c6` | feat(monitoring): add monitoring domain model, infrastructure and store | Modelo de dominio, infraestructura y store de Service Execution and Monitoring | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/monitoring | `ffd832e` | feat(monitoring): implement monitoring views | Vistas de telemetría, alertas, consumo y reglas de monitoreo | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/bounded-context-iam | `43ee2e3` | feature(iam): Add entities, value-objects, commands and enums in the domain layer. | Capa de dominio de Identity and Access Management | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/bounded-context-iam | `1cab5cb` | feature(iam): Add guards, navigation, routes, and validators for authentication flow | Guards, rutas y validadores del inicio de sesión, registro y recuperación de contraseña | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/resource-asset-management | `172842b` | feat(resource-asset-management): add IoT device list view | Listado de dispositivos IoT con su estado y conectividad | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/resource-asset-management | `5585efe` | feat(resource-asset-management): add device deactivation and reactivation | Desactivación y reactivación de dispositivos | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/bounded-context-profile | `a9c867d` | feat(profile): implement ProfilesStore service for managing user profiles and subscriptions | Servicio de aplicación de Profiles and Preferences | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/bounded-context-profile | `08ac19a` | feat(profile): implement profile settings page with user details and subscription summary | Vista Mi perfil con los datos del usuario y el resumen de la suscripción | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/property-communication | `5a9c504` | feat(property-management): implement galleries, commercial units, floor layout and tenant invitations | Bounded Context Property Management | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/property-communication | `21eda9b` | feat(property-communication): implement conversations, tenant notifications, communication logs and tenant assignments | Bounded Context Property Communication | 2026-10-08 |
+| VanguardTechIot/storepulse-web-application | feature/subscriptions-payments | `4d60482` | feat(subscriptions): add subscription status, plan catalog and payment history views | Estado de la suscripción, catálogo de planes e historial de pagos | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | feature/subscriptions-payments | `522c502` | feat(subscriptions): add checkout with simulated payment gateway | Checkout con pasarela de pago simulada | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | feature/dashboard-analytics | `9e6696c` | feat(analytics): add kpi card, consumption chart and notification item components | Componentes del dashboard consolidado y del centro de notificaciones | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | release/v0.1.0 | `a2c49c6` | chore(release): bump version to 0.1.0 | Preparación de la versión 0.1.0 | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | main | `bca724e` | Merge branch 'release/v0.1.0' into main | Publicación de la versión 0.1.0 de la Web Application (tag v0.1.0) | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | hotfix/v0.1.1 | `9e23e4a` | chore(deploy): configure firebase hosting and hosted api | Configuración de Firebase Hosting y de la URL de la API en producción | 2026-10-09 |
+| VanguardTechIot/storepulse-web-application | main | `9522780` | Merge branch 'hotfix/v0.1.1' | Publicación del hotfix 0.1.1 desplegado en Firebase (tag v0.1.1) | 2026-10-09 |
 
-> **Pendiente del equipo:** completar las columnas *Commit Id* y *Commited on* con los valores reales de cada 
-> repositorio, obtenidos con `git log --format="%h | %s | %ad" --date=short`. Los nombres de rama y los mensajes 
-> listados corresponden a la convención acordada y deben contrastarse con el historial efectivo antes de la entrega.
+El historial completo puede consultarse en cada repositorio con `git log --format="%h | %s | %ad" --date=short`.
 
 ### 6.2.1.5. Testing Suite Evidence for Sprint Review
 

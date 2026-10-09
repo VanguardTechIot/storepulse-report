@@ -1,5 +1,6 @@
 # Bibliografía
 
+- Balestrieri, E., De Vito, L., Lamonaca, F., Picariello, F., Rapuano, S., & Tudosa, I. (2018). Research challenges in measurement for Internet of Things systems. *ACTA IMEKO, 7*(4), 82–94. https://doi.org/10.21014/acta_imeko.v7i4.675
 - Bourgau, P. (2024). *The best agenda for Design-Level Event Storming*. Event Storming Journal. https://www.eventstormingjournal.com/software%20design/the-best-agenda-for-design-level-event-storming/
 - ComexPerú. (2025). *Las micro y pequeñas empresas en el Perú: resultados en 2024*. https://comex-assets.s3.amazonaws.com/comex-assets/web/posts/9750/reporte-mypes-2024.pdf
 - El Comercio. (2024, 26 de septiembre). *Inseguridad ciudadana: cómo amenaza a los pequeños negocios*. https://elcomercio.pe/economia/inseguridad-ciudadana-asociacion-de-bodegueros-inseguridad-ciudadana-amenaza-a-los-pequenos-negocios-en-cuanto-los-afecta-y-como-impacta-en-su-reactivacion-crimen-negocios-delincuencia-extorsion-robos-noticia/
