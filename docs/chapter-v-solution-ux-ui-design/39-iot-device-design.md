@@ -311,7 +311,7 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 #### Diagrama del circuito
 
-Cada nodo tiene su propio diagrama: un microcontrolador, sus sensores, su actuador y la protoboard que distribuye la alimentación.
+Cada nodo tiene su propio diagrama: un microcontrolador, sus sensores, sus actuadores y la protoboard que distribuye la alimentación.
 
 **Nodo de intrusión del stand**
 
