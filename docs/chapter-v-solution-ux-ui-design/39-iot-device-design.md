@@ -352,7 +352,7 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 | Componente | Pin del componente | Pin del ESP32 | Señal | Observación |
 |---|---|---|---|---|
 | PIR HC-SR501 | OUT | GPIO 27 | Entrada digital | — |
-| Reed MC-38 | Contacto | GPIO 26 | Entrada digital | Pull-up interno; el otro terminal va a GND |
+| Alarma (buzzer activo) | + / − | GPIO 26 / GND | Salida digital | Se muestra directa (ver nota) |
 | RTC DS3231 | SDA / SCL | GPIO 21 / GPIO 22 | I2C | Alimentado a 3,3 V |
 | LED RGB | R / G / B | GPIO 25 / GPIO 33 / GPIO 32 | PWM | Resistencia de 220 Ω por canal |
 
@@ -388,7 +388,7 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 | PIR HC-SR501 | OUT | GPIO 13 | Entrada digital | — |
 | LED RGB | R / G / B | GPIO 14 / GPIO 15 / GPIO 2 | PWM | Resistencia de 220 Ω por canal |
 
-**Nota.** El MQ-2, el YF-S201 y el PZEM-004T entregan señales de 5 V y los pines del ESP32 operan a 3,3 V. Para mantener legibles los diagramas, las conexiones se muestran directas; en la implementación física, cada una de esas tres señales pasa por un divisor resistivo (10 kΩ y 20 kΩ) que la adapta a 3,3 V.
+**Nota.** Para mantener legibles los diagramas, algunas conexiones se muestran directas. En la implementación física, las señales de 5 V del MQ-2, el YF-S201 y el PZEM-004T pasan por un divisor resistivo (10 kΩ y 20 kΩ) que las adapta a los 3,3 V del ESP32, y la alarma se acciona mediante un transistor NPN, porque consume más corriente de la que entrega un pin del ESP32.
 
 #### Diseño físico
 
