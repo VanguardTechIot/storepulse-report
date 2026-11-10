@@ -392,27 +392,26 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 
 #### Diseño físico
 
-El nodo de local se aloja en una caja plástica instalada en el interior del local. El LED de estado queda visible en la cara frontal. Los sensores que requieren otra ubicación se conectan por cable a la caja.
+Cada nodo se aloja en su propia caja plástica, con el LED de estado visible en la cara frontal, y se instala donde su sensor mide mejor.
 
-| Componente | Ubicación | Razón |
+| Nodo | Ubicación | Razón |
 |---|---|---|
-| Caja del nodo (ESP32, RTC, batería y LED) | Pared interior, a la vista del inquilino | El LED debe verse desde el puesto de atención |
-| PIR y cámara | Esquina superior, frente al acceso | Cubren la entrada y el interior con un solo ángulo |
-| Reed magnético | Marco de la cortina metálica | Confirma la apertura física del local |
-| Sensor de humo y DHT22 | Techo o parte alta del local | El humo y el calor ascienden |
-| Medidor eléctrico PZEM-004T | Tablero eléctrico del local | Mide en la acometida del local |
-| Caudalímetro YF-S201 | Tubería de entrada de agua | Solo en locales con punto de agua |
+| Intrusión del stand | Esquina superior, frente al acceso; la alarma va dentro de la caja, detrás de una rejilla | Cubre la entrada y el interior, y la alarma se escucha desde el pasillo |
+| Cámara del stand | Junto al nodo de intrusión, orientada al acceso | La imagen muestra la misma zona que vigila el sensor de movimiento |
+| Humo del stand | Techo o parte alta del stand | El humo y el calor ascienden |
+| Consumo del stand | Junto al tablero eléctrico; el caudalímetro va en la tubería de entrada | Mide en la acometida del stand; el caudalímetro solo se instala si hay punto de agua |
+| Área común | Parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito | Vigila las zonas compartidas de la galería |
 
-El nodo de área común se instala en la parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito. El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
+El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
 
 #### Flujos de interacción de los nodos
 
-Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al inquilino y al administrador como notificación push (US-20, US-21, US-22). La interfaz física de cada nodo es un LED que comunica cinco estados, conforme a la guía de estilos de la sección 5.1.2. Si coinciden varios estados, se muestra el de mayor prioridad.
+Los nodos no tienen pantalla ni botones: las alertas llegan al inquilino y al administrador como notificación push (US-20, US-21, US-22). La interfaz física de cada nodo es un LED que comunica cinco estados, y el nodo de intrusión suma una alarma sonora que se activa ante una intrusión confirmada, conforme a la guía de estilos de la sección 5.1.2. Si coinciden varios estados, el LED muestra el de mayor prioridad.
 
 | Prioridad | Estado | LED |
 |:-:|---|---|
-| 1 | Evento detectado (intrusión o humo) | Rojo intermitente |
-| 2 | Error | Morado fijo |
+| 1 | Evento detectado (intrusión o humo) | Rojo intermitente; en intrusión, además suena la alarma |
+| 2 | Error (sensor sin respuesta o voltaje de alimentación fuera de 4,5–5,5 V) | Morado fijo |
 | 3 | Sin red | Ámbar intermitente |
 | 4 | Respaldo por batería | Azul fijo |
 | 5 | Normal | Verde fijo |
@@ -421,7 +420,7 @@ Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al in
 
 | Paso | Qué ocurre | LED |
 |:-:|---|---|
-| 1 | El nodo se enciende, conserva o genera su identificador único y verifica sus sensores. Si alguno no responde, pasa a error. | Morado fijo si hay falla |
+| 1 | El nodo se enciende, conserva o genera su identificador único y verifica sus sensores y su voltaje de alimentación. Si algo falla, pasa a error. | Morado fijo si hay falla |
 | 2 | Se conecta al WiFi de la galería y se autentica ante el Edge API con su API Key. | Ámbar intermitente |
 | 3 | Sincroniza la hora y queda en operación. | Verde fijo |
 
@@ -429,14 +428,14 @@ Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al in
 
 | Paso | Nodo | Qué ocurre | LED |
 |:-:|---|---|---|
-| 1 | Intrusión | El sensor detecta movimiento o la apertura de la cortina. | Verde fijo |
+| 1 | Intrusión | El sensor PIR detecta movimiento dentro del stand. | Verde fijo |
 | 2 | Intrusión | Confirma la detección con tres lecturas seguidas y verifica que está fuera del horario de atención. | Verde fijo |
-| 3 | Intrusión | Genera el evento de intrusión y lo envía al Edge API. | Rojo intermitente |
+| 3 | Intrusión | Activa la alarma sonora, genera el evento de intrusión y lo envía al Edge API. | Rojo intermitente y alarma |
 | 4 | Cámara | Al consultar al Edge API encuentra una captura pendiente, toma la imagen y la envía. El Edge API la adjunta al evento. | Rojo intermitente |
 | 5 | — | El inquilino y el administrador reciben la notificación push (US-20, US-21). | Rojo intermitente |
-| 6 | Intrusión | Sin nuevas detecciones durante el tiempo de espera, vuelve al estado previo. | Verde fijo |
+| 6 | Intrusión | Al cumplirse el tiempo de la alarma y sin nuevas detecciones, la apaga y vuelve al estado previo. | Verde fijo |
 
-Dentro del horario de atención, el movimiento no genera evento y el LED permanece en verde. En un área común, el mismo nodo detecta el movimiento y captura la imagen.
+Dentro del horario de atención, el movimiento no genera evento y el LED permanece en verde. En un área común, el mismo nodo detecta el movimiento y captura la imagen, sin alarma sonora.
 
 **Flujo 3. Detección de humo** (MS-05)
 
@@ -453,7 +452,7 @@ Dentro del horario de atención, el movimiento no genera evento y el LED permane
 |:-:|---|---|
 | 1 | El nodo pierde la conexión con el Edge API. | Ámbar intermitente |
 | 2 | Sigue detectando y guarda cada evento con su hora en su memoria. | Ámbar, o rojo si hay un evento |
-| 3 | Reintenta el envío tras un intervalo definido, sin bloquear nuevas mediciones. | Ámbar intermitente |
+| 3 | Reintenta el envío tras un intervalo definido, sin bloquear nuevas mediciones. Si no reporta durante 15 minutos, la plataforma lo marca como desconectado. | Ámbar intermitente |
 | 4 | Al reconectar, envía los registros pendientes en orden y con su hora original. | Verde fijo |
 
 **Flujo 5. Corte de energía** (TS-14)
@@ -462,7 +461,7 @@ Dentro del horario de atención, el movimiento no genera evento y el LED permane
 |:-:|---|---|
 | 1 | Se interrumpe la alimentación de red. Los nodos de intrusión, cámara, humo y área común pasan a batería; el nodo de consumo se apaga. | Azul fijo |
 | 2 | Los nodos con batería mantienen la detección de intrusión y de humo. | Azul fijo |
-| 3 | Cada nodo reporta su voltaje en las métricas de salud del dispositivo. | Azul fijo |
+| 3 | Cada nodo reporta su voltaje y la cantidad de eventos pendientes en las métricas de salud del dispositivo. | Azul fijo |
 | 4 | Al volver la energía, el nodo de consumo se reinicia y las baterías se recargan. | Verde fijo |
 
 
