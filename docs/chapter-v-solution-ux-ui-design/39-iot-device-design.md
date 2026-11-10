@@ -1,4 +1,4 @@
-# 5.6. IoT Device Design
+### 5.6. IoT Device Design
 
 Esta sección presenta el diseño de los dispositivos IoT de StorePulse: los cuatro nodos de stand (intrusión, cámara, humo y consumo), el nodo de área común y el Edge Device de la galería. El diseño se sustenta en la metodología de doce pasos para sistemas IoT propuesta por Balestrieri et al. (2018) y se modela en Cirkit Designer.
 
@@ -10,7 +10,7 @@ Las decisiones de diseño responden a cinco criterios:
 - **Continuidad:** la detección y el registro de eventos funcionan sin internet y durante un corte de energía (EP-09).
 - **Trazabilidad con los requisitos:** cada nodo responde a una historia de la sección 3.1 (MS-01 a MS-09).
 - **Instalación no invasiva:** los nodos se comunican por WiFi y se alimentan de un tomacorriente, sin cableado nuevo entre stands.
-- **Interfaz física mínima:** el inquilino no configura nada en los nodos. Solo percibe su estado mediante un LED, definido en la guía de estilos de la sección 5.1.2.
+- **Interfaz física mínima:** el inquilino no configura nada en los nodos. Percibe su estado mediante un LED y, en el nodo de intrusión, una alarma sonora, definidos en la guía de estilos de la sección 5.1.2.
 
 La organización de los nodos sigue la arquitectura de información de la sección 5.2: cada nodo pertenece a un stand o a un área común, y el estado que muestra su LED es el mismo que las aplicaciones presentan para ese stand.
 
@@ -36,7 +36,7 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 
 | Nodo | Cargas | Potencia |
 |---|---|---:|
-| Intrusión del stand | ESP32 con WiFi, PIR, reed, RTC y LED | ≈ 0,9 W |
+| Intrusión del stand | ESP32 con WiFi, PIR, RTC y LED; la alarma suma ≈ 0,5 W solo mientras suena | ≈ 0,9 W |
 | Cámara del stand | ESP32-CAM con WiFi y LED; el valor corresponde a la captura | ≈ 1,2 W |
 | Humo del stand | ESP32 con WiFi, MQ-2 (calefactor permanente, 0,75 W), DHT22 y LED | ≈ 1,6 W |
 | Consumo del stand | ESP32 con WiFi, PZEM-004T, YF-S201 y LED | ≈ 1,2 W |
@@ -48,7 +48,7 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 |---|---|---|
 | TD-01 | Detección de humo → evento generado | ≤ 1,5 s |
 | TD-02 | Detección de humo → notificación push | ≤ 5 s |
-| TD-03 | Detección de intrusión → evento generado | ≤ 1 s |
+| TD-03 | Detección de intrusión → evento generado y alarma local activada | ≤ 1 s |
 | TD-04 | Detección de intrusión → notificación push | ≤ 5 s |
 | TD-05 | Imagen adjunta al evento de intrusión | ≤ 10 s |
 | TD-06 | Envío de la lectura de consumo eléctrico y de agua | cada 60 s |
@@ -77,7 +77,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 
 | Nodo | Microcontrolador | Sensores | Actuador | Cantidad | Historia |
 |---|---|---|---|---|---|
-| Intrusión del stand | ESP32 DevKit V1 | PIR, reed y reloj RTC | LED RGB | 1 por stand | MS-04 |
+| Intrusión del stand | ESP32 DevKit V1 | PIR y reloj RTC | Alarma sonora y LED RGB | 1 por stand | MS-04 |
 | Cámara del stand | ESP32-CAM | Cámara OV2640 integrada | LED RGB | 1 por stand | MS-04 |
 | Humo del stand | ESP32 DevKit V1 | MQ-2 y DHT22 | LED RGB | 1 por stand | MS-05 |
 | Consumo del stand | ESP32 DevKit V1 | PZEM-004T y YF-S201 | LED RGB | 1 por stand | MS-06 |
@@ -88,42 +88,43 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 | # | Función | Tipo | Nodo que lo incorpora |
 |---|---|---|---|
 | N1 | Movimiento | Sensor | Intrusión del stand y área común |
-| N2 | Apertura de puerta o cortina | Sensor | Intrusión del stand |
-| N3 | Humo | Sensor | Humo del stand |
-| N4 | Imagen del evento | Sensor | Cámara del stand y área común |
-| N5 | Energía eléctrica | Sensor | Consumo del stand |
-| N6 | Caudal de agua | Sensor | Consumo del stand (si tiene punto de agua) |
-| N7 | Temperatura y humedad | Sensor | Humo del stand |
-| N8 | Indicador de estado | Actuador | Todos los nodos |
+| N2 | Humo | Sensor | Humo del stand |
+| N3 | Imagen del evento | Sensor | Cámara del stand y área común |
+| N4 | Energía eléctrica | Sensor | Consumo del stand |
+| N5 | Caudal de agua | Sensor | Consumo del stand (si tiene punto de agua) |
+| N6 | Temperatura y humedad | Sensor | Humo del stand |
+| N7 | Indicador de estado | Actuador | Todos los nodos |
+| N8 | Alarma sonora | Actuador | Intrusión del stand |
 
 **Target uncertainty de los sensores**
 
 | Nodo | Magnitud | Target uncertainty | Razón |
 |---|---|---|---|
 | N1 | Presencia | Binaria; falsos positivos < 5 % en 24 h | La falsa alarma reduce la confianza del inquilino |
-| N2 | Apertura | Conmutación a 15 ± 5 mm | Solo distingue abierto de cerrado |
-| N3 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada stand |
-| N5 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
-| N6 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
-| N7 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
+| N2 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada stand |
+| N4 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
+| N5 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
+| N6 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
 
 **Target accuracy de los actuadores**
 
 | Nodo | Requisito |
 |---|---|
-| N8 LED RGB | Cinco estados distinguibles: normal, sin red, evento detectado, respaldo por batería y error. Cambio de estado en ≤ 50 ms |
+| N7 LED RGB | Cinco estados distinguibles: normal, sin red, evento detectado, respaldo por batería y error. Cambio de estado en ≤ 50 ms |
+| N8 Alarma sonora | Nivel sonoro ≥ 85 dB a 10 cm; activación en ≤ 50 ms desde la orden del ESP32 |
 
 **Interfaces digitales**
 
 | Nodo | Interfaz |
 |---|---|
-| N1 PIR, N2 reed | GPIO digital |
-| N3 MQ-2 | ADC de 12 bits (ADC1) |
-| N4 Cámara OV2640 | Integrada en el ESP32-CAM; la imagen se envía por WiFi |
-| N5 PZEM-004T | UART / Modbus-RTU a 9600 bps |
-| N6 YF-S201 | GPIO con interrupción (conteo de pulsos) |
-| N7 DHT22 | Bus único |
-| N8 LED RGB | PWM de 3 canales |
+| N1 PIR | GPIO digital |
+| N2 MQ-2 | ADC de 12 bits (ADC1) |
+| N3 Cámara OV2640 | Integrada en el ESP32-CAM; la imagen se envía por WiFi |
+| N4 PZEM-004T | UART / Modbus-RTU a 9600 bps |
+| N5 YF-S201 | GPIO con interrupción (conteo de pulsos) |
+| N6 DHT22 | Bus único |
+| N7 LED RGB | PWM de 3 canales |
+| N8 Alarma sonora | GPIO digital |
 | Reloj DS3231 | I2C |
 
 **Esfuerzo computacional y time-delay en el nodo.** El esfuerzo es bajo: filtrado, comparación contra umbral, conteo de pulsos y armado del mensaje. Las cargas mayores son la compresión JPEG, que resuelve el ESP32-CAM, y el envío de datos por WiFi. La decisión en el nodo (comparación contra el umbral) se resuelve en ≤ 50 ms.
@@ -159,7 +160,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 
 | ID | Servicio | Admin | Tenant | Información que integra |
 |---|---|:-:|:-:|---|
-| SV-01 | Alerta de intrusión con imagen | ● | ● | Movimiento confirmado, estado de apertura, imagen, horario de atención y stand |
+| SV-01 | Alerta de intrusión con imagen | ● | ● | Movimiento confirmado, imagen, horario de atención y stand |
 | SV-02 | Alerta de humo | ● | ● | Concentración de humo, temperatura y stand afectado |
 | SV-03 | Consumo del periodo | ● | ● | Energía y agua acumuladas en el periodo de facturación |
 | SV-04 | Histórico y línea base | ● | ● | Serie histórica, línea base y desviación del periodo actual |
@@ -205,14 +206,14 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 | Función | Componente | Características metrológicas | Alimentación | Alternativa descartada |
 |---|---|---|---|---|
-| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01) |
-| Apertura | Reed magnético MC-38 | Conmuta a 15 ± 5 mm | Contacto seco | — |
+| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01). Sensor magnético de puerta (reed): descartado por la complejidad de instalarlo en cortinas metálicas |
 | Humo | MQ-2 | 300–10 000 ppm | 5 V | MQ-135: orientado a calidad del aire (SP-02) |
 | Imagen | ESP32-CAM (OV2640) | 2 MP, JPEG | 5 V | — |
 | Energía | PZEM-004T v3 (100 A) | 80–260 V, 0–100 A, ± 0,5 % | 5 V | Pinza SCT-013 100 A/1 V: solo mide corriente (SP-03). Queda como segunda opción |
 | Agua | YF-S201 | 1–30 L/min, ± 10 % | 5 V | — |
 | Temperatura y humedad | DHT22 | ± 0,5 °C, ± 3 % HR | 3,3 V | — |
 | Estado | LED RGB | 5 estados | 3,3 V | — |
+| Alarma | Buzzer activo | ≥ 85 dB a 10 cm | 5 V | — |
 
 **Limitaciones declaradas.** El MQ-2 no es un detector certificado; el producto comercial deberá usar un detector fotoeléctrico homologado. El PZEM-004T se conecta al lado de 220 V y debe instalarlo personal con conocimiento eléctrico. Si el PZEM-004T no está disponible, el prototipo usa la pinza SCT-013 como segunda opción: mide solo corriente, por lo que el consumo se estima con 220 V nominales y sirve para mostrar tendencias, no para sustentar el cobro.
 
