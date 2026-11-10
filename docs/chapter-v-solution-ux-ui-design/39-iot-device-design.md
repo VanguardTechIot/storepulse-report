@@ -1,4 +1,4 @@
-# 5.6. IoT Device Design
+### 5.6. IoT Device Design
 
 Esta sección presenta el diseño de los dispositivos IoT de StorePulse: los cuatro nodos de stand (intrusión, cámara, humo y consumo), el nodo de área común y el Edge Device de la galería. El diseño se sustenta en la metodología de doce pasos para sistemas IoT propuesta por Balestrieri et al. (2018) y se modela en Cirkit Designer.
 
@@ -10,7 +10,7 @@ Las decisiones de diseño responden a cinco criterios:
 - **Continuidad:** la detección y el registro de eventos funcionan sin internet y durante un corte de energía (EP-09).
 - **Trazabilidad con los requisitos:** cada nodo responde a una historia de la sección 3.1 (MS-01 a MS-09).
 - **Instalación no invasiva:** los nodos se comunican por WiFi y se alimentan de un tomacorriente, sin cableado nuevo entre stands.
-- **Interfaz física mínima:** el inquilino no configura nada en los nodos. Solo percibe su estado mediante un LED, definido en la guía de estilos de la sección 5.1.2.
+- **Interfaz física mínima:** el inquilino no configura nada en los nodos. Percibe su estado mediante un LED y, en el nodo de intrusión, una alarma sonora, definidos en la guía de estilos de la sección 5.1.2.
 
 La organización de los nodos sigue la arquitectura de información de la sección 5.2: cada nodo pertenece a un stand o a un área común, y el estado que muestra su LED es el mismo que las aplicaciones presentan para ese stand.
 
@@ -36,7 +36,7 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 
 | Nodo | Cargas | Potencia |
 |---|---|---:|
-| Intrusión del stand | ESP32 con WiFi, PIR, reed, RTC y LED | ≈ 0,9 W |
+| Intrusión del stand | ESP32 con WiFi, PIR, RTC y LED; la alarma suma ≈ 0,5 W solo mientras suena | ≈ 0,9 W |
 | Cámara del stand | ESP32-CAM con WiFi y LED; el valor corresponde a la captura | ≈ 1,2 W |
 | Humo del stand | ESP32 con WiFi, MQ-2 (calefactor permanente, 0,75 W), DHT22 y LED | ≈ 1,6 W |
 | Consumo del stand | ESP32 con WiFi, PZEM-004T, YF-S201 y LED | ≈ 1,2 W |
@@ -48,7 +48,7 @@ Los pasos recorren las cuatro capas de la arquitectura de referencia: Physical L
 |---|---|---|
 | TD-01 | Detección de humo → evento generado | ≤ 1,5 s |
 | TD-02 | Detección de humo → notificación push | ≤ 5 s |
-| TD-03 | Detección de intrusión → evento generado | ≤ 1 s |
+| TD-03 | Detección de intrusión → evento generado y alarma local activada | ≤ 1 s |
 | TD-04 | Detección de intrusión → notificación push | ≤ 5 s |
 | TD-05 | Imagen adjunta al evento de intrusión | ≤ 10 s |
 | TD-06 | Envío de la lectura de consumo eléctrico y de agua | cada 60 s |
@@ -77,7 +77,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 
 | Nodo | Microcontrolador | Sensores | Actuador | Cantidad | Historia |
 |---|---|---|---|---|---|
-| Intrusión del stand | ESP32 DevKit V1 | PIR, reed y reloj RTC | LED RGB | 1 por stand | MS-04 |
+| Intrusión del stand | ESP32 DevKit V1 | PIR y reloj RTC | Alarma sonora y LED RGB | 1 por stand | MS-04 |
 | Cámara del stand | ESP32-CAM | Cámara OV2640 integrada | LED RGB | 1 por stand | MS-04 |
 | Humo del stand | ESP32 DevKit V1 | MQ-2 y DHT22 | LED RGB | 1 por stand | MS-05 |
 | Consumo del stand | ESP32 DevKit V1 | PZEM-004T y YF-S201 | LED RGB | 1 por stand | MS-06 |
@@ -88,42 +88,43 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 | # | Función | Tipo | Nodo que lo incorpora |
 |---|---|---|---|
 | N1 | Movimiento | Sensor | Intrusión del stand y área común |
-| N2 | Apertura de puerta o cortina | Sensor | Intrusión del stand |
-| N3 | Humo | Sensor | Humo del stand |
-| N4 | Imagen del evento | Sensor | Cámara del stand y área común |
-| N5 | Energía eléctrica | Sensor | Consumo del stand |
-| N6 | Caudal de agua | Sensor | Consumo del stand (si tiene punto de agua) |
-| N7 | Temperatura y humedad | Sensor | Humo del stand |
-| N8 | Indicador de estado | Actuador | Todos los nodos |
+| N2 | Humo | Sensor | Humo del stand |
+| N3 | Imagen del evento | Sensor | Cámara del stand y área común |
+| N4 | Energía eléctrica | Sensor | Consumo del stand |
+| N5 | Caudal de agua | Sensor | Consumo del stand (si tiene punto de agua) |
+| N6 | Temperatura y humedad | Sensor | Humo del stand |
+| N7 | Indicador de estado | Actuador | Todos los nodos |
+| N8 | Alarma sonora | Actuador | Intrusión del stand |
 
 **Target uncertainty de los sensores**
 
 | Nodo | Magnitud | Target uncertainty | Razón |
 |---|---|---|---|
 | N1 | Presencia | Binaria; falsos positivos < 5 % en 24 h | La falsa alarma reduce la confianza del inquilino |
-| N2 | Apertura | Conmutación a 15 ± 5 mm | Solo distingue abierto de cerrado |
-| N3 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada stand |
-| N5 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
-| N6 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
-| N7 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
+| N2 | Humo | ± 10 % del valor leído tras calibración | El umbral se fija contra la línea base de cada stand |
+| N4 | Energía activa | ± 0,5 % | Sustenta un cobro; debe ser menor que el margen de disputa |
+| N5 | Caudal | ± 10 % | Suficiente para detectar consumo anómalo; no para facturación legal |
+| N6 | Temperatura / humedad | ± 0,5 °C / ± 3 % HR | Contexto para descartar falsos positivos de humo |
 
 **Target accuracy de los actuadores**
 
 | Nodo | Requisito |
 |---|---|
-| N8 LED RGB | Cinco estados distinguibles: normal, sin red, evento detectado, respaldo por batería y error. Cambio de estado en ≤ 50 ms |
+| N7 LED RGB | Cinco estados distinguibles: normal, sin red, evento detectado, respaldo por batería y error. Cambio de estado en ≤ 50 ms |
+| N8 Alarma sonora | Nivel sonoro ≥ 85 dB a 10 cm; activación en ≤ 50 ms desde la orden del ESP32 |
 
 **Interfaces digitales**
 
 | Nodo | Interfaz |
 |---|---|
-| N1 PIR, N2 reed | GPIO digital |
-| N3 MQ-2 | ADC de 12 bits (ADC1) |
-| N4 Cámara OV2640 | Integrada en el ESP32-CAM; la imagen se envía por WiFi |
-| N5 PZEM-004T | UART / Modbus-RTU a 9600 bps |
-| N6 YF-S201 | GPIO con interrupción (conteo de pulsos) |
-| N7 DHT22 | Bus único |
-| N8 LED RGB | PWM de 3 canales |
+| N1 PIR | GPIO digital |
+| N2 MQ-2 | ADC de 12 bits (ADC1) |
+| N3 Cámara OV2640 | Integrada en el ESP32-CAM; la imagen se envía por WiFi |
+| N4 PZEM-004T | UART / Modbus-RTU a 9600 bps |
+| N5 YF-S201 | GPIO con interrupción (conteo de pulsos) |
+| N6 DHT22 | Bus único |
+| N7 LED RGB | PWM de 3 canales |
+| N8 Alarma sonora | GPIO digital |
 | Reloj DS3231 | I2C |
 
 **Esfuerzo computacional y time-delay en el nodo.** El esfuerzo es bajo: filtrado, comparación contra umbral, conteo de pulsos y armado del mensaje. Las cargas mayores son la compresión JPEG, que resuelve el ESP32-CAM, y el envío de datos por WiFi. La decisión en el nodo (comparación contra el umbral) se resuelve en ≤ 50 ms.
@@ -159,7 +160,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 
 | ID | Servicio | Admin | Tenant | Información que integra |
 |---|---|:-:|:-:|---|
-| SV-01 | Alerta de intrusión con imagen | ● | ● | Movimiento confirmado, estado de apertura, imagen, horario de atención y stand |
+| SV-01 | Alerta de intrusión con imagen | ● | ● | Movimiento confirmado, imagen, horario de atención y stand |
 | SV-02 | Alerta de humo | ● | ● | Concentración de humo, temperatura y stand afectado |
 | SV-03 | Consumo del periodo | ● | ● | Energía y agua acumuladas en el periodo de facturación |
 | SV-04 | Histórico y línea base | ● | ● | Serie histórica, línea base y desviación del periodo actual |
@@ -205,14 +206,14 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 | Función | Componente | Características metrológicas | Alimentación | Alternativa descartada |
 |---|---|---|---|---|
-| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01) |
-| Apertura | Reed magnético MC-38 | Conmuta a 15 ± 5 mm | Contacto seco | — |
+| Movimiento | PIR HC-SR501 | 3–7 m, 110° | 5 V | Ultrasónico HC-SR04: falsos positivos con cortinas y mercadería (SP-01). Sensor magnético de puerta (reed): descartado por la complejidad de instalarlo en cortinas metálicas |
 | Humo | MQ-2 | 300–10 000 ppm | 5 V | MQ-135: orientado a calidad del aire (SP-02) |
 | Imagen | ESP32-CAM (OV2640) | 2 MP, JPEG | 5 V | — |
 | Energía | PZEM-004T v3 (100 A) | 80–260 V, 0–100 A, ± 0,5 % | 5 V | Pinza SCT-013 100 A/1 V: solo mide corriente (SP-03). Queda como segunda opción |
 | Agua | YF-S201 | 1–30 L/min, ± 10 % | 5 V | — |
 | Temperatura y humedad | DHT22 | ± 0,5 °C, ± 3 % HR | 3,3 V | — |
 | Estado | LED RGB | 5 estados | 3,3 V | — |
+| Alarma | Buzzer activo | ≥ 85 dB a 10 cm | 5 V | — |
 
 **Limitaciones declaradas.** El MQ-2 no es un detector certificado; el producto comercial deberá usar un detector fotoeléctrico homologado. El PZEM-004T se conecta al lado de 220 V y debe instalarlo personal con conocimiento eléctrico. Si el PZEM-004T no está disponible, el prototipo usa la pinza SCT-013 como segunda opción: mide solo corriente, por lo que el consumo se estima con 220 V nominales y sirve para mostrar tendencias, no para sustentar el cobro.
 
@@ -236,10 +237,11 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 | 1 | Identidad | Todos | Genera un identificador único a partir de la MAC del ESP32 (MS-01). |
 | 2 | Confirmación de movimiento | Intrusión y área común | Tres lecturas activas consecutivas del PIR a 10 Hz. |
 | 3 | Filtro de horario | Intrusión | Fuera del horario de atención genera el evento; dentro del horario no (MS-04). |
-| 4 | Captura de imagen | Cámara | Consulta al Edge API si hay una captura pendiente para su stand; si la hay, toma la imagen y la envía. |
-| 5 | Confirmación de humo | Humo | Dos lecturas consecutivas sobre el umbral, a 2 Hz; genera el evento de inmediato (MS-05). |
-| 6 | Medición de consumo | Consumo | Cuenta pulsos del caudalímetro y consulta el medidor eléctrico cada 60 s (MS-06). |
-| 7 | Persistencia y reintento | Todos | Guarda cada registro con su hora antes de enviarlo y reintenta ante fallos (MS-07, MS-08). |
+| 4 | Activación de la alarma | Intrusión | Al confirmar una intrusión fuera de horario, activa la alarma sonora durante un tiempo configurado, sin esperar al Edge API. |
+| 5 | Captura de imagen | Cámara | Consulta al Edge API si hay una captura pendiente para su stand; si la hay, toma la imagen y la envía. |
+| 6 | Confirmación de humo | Humo | Dos lecturas consecutivas sobre el umbral, a 2 Hz; genera el evento de inmediato (MS-05). |
+| 7 | Medición de consumo | Consumo | Cuenta pulsos del caudalímetro y consulta el medidor eléctrico cada 60 s (MS-06). |
+| 8 | Persistencia y reintento | Todos | Guarda cada registro con su hora antes de enviarlo y reintenta ante fallos (MS-07, MS-08). |
 
 **Edge Device**
 
@@ -267,6 +269,7 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 |---|---|---|
 | Nodo | Confirmación de movimiento (3 lecturas a 10 Hz) | 200 ms |
 | Nodo | Confirmación de humo (2 lecturas a 2 Hz) | 1 000 ms |
+| Nodo de intrusión | Activación de la alarma | 50 ms |
 | Nodo de cámara | Consulta de captura pendiente al Edge API | ≤ 1 000 ms |
 | Nodo de cámara | Captura y compresión JPEG | 400 ms |
 | Nodo de cámara | Envío de la imagen al Edge API | 1 000 ms |
@@ -283,12 +286,12 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 |---|---|---|---|
 | Humo, evento | 1 000 | 1,0 s | TD-01: 1,5 s ✔ |
 | Humo, notificación | 1 000 + 50 + 30 + 500 + 300 + 2 000 | ≈ 3,9 s | TD-02: 5 s ✔ |
-| Intrusión, evento | 200 | 0,2 s | TD-03: 1 s ✔ |
+| Intrusión, evento y alarma | 200 + 50 | 0,25 s | TD-03: 1 s ✔ |
 | Intrusión, notificación | 200 + 50 + 30 + 500 + 300 + 2 000 | ≈ 3,1 s | TD-04: 5 s ✔ |
 | Intrusión, imagen | 200 + 50 + 30 + 1 000 + 400 + 1 000 | ≈ 2,7 s | TD-05: 10 s ✔ |
 | Consumo | 40 + 50 + 30 + 500 + 300 | ≈ 0,9 s | TD-07: 30 s ✔ |
 
-**Conclusión.** La etapa dominante es la entrega de la notificación push (2 s), que no controla el equipo. Por eso el evento se genera y se registra en el nodo en 1 s o menos, sin esperar confirmación remota, y la imagen la aporta el nodo de cámara después del evento, para no retrasar la alerta.
+**Conclusión.** La etapa dominante es la entrega de la notificación push (2 s), que no controla el equipo. Por eso el evento se genera y se registra en el nodo, y la alarma local suena, en 1 s o menos, sin esperar confirmación remota, y la imagen la aporta el nodo de cámara después del evento, para no retrasar la alerta.
 
 ##### Paso 12. Definition of the graphical user interface
 
@@ -297,7 +300,7 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 | Web Application (Angular) | Gallery Administrator | Tablero de la galería, alertas con evidencia, consumo por stand frente a la línea base, incidentes y gestión de stands. |
 | Mobile Application (Flutter) | Tenant | Estado del stand, centro de notificaciones, detalle del incidente con imagen y consumo propio. |
 | Landing Page | Visitante | Propósito, beneficios por segmento, planes y registro. |
-| Nodos IoT | Tenant (en el stand) | Un LED RGB por nodo, con cinco estados, según la guía de la sección 5.1.2. |
+| Nodos IoT | Tenant (en el stand) | Un LED RGB por nodo, con cinco estados, y una alarma sonora en el nodo de intrusión, según la guía de la sección 5.1.2. |
 
 **Criterios transversales**
 
@@ -308,7 +311,7 @@ Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) 
 
 #### Diagrama del circuito
 
-Cada nodo tiene su propio diagrama: un microcontrolador, sus sensores, su actuador y la protoboard que distribuye la alimentación.
+Cada nodo tiene su propio diagrama: un microcontrolador, sus sensores, sus actuadores y la protoboard que distribuye la alimentación.
 
 **Nodo de intrusión del stand**
 
@@ -349,7 +352,7 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 | Componente | Pin del componente | Pin del ESP32 | Señal | Observación |
 |---|---|---|---|---|
 | PIR HC-SR501 | OUT | GPIO 27 | Entrada digital | — |
-| Reed MC-38 | Contacto | GPIO 26 | Entrada digital | Pull-up interno; el otro terminal va a GND |
+| Alarma (buzzer activo) | + / − | GPIO 26 / GND | Salida digital | Se muestra directa (ver nota) |
 | RTC DS3231 | SDA / SCL | GPIO 21 / GPIO 22 | I2C | Alimentado a 3,3 V |
 | LED RGB | R / G / B | GPIO 25 / GPIO 33 / GPIO 32 | PWM | Resistencia de 220 Ω por canal |
 
@@ -385,31 +388,30 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 | PIR HC-SR501 | OUT | GPIO 13 | Entrada digital | — |
 | LED RGB | R / G / B | GPIO 14 / GPIO 15 / GPIO 2 | PWM | Resistencia de 220 Ω por canal |
 
-**Nota.** El MQ-2, el YF-S201 y el PZEM-004T entregan señales de 5 V y los pines del ESP32 operan a 3,3 V. Para mantener legibles los diagramas, las conexiones se muestran directas; en la implementación física, cada una de esas tres señales pasa por un divisor resistivo (10 kΩ y 20 kΩ) que la adapta a 3,3 V.
+**Nota.** Para mantener legibles los diagramas, algunas conexiones se muestran directas. En la implementación física, las señales de 5 V del MQ-2, el YF-S201 y el PZEM-004T pasan por un divisor resistivo (10 kΩ y 20 kΩ) que las adapta a los 3,3 V del ESP32, y la alarma se acciona mediante un transistor NPN, porque consume más corriente de la que entrega un pin del ESP32.
 
 #### Diseño físico
 
-El nodo de local se aloja en una caja plástica instalada en el interior del local. El LED de estado queda visible en la cara frontal. Los sensores que requieren otra ubicación se conectan por cable a la caja.
+Cada nodo se aloja en su propia caja plástica, con el LED de estado visible en la cara frontal, y se instala donde su sensor mide mejor.
 
-| Componente | Ubicación | Razón |
+| Nodo | Ubicación | Razón |
 |---|---|---|
-| Caja del nodo (ESP32, RTC, batería y LED) | Pared interior, a la vista del inquilino | El LED debe verse desde el puesto de atención |
-| PIR y cámara | Esquina superior, frente al acceso | Cubren la entrada y el interior con un solo ángulo |
-| Reed magnético | Marco de la cortina metálica | Confirma la apertura física del local |
-| Sensor de humo y DHT22 | Techo o parte alta del local | El humo y el calor ascienden |
-| Medidor eléctrico PZEM-004T | Tablero eléctrico del local | Mide en la acometida del local |
-| Caudalímetro YF-S201 | Tubería de entrada de agua | Solo en locales con punto de agua |
+| Intrusión del stand | Esquina superior, frente al acceso; la alarma va dentro de la caja, detrás de una rejilla | Cubre la entrada y el interior, y la alarma se escucha desde el pasillo |
+| Cámara del stand | Junto al nodo de intrusión, orientada al acceso | La imagen muestra la misma zona que vigila el sensor de movimiento |
+| Humo del stand | Techo o parte alta del stand | El humo y el calor ascienden |
+| Consumo del stand | Junto al tablero eléctrico; el caudalímetro va en la tubería de entrada | Mide en la acometida del stand; el caudalímetro solo se instala si hay punto de agua |
+| Área común | Parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito | Vigila las zonas compartidas de la galería |
 
-El nodo de área común se instala en la parte alta del pasillo o del acceso, con la cámara orientada a la zona de tránsito. El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
+El Edge Device se ubica en la oficina de administración, conectado por Ethernet al router de la galería.
 
 #### Flujos de interacción de los nodos
 
-Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al inquilino y al administrador como notificación push (US-20, US-21, US-22). La interfaz física de cada nodo es un LED que comunica cinco estados, conforme a la guía de estilos de la sección 5.1.2. Si coinciden varios estados, se muestra el de mayor prioridad.
+Los nodos no tienen pantalla ni botones: las alertas llegan al inquilino y al administrador como notificación push (US-20, US-21, US-22). La interfaz física de cada nodo es un LED que comunica cinco estados, y el nodo de intrusión suma una alarma sonora que se activa ante una intrusión confirmada, conforme a la guía de estilos de la sección 5.1.2. Si coinciden varios estados, el LED muestra el de mayor prioridad.
 
 | Prioridad | Estado | LED |
 |:-:|---|---|
-| 1 | Evento detectado (intrusión o humo) | Rojo intermitente |
-| 2 | Error | Morado fijo |
+| 1 | Evento detectado (intrusión o humo) | Rojo intermitente; en intrusión, además suena la alarma |
+| 2 | Error (sensor sin respuesta o voltaje de alimentación fuera de 4,5–5,5 V) | Morado fijo |
 | 3 | Sin red | Ámbar intermitente |
 | 4 | Respaldo por batería | Azul fijo |
 | 5 | Normal | Verde fijo |
@@ -418,7 +420,7 @@ Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al in
 
 | Paso | Qué ocurre | LED |
 |:-:|---|---|
-| 1 | El nodo se enciende, conserva o genera su identificador único y verifica sus sensores. Si alguno no responde, pasa a error. | Morado fijo si hay falla |
+| 1 | El nodo se enciende, conserva o genera su identificador único y verifica sus sensores y su voltaje de alimentación. Si algo falla, pasa a error. | Morado fijo si hay falla |
 | 2 | Se conecta al WiFi de la galería y se autentica ante el Edge API con su API Key. | Ámbar intermitente |
 | 3 | Sincroniza la hora y queda en operación. | Verde fijo |
 
@@ -426,14 +428,14 @@ Los nodos no tienen pantalla, botones ni alarma sonora: las alertas llegan al in
 
 | Paso | Nodo | Qué ocurre | LED |
 |:-:|---|---|---|
-| 1 | Intrusión | El sensor detecta movimiento o la apertura de la cortina. | Verde fijo |
+| 1 | Intrusión | El sensor PIR detecta movimiento dentro del stand. | Verde fijo |
 | 2 | Intrusión | Confirma la detección con tres lecturas seguidas y verifica que está fuera del horario de atención. | Verde fijo |
-| 3 | Intrusión | Genera el evento de intrusión y lo envía al Edge API. | Rojo intermitente |
+| 3 | Intrusión | Activa la alarma sonora, genera el evento de intrusión y lo envía al Edge API. | Rojo intermitente y alarma |
 | 4 | Cámara | Al consultar al Edge API encuentra una captura pendiente, toma la imagen y la envía. El Edge API la adjunta al evento. | Rojo intermitente |
 | 5 | — | El inquilino y el administrador reciben la notificación push (US-20, US-21). | Rojo intermitente |
-| 6 | Intrusión | Sin nuevas detecciones durante el tiempo de espera, vuelve al estado previo. | Verde fijo |
+| 6 | Intrusión | Al cumplirse el tiempo de la alarma y sin nuevas detecciones, la apaga y vuelve al estado previo. | Verde fijo |
 
-Dentro del horario de atención, el movimiento no genera evento y el LED permanece en verde. En un área común, el mismo nodo detecta el movimiento y captura la imagen.
+Dentro del horario de atención, el movimiento no genera evento y el LED permanece en verde. En un área común, el mismo nodo detecta el movimiento y captura la imagen, sin alarma sonora.
 
 **Flujo 3. Detección de humo** (MS-05)
 
@@ -450,7 +452,7 @@ Dentro del horario de atención, el movimiento no genera evento y el LED permane
 |:-:|---|---|
 | 1 | El nodo pierde la conexión con el Edge API. | Ámbar intermitente |
 | 2 | Sigue detectando y guarda cada evento con su hora en su memoria. | Ámbar, o rojo si hay un evento |
-| 3 | Reintenta el envío tras un intervalo definido, sin bloquear nuevas mediciones. | Ámbar intermitente |
+| 3 | Reintenta el envío tras un intervalo definido, sin bloquear nuevas mediciones. Si no reporta durante 15 minutos, la plataforma lo marca como desconectado. | Ámbar intermitente |
 | 4 | Al reconectar, envía los registros pendientes en orden y con su hora original. | Verde fijo |
 
 **Flujo 5. Corte de energía** (TS-14)
@@ -459,7 +461,7 @@ Dentro del horario de atención, el movimiento no genera evento y el LED permane
 |:-:|---|---|
 | 1 | Se interrumpe la alimentación de red. Los nodos de intrusión, cámara, humo y área común pasan a batería; el nodo de consumo se apaga. | Azul fijo |
 | 2 | Los nodos con batería mantienen la detección de intrusión y de humo. | Azul fijo |
-| 3 | Cada nodo reporta su voltaje en las métricas de salud del dispositivo. | Azul fijo |
+| 3 | Cada nodo reporta su voltaje y la cantidad de eventos pendientes en las métricas de salud del dispositivo. | Azul fijo |
 | 4 | Al volver la energía, el nodo de consumo se reinicia y las baterías se recargan. | Verde fijo |
 
 
