@@ -11,23 +11,43 @@ title StorePulse - Service Execution and Monitoring - Edge Components
 
 Container_Boundary(edgeApi, "Edge API - Python Flask") {
 
-    Component(telemetryCollector, "Telemetry Collector", "Python, Flask", "Receives measurements and telemetry from IoT devices.")
+    Component(telemetryEndpoint, "Telemetry Endpoint", "Flask Blueprint", "Receives the telemetry of the nodes at POST /api/v1/monitoring/telemetry.")
 
-    Component(localProcessor, "Local Monitoring Processor", "Python", "Validates and prepares local measurements for synchronization.")
+    Component(telemetryService, "TelemetryApplicationService", "Python", "Authenticates the node, validates and stores the telemetry, requests its evaluation and sends it to the REST API.")
 
-    Component(cloudSynchronization, "Cloud Synchronization", "Python", "Sends telemetry and measurements to the central REST API.")
+    Component(iamFacade, "IamContextFacade", "Python", "Validates the identifier and API key of the node.")
+
+    Component(safetyFacade, "SafetyContextFacade", "Python", "Evaluates each measurement against the local safety rules.")
+
+    Component(telemetryRepository, "TelemetryRepository", "Python, Peewee", "Stores the telemetry locally until its synchronization is confirmed.")
+
+    Component(backendClient, "BackendTelemetryClient", "Python, HTTP", "Sends the telemetry to the REST API with its original date.")
+
+    Component(scheduler, "SynchronizationScheduler", "Python Thread", "Retries the pending telemetry and refreshes the safety rules periodically.")
 }
 
-Container(embeddedApplication, "Embedded Application", "C++", "Reads sensor and meter data from the IoT device.")
+Container(embeddedApplication, "Embedded Application", "C++, ESP32", "Reads the sensors and sends telemetry.")
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Central StorePulse backend.")
+ContainerDb(edgeDatabase, "Edge Local Database", "SQLite", "Stores telemetry pending synchronization.")
 
-Rel(embeddedApplication, telemetryCollector, "Sends telemetry", "HTTP/JSON")
+Container(restApi, "REST API", "Java, Spring Boot", "Registers the synchronized telemetry.")
 
-Rel(telemetryCollector, localProcessor, "Provides measurements")
+Rel(embeddedApplication, telemetryEndpoint, "Sends telemetry with its API key", "HTTP/JSON")
 
-Rel(localProcessor, cloudSynchronization, "Processes telemetry")
+Rel(telemetryEndpoint, telemetryService, "Invokes")
 
-Rel(cloudSynchronization, restApi, "Synchronizes telemetry", "HTTPS/JSON")
+Rel(telemetryService, iamFacade, "Authenticates the node with")
+
+Rel(telemetryService, safetyFacade, "Evaluates measurements with")
+
+Rel(telemetryService, telemetryRepository, "Stores telemetry in")
+
+Rel(telemetryService, backendClient, "Synchronizes through")
+
+Rel(scheduler, telemetryService, "Retries pending telemetry")
+
+Rel(telemetryRepository, edgeDatabase, "Reads and writes", "SQLite")
+
+Rel(backendClient, restApi, "Sends telemetry", "HTTPS/JSON")
 
 @enduml
