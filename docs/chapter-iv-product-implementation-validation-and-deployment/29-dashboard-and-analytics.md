@@ -53,8 +53,8 @@ La **Interface Layer** expone las capacidades de consulta de Analytics hacia la 
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `NotificationsController` | ASP.NET Core | Expone la consulta del Notification Center. |
-| `DashboardController` | ASP.NET Core | Expone la consulta del Consolidated Dashboard y del Local Dashboard. |
+| `NotificationsController` | Spring Boot | Expone la consulta del Notification Center. |
+| `DashboardController` | Spring Boot | Expone la consulta del Consolidated Dashboard y del Local Dashboard. |
 | Analytics UI | Angular | Permite al Gallery Administrator revisar el Consolidated Dashboard y el Notification Center. |
 | Analytics UI | Flutter / Dart | Permite al Tenant revisar el Local Dashboard y el Notification Center desde la aplicación móvil. |
 
@@ -95,8 +95,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementan las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestiona el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persiste notificaciones y registros de consumo. |
 | Integración con Utility Meter (IoT) | HTTPS/JSON | Recibe la lectura capturada por el medidor. |
 | Integración con Sedapal y Luz del Sur | HTTPS/JSON | Recibe la confirmación de consumo del periodo. |
@@ -113,19 +113,19 @@ Se conserva además `assets/architecture/analytics/analytics.dsl`, la descripci�
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de Analytics y el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Analytics - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/01-analytics-web-component.puml&fmt=svg&v=4)
+![StorePulse - Analytics - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/01-analytics-web-component.puml&fmt=svg&v=5)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de Analytics y el servicio encargado de consumir la API REST.
 
-![StorePulse - Analytics - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/02-analytics-mobile-component.puml&fmt=svg&v=4)
+![StorePulse - Analytics - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/02-analytics-mobile-component.puml&fmt=svg&v=5)
 
 ### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de consultas y de eventos, dominio y repositorios del contexto.
+La REST API, desarrollada con Spring Boot, concentra los controladores, manejadores de consultas y de eventos, dominio y repositorios del contexto.
 
-![StorePulse - Analytics - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/03-analytics-rest-api-component.puml&fmt=svg&v=4)
+![StorePulse - Analytics - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/03-analytics-rest-api-component.puml&fmt=svg&v=5)
 
 ## 4.2.5.6. Bounded Context Software Architecture Code Level Diagrams
 

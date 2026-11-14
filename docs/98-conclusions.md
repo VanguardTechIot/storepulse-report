@@ -17,10 +17,10 @@ aplicación móvil.
 
 El proyecto mantiene una trazabilidad sólida desde la evidencia hasta el producto. Las entrevistas sustentaron los
 arquetipos, las hipótesis y el Impact Mapping; estas decisiones se convirtieron en historias del backlog, luego en los
-nueve Bounded Contexts del diseño táctico y finalmente en los wireframes, mock-ups y prototipos del Capítulo V, que
+diez Bounded Contexts del diseño táctico y finalmente en los wireframes, mock-ups y prototipos del Capítulo V, que
 referencian las user stories que cubre cada pantalla.
 
-El diseño táctico quedó completo para los nueve Bounded Contexts del Context Map, incluido Utility Billing, que en la
+El diseño táctico quedó completo para los diez Bounded Contexts del Context Map, incluido Utility Billing, que en la
 entrega anterior estaba pendiente. Con ello, cada contexto cuenta con sus capas de dominio, interfaz, aplicación e
 infraestructura, y con sus diagramas de componentes, de clases y de base de datos, lo que dio una base común para que
 cada integrante implementara su parte de la aplicación web.
@@ -44,13 +44,13 @@ compartido que integra la sesión del usuario.
 ### Recomendaciones
 
 Alinear el Sprint 1 del informe con el estado real de la aplicación web. La sección 6.2.1 describe solo la
-configuración base de Angular, pero el repositorio ya contiene los nueve Bounded Contexts implementados y desplegados.
+configuración base de Angular, pero el repositorio ya contiene los diez Bounded Contexts implementados y desplegados.
 Se recomienda registrar ese avance como parte del Sprint 2, con sus user stories, tareas y evidencias, y completar los
 identificadores y fechas reales de commits que siguen pendientes en la tabla de 6.2.1.4.
 
 Construir y documentar la REST API en el Sprint 2. Hoy la aplicación web trabaja contra un servidor de datos local
-(json-server) y varios contextos aún usan datos en memoria. Al implementar la REST API con ASP.NET Core y Entity
-Framework Core, documentarla con OpenAPI (Swagger) y desplegarla, solo cambiará la implementación de cada repositorio
+(json-server) y varios contextos aún usan datos en memoria. Al implementar la REST API con Spring Boot y Spring Data
+JPA, documentarla con OpenAPI (Swagger) y desplegarla, solo cambiará la implementación de cada repositorio
 de infraestructura, gracias a la separación por capas aplicada.
 
 Ampliar la suite de pruebas de la aplicación web y reportarla en el informe. Existen pruebas unitarias del dominio en

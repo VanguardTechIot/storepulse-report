@@ -1,4 +1,4 @@
-﻿# 4.2.7. Bounded Context: Subscriptions and Payments
+# 4.2.7. Bounded Context: Subscriptions and Payments
 
 El **Bounded Context de Subscriptions and Payments** concentra la contratación y el ciclo de vida de las suscripciones de las galerías comerciales, junto con el procesamiento de los pagos que las sustentan. Administra el catálogo de planes escalonados por cantidad de locales monitoreados, la activación y renovación de la suscripción, su cancelación y su expiración.
 
@@ -81,11 +81,11 @@ La **Interface Layer** expone las capacidades del contexto hacia la Web Applicat
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `SubscriptionPlansController` | ASP.NET Core | Expone la publicación y la consulta del catálogo de planes. |
-| `SubscriptionsController` | ASP.NET Core | Expone la solicitud, consulta, renovación y cancelación de la suscripción de una galería. |
-| `PaymentsController` | ASP.NET Core | Expone el registro del pago y la consulta del histórico de cobros. |
-| `PaymentGatewayWebhookController` | ASP.NET Core | Recibe la confirmación o el rechazo del cobro enviado por la pasarela de pagos externa. |
-| `ISubscriptionsFacade` | ASP.NET Core | Anti-Corruption Layer que expone a otros contextos el estado de la suscripción de una galería y su límite de locales monitoreados. |
+| `SubscriptionPlansController` | Spring Boot | Expone la publicación y la consulta del catálogo de planes. |
+| `SubscriptionsController` | Spring Boot | Expone la solicitud, consulta, renovación y cancelación de la suscripción de una galería. |
+| `PaymentsController` | Spring Boot | Expone el registro del pago y la consulta del histórico de cobros. |
+| `PaymentGatewayWebhookController` | Spring Boot | Recibe la confirmación o el rechazo del cobro enviado por la pasarela de pagos externa. |
+| `ISubscriptionsFacade` | Spring Boot | Anti-Corruption Layer que expone a otros contextos el estado de la suscripción de una galería y su límite de locales monitoreados. |
 | Subscriptions UI | Angular | Permite al Gallery Administrator consultar los planes, contratar, pagar, renovar y cancelar la suscripción de su galería. |
 | Subscriptions UI | Flutter / Dart | Permite al Gallery Administrator consultar el estado y la vigencia de su suscripción desde la aplicación móvil. |
 
@@ -130,8 +130,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementan las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestiona el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persiste planes, suscripciones y pagos. |
 | `PaymentGatewayAdapter` | HTTPS/JSON | Envía la orden de cobro a la pasarela de pagos y recupera la referencia de la transacción. |
 | `SubscriptionExpirationJob` | Hosted Service | Ejecuta periódicamente la verificación de suscripciones vencidas. |
@@ -146,19 +146,19 @@ Los diagramas de componentes de este Bounded Context se elaboran con **Structuri
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de contratación y gestión de la suscripción, junto con el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Subscriptions and Payments - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/01_Subscriptions_Web_Component.puml&fmt=svg&v=1)
+![StorePulse - Subscriptions and Payments - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/01_Subscriptions_Web_Component.puml&fmt=svg&v=2)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de consulta del estado y la vigencia de la suscripción, junto con el servicio encargado de consumir la API REST.
 
-![StorePulse - Subscriptions and Payments - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/02_Subscriptions_Mobile_Component.puml&fmt=svg&v=1)
+![StorePulse - Subscriptions and Payments - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/02_Subscriptions_Mobile_Component.puml&fmt=svg&v=2)
 
 ### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, el webhook de la pasarela, los manejadores de comandos, consultas y eventos, el dominio, los repositorios, la fachada ACL y el adaptador hacia la pasarela de pagos.
+La REST API, desarrollada con Spring Boot, concentra los controladores, el webhook de la pasarela, los manejadores de comandos, consultas y eventos, el dominio, los repositorios, la fachada ACL y el adaptador hacia la pasarela de pagos.
 
-![StorePulse - Subscriptions and Payments - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/03_Subscriptions_REST_API_Component.puml&fmt=svg&v=1)
+![StorePulse - Subscriptions and Payments - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/subscriptions-and-payments/03_Subscriptions_REST_API_Component.puml&fmt=svg&v=2)
 
 ## 4.2.7.6. Bounded Context Software Architecture Code Level Diagrams
 

@@ -230,7 +230,7 @@ Esta capa no contiene reglas puras de dominio: su responsabilidad es reaccionar 
 
 La capa de infraestructura del Bounded Context Property Communication resuelve los detalles técnicos necesarios para materializar las abstracciones definidas en el dominio.
 
-En esta capa se implementan los repositorios con Entity Framework Core sobre MySQL, se configura el contexto de base de datos y se integran los adapters necesarios para el envío de notificaciones por los canales in-app, email y push.
+En esta capa se implementan los repositorios con Spring Data JPA sobre MySQL, se configura el contexto de base de datos y se integran los adapters necesarios para el envío de notificaciones por los canales in-app, email y push.
 
 ### Repositories
 
@@ -245,11 +245,11 @@ En esta capa se implementan los repositorios con Entity Framework Core sobre MyS
 
 | Nombre de Clase | Categoría | Propósito |
 |---|---|---|
-| `ManagementTenantCommunicationDbContext` | DbContext | Punto central de configuración de Entity Framework Core para el mapeo de los agregados `Conversation`, `TenantNotification`, `CommunicationLog` y `TenantAssignment` sobre MySQL. |
-| `ConversationEntityConfiguration` | EF Core Configuration | Configura el mapeo de la tabla `conversations` y sus relaciones con `messages` y `message_attachments`. |
-| `TenantNotificationEntityConfiguration` | EF Core Configuration | Configura el mapeo de la tabla `tenant_notifications`. |
-| `CommunicationLogEntityConfiguration` | EF Core Configuration | Configura el mapeo de la tabla `communication_logs`. |
-| `TenantAssignmentEntityConfiguration` | EF Core Configuration | Configura el mapeo de la tabla `tenant_assignments` y su restricción de asignación activa única por unidad. |
+| `EntityManager` | JPA | Punto central de configuración de Spring Data JPA para el mapeo de los agregados `Conversation`, `TenantNotification`, `CommunicationLog` y `TenantAssignment` sobre MySQL. |
+| `ConversationEntityConfiguration` | JPA Entity Mapping | Configura el mapeo de la tabla `conversations` y sus relaciones con `messages` y `message_attachments`. |
+| `TenantNotificationEntityConfiguration` | JPA Entity Mapping | Configura el mapeo de la tabla `tenant_notifications`. |
+| `CommunicationLogEntityConfiguration` | JPA Entity Mapping | Configura el mapeo de la tabla `communication_logs`. |
+| `TenantAssignmentEntityConfiguration` | JPA Entity Mapping | Configura el mapeo de la tabla `tenant_assignments` y su restricción de asignación activa única por unidad. |
 | `EmailNotificationAdapter` | External Service Wrapper | Integra el servicio de envío de correos transaccionales para el canal `Email` de las notificaciones. |
 | `PushNotificationAdapter` | External Service Wrapper | Integra el servicio de envío de notificaciones push hacia la Mobile Application para el canal `Push`. |
 | `StorageAdapter` | External Service Wrapper | Almacena los adjuntos de los mensajes y expone las URLs públicas correspondientes. |
@@ -321,36 +321,36 @@ Este diagrama muestra la estructura interna de la Mobile Application, desarrolla
 
 ## 4.2.4.5.3. Component Diagram — REST API Container
 
-Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP.NET Core y .NET, y los componentes que gestionan las operaciones del Bounded Context Property Communication, incluyendo controladores, handlers, repositorios, adaptadores y la fachada de integración con otros Bounded Contexts.
+Este diagrama muestra la estructura interna de la REST API, desarrollada con Java y Spring Boot, y los componentes que gestionan las operaciones del Bounded Context Property Communication, incluyendo controladores, handlers, repositorios, adaptadores y la fachada de integración con otros Bounded Contexts.
 
 ![Backend Component Property Communication](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-communication/05_Component_REST_API_Backend.puml&fmt=svg&v=4)
 ### Componentes
 
 | Componente | Responsabilidad | Tecnología |
 |---|---|---|
-| `ConversationsController` | Expone endpoints para iniciar, consultar y resolver conversaciones. | ASP.NET Core MVC |
-| `ConversationMessagesController` | Expone endpoints para consultar y enviar mensajes dentro de una conversación. | ASP.NET Core MVC |
-| `TenantNotificationsController` | Expone endpoints para consultar notificaciones y su estado de lectura. | ASP.NET Core MVC |
-| `CommunicationLogsController` | Expone endpoints para consultar los logs de comunicación. | ASP.NET Core MVC |
-| `TenantAssignmentsController` | Expone endpoints para asignar y terminar asignaciones de Tenants a Commercial Units. | ASP.NET Core Core MVC |
-| `ConversationCommandHandlers` | Orquestan los casos de uso de creación, envío de mensajes y resolución de conversaciones. | C# Application Services |
-| `NotificationCommandHandlers` | Orquestan la creación y despacho de notificaciones al Tenant. | C# Application Services |
-| `CommunicationLogCommandHandlers` | Registran los logs de comunicación asociados a notificaciones y conversaciones. | C# Application Services |
-| `AssignmentCommandHandlers` | Orquestan la asignación y terminación de asignaciones de Tenants a Commercial Units. | C# Application Services |
-| `QueryHandlers` | Atienden las consultas de conversaciones, notificaciones, logs y asignaciones. | C# Application Services |
-| `UtilityBillIssuedEventHandler` | Reacciona al evento emitido por Consumption and Billing e invoca la notificación al Tenant. | C# Event Handler |
-| `TenantNotifiedEventHandler` | Registra el log de comunicación al confirmarse el envío de una notificación. | C# Event Handler |
-| `Conversation` | Agregado que representa una conversación con sus mensajes y adjuntos. | C# Domain Model |
-| `TenantNotification` | Agregado que representa una notificación emitida al Tenant. | C# Domain Model |
-| `CommunicationLog` | Agregado que representa el registro histórico de una comunicación. | C# Domain Model |
-| `TenantAssignment` | Agregado que representa la asignación de un Tenant a una Commercial Unit. | C# Domain Model |
-| `ConversationRepository` | Persiste y recupera conversaciones y sus mensajes. | Entity Framework Core |
-| `TenantNotificationRepository` | Persiste y recupera notificaciones. | Entity Framework Core |
-| `CommunicationLogRepository` | Persiste y recupera logs de comunicación. | Entity Framework Core |
-| `TenantAssignmentRepository` | Persiste y recupera asignaciones. | Entity Framework Core |
-| `ManagementTenantCommunicationFacade` | Anti-Corruption Layer que expone operaciones de notificación y validación a otros bounded contexts. | C# Application Service |
-| `EmailNotificationAdapter` | Envía notificaciones por correo electrónico. | C# Adapter |
-| `PushNotificationAdapter` | Envía notificaciones push a la aplicación móvil. | C# Adapter |
+| `ConversationsController` | Expone endpoints para iniciar, consultar y resolver conversaciones. | Spring Web MVC |
+| `ConversationMessagesController` | Expone endpoints para consultar y enviar mensajes dentro de una conversación. | Spring Web MVC |
+| `TenantNotificationsController` | Expone endpoints para consultar notificaciones y su estado de lectura. | Spring Web MVC |
+| `CommunicationLogsController` | Expone endpoints para consultar los logs de comunicación. | Spring Web MVC |
+| `TenantAssignmentsController` | Expone endpoints para asignar y terminar asignaciones de Tenants a Commercial Units. | Spring Boot Core MVC |
+| `ConversationCommandHandlers` | Orquestan los casos de uso de creación, envío de mensajes y resolución de conversaciones. | Java Application Services |
+| `NotificationCommandHandlers` | Orquestan la creación y despacho de notificaciones al Tenant. | Java Application Services |
+| `CommunicationLogCommandHandlers` | Registran los logs de comunicación asociados a notificaciones y conversaciones. | Java Application Services |
+| `AssignmentCommandHandlers` | Orquestan la asignación y terminación de asignaciones de Tenants a Commercial Units. | Java Application Services |
+| `QueryHandlers` | Atienden las consultas de conversaciones, notificaciones, logs y asignaciones. | Java Application Services |
+| `UtilityBillIssuedEventHandler` | Reacciona al evento emitido por Consumption and Billing e invoca la notificación al Tenant. | Java Event Handler |
+| `TenantNotifiedEventHandler` | Registra el log de comunicación al confirmarse el envío de una notificación. | Java Event Handler |
+| `Conversation` | Agregado que representa una conversación con sus mensajes y adjuntos. | Java Domain Model |
+| `TenantNotification` | Agregado que representa una notificación emitida al Tenant. | Java Domain Model |
+| `CommunicationLog` | Agregado que representa el registro histórico de una comunicación. | Java Domain Model |
+| `TenantAssignment` | Agregado que representa la asignación de un Tenant a una Commercial Unit. | Java Domain Model |
+| `ConversationRepository` | Persiste y recupera conversaciones y sus mensajes. | Spring Data JPA |
+| `TenantNotificationRepository` | Persiste y recupera notificaciones. | Spring Data JPA |
+| `CommunicationLogRepository` | Persiste y recupera logs de comunicación. | Spring Data JPA |
+| `TenantAssignmentRepository` | Persiste y recupera asignaciones. | Spring Data JPA |
+| `ManagementTenantCommunicationFacade` | Anti-Corruption Layer que expone operaciones de notificación y validación a otros bounded contexts. | Java Application Service |
+| `EmailNotificationAdapter` | Envía notificaciones por correo electrónico. | Java Adapter |
+| `PushNotificationAdapter` | Envía notificaciones push a la aplicación móvil. | Java Adapter |
 
 ### Interacciones
 
@@ -364,7 +364,7 @@ Este diagrama muestra la estructura interna de la REST API, desarrollada con ASP
 | Tenant Management | Dependencia Interna | Valida la existencia del Tenant antes de iniciar conversaciones, notificar o asignar. |
 | Email Provider | Integración Externa | Envía notificaciones por correo electrónico a través del `EmailNotificationAdapter`. |
 | Push Notification Service | Integración Externa | Envía notificaciones push a la Mobile Application a través del `PushNotificationAdapter`. |
-| MySQL Database | Persistencia | Almacena y recupera conversaciones, mensajes, adjuntos, notificaciones, logs de comunicación y asignaciones mediante Entity Framework Core. |
+| MySQL Database | Persistencia | Almacena y recupera conversaciones, mensajes, adjuntos, notificaciones, logs de comunicación y asignaciones mediante Spring Data JPA. |
 
 ---
 

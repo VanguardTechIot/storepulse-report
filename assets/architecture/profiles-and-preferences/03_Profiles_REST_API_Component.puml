@@ -10,9 +10,9 @@ skinparam defaultFontName Arial
 title StorePulse - REST API Component View - Profiles and Preferences
 
 Container_Boundary(restApi, "REST API") {
-    Component(userProfilesController, "UserProfilesController", "ASP.NET Core Controller", "Exposes the profile query, update, photo upload and language change endpoints.")
-    Component(notificationPreferencesController, "NotificationPreferencesController", "ASP.NET Core Controller", "Exposes the notification preference query, update and channel disable endpoints.")
-    Component(userRegisteredEventConsumer, "UserRegisteredEventConsumer", "ASP.NET Core", "Receives the user registration event published by Identity and Access Management.")
+    Component(userProfilesController, "UserProfilesController", "Spring REST Controller", "Exposes the profile query, update, photo upload and language change endpoints.")
+    Component(notificationPreferencesController, "NotificationPreferencesController", "Spring REST Controller", "Exposes the notification preference query, update and channel disable endpoints.")
+    Component(userRegisteredEventConsumer, "UserRegisteredEventConsumer", "Spring Boot", "Receives the user registration event published by Identity and Access Management.")
 
     Component(commandHandlers, "Command Handlers", "Application Layer", "Orchestrates profile creation and update, photo upload, language change and preference configuration.")
     Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the Profile Settings, Language Options and Notification Settings read models.")
@@ -24,7 +24,7 @@ Container_Boundary(restApi, "REST API") {
 
     Component(profilesAndPreferencesDomain, "Profiles and Preferences Domain", "Domain Layer", "Contains the UserProfile and NotificationPreferences aggregates and domain rules.")
 
-    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Spring Data JPA.")
 }
 
 System_Ext(identityAccessManagement, "Identity and Access Management", "Publishes the UserRegisteredEvent that triggers profile creation.")
@@ -55,7 +55,7 @@ Rel(eventHandlers, profilesAndPreferencesDomain, "Creates and updates aggregates
 
 Rel(profilesAndPreferencesDomain, repositoryImplementations, "Uses repository abstractions")
 
-Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+Rel(repositoryImplementations, database, "Reads and writes", "Spring Data JPA")
 
 Rel(imageStorageServiceAdapter, imageStorageService, "Sends the profile photo", "HTTPS/JSON")
 
