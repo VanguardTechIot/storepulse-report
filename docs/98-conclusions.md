@@ -73,3 +73,4 @@ la aplicación móvil y de las demás aplicaciones (Edge API y Embedded Applicat
 Interviews (6.3) y el Video About-the-Product (6.4), que todavía no tienen contenido.
 
 ## Video About-the-Team
+<tr><td>Link de About the team : </td><td><a href="https://shorturl.at/MBdUP">https://shorturl.at/MBdUP</a></td></tr>
