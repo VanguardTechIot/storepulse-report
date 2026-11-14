@@ -4,7 +4,7 @@ Para que StorePulse pase de ser una idea a una solución útil, necesitamos sali
 
 En esta sección, dejamos de lado las suposiciones para escuchar la voz de los administradores de galería y los inquilinos de local, asegurando que nuestra propuesta tecnológica sea intuitiva y genere un impacto real en la seguridad de su patrimonio y en la transparencia de su operación diaria.
 
-### 2.2.1.  Diseño de entrevistas
+### 2.2.1. Diseño de entrevistas
 
 **Objetivos**
 
