@@ -1,0 +1,49 @@
+@startuml storepulse-safety-edge-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Edge Components
+
+Container_Boundary(edgeApi, "Edge API - Python Flask") {
+
+    Component(safetyFacade, "SafetyContextFacade", "Python", "Evaluates each measurement received by the monitoring module.")
+
+    Component(evaluationService, "SafetyEvaluationApplicationService", "Python", "Applies the local rules and the business hours to a measurement.")
+
+    Component(ruleService, "SafetyRuleApplicationService", "Python", "Refreshes the local rules from the REST API and keeps the standard rules when there is no connection.")
+
+    Component(rulesEndpoint, "Safety Rules Endpoint", "Flask Blueprint", "Lists the rules applied locally at GET /api/v1/safety/rules.")
+
+    Component(ruleRepository, "SafetyRuleRepository", "Python, Peewee", "Stores the local copy of the safety rules.")
+
+    Component(backendClient, "BackendSafetyRuleClient", "Python, HTTP", "Requests the safety rules from the REST API.")
+}
+
+Container(monitoringModule, "Edge Monitoring Module", "Python", "Receives the telemetry of the nodes.")
+
+ContainerDb(edgeDatabase, "Edge Local Database", "SQLite", "Stores the local safety rules.")
+
+Container(restApi, "REST API", "Java, Spring Boot", "Provides the safety rules.")
+
+Rel(monitoringModule, safetyFacade, "Requests evaluations from")
+
+Rel(safetyFacade, evaluationService, "Invokes")
+
+Rel(evaluationService, ruleRepository, "Reads rules from")
+
+Rel(rulesEndpoint, ruleService, "Invokes")
+
+Rel(ruleService, backendClient, "Refreshes rules through")
+
+Rel(ruleService, ruleRepository, "Stores rules in")
+
+Rel(ruleRepository, edgeDatabase, "Reads and writes", "SQLite")
+
+Rel(backendClient, restApi, "Requests /safety-rules", "HTTPS/JSON")
+
+@enduml

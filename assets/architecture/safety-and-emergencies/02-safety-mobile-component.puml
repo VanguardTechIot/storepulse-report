@@ -1,0 +1,29 @@
+@startuml storepulse-safety-mobile-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Mobile Components
+
+Container_Boundary(mobileApp, "Mobile Application - Flutter") {
+
+    Component(dashboardPage, "DashboardPage", "Flutter Widget", "Shows the alerts by status and the open alerts by sensor type.")
+
+    Component(dashboardViewModel, "DashboardViewModel", "Cubit", "Loads the dashboard summary.")
+
+    Component(dashboardService, "DashboardService", "Dart HTTP Client", "Requests the dashboard summary with the session token.")
+}
+
+Container(restApi, "REST API", "Java, Spring Boot", "Builds the dashboard summary from the alert counts of Safety and Emergencies.")
+
+Rel(dashboardPage, dashboardViewModel, "Observes state from")
+
+Rel(dashboardViewModel, dashboardService, "Uses")
+
+Rel(dashboardService, restApi, "Requests /dashboard/summary", "HTTPS/JSON")
+
+@enduml

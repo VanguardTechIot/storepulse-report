@@ -1,0 +1,65 @@
+@startuml storepulse-safety-rest-api-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - REST API Components
+
+Container_Boundary(restApi, "REST API - Spring Boot") {
+
+    Component(alertsController, "AlertsController", "Spring REST Controller", "Queries alerts and changes their state.")
+
+    Component(deviceStatesController, "DeviceStatesController", "Spring REST Controller", "Queries the safety state of a device.")
+
+    Component(safetyRulesController, "SafetyRulesController", "Spring REST Controller", "Queries the safety rules.")
+
+    Component(safetyFacade, "SafetyContextFacade", "Context Facade", "Evaluates measurements and counts alerts for other Bounded Contexts.")
+
+    Component(commandServices, "AlertCommandServiceImpl / SafetyRuleCommandServiceImpl", "Application Services", "Evaluate measurements, manage the alert lifecycle and register the standard rules.")
+
+    Component(queryServices, "Alert, DeviceState and SafetyRule Query Services", "Application Services", "Process the safety queries.")
+
+    Component(outboundServices, "ExternalAssetsService / ExternalAlertNotificationService", "Anti-Corruption Layer", "Read the visible devices and notify the tenant of the affected store.")
+
+    Component(domainModel, "Safety and Emergencies Domain", "Domain Layer", "Contains SafetyRule, Alert, DeviceState, value objects and domain events.")
+
+    Component(repositories, "SafetyRule, Alert and DeviceState Repositories", "Spring Data JPA", "Persist rules, alerts and device states.")
+}
+
+ContainerDb(database, "Database", "MySQL", "Stores safety rules, alerts and device states.")
+
+Container(monitoring, "Service Execution and Monitoring", "Bounded Context", "Requests the evaluation of each measurement.")
+
+Container(otherContexts, "Resource and Asset Management, Property Management, Property Communication", "Bounded Contexts", "Provide devices, stores and tenant notifications.")
+
+Rel(monitoring, safetyFacade, "Requests evaluations from")
+
+Rel(safetyFacade, commandServices, "Invokes")
+
+Rel(alertsController, commandServices, "Invokes")
+
+Rel(alertsController, queryServices, "Invokes")
+
+Rel(deviceStatesController, queryServices, "Invokes")
+
+Rel(safetyRulesController, queryServices, "Invokes")
+
+Rel(commandServices, domainModel, "Executes domain operations")
+
+Rel(commandServices, outboundServices, "Uses")
+
+Rel(queryServices, outboundServices, "Uses")
+
+Rel(commandServices, repositories, "Writes to")
+
+Rel(queryServices, repositories, "Reads from")
+
+Rel(outboundServices, otherContexts, "Calls context facades of")
+
+Rel(repositories, database, "Reads and writes", "Spring Data JPA")
+
+@enduml
