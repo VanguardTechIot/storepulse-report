@@ -16,7 +16,7 @@ Container_Boundary(webApp, "Web Application - Angular") {
     Component(resourceAssetService, "Resource & Asset Service", "Angular Service", "Consumes REST endpoints related to resources, assets and IoT devices.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(resourceAssetUI, resourceAssetService, "Uses")
 

@@ -10,6 +10,7 @@ Los Bounded Contexts considerados durante este proceso fueron:
 - Property Management
 - Resource and Asset Management
 - Service Execution and Monitoring
+- Safety and Emergencies
 - Dashboard and Analytics
 - Utility Billing
 - Property Communication
@@ -40,7 +41,9 @@ Esta alternativa surge del Big Picture EventStorming (Capítulo II), donde ambos
 
 ![Candidate Context Map 2 - Safety and Emergencies with Business Continuity](../../assets/architecture/context-map/candidate-context-map-2.png)
 
-Por esta razón, la alternativa fue **aceptada**, consolidando ambas responsabilidades en un único Bounded Context: **Service Execution and Monitoring**.
+La continuidad operativa sí forma parte de Service Execution and Monitoring, porque depende directamente de cómo se registra y sincroniza la telemetría desde el Edge. En cambio, la evaluación de las reglas de seguridad y la gestión de las alertas tienen un modelo y un ciclo de vida propios: las reglas, el estado de cada dispositivo y las alertas que pasan de activas a en atención y a resueltas. Mantenerlas dentro del mismo contexto mezclaría el registro de la información con las decisiones que se toman sobre ella.
+
+Por esta razón, la alternativa fue **rechazada**. La continuidad operativa se integró en **Service Execution and Monitoring** y la detección de incidentes de seguridad se organizó en un Bounded Context independiente: **Safety and Emergencies**.
 
 ##### Candidate Context Map 3 — Distribution of Notification Capabilities
 
@@ -59,10 +62,10 @@ Por esta razón, la alternativa fue **rechazada** y Property Communication se ma
 | Alternative | Main Advantage | Main Disadvantage | Decision |
 |---|---|---|---|
 | Dashboard and Analytics + Utility Billing | Evita comunicación explícita entre consumo y facturación. | Mezcla un modelo de solo consulta con uno transaccional de reglas de negocio. | Rejected |
-| Safety and Emergencies + Business Continuity | Ambas comparten el mismo motor operativo de procesamiento de telemetría en tiempo real. | Ninguna relevante — comparten aggregate root técnico y ciclo de vida. | **Accepted** |
+| Safety and Emergencies + Business Continuity | Ambas comparten el mismo origen de datos y el procesamiento en el Edge. | Mezcla el registro de la telemetría con la evaluación de reglas y el ciclo de vida de las alertas. | Rejected |
 | Distributed Notifications | Reduce la dependencia hacia un contexto especializado en comunicación. | Duplica la lógica de entrega y dificulta un centro de notificaciones consolidado. | Rejected |
 
-A partir de esta comparación se determinó una organización de **nueve Bounded Contexts**, resultado de fusionar Safety and Emergencies con Business Continuity en Service Execution and Monitoring, y de mantener el resto de contextos independientes con relaciones explícitas entre ellos.
+A partir de esta comparación se determinó una organización de **diez Bounded Contexts**, en la que la continuidad operativa forma parte de Service Execution and Monitoring, Safety and Emergencies se mantiene como un contexto independiente y el resto de contextos conservan relaciones explícitas entre ellos.
 
 #### Selected Context Map
 
@@ -72,6 +75,7 @@ El Context Map seleccionado está conformado por:
 - Property Management
 - Resource and Asset Management
 - Service Execution and Monitoring
+- Safety and Emergencies
 - Dashboard and Analytics
 - Utility Billing
 - Property Communication
@@ -147,11 +151,35 @@ El Context Map seleccionado está conformado por:
 - **Integration Pattern:** Anti-Corruption Layer (ACL)
 - **Description:** Service Execution and Monitoring identifica lecturas y eventos crudos de telemetría. Dashboard and Analytics transforma esta información hacia sus propios conceptos (`ConsumptionSummary`, `BaselineDeviation`), evitando que su modelo dependa directamente del modelo de eventos IoT.
 
-##### Service Execution and Monitoring → Property Communication
+##### Safety and Emergencies → Service Execution and Monitoring
 
-- **Relationship:** Upstream (Service Execution and Monitoring) / Downstream (Property Communication)
+- **Relationship:** Upstream (Safety and Emergencies) / Downstream (Service Execution and Monitoring)
+- **Integration Pattern:** Anti-Corruption Layer (ACL)
+- **Description:** Safety and Emergencies mantiene la autoridad sobre las reglas de seguridad, el estado de los dispositivos y las alertas. Service Execution and Monitoring le solicita la evaluación de cada medición registrada y traduce el resultado a su propio concepto de `MeasurementEvaluation`, que devuelve junto con la telemetría.
+
+##### Resource and Asset Management → Safety and Emergencies
+
+- **Relationship:** Upstream (Resource and Asset Management) / Downstream (Safety and Emergencies)
+- **Integration Pattern:** Anti-Corruption Layer (ACL)
+- **Description:** Resource and Asset Management mantiene los dispositivos y el recurso donde está instalado cada uno. Safety and Emergencies consume únicamente los identificadores necesarios para saber qué dispositivos puede ver cada usuario y en qué recurso ocurrió una alerta.
+
+##### Property Management → Safety and Emergencies
+
+- **Relationship:** Upstream (Property Management) / Downstream (Safety and Emergencies)
+- **Integration Pattern:** Anti-Corruption Layer (ACL)
+- **Description:** Property Management mantiene los locales y áreas comunes de cada galería. Safety and Emergencies obtiene el local vinculado al recurso del dispositivo y el administrador de su galería para dirigir la notificación de cada alerta.
+
+##### Property Communication → Safety and Emergencies
+
+- **Relationship:** Upstream (Property Communication) / Downstream (Safety and Emergencies)
 - **Integration Pattern:** Customer/Supplier
-- **Description:** Service Execution and Monitoring proporciona los eventos de intrusión, humo o desconexión. Property Communication utiliza esta información para generar y escalar las alertas correspondientes a administrador e inquilino.
+- **Description:** Property Communication actúa como Supplier de la entrega de notificaciones y de la relación entre cada inquilino y su local. Safety and Emergencies actúa como Customer: consulta qué recursos puede ver el usuario autenticado y solicita la notificación al inquilino del local afectado cuando se genera una alerta.
+
+##### Safety and Emergencies → Dashboard and Analytics
+
+- **Relationship:** Upstream (Safety and Emergencies) / Downstream (Dashboard and Analytics)
+- **Integration Pattern:** Anti-Corruption Layer (ACL)
+- **Description:** Safety and Emergencies proporciona el número de alertas por estado y de alertas abiertas por tipo de sensor. Dashboard and Analytics transforma esta información en los indicadores de su resumen.
 
 ##### Dashboard and Analytics → Utility Billing
 
@@ -175,8 +203,8 @@ El Context Map seleccionado está conformado por:
 
 | Pattern | Relationships |
 |---|---|
-| **Anti-Corruption Layer (ACL)** | IAM → Property Management; IAM → Profiles and Preferences; IAM → Subscriptions and Payments; Resource and Asset Management → Service Execution and Monitoring; Service Execution and Monitoring → Dashboard and Analytics |
-| **Customer/Supplier** | IAM → Property Communication; Property Management → Resource and Asset Management; Property Management → Subscriptions and Payments; Property Management → Property Communication; Service Execution and Monitoring → Property Communication; Dashboard and Analytics → Utility Billing; Utility Billing → Property Communication; Subscriptions and Payments → Resource and Asset Management |
+| **Anti-Corruption Layer (ACL)** | IAM → Property Management; IAM → Profiles and Preferences; IAM → Subscriptions and Payments; Resource and Asset Management → Service Execution and Monitoring; Service Execution and Monitoring → Dashboard and Analytics; Safety and Emergencies → Service Execution and Monitoring; Resource and Asset Management → Safety and Emergencies; Property Management → Safety and Emergencies; Safety and Emergencies → Dashboard and Analytics |
+| **Customer/Supplier** | IAM → Property Communication; Property Management → Resource and Asset Management; Property Management → Subscriptions and Payments; Property Management → Property Communication; Property Communication → Safety and Emergencies; Dashboard and Analytics → Utility Billing; Utility Billing → Property Communication; Subscriptions and Payments → Resource and Asset Management |
 
 **Customer/Supplier** se utiliza cuando un contexto Upstream actúa como Supplier de información o capacidades requeridas explícitamente por un contexto Downstream que actúa como Customer, manteniendo el Supplier la autoridad sobre dicha información.
 
@@ -194,10 +222,10 @@ Por lo tanto, los patrones que mejor representan las relaciones identificadas en
 
 #### Final Context Mapping Decision
 
-Después de evaluar las distintas alternativas de Context Mapping, se determinó que mantener nueve Bounded Contexts como unidades independientes —fusionando previamente Safety and Emergencies con Business Continuity en Service Execution and Monitoring— representa la aproximación seleccionada para StorePulse.
+Después de evaluar las distintas alternativas de Context Mapping, se determinó que mantener diez Bounded Contexts como unidades independientes —integrando la continuidad operativa en Service Execution and Monitoring y separando Safety and Emergencies— representa la aproximación seleccionada para StorePulse.
 
-La integración de Dashboard and Analytics con Utility Billing fue descartada debido a que mezclaría un modelo de solo consulta con uno transaccional de reglas de negocio. La integración de Property Management con Profiles and Preferences fue descartada porque combinaría dos aggregate roots sin relación conceptual entre sí. La distribución de las capabilities de notificación entre los demás contextos fue descartada debido a que produciría duplicación de lógica de entrega y dificultaría un centro de notificaciones consolidado.
+La integración de Dashboard and Analytics con Utility Billing fue descartada debido a que mezclaría un modelo de solo consulta con uno transaccional de reglas de negocio. La unión de Safety and Emergencies con Business Continuity fue descartada porque mezclaría el registro de la telemetría con la evaluación de reglas y el ciclo de vida de las alertas. La integración de Property Management con Profiles and Preferences fue descartada porque combinaría dos aggregate roots sin relación conceptual entre sí. La distribución de las capabilities de notificación entre los demás contextos fue descartada debido a que produciría duplicación de lógica de entrega y dificultaría un centro de notificaciones consolidado.
 
-La alternativa seleccionada mantiene separados **Identity and Access Management, Property Management, Resource and Asset Management, Service Execution and Monitoring, Dashboard and Analytics, Utility Billing, Property Communication, Profiles and Preferences y Subscriptions and Payments**, con colaboraciones establecidas mediante los patrones **Customer/Supplier** y **Anti-Corruption Layer**.
+La alternativa seleccionada mantiene separados **Identity and Access Management, Property Management, Resource and Asset Management, Service Execution and Monitoring, Safety and Emergencies, Dashboard and Analytics, Utility Billing, Property Communication, Profiles and Preferences y Subscriptions and Payments**, con colaboraciones establecidas mediante los patrones **Customer/Supplier** y **Anti-Corruption Layer**.
 
 De esta manera, cada Bounded Context conserva la autoridad sobre su propio modelo de dominio, comparte únicamente la información necesaria mediante contratos claramente definidos, y puede evolucionar sin introducir dependencias innecesarias sobre los modelos internos de los demás contextos.

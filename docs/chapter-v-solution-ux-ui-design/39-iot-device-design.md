@@ -191,7 +191,7 @@ Nodos sensores/actuadores  →  Edge Device  →  Cloud  →  Aplicaciones de us
 ##### Paso 7. Selection of the architectures of data exchange and information integration layers
 
 ```
-Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) ──HTTPS/JSON──► REST API (ASP.NET Core + MySQL)
+Embedded Application (ESP32) ──HTTP/JSON──► Edge API (Flask + SQLite) ──HTTPS/JSON──► REST API (Spring Boot + MySQL)
       Un nodo por función                     Edge Device                              Cloud
 ```
 

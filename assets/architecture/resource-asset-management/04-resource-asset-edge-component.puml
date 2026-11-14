@@ -20,7 +20,7 @@ Container_Boundary(edgeApi, "Edge API - Python Flask") {
 
 Container(embeddedApplication, "Embedded Application", "C++", "Controls the IoT device and communicates with sensors and meters.")
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Central StorePulse backend.")
+Container(restApi, "REST API", "Java, Spring Boot", "Central StorePulse backend.")
 
 Rel(embeddedApplication, deviceGateway, "Communicates with", "HTTP/JSON")
 

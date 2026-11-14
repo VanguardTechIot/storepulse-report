@@ -13,7 +13,7 @@ La **Domain Layer** contiene el núcleo de las reglas de negocio sobre la gesti�
 | Nombre | Categoría | Propósito y reglas de negocio |
 |---|---|---|
 | `Gallery` | Aggregate Root | Representa una galería comercial administrada por StorePulse. Mantiene su nombre, dirección, total de locales y la relación con su administrador (`OwnerId`). |
-| `Unit` | Aggregate Root | Representa un local individual dentro de una galería. Mantiene número de local, piso, superficie en $m^2$ y estado de ocupación. 
+| `Unit` | Aggregate Root | Representa un local individual dentro de una galería. Mantiene número de local, piso, superficie en $m^2$ y estado de ocupación. |
 | `Tenant` | Entity | Representa la persona o entidad que alquila un local específico. Mantiene datos de contacto e identificación legal. |
 | `LeaseAgreement` | Aggregate Root | Administra la relación contractual de alquiler entre un `Tenant` y una `Unit`, especificando vigencia y condiciones. |
 | `GalleryId` | Value Object | Encapsula el identificador único de una galería. |
@@ -70,9 +70,9 @@ La **Interface Layer** expone las capacidades del contexto hacia la Web Applicat
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `GalleryController` | ASP.NET Core | Expone las operaciones CRUD y de gestión de galerías. |
-| `UnitController` | ASP.NET Core | Expone endpoints para consulta y mantenimiento de locales. |
-| `LeaseController` | ASP.NET Core | Gestiona la asignación de inquilinos y contratos de arrendamiento. |
+| `GalleryController` | Spring Boot | Expone las operaciones CRUD y de gestión de galerías. |
+| `UnitController` | Spring Boot | Expone endpoints para consulta y mantenimiento de locales. |
+| `LeaseController` | Spring Boot | Gestiona la asignación de inquilinos y contratos de arrendamiento. |
 | Property Management UI | Angular | Permite al administrador gestionar galerías, locales e inquilinos. |
 | Property Mobile UI | Flutter / Dart | Permite consultar información sobre locales y contratos desde la aplicación móvil. |
 
@@ -109,8 +109,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / EF Core | Implementar las abstracciones de repositorio definidas por el dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestionar el acceso y la interacción con la base de datos central. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementar las abstracciones de repositorio definidas por el dominio. |
+| `EntityManager` | Spring Data JPA | Gestionar el acceso y la interacción con la base de datos central. |
 | MySQL | MySQL | Persistir galerías, locales, inquilinos y contratos de arrendamiento. |
 
 ## 4.2.8.5. Bounded Context Software Architecture Component Level Diagrams
@@ -121,19 +121,19 @@ Los siguientes diagramas muestran cómo se distribuyen los componentes del Bound
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de gestión de galerías y unidades comerciales, junto con el servicio encargado de consumir los servicios REST correspondientes para la administración del espacio físico.
 
-![StorePulse - Property Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-web-component.puml&fmt=svg&v=4)
+![StorePulse - Property Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-web-component.puml&fmt=svg&v=5)
 
 ### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de inspección y consulta de disponibilidad de locales comerciales, junto con el servicio encargado de consumir la API REST para administradores de campo.
 
-![StorePulse - Property Managements - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-mobile-component.puml&fmt=svg&v=4)
+![StorePulse - Property Managements - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-mobile-component.puml&fmt=svg&v=5)
 
 ### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores de galerías y locales comerciales, manejadores de comandos y consultas, el modelo de dominio y la implementación de repositorios para la gestión inmobiliaria.
+La REST API, desarrollada con Spring Boot, concentra los controladores de galerías y locales comerciales, manejadores de comandos y consultas, el modelo de dominio y la implementación de repositorios para la gestión inmobiliaria.
 
-![StorePulse - Property Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-rest-api-component.puml&fmt=svg&v=4)
+![StorePulse - Property Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/property-management/property-management-rest-api-component.puml&fmt=svg&v=5)
 
 ## 4.2.8.6. Bounded Context Software Architecture Code Level Diagrams
 

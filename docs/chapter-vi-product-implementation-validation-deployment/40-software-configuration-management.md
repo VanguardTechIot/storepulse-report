@@ -59,7 +59,7 @@ referencia (productos SaaS) o de descarga (productos que se ejecutan en el compu
 
 Los entornos de desarrollo de la REST API, la Edge API, la Mobile Application y la Embedded Application se
 especificarán en esta sección cuando cada producto ingrese al alcance de un Sprint, respetando las tecnologías
-definidas en el Capítulo IV (ASP.NET Core, Python con Flask, Flutter y C++ sobre ESP32).
+definidas en el Capítulo IV (Spring Boot, Python con Flask, Flutter y C++ sobre ESP32).
 
 **Software Testing**
 
@@ -166,9 +166,9 @@ guías adoptadas para los lenguajes en uso y las convenciones principales que el
 | Gherkin (archivos `.feature`) | Gherkin Conventions for Readable Specifications | Un archivo por Story, nombrado como la Story (`subscription-plans.feature`); `Feature` con la descripción *As a / I want / So that*; escenarios en tiempo presente y tercera persona; un `When` por escenario; sin detalles de interfaz. |
 | Markdown (informe) | Markdown Guide | Un archivo por sección numerada; encabezados ATX; tablas con alineación explícita; imágenes referenciadas desde `assets/` con texto alternativo. |
 
-Las guías para C#, Python, Dart y C++ se incorporarán a esta tabla cuando inicie la implementación de la REST API, la
+Las guías para Java, Python, Dart y C++ se incorporarán a esta tabla cuando inicie la implementación de la REST API, la
 Edge API, la Mobile Application y la Embedded Application, tomando como referencia las convenciones oficiales de cada
-lenguaje (Microsoft C# Coding Conventions, PEP 8, Effective Dart y Google C++ Style Guide).
+lenguaje (Google Java Style Guide, PEP 8, Effective Dart y Google C++ Style Guide).
 
 ### 6.1.4. Software Deployment Configuration
 

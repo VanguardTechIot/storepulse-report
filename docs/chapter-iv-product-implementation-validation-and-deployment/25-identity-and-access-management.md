@@ -63,8 +63,8 @@ La **Interface Layer** expone las capacidades de Identity and Access Management 
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `AuthenticationController` | ASP.NET Core | Expone el registro, inicio de sesión y cierre de sesión. |
-| `PasswordRecoveryController` | ASP.NET Core | Expone la solicitud y confirmación de recuperación de contraseña. |
+| `AuthenticationController` | Spring Boot | Expone el registro, inicio de sesión y cierre de sesión. |
+| `PasswordRecoveryController` | Spring Boot | Expone la solicitud y confirmación de recuperación de contraseña. |
 | Identity & Access UI | Angular | Permite al Gallery Administrator registrarse, iniciar sesión y recuperar su contraseña. |
 | Identity & Access UI | Flutter / Dart | Permite al Tenant registrarse, iniciar sesión y recuperar su contraseña desde la aplicación móvil. |
 
@@ -105,10 +105,10 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
 | `TokenService` | JWT (JSON Web Token) | Genera y valida los tokens de acceso que el resto de los Bounded Contexts consumen para autorizar sus solicitudes. |
-| `PasswordHasher` | Hashing seguro (ASP.NET Core) | Protege la contraseña antes de persistirla; implementa el contrato `IPasswordHasher`. |
-| `Authorization Middleware` | ASP.NET Core Middleware | Valida el token de acceso en cada solicitud protegida y aplica el control de acceso por rol. |
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| `PasswordHasher` | Hashing seguro (Spring Security) | Protege la contraseña antes de persistirla; implementa el contrato `IPasswordHasher`. |
+| `Authorization Middleware` | Spring Security Filter | Valida el token de acceso en cada solicitud protegida y aplica el control de acceso por rol. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementan las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestiona el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persiste cuentas de usuario, códigos de recuperación e intentos no autorizados. |
 | Servicio de envío de código | Firebase Authentication | Envía por correo el código de 6 dígitos de recuperación de contraseña generado internamente por el backend. |
 
@@ -120,19 +120,19 @@ Los siguientes diagramas muestran cómo se distribuyen los componentes del Bound
 
 La aplicación web, desarrollada con Angular, contiene la interfaz de identidad y acceso y el servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Identity and Access Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/01-iam-web-component.puml&fmt=svg&v=4)
+![StorePulse - Identity and Access Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/01-iam-web-component.puml&fmt=svg&v=5)
 
 ##### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de identidad y acceso y el servicio encargado de consumir la API REST.
 
-![StorePulse - Identity and Access Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/02-iam-mobile-component.puml&fmt=svg&v=4)
+![StorePulse - Identity and Access Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/02-iam-mobile-component.puml&fmt=svg&v=5)
 
 ##### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, dominio, repositorios y los servicios de seguridad (`TokenService`, `PasswordHasher`) del contexto.
+La REST API, desarrollada con Spring Boot, concentra los controladores, manejadores de comandos y consultas, dominio, repositorios y los servicios de seguridad (`TokenService`, `PasswordHasher`) del contexto.
 
-![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=4)
+![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=5)
 
 #### 4.2.1.6. Bounded Context Software Architecture Code Level Diagrams
 

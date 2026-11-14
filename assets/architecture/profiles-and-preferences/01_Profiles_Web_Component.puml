@@ -14,7 +14,7 @@ Container_Boundary(webApplication, "Web Application") {
     Component(profilesService, "Profiles Service", "Angular Service", "Consumes the profile and notification preference REST endpoints.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic API that centralizes StorePulse business logic.")
 
 Rel(profilesUI, profilesService, "Uses")
 Rel(profilesService, restApi, "Consumes profile and preference services", "HTTPS/JSON")
