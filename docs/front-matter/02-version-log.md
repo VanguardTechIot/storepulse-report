@@ -1,6 +1,6 @@
 ## Registro de Versiones del Informe
 
-<table border="1">
+<table>
   <tr>
     <th>Versión</th>
     <th>Fecha</th>
