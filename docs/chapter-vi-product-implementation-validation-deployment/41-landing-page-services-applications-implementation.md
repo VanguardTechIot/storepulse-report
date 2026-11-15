@@ -452,14 +452,14 @@ Finalmente, la Figura 7 muestra el dashboard de StorePulse cargado en el navegad
 En el Sprint 2 la matriz **LACX** (**L**: Leader, **A**: Accountable, **C**: Collaborator, **X**: Not involved / Informado) refleja la distribución real del equipo sobre los cinco productos implementados y el despliegue productivo:
 
 | Aspecto / Contexto | Araujo Ingunza, Renzo José (`RnArauj0`) | Carranza Tesén, Joaquín Enrique (`thepima`) | Cordova Valdivia, Sebastián (`Sevas04`) | Curi Marcelo, Angelo Marcio (`AngeloC12`) | Diaz Gutierrez, Henry Kevin (`HenryDiaz12`) | Esquivel León, Miguel Juan Diego (`juandyoff`) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| Gestión GitFlow, Releases y Despliegue Cloud | **L** | **A** | **C** | **C** | **C** | **C** |
-| REST API (`storepulse-platform`): IAM, Profiles, Property & Assets | **A** | **L** | **C** | **C** | **C** | **C** |
-| REST API (`storepulse-platform`): Monitoring, Safety, Dashboard, Billing & Subscriptions | **C** | **C** | **C** | **L** | **L** | **C** |
-| Web Application (`storepulse-web-application`): Integración REST API y Vistas Admin | **A** | **L** | **X** | **C** | **X** | **C** |
-| Edge API (`storepulse-edge`): Device IAM, Buffering SQLite, Safety & Analytics | **L** | **A** | **C** | **C** | **L** | **X** |
-| Mobile Application (`storepulse-mobile`): Arquitectura Flutter, BLoC, Monitoreo y Suscripciones | **A** | **L** | **C** | **C** | **C** | **X** |
-| Landing Page (`storepulse-landing-page`): Video, CTAs a Web App, i18n y Legal (`v2.1.0`) | **A** | **C** | **C** | **C** | **C** | **L** |
+| :--- | :---: | :---: |:---------------------------------------:| :---: |:-------------------------------------------:|:----------------------------------------------:|
+| Gestión GitFlow, Releases y Despliegue Cloud | **L** | **A** |                  **C**                  | **C** |                    **C**                    |                     **C**                      |
+| REST API (`storepulse-platform`): IAM, Profiles, Property & Assets | **A** | **L** |                  **C**                  | **C** |                    **C**                    |                     **C**                      |
+| REST API (`storepulse-platform`): Monitoring, Safety, Dashboard, Billing & Subscriptions | **C** | **C** |                  **C**                  | **L** |                    **L**                    |                     **C**                      |
+| Web Application (`storepulse-web-application`): Integración REST API y Vistas Admin | **A** | **L** |                  **X**                  | **C** |                    **C**                    |                     **C**                      |
+| Edge API (`storepulse-edge`): Device IAM, Buffering SQLite, Safety & Analytics | **L** | **A** |                  **C**                  | **C** |                    **L**                    |                     **C**                      |
+| Mobile Application (`storepulse-mobile`): Arquitectura Flutter, BLoC, Monitoreo y Suscripciones | **A** | **L** |                  **C**                  | **C** |                    **C**                    |                     **C**                      |
+| Landing Page (`storepulse-landing-page`): Video, CTAs a Web App, i18n y Legal (`v2.1.0`) | **A** | **C** |                  **C**                  | **C** |                    **C**                    |                     **L**                      |
 
 ### 6.2.2.3. Sprint Backlog 2
 
