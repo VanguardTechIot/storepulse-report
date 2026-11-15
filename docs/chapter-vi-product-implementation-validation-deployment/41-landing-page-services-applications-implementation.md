@@ -479,7 +479,7 @@ La siguiente tabla detalla la descomposición en tareas de las historias abordad
 | US-02, US-19, US-50, US-51 | Integración completa Web & Mobile contra Backend Railway | T2-11 | Retirar API simulada y conectar clientes web/móvil a Railway | Actualizar `environment.ts` en Angular, eliminar `json-server`, configurar `ApiConfig.baseUrl` en Flutter y validar flujos en producción. | 8 | Carranza Tesén, Joaquín Enrique | DONE |
 | VS-06, VS-08, VS-09, VS-10 | Video de producto, CTAs a Web App, i18n y términos en Landing Page | T2-12 | Actualizar Landing Page (`v2.1.0`) y publicar en GitHub Pages | Incorporar sección de video de producto, enlazar CTAs hacia `storepulse-web-app.web.app`, completar textos EN/ES y ajustar diseño responsive. | 6 | Esquivel León, Miguel Juan Diego | DONE |
 
-**[Agregar imagen referente a: Tablero Trello con el Sprint Backlog 2 organizado en columnas To Do, In Progress y Done reflejando las historias y tareas del Sprint 2]**
+> **Agregar imagen referente a:** Tablero Trello con el Sprint Backlog 2 organizado en columnas To Do, In Progress y Done reflejando las historias y tareas del Sprint 2.
 
 ### 6.2.2.4. Development Evidence for Sprint Review
 
@@ -567,15 +567,15 @@ Durante la Sprint Review del **Sprint 2** se demostró el funcionamiento integra
 4. **Mobile Application (`storepulse-mobile`)**: Flujo multirol en Android (**Administrador** e **Inquilino**) con inicio/cierre de sesión persistido, dashboard de seguridad y consumo en tiempo real, monitoreo de sensores por local, visualización de cobertura/suscripción y gestión de perfil.
 5. **Landing Page (`storepulse-landing-page` `v2.1.0`)**: Visualización del video de presentación del producto, navegación directa a registro/inicio de sesión en la aplicación web desplegada, cambio de idioma EN/ES y páginas legales.
 
-**[Agregar imagen referente a: Captura de ejecución del Backend / Swagger UI mostrando respuestas exitosas `200 OK` / `201 Created` de los endpoints principales de StorePulse Platform]**
+> **Agregar imagen referente a:** Captura de ejecución del Backend / Swagger UI mostrando respuestas exitosas `200 OK` / `201 Created` de los endpoints principales de StorePulse Platform.
 
-**[Agregar imagen referente a: Captura de ejecución del Edge Gateway (`storepulse-edge`) en consola recibiendo telemetría IoT, guardando en SQLite y sincronizando con la plataforma]**
+> **Agregar imagen referente a:** Captura de ejecución del Edge Gateway (`storepulse-edge`) en consola recibiendo telemetría IoT, guardando en SQLite y sincronizando con la plataforma.
 
-**[Agregar imagen referente a: Capturas de ejecución de la Web Application (`storepulse-web-application`) mostrando el Dashboard, Gestión de Locales/Dispositivos, Alertas y Facturación consumiendo la API en Railway]**
+> **Agregar imagen referente a:** Capturas de ejecución de la Web Application (`storepulse-web-application`) mostrando el Dashboard, Gestión de Locales/Dispositivos, Alertas y Facturación consumiendo la API en Railway.
 
-**[Agregar imagen referente a: Capturas de ejecución de la Mobile Application (`storepulse-mobile`) en emulador o dispositivo Android mostrando Inicio de Sesión, Dashboard del Local, Monitoreo de Sensores y Suscripción/Perfil]**
+> **Agregar imagen referente a:** Capturas de ejecución de la Mobile Application (`storepulse-mobile`) en emulador o dispositivo Android mostrando Inicio de Sesión, Dashboard del Local, Monitoreo de Sensores y Suscripción/Perfil.
 
-**[Agregar imagen referente a: Captura de ejecución del Landing Page (`v2.1.0`) mostrando la sección de Video del Producto y enlaces activos hacia la Web App]**
+> **Agregar imagen referente a:** Captura de ejecución del Landing Page (`v2.1.0`) mostrando la sección de Video del Producto y enlaces activos hacia la Web App.
 
 #### 6.2.2.7. Services Documentation Evidence for Sprint Review
 
@@ -759,29 +759,29 @@ Al cierre del **Sprint 2**, las aplicaciones y servicios de **StorePulse** se en
 | **StorePulse Mobile (Android)** | GitHub Releases / Build APK Android (`storepulse-mobile`) | `1.0.1` | https://github.com/VanguardTechIot/storepulse-mobile/releases/tag/1.0.1 |
 | **StorePulse Edge Gateway** | Entorno Local LAN en Gateway (`python main.py` + `storepulse_edge.db`) | `1.0.1` | https://github.com/VanguardTechIot/storepulse-edge/releases/tag/1.0.1 (`http://0.0.0.0:5000/api/v1`) |
 
-**[Agregar imagen referente a: Panel de Railway mostrando el despliegue activo de `storepulse-platform` (`v1.0.0`) y los logs/variables en producción]**
+> **Agregar imagen referente a:** Panel de Railway mostrando el despliegue activo de `storepulse-platform` (`v1.0.0`) y los logs/variables en producción.
 
-**[Agregar imagen referente a: Consola de Firebase Hosting mostrando la versión `2.0.0` desplegada en `storepulse-web-app.web.app` y vista en navegador de la Web App en producción]**
+> **Agregar imagen referente a:** Consola de Firebase Hosting mostrando la versión `2.0.0` desplegada en `storepulse-web-app.web.app` y vista en navegador de la Web App en producción.
 
-**[Agregar imagen referente a: Sitio `storepulse-landing-page` (`v2.1.0`) desplegado en GitHub Pages verificando el video de producto y los enlaces activos hacia Firebase Hosting]**
+> **Agregar imagen referente a:** Sitio `storepulse-landing-page` (`v2.1.0`) desplegado en GitHub Pages verificando el video de producto y los enlaces activos hacia Firebase Hosting.
 
-**[Agregar imagen referente a: Release `1.0.1` en GitHub de `storepulse-mobile` con el artefacto APK adjunto o pantalla instalada en dispositivo Android]**
+> **Agregar imagen referente a:** Release `1.0.1` en GitHub de `storepulse-mobile` con el artefacto APK adjunto o pantalla instalada en dispositivo Android.
 
-**[Agregar imagen referente a: Despliegue/ejecución de `storepulse-edge` (`v1.0.1`) comunicándose con `storepulse-platform` en Railway]**
+> **Agregar imagen referente a:** Despliegue/ejecución de `storepulse-edge` (`v1.0.1`) comunicándose con `storepulse-platform` en Railway.
 
 #### 6.2.2.9. Team Collaboration Insights during Sprint.
 
 En el **Sprint 2** la colaboración del equipo se amplió del enfoque inicial en el Landing Page y el informe hacia el desarrollo paralelo en los **seis repositorios activos** (`storepulse-platform`, `storepulse-web-application`, `storepulse-edge`, `storepulse-mobile`, `storepulse-landing-page` y `storepulse-report`), integrando pull requests y releases mediante GitFlow.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-platform`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-platform`.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-web-application`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-web-application`.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-edge`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-edge`.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-mobile`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-mobile`.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-landing-page`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-landing-page`.
 
-**[Agregar imagen referente a: GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-report`]**
+> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-report`.
 
