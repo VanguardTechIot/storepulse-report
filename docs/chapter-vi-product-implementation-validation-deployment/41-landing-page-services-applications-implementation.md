@@ -757,18 +757,79 @@ Al cierre del **Sprint 2**, las aplicaciones y servicios de **StorePulse** se en
 | **StorePulse Platform (REST API)** | Railway (`storepulse-platform-production`) + Swagger UI | `1.0.0` | https://storepulse-platform-production.up.railway.app/api/v1 <br> Swagger: https://storepulse-platform-production.up.railway.app/swagger-ui.html |
 | **StorePulse Web Application** | Firebase Hosting (`storepulse-web-app`) | `2.0.0` | https://storepulse-web-app.web.app (y https://storepulse-web-app.firebaseapp.com) |
 | **StorePulse Landing Page** | GitHub Pages | `2.1.0` | https://vanguardtechiot.github.io/storepulse-landing-page/ |
-| **StorePulse Mobile (Android)** | GitHub Releases / Build APK Android (`storepulse-mobile`) | `1.0.1` | https://github.com/VanguardTechIot/storepulse-mobile/releases/tag/1.0.1 |
+| **StorePulse Mobile (Android)** | Firebase App Distribution (`storepulse-mobile`) | `1.0.0 (2)` | Distribución por invitación a los verificadores del equipo (APK Android) |
 | **StorePulse Edge Gateway** | Entorno Local LAN en Gateway (`python main.py` + `storepulse_edge.db`) | `1.0.1` | https://github.com/VanguardTechIot/storepulse-edge/releases/tag/1.0.1 (`http://0.0.0.0:5000/api/v1`) |
 
-> **Agregar imagen referente a:** Panel de Railway mostrando el despliegue activo de `storepulse-platform` (`v1.0.0`) y los logs/variables en producción.
+##### Despliegue del backend (REST API) en Railway
 
-> **Agregar imagen referente a:** Consola de Firebase Hosting mostrando la versión `2.0.0` desplegada en `storepulse-web-app.web.app` y vista en navegador de la Web App en producción.
+El backend `storepulse-platform` se desplegó en Railway dentro del proyecto `enthusiastic-reprieve`, en el entorno `production`. Railway construye y publica el servicio automáticamente desde el repositorio de GitHub cada vez que se integra un cambio en la rama configurada, y lo conecta a una base de datos MySQL administrada en el mismo proyecto.
 
-> **Agregar imagen referente a:** Sitio `storepulse-landing-page` (`v2.1.0`) desplegado en GitHub Pages verificando el video de producto y los enlaces activos hacia Firebase Hosting.
+La Figura 8 muestra la vista general del proyecto en Railway, con el servicio `storepulse-platform` y la base de datos `MySQL` (con su volumen persistente `mysql-volume`) en estado `Online`.
 
-> **Agregar imagen referente a:** Release `1.0.1` en GitHub de `storepulse-mobile` con el artefacto APK adjunto o pantalla instalada en dispositivo Android.
+![Figura 8. Servicios del proyecto StorePulse en Railway](../../assets/evidence_deployment/08-railway-project-services.jpeg)
 
-> **Agregar imagen referente a:** Despliegue/ejecución de `storepulse-edge` (`v1.0.1`) comunicándose con `storepulse-platform` en Railway.
+La Figura 9 presenta el historial de despliegues del servicio. El despliegue activo, originado desde GitHub, figura como `Deployment successful` y expone el dominio público `storepulse-platform-production.up.railway.app` sobre Java 21 en la región US East.
+
+![Figura 9. Historial de despliegues de storepulse-platform en Railway](../../assets/evidence_deployment/09-railway-platform-deployments.jpeg)
+
+La Figura 10 corresponde a las estadísticas de la base de datos MySQL 8.4 en producción, donde se observan el tiempo de actividad, las conexiones abiertas y las consultas de lectura y escritura generadas por la aplicación.
+
+![Figura 10. Estadísticas de la base de datos MySQL en Railway](../../assets/evidence_deployment/10-railway-mysql-database-stats.jpeg)
+
+La Figura 11 muestra los registros de despliegue del servicio activo. En ellos se confirma que Tomcat inició en el puerto `8080`, que `StorepulseRestApiApplication` arrancó correctamente y que la documentación OpenAPI se inicializó al recibir solicitudes.
+
+![Figura 11. Registros de despliegue de storepulse-platform en Railway](../../assets/evidence_deployment/11-railway-platform-deploy-logs.jpeg)
+
+La Figura 12 presenta la documentación Swagger UI publicada en `https://storepulse-platform-production.up.railway.app/swagger-ui.html`, con la versión `1.0.0` de StorePulse REST API y sus endpoints agrupados por bounded context.
+
+![Figura 12. Swagger UI de StorePulse REST API en producción](../../assets/evidence_deployment/12-swagger-rest-api-production.jpeg)
+
+##### Despliegue de la Web Application en Firebase Hosting
+
+La Web Application se publicó nuevamente en Firebase Hosting, en el proyecto `storepulse-web-app`, ya integrada con la REST API desplegada en Railway. La Figura 13 muestra la descripción general del proyecto en Firebase, con la última implementación de Hosting registrada el 10 de noviembre de 2026.
+
+![Figura 13. Descripción general del proyecto storepulse-web-app en Firebase](../../assets/evidence_deployment/13-firebase-project-overview.jpeg)
+
+La Figura 14 presenta el panel de administración del sitio, con la versión actual publicada y las versiones anteriores, así como los dominios predeterminados `storepulse-web-app.web.app` y `storepulse-web-app.firebaseapp.com`.
+
+![Figura 14. Versiones y dominios del sitio en Firebase Hosting](../../assets/evidence_deployment/14-firebase-hosting-site-versions.jpeg)
+
+A diferencia del Sprint 1, la Figura 15 ya registra consumo del sitio: 1.12 MB de almacenamiento y 6.64 MB de descargas en el periodo de facturación, lo que evidencia accesos reales a la aplicación publicada.
+
+![Figura 15. Métricas de uso de Firebase Hosting en el Sprint 2](../../assets/evidence_deployment/15-firebase-hosting-usage-sprint-2.jpeg)
+
+La Figura 16 muestra la pantalla de inicio de sesión de la Web Application cargada desde `https://storepulse-web-app.web.app/iam/sign-in`, punto de entrada del administrador de galería en producción.
+
+![Figura 16. Web Application de StorePulse en producción](../../assets/evidence_deployment/16-storepulse-web-app-production.jpeg)
+
+##### Despliegue del Landing Page en GitHub Pages
+
+El Landing Page se mantiene publicado en GitHub Pages desde la rama `main` del repositorio `storepulse-landing-page`. La Figura 17 muestra el historial de despliegues del entorno `github-pages`, donde el despliegue activo corresponde a la integración de `release/2.1.0` en `main`.
+
+![Figura 17. Historial de despliegues del Landing Page en GitHub Pages](../../assets/evidence_deployment/17-github-pages-landing-deployments.jpeg)
+
+La Figura 18 presenta el Landing Page cargado en `https://vanguardtechiot.github.io/storepulse-landing-page/`, con la navegación principal, el selector de idioma y los botones de acceso hacia la Web Application.
+
+![Figura 18. Landing Page de StorePulse publicado en GitHub Pages](../../assets/evidence_deployment/18-storepulse-landing-page-production.jpeg)
+
+##### Distribución de la Mobile Application
+
+La aplicación móvil para Android se distribuyó a los verificadores del equipo mediante Firebase App Distribution, en el proyecto `storepulse-mobile`. La Figura 19 muestra la versión `1.0.0 (2)`, publicada el 15 de noviembre de 2026 con la nota *Release 1.0.0: UI refinements and StorePulse branding*, junto con el número de verificadores invitados, aceptados y descargas registradas.
+
+![Figura 19. Distribución de StorePulse Mobile en Firebase App Distribution](../../assets/evidence_deployment/19-firebase-app-distribution-mobile.jpeg)
+
+##### Ejecución del Edge Gateway
+
+El servicio `storepulse-edge` se ejecuta en la red local de la galería con `python main.py`, escuchando en `http://0.0.0.0:5000`, y guarda su información en la base de datos local `storepulse_edge.db`. La Figura 20 evidencia su interacción con la plataforma desplegada:
+
+1. El administrador de galería inicia sesión en la REST API de Railway (`/api/v1/authentication/sign-in`) y obtiene su token de acceso.
+2. Con ese token, el Edge registra el nodo `demo-node-01` de tipo `SMOKE_NODE` (`POST /api/v1/iam/devices`) y emite su API key. El Edge verifica el token localmente con la misma clave de firma de la REST API, por lo que el registro no depende de la conexión a internet.
+3. El nodo se autentica con su `device_id` y la cabecera `X-API-Key` (`POST /api/v1/iam/authentications`) y el Edge responde `authenticated: True`.
+4. El nodo envía una lectura de humo de 350 (`POST /api/v1/monitoring/telemetry`). El Edge la evalúa con sus reglas locales, responde `ALERT` con la acción `SEND_ALERT` y deja el paquete almacenado para su sincronización con la plataforma.
+
+Por seguridad, en la captura se ocultaron la contraseña de la cuenta y la API key emitida para el nodo.
+
+![Figura 20. Ejecución del Edge Gateway integrado con la REST API en Railway](../../assets/evidence_deployment/20-storepulse-edge-execution.jpeg)
 
 #### 6.2.2.9. Team Collaboration Insights during Sprint.
 
