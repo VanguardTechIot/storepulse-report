@@ -1,4 +1,4 @@
-# 6.2. Landing Page, Services & Applications Implementation 
+# 6.2. Landing Page, Services & Applications Implementation
 
 En esta sección se explica y evidencia el proceso de implementación, pruebas, documentación y despliegue del Landing 
 Page, Web Services, Web Applications, Mobile Applications y Embedded Applications que conforman la solución StorePulse.
@@ -355,7 +355,8 @@ Característica: Consulta de documentos legales
     Cuando accede a la sección "Política de Privacidad"
     Entonces puede visualizar la información relacionada con el tratamiento y protección de sus datos personales
 ```
-#### 6.2.1.6. Execution Evidence for Sprint Review 
+
+#### 6.2.1.6. Execution Evidence for Sprint Review
 
 ![evidence1.png](../../assets/execution_team/evidence1.png)
 
@@ -370,7 +371,7 @@ Característica: Consulta de documentos legales
 Este sprint 1 solo trata la implementación del landing page, por lo
 que no hay un servicio adicinal.
 
-#### 6.2.1.8. Software Deployment Evidence for Sprint Review. 
+#### 6.2.1.8. Software Deployment Evidence for Sprint Review.
 
 El despliegue del Landing Page se realizó a través de GitHub pages. El
 link de nuestra Landing Page es el siguiente:
