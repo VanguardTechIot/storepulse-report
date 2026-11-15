@@ -833,17 +833,39 @@ Por seguridad, en la captura se ocultaron la contraseña de la cuenta y la API k
 
 #### 6.2.2.9. Team Collaboration Insights during Sprint.
 
-En el **Sprint 2** la colaboración del equipo se amplió del enfoque inicial en el Landing Page y el informe hacia el desarrollo paralelo en los **seis repositorios activos** (`storepulse-platform`, `storepulse-web-application`, `storepulse-edge`, `storepulse-mobile`, `storepulse-landing-page` y `storepulse-report`), integrando pull requests y releases mediante GitFlow.
+En el **Sprint 2** la colaboración del equipo se amplió del enfoque inicial en el Landing Page y el informe hacia el desarrollo paralelo en los **seis repositorios activos** (`storepulse-platform`, `storepulse-web-application`, `storepulse-edge`, `storepulse-mobile`, `storepulse-landing-page` y `storepulse-report`). Cada integrante trabajó en ramas `feature/*` y el equipo las integró en `develop` y publicó las versiones en `main` mediante ramas `release/*`, siguiendo GitFlow.
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-platform`.
+Las evidencias corresponden a la sección **Insights > Pulse** de GitHub para el periodo del 15 de octubre al 15 de noviembre de 2026. Las cifras de commits excluyen los merges:
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-web-application`.
+| Repositorio | Autores | Commits | Releases publicados |
+| :--- | :---: | :---: | :--- |
+| `storepulse-platform` | 6 | 409 | `1.0.0` |
+| `storepulse-web-application` | 4 | 171 | `2.0.0` |
+| `storepulse-mobile` | 5 | 123 | `1.0.0`, `1.0.1` |
+| `storepulse-edge` | 5 | 55 | `1.0.0`, `1.0.1` |
+| `storepulse-landing-page` | 6 | 44 | `2.1.0` |
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-edge`.
+En conjunto, el equipo registró **802 commits** en los cinco repositorios de producto durante el sprint. El mayor volumen se concentró en `storepulse-platform`, donde participaron los seis integrantes, porque la REST API es la base que integran la Web Application, la Mobile Application y el Edge.
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-mobile`.
+La Figura 21 muestra la actividad de `storepulse-platform`: seis autores con 409 commits y la publicación del release `1.0.0`, versión desplegada en Railway.
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-landing-page`.
+![Figura 21. GitHub Pulse del repositorio storepulse-platform](../../assets/team/insights/pulse-insights-storepulse-platform-av2.png)
+
+La Figura 22 corresponde a `storepulse-web-application`: cuatro autores con 171 commits y el release `2.0.0`. En `main` se modificaron 546 archivos (13,201 adiciones y 14,696 eliminaciones), producto de la migración de los datos de prueba a la REST API desplegada.
+
+![Figura 22. GitHub Pulse del repositorio storepulse-web-application](../../assets/team/insights/pulse-insights-storepulse-web-application-av2.png)
+
+La Figura 23 presenta la actividad de `storepulse-mobile`: cinco autores con 123 commits y los releases `1.0.0` y `1.0.1` de la aplicación para Android.
+
+![Figura 23. GitHub Pulse del repositorio storepulse-mobile](../../assets/team/insights/pulse-insights-storepulse-mobile-av2.png)
+
+La Figura 24 muestra `storepulse-edge`: cinco autores con 55 commits y los releases `1.0.0` y `1.0.1` del Edge Gateway.
+
+![Figura 24. GitHub Pulse del repositorio storepulse-edge](../../assets/team/insights/pulse-insights-storepulse-edge-av2.png)
+
+La Figura 25 corresponde a `storepulse-landing-page`: seis autores con 44 commits, 22 archivos modificados en `main` (1,207 adiciones y 239 eliminaciones) y el release `2.1.0` publicado en GitHub Pages.
+
+![Figura 25. GitHub Pulse del repositorio storepulse-landing-page](../../assets/team/insights/pulse-insights-storepulse-landing-page-av2.png)
 
 > **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-report`.
 
