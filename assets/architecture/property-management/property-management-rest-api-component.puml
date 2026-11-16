@@ -9,11 +9,11 @@ skinparam defaultFontName Arial
 
 title StorePulse - Property Management - REST API Components
 
-Container_Boundary(restApi, "REST API - ASP.NET Core") {
+Container_Boundary(restApi, "REST API - Spring Boot") {
 
-    Component(galleryController, "GalleryController", "ASP.NET Core Controller", "Exposes endpoints for commercial gallery management.")
+    Component(galleryController, "GalleryController", "Spring REST Controller", "Exposes endpoints for commercial gallery management.")
 
-    Component(unitController, "CommercialUnitController", "ASP.NET Core Controller", "Exposes endpoints for commercial unit lifecycle and assignments.")
+    Component(unitController, "CommercialUnitController", "Spring REST Controller", "Exposes endpoints for commercial unit lifecycle and assignments.")
 
     Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates gallery registration and unit status change use cases.")
 
@@ -21,7 +21,7 @@ Container_Boundary(restApi, "REST API - ASP.NET Core") {
 
     Component(domainModel, "Property Management Domain", "Domain Layer", "Contains aggregates (CommercialGallery, CommercialUnit), entities, value objects, and business rules.")
 
-    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Spring Data JPA.")
 }
 
 ContainerDb(database, "Database", "MySQL", "Stores commercial galleries, units, dimensions, and occupancy states.")
@@ -36,6 +36,6 @@ Rel(commandHandlers, domainModel, "Executes domain operations")
 Rel(queryHandlers, domainModel, "Queries domain data")
 
 Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
-Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+Rel(repositoryImplementations, database, "Reads and writes", "Spring Data JPA")
 
 @enduml

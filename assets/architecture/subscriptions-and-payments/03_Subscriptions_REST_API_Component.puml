@@ -11,10 +11,10 @@ skinparam defaultFontName Arial
 title StorePulse - REST API Component View - Subscriptions and Payments
 
 Container_Boundary(restApi, "REST API") {
-    Component(plansController, "SubscriptionPlansController", "ASP.NET Core Controller", "Exposes the publication and query of the subscription plan catalog.")
-    Component(subscriptionsController, "SubscriptionsController", "ASP.NET Core Controller", "Exposes the request, query, renewal and cancellation of a subscription.")
-    Component(paymentsController, "PaymentsController", "ASP.NET Core Controller", "Exposes the payment registration and the payment history query.")
-    Component(webhookController, "PaymentGatewayWebhookController", "ASP.NET Core Controller", "Receives the payment confirmation or rejection sent by the gateway.")
+    Component(plansController, "SubscriptionPlansController", "Spring REST Controller", "Exposes the publication and query of the subscription plan catalog.")
+    Component(subscriptionsController, "SubscriptionsController", "Spring REST Controller", "Exposes the request, query, renewal and cancellation of a subscription.")
+    Component(paymentsController, "PaymentsController", "Spring REST Controller", "Exposes the payment registration and the payment history query.")
+    Component(webhookController, "PaymentGatewayWebhookController", "Spring REST Controller", "Receives the payment confirmation or rejection sent by the gateway.")
 
     Component(commandHandlers, "Command Handlers", "Application Layer", "Orchestrates plan publication, subscription request, payment registration, renewal and cancellation.")
     Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the plan catalog, subscription status and payment history read models.")
@@ -24,7 +24,7 @@ Container_Boundary(restApi, "REST API") {
     Component(subscriptionsDomain, "Subscriptions and Payments Domain", "Domain Layer", "Contains the SubscriptionPlan, Subscription and Payment aggregates and domain rules.")
     Component(subscriptionsFacade, "SubscriptionsFacade", "Application Layer", "Anti-Corruption Layer that exposes the subscription status and the monitored unit limit to other Bounded Contexts.")
 
-    Component(repositories, "Repository Implementations", "Entity Framework Core", "Implements domain repository abstractions.")
+    Component(repositories, "Repository Implementations", "Spring Data JPA", "Implements domain repository abstractions.")
     Component(gatewayAdapter, "PaymentGatewayAdapter", "Infrastructure Layer", "Sends the payment order to the external gateway and retrieves the transaction reference.")
 }
 
@@ -50,7 +50,7 @@ Rel(subscriptionsFacade, subscriptionsDomain, "Queries status and unit limit")
 
 Rel(commandHandlers, gatewayAdapter, "Sends payment order through")
 Rel(subscriptionsDomain, repositories, "Uses repository abstractions")
-Rel(repositories, database, "Reads and writes", "Entity Framework Core")
+Rel(repositories, database, "Reads and writes", "Spring Data JPA")
 
 Rel(gatewayAdapter, paymentGateway, "Sends the payment order", "HTTPS/JSON")
 Rel(paymentGateway, webhookController, "Confirms or rejects the payment", "HTTPS/JSON")

@@ -1,4 +1,4 @@
-﻿# 4.2.6. Bounded Context: Profiles and Preferences
+# 4.2.6. Bounded Context: Profiles and Preferences
 
 El **Bounded Context de Profiles and Preferences** concentra la gestión del perfil de cada usuario de la plataforma y la configuración de las alertas que desea recibir. Administra los datos personales, la fotografía, el idioma preferido, los canales de entrega y los tipos de alerta habilitados, tanto para el Gallery Administrator como para el Tenant.
 
@@ -76,10 +76,10 @@ La **Interface Layer** expone las capacidades del contexto hacia la Web Applicat
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `UserProfilesController` | ASP.NET Core | Expone la consulta y actualización del perfil, la carga de fotografía y el cambio de idioma. |
-| `NotificationPreferencesController` | ASP.NET Core | Expone la consulta y configuración de preferencias y la desactivación de canales. |
-| `UserRegisteredEventConsumer` | ASP.NET Core | Recibe el evento de registro publicado por Identity and Access Management. |
-| `IProfilesAndPreferencesFacade` | ASP.NET Core | Anti-Corruption Layer que expone a otros contextos el idioma preferido del usuario y los canales habilitados para un tipo de alerta. |
+| `UserProfilesController` | Spring Boot | Expone la consulta y actualización del perfil, la carga de fotografía y el cambio de idioma. |
+| `NotificationPreferencesController` | Spring Boot | Expone la consulta y configuración de preferencias y la desactivación de canales. |
+| `UserRegisteredEventConsumer` | Spring Boot | Recibe el evento de registro publicado por Identity and Access Management. |
+| `IProfilesAndPreferencesFacade` | Spring Boot | Anti-Corruption Layer que expone a otros contextos el idioma preferido del usuario y los canales habilitados para un tipo de alerta. |
 | Profiles UI | Angular | Permite al Gallery Administrator y al Tenant administrar su perfil y sus preferencias desde el navegador. |
 | Profiles UI | Flutter / Dart | Permite al Tenant administrar su perfil y sus preferencias desde la aplicación móvil. |
 
@@ -123,8 +123,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementan las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestiona el acceso de la aplicación a la base de datos. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementan las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestiona el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persiste perfiles, preferencias y canales de notificación. |
 | `ImageStorageServiceAdapter` | HTTPS/JSON | Envía la fotografía al servicio externo de almacenamiento y recupera la URL generada. |
 | Evento entrante desde Identity and Access Management | Integration Event | Recibe `UserRegisteredEvent` para disparar la creación automática del perfil. |
@@ -138,19 +138,19 @@ Los siguientes diagramas muestran la estructura de componentes del Bounded Conte
 
 La aplicación web permite al Gallery Administrator y al Tenant gestionar la información de su perfil y las preferencias de notificación.
 
-![StorePulse - Profiles and Preferences - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/01_Profiles_Web_Component.puml&fmt=svg&v=4)
+![StorePulse - Profiles and Preferences - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/01_Profiles_Web_Component.puml&fmt=svg&v=5)
 
 ### Mobile Application
 
 La aplicación móvil permite al Tenant consultar y actualizar su perfil, configurar sus preferencias y gestionar la fotografía asociada a su cuenta.
 
-![StorePulse - Profiles and Preferences - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/02_Profiles_Mobile_Component.puml&fmt=svg&v=4)
+![StorePulse - Profiles and Preferences - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/02_Profiles_Mobile_Component.puml&fmt=svg&v=5)
 
 ### REST API
 
 La REST API gestiona las operaciones relacionadas con los perfiles y las preferencias, incluyendo los controladores, handlers, dominio, repositorios y servicios necesarios para su funcionamiento.
 
-![StorePulse - Profiles and Preferences - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/03_Profiles_REST_API_Component.puml&fmt=svg&v=4)
+![StorePulse - Profiles and Preferences - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/profiles-and-preferences/03_Profiles_REST_API_Component.puml&fmt=svg&v=5)
 
 ## 4.2.6.6. Bounded Context Software Architecture Code Level Diagrams
 

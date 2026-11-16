@@ -11,15 +11,27 @@ title StorePulse - Service Execution and Monitoring - Web Components
 
 Container_Boundary(webApp, "Web Application - Angular") {
 
-    Component(monitoringUI, "Monitoring UI", "Angular", "Provides dashboards for telemetry, measurements, consumption and alerts.")
+    Component(telemetryDashboard, "TelemetryDashboard", "Angular View", "Shows the monitoring status of each location and its latest measurements.")
 
-    Component(monitoringService, "Monitoring Service", "Angular Service", "Consumes REST endpoints for monitoring and alert information.")
+    Component(consumptionView, "ConsumptionView", "Angular View", "Shows the consumption of each period and compares it with the historical baseline.")
+
+    Component(monitoringStore, "MonitoringStore", "Angular Signals Store", "Keeps the telemetry, consumption and monitored resources used by the views.")
+
+    Component(monitoringApi, "MonitoringApi", "Angular Service", "Groups the telemetry and consumption endpoints of the REST API.")
+
+    Component(endpoints, "TelemetryApiEndpoint / ConsumptionApiEndpoint", "Angular HttpClient", "Requests the REST resources and converts them into domain entities.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Provides telemetry and consumption services.")
 
-Rel(monitoringUI, monitoringService, "Uses")
+Rel(telemetryDashboard, monitoringStore, "Reads")
 
-Rel(monitoringService, restApi, "Consumes monitoring services", "HTTPS/JSON")
+Rel(consumptionView, monitoringStore, "Reads")
+
+Rel(monitoringStore, monitoringApi, "Loads data through")
+
+Rel(monitoringApi, endpoints, "Uses")
+
+Rel(endpoints, restApi, "Requests /telemetry and /consumption", "HTTPS/JSON")
 
 @enduml

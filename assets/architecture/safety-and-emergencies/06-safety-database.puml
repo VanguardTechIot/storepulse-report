@@ -1,0 +1,55 @@
+@startuml storepulse-safety-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Database Design
+
+entity "safety_rules" as rules {
+    * id : BIGINT <<PK>>
+    --
+    name : VARCHAR(255)
+    sensor_type : ENUM
+    threshold_value : DOUBLE
+    threshold_operator : ENUM
+    device_status : ENUM
+    response_action : ENUM
+    enabled : BIT(1)
+    created_at : DATETIME(6)
+    updated_at : DATETIME(6)
+}
+
+entity "alerts" as alerts {
+    * id : BIGINT <<PK>>
+    --
+    safety_rule_id : BIGINT
+    device_id : BIGINT
+    measurement_id : BIGINT
+    sensor_type : ENUM
+    measured_value : DOUBLE
+    status : ENUM
+    detected_at : DATETIME(6)
+    acknowledged_at : DATETIME(6)
+    resolved_at : DATETIME(6)
+    resolution_note : VARCHAR(255)
+    created_at : DATETIME(6)
+    updated_at : DATETIME(6)
+}
+
+entity "device_states" as states {
+    * id : BIGINT <<PK>>
+    --
+    device_id : BIGINT <<UNIQUE>>
+    status : ENUM
+    response : ENUM
+    evaluated_at : DATETIME(6)
+    created_at : DATETIME(6)
+    updated_at : DATETIME(6)
+}
+
+rules ||--o{ alerts : originates
+
+@enduml

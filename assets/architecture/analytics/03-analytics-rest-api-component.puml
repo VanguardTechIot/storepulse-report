@@ -9,11 +9,11 @@ skinparam defaultFontName Arial
 
 title StorePulse - Dashboard and Analytics - REST API Components
 
-Container_Boundary(restApi, "REST API - ASP.NET Core") {
+Container_Boundary(restApi, "REST API - Spring Boot") {
 
-    Component(notificationsController, "NotificationsController", "ASP.NET Core Controller", "Exposes the Notification Center query endpoint.")
+    Component(notificationsController, "NotificationsController", "Spring REST Controller", "Exposes the Notification Center query endpoint.")
 
-    Component(dashboardController, "DashboardController", "ASP.NET Core Controller", "Exposes the Consolidated Dashboard and the Local Dashboard query endpoints.")
+    Component(dashboardController, "DashboardController", "Spring REST Controller", "Exposes the Consolidated Dashboard and the Local Dashboard query endpoints.")
 
     Component(queryHandlers, "Query Handlers", "Application Layer", "Resolves the Notification Center, Consolidated Dashboard and Local Dashboard queries.")
 
@@ -21,7 +21,7 @@ Container_Boundary(restApi, "REST API - ASP.NET Core") {
 
     Component(analyticsDomain, "Analytics Domain", "Domain Layer", "Contains the Notification and ConsumptionRegistration aggregates and their domain rules.")
 
-    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Spring Data JPA.")
 }
 
 ContainerDb(database, "Database", "MySQL", "Stores notifications and consumption registrations.")
@@ -44,7 +44,7 @@ Rel(eventHandlers, analyticsDomain, "Executes domain operations")
 
 Rel(analyticsDomain, repositoryImplementations, "Uses repository abstractions")
 
-Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+Rel(repositoryImplementations, database, "Reads and writes", "Spring Data JPA")
 
 Rel(utilityMeter, eventHandlers, "Sends utility meter reading", "HTTPS/JSON")
 

@@ -16,7 +16,7 @@ Container_Boundary(webApp, "Web Application - Angular") {
     Component(propertyService, "Property Service", "Angular Service", "Consumes REST endpoints related to galleries and commercial units.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(propertyManagementUI, propertyService, "Uses")
 Rel(propertyService, restApi, "Consumes property management services", "HTTPS/JSON")

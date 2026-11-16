@@ -54,8 +54,8 @@ Los principales contenedores que conforman StorePulse son:
 - **Landing Page:** página web pública desarrollada con HTML5, CSS3 y JavaScript, utilizada para proporcionar información pública y permitir el acceso a las aplicaciones de StorePulse.
 - **Web Application:** aplicación web desarrollada con Angular, utilizada por el Gallery Administrator para supervisar el inmueble y gestionar información del sistema.
 - **Mobile Application:** aplicación móvil desarrollada con Flutter y Dart, utilizada por el Tenant para monitorear su local, consultar información de consumo y recibir alertas.
-- **REST API:** API monolítica desarrollada con ASP.NET Core y .NET, responsable de centralizar la lógica de negocio y proporcionar los servicios utilizados por las aplicaciones Web y Mobile.
-- **Edge API:** API desarrollada con Python y Flask que opera en el entorno Edge. Se encarga de recibir, validar y procesar la información proveniente de los dispositivos IoT antes de sincronizarla con la nube.
+- **REST API:** API monolítica desarrollada con Java y Spring Boot, responsable de centralizar la lógica de negocio y proporcionar los servicios utilizados por las aplicaciones Web y Mobile.
+- **Edge API:** API desarrollada con Python y Flask que opera en el entorno Edge. Se encarga de autenticar a los nodos, recibir, validar y procesar la información proveniente de los dispositivos IoT y conservarla en una base de datos SQLite local hasta sincronizarla con la nube.
 - **Database:** base de datos MySQL utilizada para almacenar información de usuarios, consumo, seguridad, estadísticas y demás información gestionada por StorePulse.
 - **Embedded Application:** aplicación embebida desarrollada en C++ que controla el dispositivo IoT, recopila la información de los sensores y transmite los datos hacia el entorno Edge.
 
@@ -64,7 +64,7 @@ El flujo principal de información proveniente de los dispositivos IoT se desarr
 Por otro lado, el **Gallery Administrator** utiliza la **Web Application** y el **Tenant** utiliza la **Mobile Application**. Ambas aplicaciones consumen los servicios proporcionados por la **REST API** mediante HTTPS/JSON. La **REST API** también se comunica con **Stripe** mediante HTTPS/REST para procesar los pagos asociados a las suscripciones, con **Resend** para el envío de correos electrónicos transaccionales y con **Firebase Cloud Messaging** para el envío de notificaciones push.
 
 El diagrama permite visualizar la estructura lógica de StorePulse, los principales contenedores que conforman la solución, las tecnologías utilizadas y las relaciones de comunicación entre sus componentes.
-![StorePulse - Container Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=5)
+![StorePulse - Container Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/03-storepulse-container.puml&fmt=svg&v=6)
 #### 4.1.3.4. Software Architecture Deployment Diagram
 
 El **Deployment Diagram** representa la distribución física de los contenedores de software de StorePulse sobre la infraestructura donde serán ejecutados. Esta vista permite identificar los nodos físicos y de infraestructura asociados al entorno de la galería comercial, el procesamiento Edge, la infraestructura Cloud y los dispositivos utilizados por los usuarios.
@@ -78,21 +78,21 @@ Los principales nodos de despliegue son:
 - **Edge Device:** representa la infraestructura local encargada del procesamiento Edge. Sobre este nodo se ejecuta la **Edge API**, desarrollada con Python y Flask, responsable de recibir, validar y procesar la información proveniente de los dispositivos IoT antes de sincronizarla con la plataforma central.
 
 - **Cloud:** representa la infraestructura donde se ejecutan los principales servicios centralizados de StorePulse.
-  - **Application Server:** aloja la **REST API**, desarrollada con ASP.NET Core y .NET, responsable de centralizar la lógica de negocio y proporcionar los servicios de StorePulse.
+  - **Application Server:** aloja en Railway la **REST API**, desarrollada con Java y Spring Boot, responsable de centralizar la lógica de negocio y proporcionar los servicios de StorePulse.
   - **Database Server:** aloja la **Database**, desarrollada en MySQL, donde se almacena la información persistente de la plataforma.
   - **Web Server:** aloja la **Landing Page**, desarrollada con HTML5, CSS3 y JavaScript, utilizada para proporcionar información pública sobre StorePulse.
 
-- **Administrator Computer:** representa la computadora utilizada por el **Gallery Administrator**, donde se ejecuta la **Web Application**, desarrollada con Angular.
+- **Administrator Computer:** representa la computadora utilizada por el **Gallery Administrator**, donde se ejecuta la **Web Application**, desarrollada con Angular y publicada en Firebase Hosting.
 
 - **Tenant Mobile Device:** representa el dispositivo móvil utilizado por el **Tenant**, donde se ejecuta la **Mobile Application**, desarrollada con Flutter y Dart.
 
 La comunicación entre los elementos desplegados se realiza mediante los siguientes mecanismos:
 
-- **Embedded Application → Edge API:** HTTP/JSON.
+- **Embedded Application → Edge API:** HTTP/JSON, con la API key de cada nodo.
 - **Edge API → REST API:** HTTPS/JSON.
 - **Web Application → REST API:** HTTPS/JSON.
 - **Mobile Application → REST API:** HTTPS/JSON.
-- **REST API → Database:** Entity Framework Core.
+- **REST API → Database:** Spring Data JPA.
 
 Esta distribución permite mantener el procesamiento de los datos IoT cercano a los dispositivos mediante **Edge Computing**, mientras que la lógica de negocio y la persistencia centralizada se mantienen en la infraestructura **Cloud**.
-![StorePulse - Deployment Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=5)
+![StorePulse - Deployment Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/04-storepulse-deployment.puml&fmt=svg&v=6)

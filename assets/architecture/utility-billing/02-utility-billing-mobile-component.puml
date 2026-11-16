@@ -14,7 +14,7 @@ Container_Boundary(mobileApp, "Mobile Application - Flutter") {
     Component(utilityBillingService, "Utility Billing Service", "Flutter Service", "Consumes REST endpoints related to utility bills and billing disputes.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(utilityBillingUI, utilityBillingService, "Uses")
 Rel(utilityBillingService, restApi, "Consumes utility billing services", "HTTPS/JSON")

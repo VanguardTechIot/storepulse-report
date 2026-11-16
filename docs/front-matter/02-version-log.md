@@ -1,6 +1,6 @@
 ## Registro de Versiones del Informe
 
-<table border="1">
+<table>
   <tr>
     <th>Versión</th>
     <th>Fecha</th>
@@ -439,5 +439,53 @@
     <td>Renzo Araujo</td>
     <td>Se completaron el registro de versiones de TB1, la configuración de hosting y de versiones (6.1.2 y 6.1.4), la tabla de commits del Sprint 1 y la referencia de Balestrieri et al. (2018).</td>
 
+  </tr>
+  <tr>
+    <td>2.58</td>
+    <td>09/10/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se agregó la configuración de exportación del informe a PDF mediante Pandoc y un filtro Lua personalizado.</td>
+  </tr>
+  <tr>
+    <td>2.59</td>
+    <td>09/11/26</td>
+    <td>Sebastián Cordova</td>
+    <td>Se actualizó el IoT Device Design (39-iot-device-design.md) incorporando el actuador de alarma, nuevos diagramas de circuito y asignación de pines, y flujos de interacción con estado de salud del dispositivo.</td>
+  </tr>
+  <tr>
+    <td>2.60</td>
+    <td>12/11/26</td>
+    <td>Henry Diaz</td>
+    <td>Se actualizaron los resúmenes y evidencias de las Validation Interviews (42-validation-interviews.md) para los entrevistados Luis, Álvaro y Víctor.</td>
+  </tr>
+  <tr>
+    <td>2.61</td>
+    <td>13/11/26</td>
+    <td>Angelo Curi</td>
+    <td>Se actualizaron los diagramas de arquitectura (C4, UML y Bounded Contexts) al stack Spring Boot y Edge API, se actualizó Service Execution and Monitoring, se agregó Safety and Emergencies, y se actualizaron el Ubiquitous Language, los endpoints de Technical Stories y la tabla de contenido.</td>
+  </tr>
+  <tr>
+    <td>2.62</td>
+    <td>14/11/26</td>
+    <td>Henry Diaz</td>
+    <td>Se actualizaron las conclusiones y recomendaciones finales (98-conclusions.md) y se agregaron los enlaces del Video About-the-Product (43-video-about-the-product.md).</td>
+  </tr>
+  <tr>
+    <td>2.63</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se actualizó el Student Outcome (05-student-outcome.md) con las actividades de Joaquín Carranza correspondientes a la entrega AV2.</td>
+  </tr>
+  <tr>
+    <td>2.64</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se documentó el Sprint 2 (6.2.2 en 41-landing-page-services-applications-implementation.md): Sprint Planning 2, matriz LACX, Sprint Backlog 2, commits de desarrollo en los seis repositorios, resultados de las suites de pruebas, documentación de servicios REST (Platform y Edge), despliegue y colaboración.</td>
+  </tr>
+  <tr>
+    <td>2.65</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se actualizó integralmente la tabla de contenido (04-content.md) incorporando los Capítulos V, VI y el Anexo B, y se actualizó el registro de versiones (02-version-log.md).</td>
   </tr>
 </table>

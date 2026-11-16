@@ -15,7 +15,7 @@ Container_Boundary(mobileApplication, "Mobile Application") {
     Component(subscriptionsService, "Subscriptions Service", "Dart", "Consumes the subscription and payment REST endpoints.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic API that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic API that centralizes StorePulse business logic.")
 
 Rel(subscriptionsUI, subscriptionsService, "Uses")
 Rel(subscriptionsService, restApi, "Consumes subscription and payment services", "HTTPS/JSON")

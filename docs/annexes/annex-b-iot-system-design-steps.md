@@ -296,7 +296,7 @@ Nodo ESP32 ──MQTT/TLS──► Broker Mosquitto (gateway)
 
 **Capa de integración de información**
 
-La REST API monolítica en ASP.NET Core concentra la lógica de negocio; MySQL almacena tanto los datos operativos como la telemetría histórica particionada por tiempo.
+La REST API monolítica en Spring Boot concentra la lógica de negocio; MySQL almacena tanto los datos operativos como la telemetría histórica particionada por tiempo.
 
 | Decisión | Sustento |
 |---|---|

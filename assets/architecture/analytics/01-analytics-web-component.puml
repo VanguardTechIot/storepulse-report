@@ -16,7 +16,7 @@ Container_Boundary(webApp, "Web Application - Angular") {
     Component(analyticsWebService, "Analytics Service", "Angular Service", "Consumes the dashboard and notification REST endpoints.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(analyticsWebUI, analyticsWebService, "Uses")
 

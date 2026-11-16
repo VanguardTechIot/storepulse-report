@@ -1,0 +1,167 @@
+@startuml storepulse-safety-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Domain Layer Class Diagram
+
+package "Safety Rules" {
+
+    class SafetyRule <<Aggregate Root>> {
+        - id: Long
+        - name: String
+        - sensorType: SensorType
+        - threshold: Threshold
+        - deviceStatus: DeviceStatus
+        - responseAction: ResponseAction
+        - enabled: boolean
+        + isTriggeredBy(measuredValue: Double, recordedAt: Instant): boolean
+    }
+
+    class Threshold <<Value Object>> {
+        - value: Double
+        - operator: ComparisonOperator
+        + isMetBy(measuredValue: Double): boolean
+    }
+
+    class BusinessHours <<Value Object>> {
+        - opening: LocalTime
+        - closing: LocalTime
+        + {static} includes(instant: Instant): boolean
+    }
+
+    enum ComparisonOperator {
+        GREATER_THAN
+        GREATER_THAN_OR_EQUAL
+        LESS_THAN
+        LESS_THAN_OR_EQUAL
+        EQUAL
+        + compare(measuredValue: double, limit: double): boolean
+    }
+
+    enum SensorType {
+        MOTION
+        SMOKE
+        HUMIDITY
+        TEMPERATURE
+        ELECTRICITY
+        WATER
+    }
+}
+
+package "Alerts and Device States" {
+
+    class Alert <<Aggregate Root>> {
+        - id: Long
+        - safetyRuleId: Long
+        - deviceId: Long
+        - measurementId: Long
+        - sensorType: SensorType
+        - measuredValue: Double
+        - status: AlertStatus
+        - detectedAt: Instant
+        - acknowledgedAt: Instant
+        - resolvedAt: Instant
+        - resolutionNote: String
+        + acknowledge(): void
+        + resolve(resolutionNote: String): void
+    }
+
+    class DeviceState <<Aggregate Root>> {
+        - id: Long
+        - deviceId: Long
+        - status: DeviceStatus
+        - response: ResponseAction
+        - evaluatedAt: Instant
+        + update(status: DeviceStatus, response: ResponseAction, evaluatedAt: Instant): void
+    }
+
+    class MeasurementAssessment <<Value Object>> {
+        - deviceStatus: DeviceStatus
+        - response: ResponseAction
+        - alertTriggered: boolean
+    }
+
+    enum AlertStatus {
+        ACTIVE
+        ACKNOWLEDGED
+        RESOLVED
+    }
+
+    enum DeviceStatus {
+        NORMAL
+        ALERT
+    }
+
+    enum ResponseAction {
+        NONE
+        SEND_ALERT
+    }
+}
+
+package "Repositories" {
+
+    interface SafetyRuleRepository {
+        + save(rule: SafetyRule): SafetyRule
+        + existsByName(name: String): boolean
+        + findBySensorType(sensorType: SensorType): List<SafetyRule>
+    }
+
+    interface AlertRepository {
+        + save(alert: Alert): Alert
+        + findByDeviceIdInOrderByDetectedAtDesc(deviceIds: Collection<Long>): List<Alert>
+        + existsByDeviceIdAndStatusNot(deviceId: Long, status: AlertStatus): boolean
+        + existsByDeviceIdAndSensorTypeAndStatusNot(deviceId: Long, sensorType: SensorType, status: AlertStatus): boolean
+    }
+
+    interface DeviceStateRepository {
+        + save(state: DeviceState): DeviceState
+        + findByDeviceId(deviceId: Long): Optional<DeviceState>
+    }
+}
+
+package "Domain Events" {
+
+    class AlertTriggeredEvent <<Domain Event>> {
+        - deviceId: Long
+        - safetyRuleId: Long
+        - measuredValue: Double
+        - occurredOn: Instant
+    }
+
+    class AlertAcknowledgedEvent <<Domain Event>> {
+        - alertId: Long
+        - occurredOn: Instant
+    }
+
+    class AlertResolvedEvent <<Domain Event>> {
+        - alertId: Long
+        - occurredOn: Instant
+    }
+}
+
+SafetyRule *-- Threshold
+SafetyRule --> SensorType
+SafetyRule --> DeviceStatus
+SafetyRule --> ResponseAction
+SafetyRule ..> BusinessHours : uses for MOTION
+Threshold --> ComparisonOperator
+
+SafetyRule "1" -- "0..*" Alert : originates
+Alert --> SensorType
+Alert --> AlertStatus
+DeviceState --> DeviceStatus
+DeviceState --> ResponseAction
+MeasurementAssessment --> DeviceStatus
+MeasurementAssessment --> ResponseAction
+
+SafetyRuleRepository ..> SafetyRule : persists
+AlertRepository ..> Alert : persists
+DeviceStateRepository ..> DeviceState : persists
+
+Alert ..> AlertTriggeredEvent : publishes
+Alert ..> AlertAcknowledgedEvent : publishes
+Alert ..> AlertResolvedEvent : publishes
+
+@enduml

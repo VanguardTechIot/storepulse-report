@@ -74,9 +74,9 @@ La **Interface Layer** expone las capacidades de Utility Billing hacia la Web Ap
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `UtilityBillsController` | ASP.NET Core | Expone las operaciones para generar, emitir y consultar facturas. |
-| `BillingBreakdownController` | ASP.NET Core | Expone la consulta del desglose de consumo utilizado para calcular una factura. |
-| `BillingDisputesController` | ASP.NET Core | Expone las operaciones para registrar, consultar y resolver reclamos de facturación. |
+| `UtilityBillsController` | Spring Boot | Expone las operaciones para generar, emitir y consultar facturas. |
+| `BillingBreakdownController` | Spring Boot | Expone la consulta del desglose de consumo utilizado para calcular una factura. |
+| `BillingDisputesController` | Spring Boot | Expone las operaciones para registrar, consultar y resolver reclamos de facturación. |
 | Utility Billing UI | Angular | Permite al Gallery Administrator generar facturas, revisar información de consumo y atender reclamos. |
 | Utility Billing UI | Flutter / Dart | Permite al Tenant consultar sus facturas, revisar el desglose y presentar reclamos. |
 
@@ -127,10 +127,10 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementar las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestionar el acceso de Utility Billing a la base de datos. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementar las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestionar el acceso de Utility Billing a la base de datos. |
 | MySQL | MySQL | Persistir facturas, conceptos de facturación y reclamos. |
-| `Analytics Facade` | ASP.NET Core / HTTPS-JSON | Consumir y adaptar la información de consumo y línea base proporcionada por Dashboard and Analytics. |
+| `Analytics Facade` | Spring Boot / HTTPS-JSON | Consumir y adaptar la información de consumo y línea base proporcionada por Dashboard and Analytics. |
 | `Integration Event Publisher` | Integration Events | Publicar `UtilityBillIssued`, `BillingDisputeRaised` y `BillingDisputeResolved` para los contextos consumidores. |
 
 La integración con Dashboard and Analytics mantiene la separación de responsabilidades: Analytics conserva la autoridad sobre el consumo calculado y Utility Billing utiliza ese resultado como insumo para la facturación.
@@ -143,19 +143,19 @@ Los siguientes diagramas muestran cómo se distribuyen los componentes de Utilit
 
 La aplicación web, desarrollada con Angular, contiene la interfaz que permite al Gallery Administrator generar y revisar facturas, consultar información de consumo y gestionar reclamos de facturación.
 
-![StorePulse - Utility Billing - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/01-utility-billing-web-component.puml&fmt=svg&v=4)
+![StorePulse - Utility Billing - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/01-utility-billing-web-component.puml&fmt=svg&v=5)
 
 #### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz que permite al Tenant consultar sus facturas, revisar el desglose de consumo y presentar reclamos.
 
-![StorePulse - Utility Billing - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/02-utility-billing-mobile-component.puml&fmt=svg&v=4)
+![StorePulse - Utility Billing - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/02-utility-billing-mobile-component.puml&fmt=svg&v=5)
 
 #### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, eventos de integración, dominio, repositorios y la fachada que adapta la información de Dashboard and Analytics.
+La REST API, desarrollada con Spring Boot, concentra los controladores, manejadores de comandos y consultas, eventos de integración, dominio, repositorios y la fachada que adapta la información de Dashboard and Analytics.
 
-![StorePulse - Utility Billing - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/03-utility-billing-rest-api-component.puml&fmt=svg&v=4)
+![StorePulse - Utility Billing - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/utility-billing/03-utility-billing-rest-api-component.puml&fmt=svg&v=5)
 
 ### 4.2.9.6. Bounded Context Software Architecture Code Level Diagrams
 

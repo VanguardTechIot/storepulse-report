@@ -14,7 +14,7 @@ Container_Boundary(webApp, "Web Application - Angular") {
     Component(utilityBillingService, "Utility Billing Service", "Angular Service", "Consumes REST endpoints related to utility bills, billing breakdowns and billing disputes.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(utilityBillingUI, utilityBillingService, "Uses")
 Rel(utilityBillingService, restApi, "Consumes utility billing services", "HTTPS/JSON")

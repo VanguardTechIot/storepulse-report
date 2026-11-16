@@ -1,0 +1,39 @@
+@startuml storepulse-safety-web-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Web Components
+
+Container_Boundary(webApp, "Web Application - Angular") {
+
+    Component(dashboardView, "ConsolidatedDashboard", "Angular View", "Shows the open alerts indicator and the alerts by sensor type.")
+
+    Component(alertCenter, "AlertCenter", "Angular View", "Lists the alerts of the gallery and lets the administrator acknowledge them.")
+
+    Component(resolveDialog, "ResolveAlertDialog", "Angular Dialog", "Records the resolution note of an acknowledged alert.")
+
+    Component(analyticsStore, "AnalyticsStore", "Angular Signals Store", "Keeps the alerts and sends the acknowledge and resolve commands.")
+
+    Component(analyticsRepository, "HttpAnalyticsRepository", "Angular HttpClient", "Requests the alerts and their state changes from the REST API.")
+}
+
+Container(restApi, "REST API", "Java, Spring Boot", "Provides the alert services.")
+
+Rel(dashboardView, analyticsStore, "Reads alerts from")
+
+Rel(alertCenter, analyticsStore, "Acknowledges alerts through")
+
+Rel(alertCenter, resolveDialog, "Opens")
+
+Rel(resolveDialog, analyticsStore, "Resolves alerts through")
+
+Rel(analyticsStore, analyticsRepository, "Uses")
+
+Rel(analyticsRepository, restApi, "Requests /alerts, /acknowledge and /resolve", "HTTPS/JSON")
+
+@enduml

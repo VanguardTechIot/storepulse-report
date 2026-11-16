@@ -9,13 +9,13 @@ skinparam defaultFontName Arial
 
 title StorePulse - Resource and Asset Management - REST API Components
 
-Container_Boundary(restApi, "REST API - ASP.NET Core") {
+Container_Boundary(restApi, "REST API - Spring Boot") {
 
-    Component(resourceController, "ResourceController", "ASP.NET Core Controller", "Exposes endpoints for resource management.")
+    Component(resourceController, "ResourceController", "Spring REST Controller", "Exposes endpoints for resource management.")
 
-    Component(assetController, "AssetController", "ASP.NET Core Controller", "Exposes endpoints for asset management.")
+    Component(assetController, "AssetController", "Spring REST Controller", "Exposes endpoints for asset management.")
 
-    Component(iotDeviceController, "IoTDeviceController", "ASP.NET Core Controller", "Exposes endpoints for IoT device management.")
+    Component(iotDeviceController, "IoTDeviceController", "Spring REST Controller", "Exposes endpoints for IoT device management.")
 
     Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates resource, asset and IoT device use cases.")
 
@@ -23,7 +23,7 @@ Container_Boundary(restApi, "REST API - ASP.NET Core") {
 
     Component(domainModel, "Resource & Asset Domain", "Domain Layer", "Contains aggregates, entities, value objects and domain rules.")
 
-    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Spring Data JPA.")
 }
 
 ContainerDb(database, "Database", "MySQL", "Stores resources, assets and IoT device information.")
@@ -42,7 +42,7 @@ Rel(queryHandlers, domainModel, "Queries domain data")
 
 Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
 
-Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+Rel(repositoryImplementations, database, "Reads and writes", "Spring Data JPA")
 
 Rel(iotDeviceController, edgeApi, "Sends device configuration", "HTTPS/JSON")
 

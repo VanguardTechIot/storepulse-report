@@ -11,15 +11,23 @@ title StorePulse - Service Execution and Monitoring - Mobile Components
 
 Container_Boundary(mobileApp, "Mobile Application - Flutter") {
 
-    Component(monitoringUI, "Monitoring UI", "Flutter, Dart", "Provides monitoring views for measurements, consumption and alerts.")
+    Component(monitoringPage, "MonitoringPage", "Flutter Widget", "Shows the consumption of the period, the status of the sensors and the consumption history of the store.")
 
-    Component(monitoringService, "Monitoring Service", "Dart", "Consumes REST services for telemetry, measurements and alerts.")
+    Component(monitoringViewModel, "MonitoringViewModel", "Cubit", "Loads the monitored locations and the data of the selected one.")
+
+    Component(monitoringRepository, "MonitoringRepositoryImpl", "Dart Repository", "Builds the domain entities from the REST resources.")
+
+    Component(monitoringService, "MonitoringService", "Dart HTTP Client", "Calls the monitoring endpoints with the session token.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Provides monitored resources, consumption and sensor status services.")
 
-Rel(monitoringUI, monitoringService, "Uses")
+Rel(monitoringPage, monitoringViewModel, "Observes state from")
 
-Rel(monitoringService, restApi, "Consumes monitoring services", "HTTPS/JSON")
+Rel(monitoringViewModel, monitoringRepository, "Requests data from")
+
+Rel(monitoringRepository, monitoringService, "Uses")
+
+Rel(monitoringService, restApi, "Requests /monitored-resources, /consumption and /sensors/status", "HTTPS/JSON")
 
 @enduml

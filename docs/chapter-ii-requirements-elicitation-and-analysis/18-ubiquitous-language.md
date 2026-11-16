@@ -30,3 +30,10 @@ El Ubiquitous Language define un conjunto de términos propios del dominio de St
 | **Gallery Event** | Evento que afecta o puede afectar a varias áreas o locales de la galería comercial. |
 | **Property Owner** | Persona o entidad propietaria de uno o más locales o de la infraestructura de la galería comercial. |
 | **Connectivity** | Estado de conexión de red de los dispositivos y sistemas de la galería, cuya pérdida (*Connectivity Lost*) interrumpe la capacidad de respuesta de los módulos que dependen de ella, como el de seguridad. |
+| **Telemetry** | Conjunto de mediciones que un dispositivo IoT envía en un mismo momento sobre el local o el área común donde está instalado. |
+| **Measurement** | Valor registrado por un sensor, como temperatura, humedad, humo, movimiento o consumo de agua y energía, junto con la fecha en que se tomó. |
+| **Safety Rule** | Condición que determina cuándo una medición representa un riesgo para la galería y qué respuesta debe darse. |
+| **Threshold** | Valor límite de una regla de seguridad a partir del cual una medición se considera un riesgo. |
+| **Business Hours** | Horario de atención de la galería. Fuera de este horario, el movimiento dentro de un local se considera una posible intrusión. |
+| **Alert** | Registro generado cuando una regla de seguridad se cumple. Permanece activa hasta que el administrador confirma su atención y registra su resolución. |
+| **Device State** | Situación de seguridad de un dispositivo: normal o en alerta mientras tenga alertas sin resolver. |

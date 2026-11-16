@@ -16,7 +16,7 @@ Container_Boundary(mobileApp, "Mobile Application - Flutter") {
     Component(propertyMobileService, "Property Mobile Service", "Dart", "Consumes REST services for gallery and unit information.")
 }
 
-Container(restApi, "REST API", "ASP.NET Core, .NET", "Monolithic backend that centralizes StorePulse business logic.")
+Container(restApi, "REST API", "Java, Spring Boot", "Monolithic backend that centralizes StorePulse business logic.")
 
 Rel(propertyMobileUI, propertyMobileService, "Uses")
 Rel(propertyMobileService, restApi, "Consumes property management services", "HTTPS/JSON")

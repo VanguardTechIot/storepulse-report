@@ -9,11 +9,11 @@ skinparam defaultFontName Arial
 
 title StorePulse - Identity and Access Management - REST API Components
 
-Container_Boundary(restApi, "REST API - ASP.NET Core") {
+Container_Boundary(restApi, "REST API - Spring Boot") {
 
-    Component(authController, "AuthenticationController", "ASP.NET Core Controller", "Exposes sign-up, sign-in and sign-out endpoints.")
+    Component(authController, "AuthenticationController", "Spring REST Controller", "Exposes sign-up, sign-in and sign-out endpoints.")
 
-    Component(passwordRecoveryController, "PasswordRecoveryController", "ASP.NET Core Controller", "Exposes password reset request and confirmation endpoints.")
+    Component(passwordRecoveryController, "PasswordRecoveryController", "Spring REST Controller", "Exposes password reset request and confirmation endpoints.")
 
     Component(commandHandlers, "Command Handlers", "Application Layer", "Coordinates sign-up, sign-in, sign-out and password recovery use cases.")
 
@@ -21,13 +21,13 @@ Container_Boundary(restApi, "REST API - ASP.NET Core") {
 
     Component(domainModel, "Identity & Access Domain", "Domain Layer", "Contains UserAccount, PasswordRecovery, UnauthorizedAccessAttempt and domain rules.")
 
-    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Entity Framework Core.")
+    Component(repositoryImplementations, "Repository Implementations", "Infrastructure Layer", "Implements domain repository abstractions using Spring Data JPA.")
 
     Component(tokenService, "TokenService", "JWT", "Generates and validates the access tokens consumed by the rest of the Bounded Contexts.")
 
     Component(passwordHasher, "PasswordHasher", "Infrastructure Layer", "Protects the password before it is persisted.")
 
-    Component(authorizationMiddleware, "Authorization Middleware", "ASP.NET Core Middleware", "Validates the access token on protected requests and enforces role-based access control.")
+    Component(authorizationMiddleware, "Authorization Middleware", "Spring Security Filter", "Validates the access token on protected requests and enforces role-based access control.")
 }
 
 ContainerDb(database, "Database", "MySQL", "Stores user accounts, password recovery codes and unauthorized access attempts.")
@@ -44,7 +44,7 @@ Rel(queryHandlers, domainModel, "Queries domain data")
 
 Rel(domainModel, repositoryImplementations, "Uses repository abstractions")
 
-Rel(repositoryImplementations, database, "Reads and writes", "Entity Framework Core")
+Rel(repositoryImplementations, database, "Reads and writes", "Spring Data JPA")
 
 Rel(authController, tokenService, "Requests access token generation")
 

@@ -23,15 +23,15 @@ Deployment_Node(gallery, "Commercial Gallery", "Physical Infrastructure", "Physi
 
     Deployment_Node(edgeNode, "Edge Device", "Local Computer / Raspberry Pi", "Local infrastructure responsible for Edge processing.") {
 
-        Container(edgeApi, "Edge API", "Python, Flask", "Receives, validates and processes IoT information in the Edge environment before synchronizing it with the central platform.")
+        Container(edgeApi, "Edge API", "Python, Flask, SQLite", "Authenticates the nodes, receives, validates and processes IoT information in the Edge environment and keeps it locally until it is synchronized with the central platform.")
     }
 }
 
 Deployment_Node(cloud, "Cloud", "Cloud Infrastructure", "Central infrastructure where the StorePulse platform is deployed.") {
 
-    Deployment_Node(appServer, "Application Server", "Cloud Server", "Server responsible for executing the central StorePulse backend.") {
+    Deployment_Node(appServer, "Application Server", "Railway", "Server responsible for executing the central StorePulse backend.") {
 
-        Container(restApi, "REST API", "ASP.NET Core, .NET", "Central backend application responsible for the business logic and services of StorePulse.")
+        Container(restApi, "REST API", "Java, Spring Boot", "Central backend application responsible for the business logic and services of StorePulse.")
     }
 
     Deployment_Node(databaseServer, "Database Server", "MySQL Server", "Server responsible for persistent StorePulse data.") {
@@ -69,5 +69,5 @@ Rel(webApplication, restApi, "Consumes REST services", "HTTPS/JSON")
 
 Rel(mobileApplication, restApi, "Consumes REST services", "HTTPS/JSON")
 
-Rel(restApi, database, "Reads and writes information", "Entity Framework Core")
+Rel(restApi, database, "Reads and writes information", "Spring Data JPA")
 @enduml

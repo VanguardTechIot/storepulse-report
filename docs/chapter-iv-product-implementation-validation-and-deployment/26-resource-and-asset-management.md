@@ -66,9 +66,9 @@ La **Interface Layer** expone los puntos de entrada mediante los cuales las apli
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `ResourceController` | ASP.NET Core | Expone las operaciones relacionadas con recursos. |
-| `AssetController` | ASP.NET Core | Expone las operaciones relacionadas con activos. |
-| `IoTDeviceController` | ASP.NET Core | Expone las operaciones relacionadas con dispositivos IoT. |
+| `ResourceController` | Spring Boot | Expone las operaciones relacionadas con recursos. |
+| `AssetController` | Spring Boot | Expone las operaciones relacionadas con activos. |
+| `IoTDeviceController` | Spring Boot | Expone las operaciones relacionadas con dispositivos IoT. |
 | Resource & Asset Management UI | Angular | Permite al administrador interactuar con la gestión de recursos, activos y dispositivos. |
 | Resource & Asset UI | Flutter / Dart | Permite consultar información de recursos y activos desde la aplicación móvil. |
 
@@ -107,8 +107,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 
 | Componente | Tecnología | Responsabilidad |
 |---|---|---|
-| `Repository Implementations` | ASP.NET Core / Entity Framework Core | Implementar las interfaces de repositorio del dominio. |
-| `StorePulseDbContext` | Entity Framework Core | Gestionar el acceso de la aplicación a la base de datos. |
+| `Repository Implementations` | Spring Boot / Spring Data JPA | Implementar las interfaces de repositorio del dominio. |
+| `EntityManager` | Spring Data JPA | Gestionar el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persistir recursos, activos y dispositivos IoT. |
 | `Device Gateway` | Python / Flask | Recibir comunicación proveniente de los dispositivos IoT. |
 | `Device Configuration` | Python | Procesar información de configuración de dispositivos. |
@@ -124,23 +124,23 @@ Los siguientes diagramas muestran cómo se distribuyen los componentes del Bound
 
 La aplicación web, desarrollada con Angular, contiene una interfaz de gestión y un servicio encargado de consumir los servicios REST correspondientes.
 
-![StorePulse - Resource and Asset Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/01-resource-asset-web-component.puml&fmt=svg&v=4)
+![StorePulse - Resource and Asset Management - Web Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/01-resource-asset-web-component.puml&fmt=svg&v=5)
 #### Mobile Application
 
 La aplicación móvil, desarrollada con Flutter y Dart, contiene la interfaz de recursos y activos y el servicio encargado de consumir la API REST.
 
-![StorePulse - Resource and Asset Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/02-resource-asset-mobile-component.puml&fmt=svg&v=4)
+![StorePulse - Resource and Asset Management - Mobile Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/02-resource-asset-mobile-component.puml&fmt=svg&v=5)
 
 #### REST API
 
-La REST API, desarrollada con ASP.NET Core, concentra los controladores, manejadores de comandos y consultas, dominio y repositorios del contexto.
+La REST API, desarrollada con Spring Boot, concentra los controladores, manejadores de comandos y consultas, dominio y repositorios del contexto.
 
-![StorePulse - Resource and Asset Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/03-resource-asset-rest-api-component.puml&fmt=svg&v=4)
+![StorePulse - Resource and Asset Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/03-resource-asset-rest-api-component.puml&fmt=svg&v=5)
 #### Edge API
 
 La Edge API, desarrollada con Python y Flask, actúa como intermediaria entre la aplicación embebida y la plataforma central para las operaciones relacionadas con los dispositivos.
 
-![StorePulse - Resource and Asset Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/04-resource-asset-edge-component.puml&fmt=svg&v=4)
+![StorePulse - Resource and Asset Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/04-resource-asset-edge-component.puml&fmt=svg&v=5)
 ### 4.2.2.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.
