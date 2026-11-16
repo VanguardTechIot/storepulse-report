@@ -488,4 +488,52 @@
     <td>Joaquín Carranza</td>
     <td>Se actualizó integralmente la tabla de contenido (04-content.md) incorporando los Capítulos V, VI y el Anexo B, y se actualizó el registro de versiones (02-version-log.md).</td>
   </tr>
+  <tr>
+    <td>2.66</td>
+    <td>15/11/26</td>
+    <td>Henry Diaz</td>
+    <td>Se actualizaron las acciones individuales del Student Outcome (05-student-outcome.md) correspondientes a la entrega AV2.</td>
+  </tr>
+  <tr>
+    <td>2.67</td>
+    <td>15/11/26</td>
+    <td>Renzo Araujo</td>
+    <td>Se limpiaron archivos HTML obsoletos, se incorporaron las evidencias de despliegue productivo (6.2.2.8 en Railway, Firebase Hosting, GitHub Pages, Firebase App Distribution y Edge), se actualizaron la matriz LACX (6.2.2.2), las gráficas GitHub Pulse de los cinco repositorios de producto (6.2.2.9) y el Student Outcome del Sprint 2.</td>
+  </tr>
+  <tr>
+    <td>2.68</td>
+    <td>15/11/26</td>
+    <td>Sebastián Cordova</td>
+    <td>Se actualizó el Student Outcome (05-student-outcome.md) con las contribuciones de Sebastián Cordova en la entrega AV2.</td>
+  </tr>
+  <tr>
+    <td>2.69</td>
+    <td>15/11/26</td>
+    <td>Angelo Curi</td>
+    <td>Se actualizó el Student Outcome de Angelo Curi para AV2 (05-student-outcome.md), se alineó el Context Mapping (23-context-mapping.md) con los contextos implementados y se redibujaron los cuatro diagramas de Context Map.</td>
+  </tr>
+  <tr>
+    <td>2.70</td>
+    <td>15/11/26</td>
+    <td>Miguel Esquivel</td>
+    <td>Se incorporó el perfil y la fotografía de Miguel Juan Diego Esquivel en el Capítulo I (10-startup-profile.md y assets/team/miguel-esquirva.png).</td>
+  </tr>
+  <tr>
+    <td>2.71</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se corrigieron encabezados de Sprint 1 y atributos HTML obsoletos, y se integraron las capturas de Trello por épica (EP-01 a EP-06) en el Sprint Backlog 2 (6.2.2.3) junto con las evidencias de ejecución en Swagger, Edge, Web, Mobile y Landing Page (6.2.2.6).</td>
+  </tr>
+  <tr>
+    <td>3.0</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se consolidó la versión 3.0 del informe para el cierre del Sprint 2 / entrega AV2 y se publicó el release 3.0.0.</td>
+  </tr>
+  <tr>
+    <td>3.1</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se agregaron el reporte de colaboración e insights de GitHub AV2 de storepulse-report (03-collaboration-insights.md y Figura 26 de 6.2.2.9), se limpió el formato de imágenes a Markdown y se actualizó el registro de versiones para el release 3.1.0.</td>
+  </tr>
 </table>
