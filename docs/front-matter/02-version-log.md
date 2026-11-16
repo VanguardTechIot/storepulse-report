@@ -527,6 +527,12 @@
     <td>3.0</td>
     <td>15/11/26</td>
     <td>Joaquín Carranza</td>
-    <td>Se consolidó la versión 3.0 del informe para el cierre del Sprint 2 / entrega AV2 y se agregaron el reporte de colaboración e insights de GitHub AV2 de storepulse-report (03-collaboration-insights.md y Figura 26 de 6.2.2.9), actualizando el registro de versiones.</td>
+    <td>Se consolidó la versión 3.0 del informe para el cierre del Sprint 2 / entrega AV2 y se publicó el release 3.0.0.</td>
+  </tr>
+  <tr>
+    <td>3.1</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se agregaron el reporte de colaboración e insights de GitHub AV2 de storepulse-report (03-collaboration-insights.md y Figura 26 de 6.2.2.9), se limpió el formato de imágenes a Markdown y se actualizó el registro de versiones para el release 3.1.0.</td>
   </tr>
 </table>
