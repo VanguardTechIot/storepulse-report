@@ -61,32 +61,24 @@ Miguel Juan Diego incorporó su perfil de integrante en el Capítulo I (`10-star
 
 A continuación se presentan los gráficos de colaboración que representan la cantidad de commits realizados por cada miembro del equipo en el repositorio del informe.
 
-<div align="center">
-  <img src="../../assets/team/insights/commits-insights-av1.png" alt="Commits Insights AV1">
-</div>
+![Commits Insights AV1](../../assets/team/insights/commits-insights-av1.png)
 
 **Ramificación del proyecto usando GitFlow:**
 
 El siguiente gráfico muestra la ramificación del repositorio y las visitas registradas durante la fase AV1, evidenciando el flujo de trabajo colaborativo del equipo.
 
-<div align="center">
-  <img src="../../assets/team/insights/network-graph-insights-av1.png" alt="Network Graph Insights AV1">
-</div>
+![Network Graph Insights AV1](../../assets/team/insights/network-graph-insights-av1.png)
 
 **Reporte de colaboración de la entrega del AV2**
 
 El siguiente gráfico de **GitHub Insights > Pulse** refleja la actividad colaborativa en `storepulse-report` durante el cierre de la entrega AV2 (8 al 15 de noviembre de 2026), con los **6 autores** del equipo acumulando **46 commits** (excluyendo merges) y la publicación del release `3.0.0`.
 
-<div align="center">
-  <img src="../../assets/team/insights/pulse-insights-storepulse-report-av2.png" alt="Pulse Insights AV2 storepulse-report">
-</div>
+![Pulse Insights AV2 storepulse-report](../../assets/team/insights/pulse-insights-storepulse-report-av2.png)
 
 **Ramificación del proyecto usando GitFlow (AV2):**
 
 El siguiente gráfico muestra la evolución de ramas `feature/*`, fusiones hacia `develop` y actualización de `main` durante la fase final del Sprint 2 / AV2.
 
-<div align="center">
-  <img src="../../assets/team/insights/network-graph-insights-av2.png" alt="Network Graph Insights AV2">
-</div>
+![Network Graph Insights AV2](../../assets/team/insights/network-graph-insights-av2.png)
 
 <div style="page-break-after: always;"></div>
