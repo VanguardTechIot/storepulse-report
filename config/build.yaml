@@ -35,6 +35,7 @@ input-files:
   - docs/chapter-iv-product-implementation-validation-and-deployment/31-subscriptions-and-payments.md
   - docs/chapter-iv-product-implementation-validation-and-deployment/32-property-management.md
   - docs/chapter-iv-product-implementation-validation-and-deployment/33-utility-billing.md
+  - docs/chapter-iv-product-implementation-validation-and-deployment/34-safety-and-emergencies.md
   - docs/chapter-v-solution-ux-ui-design/34-style-guidelines.md
   - docs/chapter-v-solution-ux-ui-design/35-information-architecture.md
   - docs/chapter-v-solution-ux-ui-design/36-landing-page-ui-design.md
