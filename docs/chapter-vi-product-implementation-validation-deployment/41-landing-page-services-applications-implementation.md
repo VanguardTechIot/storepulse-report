@@ -480,7 +480,27 @@ La siguiente tabla detalla la descomposición en tareas de las historias abordad
 | US-02, US-19, US-50, US-51 | Integración completa Web & Mobile contra Backend Railway | T2-11 | Retirar API simulada y conectar clientes web/móvil a Railway | Actualizar `environment.ts` en Angular, eliminar `json-server`, configurar `ApiConfig.baseUrl` en Flutter y validar flujos en producción. | 8 | Carranza Tesén, Joaquín Enrique | DONE |
 | VS-06, VS-08, VS-09, VS-10 | Video de producto, CTAs a Web App, i18n y términos en Landing Page | T2-12 | Actualizar Landing Page (`v2.1.0`) y publicar en GitHub Pages | Incorporar sección de video de producto, enlazar CTAs hacia `storepulse-web-app.web.app`, completar textos EN/ES y ajustar diseño responsive. | 6 | Esquivel León, Miguel Juan Diego | DONE |
 
-> **Agregar imagen referente a:** Tablero Trello con el Sprint Backlog 2 organizado en columnas To Do, In Progress y Done reflejando las historias y tareas del Sprint 2.
+Las siguientes capturas de Trello evidencian el avance y cierre de los tableros por épica asociados al **Sprint Backlog 2**:
+
+* **EP-01 — Landing Page (`Hecho: 9`)**
+
+![Tablero Trello EP-01 Landing Page](../../assets/sprints/sprint-2/trello-ep01-landing-page.jpg)
+
+* **EP-02 & EP-03 — Gestión de acceso y cuentas y Gestión de perfil de usuario (`Hecho: 11`)**
+
+![Tablero Trello EP-02 y EP-03 IAM y Perfiles](../../assets/sprints/sprint-2/trello-ep02-ep03-iam-profiles.jpg)
+
+* **EP-04 — Gestión del inmueble y locales (`Hecho: 12`)**
+
+![Tablero Trello EP-04 Propiedad y Locales](../../assets/sprints/sprint-2/trello-ep04-property-management.jpg)
+
+* **EP-05 — Gestión de dispositivos IoT (`Hecho: 12`)**
+
+![Tablero Trello EP-05 Dispositivos IoT](../../assets/sprints/sprint-2/trello-ep05-iot-devices.jpg)
+
+* **EP-06 — Monitoreo de seguridad y emergencias (`Lista de tareas: 3`, `Hecho: 12`)**
+
+![Tablero Trello EP-06 Seguridad y Emergencias](../../assets/sprints/sprint-2/trello-ep06-safety-emergencies.jpg)
 
 ### 6.2.2.4. Development Evidence for Sprint Review
 
@@ -568,15 +588,25 @@ Durante la Sprint Review del **Sprint 2** se demostró el funcionamiento integra
 4. **Mobile Application (`storepulse-mobile`)**: Flujo multirol en Android (**Administrador** e **Inquilino**) con inicio/cierre de sesión persistido, dashboard de seguridad y consumo en tiempo real, monitoreo de sensores por local, visualización de cobertura/suscripción y gestión de perfil.
 5. **Landing Page (`storepulse-landing-page` `v2.1.0`)**: Visualización del video de presentación del producto, navegación directa a registro/inicio de sesión en la aplicación web desplegada, cambio de idioma EN/ES y páginas legales.
 
-> **Agregar imagen referente a:** Captura de ejecución del Backend / Swagger UI mostrando respuestas exitosas `200 OK` / `201 Created` de los endpoints principales de StorePulse Platform.
+**Evidencia de ejecución — Backend (`storepulse-platform`, Swagger UI en Railway)**
 
-> **Agregar imagen referente a:** Captura de ejecución del Edge Gateway (`storepulse-edge`) en consola recibiendo telemetría IoT, guardando en SQLite y sincronizando con la plataforma.
+![Ejecución de StorePulse REST API en Swagger UI](../../assets/sprints/sprint-2/execution-backend-swagger.png)
 
-> **Agregar imagen referente a:** Capturas de ejecución de la Web Application (`storepulse-web-application`) mostrando el Dashboard, Gestión de Locales/Dispositivos, Alertas y Facturación consumiendo la API en Railway.
+**Evidencia de ejecución — Edge Gateway (`storepulse-edge`, terminal LAN integrada con Railway)**
 
-> **Agregar imagen referente a:** Capturas de ejecución de la Mobile Application (`storepulse-mobile`) en emulador o dispositivo Android mostrando Inicio de Sesión, Dashboard del Local, Monitoreo de Sensores y Suscripción/Perfil.
+![Ejecución de StorePulse Edge Gateway](../../assets/evidence_deployment/20-storepulse-edge-execution.jpeg)
 
-> **Agregar imagen referente a:** Captura de ejecución del Landing Page (`v2.1.0`) mostrando la sección de Video del Producto y enlaces activos hacia la Web App.
+**Evidencia de ejecución — Web Application (`storepulse-web-application`, Dashboard consolidado)**
+
+![Ejecución del Dashboard Web de StorePulse](../../assets/sprints/sprint-2/execution-web-dashboard.png)
+
+**Evidencia de ejecución — Mobile Application (`storepulse-mobile`, Dashboard Local del Inquilino)**
+
+![Ejecución de StorePulse Mobile para Inquilino](../../assets/sprints/sprint-2/execution-mobile-dashboard.jpg)
+
+**Evidencia de ejecución — Landing Page (`storepulse-landing-page` v2.1.0, Video y acceso a Web App)**
+
+![Ejecución del Landing Page v2.1.0 con video de producto](../../assets/sprints/sprint-2/execution-landing-page.jpg)
 
 #### 6.2.2.7. Services Documentation Evidence for Sprint Review
 
