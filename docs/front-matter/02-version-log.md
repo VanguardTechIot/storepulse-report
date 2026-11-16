@@ -535,4 +535,10 @@
     <td>Joaquín Carranza</td>
     <td>Se agregaron el reporte de colaboración e insights de GitHub AV2 de storepulse-report (03-collaboration-insights.md y Figura 26 de 6.2.2.9), se limpió el formato de imágenes a Markdown y se actualizó el registro de versiones para el release 3.1.0.</td>
   </tr>
+  <tr>
+    <td>3.1.1</td>
+    <td>15/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se corrigió la configuración de exportación a PDF (inclusión de 34-safety-and-emergencies.md en config/build.yaml, escape de polaridad en 39-iot-device-design.md y recodificación a PNG válido de miguel-esquirva.png) para el release 3.1.1.</td>
+  </tr>
 </table>
