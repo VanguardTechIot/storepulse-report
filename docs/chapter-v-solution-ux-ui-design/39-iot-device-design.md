@@ -352,7 +352,7 @@ Las tablas identifican cada pin por su número de GPIO. Según la placa o la her
 | Componente | Pin del componente | Pin del ESP32 | Señal | Observación |
 |---|---|---|---|---|
 | PIR HC-SR501 | OUT | GPIO 27 | Entrada digital | — |
-| Alarma (buzzer activo) | + / − | GPIO 26 / GND | Salida digital | Se muestra directa (ver nota) |
+| Alarma (buzzer activo) | `+ / −` | GPIO 26 / GND | Salida digital | Se muestra directa (ver nota) |
 | RTC DS3231 | SDA / SCL | GPIO 21 / GPIO 22 | I2C | Alimentado a 3,3 V |
 | LED RGB | R / G / B | GPIO 25 / GPIO 33 / GPIO 32 | PWM | Resistencia de 220 Ω por canal |
 
