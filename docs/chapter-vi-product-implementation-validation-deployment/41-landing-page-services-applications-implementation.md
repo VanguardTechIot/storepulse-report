@@ -897,5 +897,7 @@ La Figura 25 corresponde a `storepulse-landing-page`: seis autores con 44 commit
 
 ![Figura 25. GitHub Pulse del repositorio storepulse-landing-page](../../assets/team/insights/pulse-insights-storepulse-landing-page-av2.png)
 
-> **Agregar imagen referente a:** GitHub Insights / Pulse y gráfica de contribuciones del Sprint 2 en el repositorio `storepulse-report`.
+La Figura 26 muestra la actividad de `storepulse-report` durante la semana de cierre del Sprint 2 (8 al 15 de noviembre de 2026): seis autores con 46 commits excluyendo merges, 142 archivos modificados en `main` (2,084 adiciones y 3,152 eliminaciones) y la publicación del release `3.0.0`.
+
+![Figura 26. GitHub Pulse del repositorio storepulse-report](../../assets/team/insights/pulse-insights-storepulse-report-av2.png)
 
