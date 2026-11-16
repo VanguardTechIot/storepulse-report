@@ -28,6 +28,32 @@ Angelo desarrolló el Ubiquitous Language y el análisis competitivo del proyect
 
 Joaquín desarrolló los Bounded Context Canvases de la sección 4.1.1.3, elaborando los diez lienzos de los contextos candidatos con la plantilla Bounded Context Canvas V4 de DDD-Crew y documentando para cada uno su propósito, clasificación estratégica, lenguaje ubicuo, reglas de negocio y comunicaciones entrantes y salientes. Este trabajo sirvió de base para el diseño táctico que cada integrante realizó en el Capítulo IV. Organizó sus contribuciones en ramas de feature independientes y las integró a develop siguiendo GitFlow y Conventional Commits.
 
+**Reporte de colaboración de la entrega del AV2**
+
+**Renzo Araujo Ingunza**
+
+Renzo coordinó la integración bajo GitFlow y la publicación de las evidencias de despliegue de los servicios en producción (Railway y Firebase Hosting), actualizó la matriz de roles y responsabilidades del Sprint 2 (sección 6.2.2.2) y documentó las métricas de colaboración y distribución del equipo para la entrega AV2.
+
+**Sebastián Córdova Valdivia**
+
+Sebastián actualizó el IoT Device Design (sección 5.6), incorporando el actuador de alarma, nuevos diagramas de circuito, asignación de pines, diseño físico y flujos de interacción considerando el estado de salud del dispositivo, además de registrar sus avances en el Student Outcome de AV2.
+
+**Diaz Gutierrez, Henry Kevin**
+
+Henry condujo y documentó las Validation Interviews de Sprint 2 (sección 6.3) junto con las evidencias fotográficas de los entrevistados, incorporó los enlaces del Video About-the-Product (sección 6.4) y actualizó las conclusiones y recomendaciones finales del informe.
+
+**Angelo Curi Marcelo**
+
+Angelo actualizó la arquitectura del informe y los diagramas C4 y PlantUML al stack definitivo (Spring Boot 4 y StorePulse Edge en Python/Flask), completó el contexto Service Execution and Monitoring, incorporó el contexto Safety and Emergencies, redibujó los Context Maps, actualizó las Technical Stories y corrigió la tabla de contenido y el Student Outcome.
+
+**Joaquín Enrique Carranza Tesén**
+
+Joaquín estructuró y documentó íntegramente el Sprint 2 (sección 6.2.2: Sprint Planning 2, Sprint Backlog 2, Development Evidence, Testing Suite Evidence, Execution Evidence y Services Documentation de Platform y Edge), integró las capturas de Trello y ejecución en `assets/sprints/sprint-2/`, actualizó la tabla de contenido con los Capítulos V, VI y Anexo B, el Registro de Versiones (`02-version-log.md`) y el Student Outcome.
+
+**Miguel Juan Diego Esquivel León**
+
+Miguel Juan Diego incorporó su perfil de integrante en el Capítulo I (`10-startup-profile.md`) con su fotografía oficial en `assets/team/` y colaboró en la actualización de los productos digitales vinculados al Sprint 2.
+
 ### Evidencias de Analíticos y Commits en GitHub
 
 **Reporte de colaboración de la entrega del AV1**
@@ -45,6 +71,22 @@ El siguiente gráfico muestra la ramificación del repositorio y las visitas reg
 
 <div align="center">
   <img src="../../assets/team/insights/network-graph-insights-av1.png" alt="Network Graph Insights AV1">
+</div>
+
+**Reporte de colaboración de la entrega del AV2**
+
+El siguiente gráfico de **GitHub Insights > Pulse** refleja la actividad colaborativa en `storepulse-report` durante el cierre de la entrega AV2 (8 al 15 de noviembre de 2026), con los **6 autores** del equipo acumulando **46 commits** (excluyendo merges) y la publicación del release `3.0.0`.
+
+<div align="center">
+  <img src="../../assets/team/insights/pulse-insights-storepulse-report-av2.png" alt="Pulse Insights AV2 storepulse-report">
+</div>
+
+**Ramificación del proyecto usando GitFlow (AV2):**
+
+El siguiente gráfico muestra la evolución de ramas `feature/*`, fusiones hacia `develop` y actualización de `main` durante la fase final del Sprint 2 / AV2.
+
+<div align="center">
+  <img src="../../assets/team/insights/network-graph-insights-av2.png" alt="Network Graph Insights AV2">
 </div>
 
 <div style="page-break-after: always;"></div>
