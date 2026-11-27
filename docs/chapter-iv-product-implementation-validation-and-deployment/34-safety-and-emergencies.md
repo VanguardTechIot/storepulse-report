@@ -190,6 +190,12 @@ La Edge API mantiene una copia local de las reglas de seguridad y evalúa cada m
 
 ![StorePulse - Safety and Emergencies - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/04-safety-edge-component.puml&fmt=svg&v=1)
 
+#### Embedded Application
+
+La aplicación embebida reúne los nodos de seguridad: el sensor de humo MQ-2, el sensor de intrusión PIR con su horario de atención y su alarma local, y la cámara de áreas comunes. Cada nodo envía sus eventos SMOKE o MOTION a la Edge API y muestra en sus LEDs la alerta que la Edge API evalúa.
+
+![StorePulse - Safety and Emergencies - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/07-safety-embedded-component.puml&fmt=svg&v=1)
+
 ### 4.2.10.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura del dominio y el modelo de persistencia correspondiente al contexto.
