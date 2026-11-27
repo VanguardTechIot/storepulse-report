@@ -208,6 +208,12 @@ Las relaciones permiten observar cómo una regla evalúa las mediciones mediante
 
 ![StorePulse - Safety and Emergencies - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/05-safety-domain-class.puml&fmt=svg&v=1)
 
+##### Edge API
+
+En la Edge API, `SafetyEvaluationService` aplica las reglas locales (`SafetyRule`) a cada medición y devuelve un `MeasurementAssessment` con el estado `NORMAL` o `ALERT`. Las reglas de movimiento solo se disparan fuera del horario de atención (`BusinessHours`, de 10:00 a 22:00, hora de Lima).
+
+![StorePulse - Safety and Emergencies - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/08-safety-edge-domain-class.puml&fmt=svg&v=1)
+
 #### 4.2.10.6.2. Bounded Context Database Design Diagram
 
 El modelo de datos representa las estructuras necesarias para persistir la información del contexto.
@@ -223,3 +229,9 @@ Las principales relaciones representadas en el modelo son:
 - `safety_rules` → `alerts`
 
 ![StorePulse - Safety and Emergencies - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/06-safety-database.puml&fmt=svg&v=1)
+
+##### Edge API
+
+La Edge API guarda una copia local de las reglas de seguridad en la tabla `safety_rules` de su base SQLite, para evaluar las mediciones sin depender de la conexión con la REST API.
+
+![StorePulse - Safety and Emergencies - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/09-safety-edge-database.puml&fmt=svg&v=1)
