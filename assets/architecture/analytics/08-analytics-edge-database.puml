@@ -1,0 +1,53 @@
+@startuml storepulse-analytics-edge-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Dashboard and Analytics - Edge Database Design (SQLite)
+
+entity "analytics_sensor_aggregates" as aggregates {
+    * platform_device_id : INTEGER <<PK>>
+    * sensor_type : VARCHAR(24) <<PK>>
+    --
+    sample_count : INTEGER
+    total_value : REAL
+    min_value : REAL
+    max_value : REAL
+    latest_value : REAL
+    deviation_ratio : REAL
+    latest_recorded_at : DATETIME
+}
+
+entity "analytics_node_health" as health {
+    * platform_device_id : INTEGER <<PK>>
+    --
+    supply_voltage : REAL <<NULL>>
+    power_status : VARCHAR(24)
+    buffered_events : INTEGER
+    telemetry_count : INTEGER
+    last_seen_at : DATETIME
+}
+
+entity "analytics_notifications" as notifications {
+    * id : INTEGER <<PK>>
+    --
+    platform_device_id : INTEGER <<INDEX>>
+    category : VARCHAR(32) <<INDEX>>
+    severity : VARCHAR(16)
+    status : VARCHAR(16) <<INDEX>>
+    sensor_type : VARCHAR(24) <<NULL>>
+    message : TEXT
+    latest_value : REAL <<NULL>>
+    occurrence_count : INTEGER
+    first_occurred_at : DATETIME
+    last_occurred_at : DATETIME
+    acknowledged_at : DATETIME <<NULL>>
+}
+
+health ||..o{ aggregates : "platform_device_id"
+health ||..o{ notifications : "platform_device_id"
+
+@enduml

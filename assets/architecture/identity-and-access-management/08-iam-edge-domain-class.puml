@@ -1,0 +1,74 @@
+@startuml storepulse-iam-edge-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Edge Domain Layer Class Diagram
+
+package "Devices" {
+
+    class Device <<Aggregate Root>> {
+        - deviceId: str
+        - deviceType: DeviceType
+        - platformDeviceId: int
+        - credential: ApiCredential
+        - createdAt: datetime
+        - revokedAt: datetime | None
+        + {static} register(deviceId: str, deviceType: DeviceType, platformDeviceId: int): (Device, str)
+        + isActive(): bool
+        + authenticate(apiKey: str): bool
+        + rotateApiKey(): (Device, str)
+        + revoke(at: datetime): Device
+    }
+
+    class ApiCredential <<Value Object>> {
+        - salt: bytes
+        - digest: bytes
+        - iterations: int
+        + {static} issue(): (ApiCredential, str)
+        + {static} fromEncoded(encoded: str): ApiCredential
+        + matches(secret: str): bool
+        + encode(): str
+    }
+
+    enum DeviceType {
+        INTRUSION_NODE
+        CAMERA_NODE
+        SMOKE_NODE
+        CONSUMPTION_NODE
+        COMMON_AREA_NODE
+    }
+
+    interface DeviceRepository <<Repository>> {
+        + findByDeviceId(deviceId: str): Device | None
+        + findByPlatformDeviceId(platformDeviceId: int): Device | None
+        + findAll(): list<Device>
+        + save(device: Device): Device
+    }
+
+    class DeviceRevoked <<Domain Error>>
+}
+
+package "Users" {
+
+    class AuthenticatedUser <<Value Object>> {
+        - userId: int
+        - email: str
+        - role: Role
+        + canManageDevices(): bool
+    }
+
+    enum Role {
+        GALLERY_ADMINISTRATOR
+        TENANT
+    }
+}
+
+Device *-- "1" ApiCredential : credential
+Device --> DeviceType
+Device ..> DeviceRevoked : raises
+DeviceRepository ..> Device : stores
+AuthenticatedUser --> Role
+
+@enduml

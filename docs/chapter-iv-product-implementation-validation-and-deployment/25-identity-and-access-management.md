@@ -156,6 +156,12 @@ El diagrama de clases presenta los agregados raíz `UserAccount`, `PasswordRecov
 
 ![StorePulse - Identity and Access Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/04-iam-domain-class.puml&fmt=svg&v=4)
 
+###### Edge API
+
+En la Edge API, el agregado `Device` representa a cada nodo ESP32 registrado. Controla el ciclo de vida de su credencial: autentica la API key mientras está activo, la rota y se revoca. `ApiCredential` guarda solo el verificador PBKDF2-SHA256 de la clave, y `AuthenticatedUser` representa al administrador identificado por el token de la REST API.
+
+![StorePulse - Identity and Access Management - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/08-iam-edge-domain-class.puml&fmt=svg&v=1)
+
 ##### 4.2.1.6.2. Bounded Context Database Design Diagram
 
 El modelo de datos representa la persistencia de los principales elementos del contexto.
@@ -172,4 +178,10 @@ Las relaciones del modelo de datos son:
 - `users` → `unauthorized_access_attempts`
 
 ![StorePulse - Identity and Access Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/05-iam-database.puml&fmt=svg&v=4)
+
+###### Edge API
+
+La Edge API guarda los nodos registrados en la tabla `devices` de su base SQLite local. `platform_device_id` vincula cada nodo con su dispositivo IoT de la REST API y `credential_verifier` guarda el verificador de la API key, nunca la clave.
+
+![StorePulse - Identity and Access Management - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/09-iam-edge-database.puml&fmt=svg&v=1)
 

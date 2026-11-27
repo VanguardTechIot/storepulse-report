@@ -1,0 +1,28 @@
+@startuml storepulse-safety-edge-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Edge Database Design (SQLite)
+
+entity "safety_rules" as rules {
+    * id : INTEGER <<PK>>
+    --
+    name : VARCHAR(255) <<UNIQUE>>
+    sensor_type : VARCHAR(255)
+    threshold_value : REAL
+    threshold_operator : VARCHAR(255)
+    enabled : BOOLEAN
+}
+
+note right of rules
+  Local copy of the rules of the REST API.
+  It is refreshed periodically and keeps
+  the standard rules when there is no
+  connection.
+end note
+
+@enduml

@@ -143,6 +143,12 @@ El diagrama de clases presenta los agregados raíz `Notification` y `Consumption
 
 ![StorePulse - Analytics - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/04-analytics-domain-class.puml&fmt=svg&v=4)
 
+#### Edge API
+
+En la Edge API, la analítica local se calcula con `TelemetryAnalyticsService`, que actualiza los agregados por sensor (`SensorAggregate`) y la salud de cada nodo (`NodeHealthSnapshot`), detecta anomalías de consumo y consolida las notificaciones repetidas en una sola `LocalNotification`.
+
+![StorePulse - Dashboard and Analytics - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/07-analytics-edge-domain-class.puml&fmt=svg&v=1)
+
 ### 4.2.5.6.2. Bounded Context Database Design Diagram
 
 El modelo de datos representa la persistencia de los principales elementos del contexto.
@@ -153,3 +159,9 @@ El modelo de datos representa la persistencia de los principales elementos del c
 | `consumption_registrations` | Almacenar las lecturas y consumos de agua y electricidad registrados por medidor y periodo. | `meter_id` es una referencia externa a Resource and Assets Management, sin FK física entre contextos. |
 
 ![StorePulse - Analytics - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/05-analytics-database.puml&fmt=svg&v=4)
+
+#### Edge API
+
+La Edge API guarda la analítica local en tres tablas de su base SQLite: `analytics_sensor_aggregates`, `analytics_node_health` y `analytics_notifications`, todas vinculadas al dispositivo por `platform_device_id`.
+
+![StorePulse - Dashboard and Analytics - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/08-analytics-edge-database.puml&fmt=svg&v=1)
