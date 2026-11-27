@@ -435,7 +435,11 @@ Un wireflow combina los wireframes con las acciones del usuario que conectan una
 Desde la bienvenida, el administrador crea su cuenta, registra los datos de su galería, elige un plan y realiza el pago. Si la contraseña no es segura, se le indica en el mismo paso. Al terminar, llega al dashboard todavía sin datos, desde donde registra su primer local.
 
 <p align="center">
-  <img src="../../assets/applications-ux-ui-design/web-wireflows/WF-01-registrar-galeria-y-activar-suscripcion.jpg" alt="Wireflow WF-01" width="100%">
+  <img src="../../assets/applications-ux-ui-design/web-wireflows/WF-01-registrar-galeria-y-activar-suscripcion-parte-1.jpg" alt="Wireflow WF-01 (parte 1 de 2)" width="100%">
+</p>
+
+<p align="center">
+  <img src="../../assets/applications-ux-ui-design/web-wireflows/WF-01-registrar-galeria-y-activar-suscripcion-parte-2.jpg" alt="Wireflow WF-01 (parte 2 de 2)" width="100%">
 </p>
 
 **WF-02 · Acceder a la plataforma y recuperar la contraseña**
@@ -1002,7 +1006,15 @@ Rutas alternativas:
 * Si el pago es rechazado, vuelve a la selección de plan para intentarlo nuevamente.
 
 <p align="center">
-  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-01-registrar-galeria-y-activar-suscripcion.jpg" alt="User Flow UF-01" width="100%">
+  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-01-registrar-galeria-y-activar-suscripcion-parte-1.jpg" alt="User Flow UF-01 (parte 1 de 3)" width="100%">
+</p>
+
+<p align="center">
+  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-01-registrar-galeria-y-activar-suscripcion-parte-2.jpg" alt="User Flow UF-01 (parte 2 de 3)" width="100%">
+</p>
+
+<p align="center">
+  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-01-registrar-galeria-y-activar-suscripcion-parte-3.jpg" alt="User Flow UF-01 (parte 3 de 3)" width="100%">
 </p>
 
 **UF-02 · Acceder a la plataforma y recuperar la contraseña**
@@ -1065,7 +1077,11 @@ Rutas alternativas:
 * Si decide no confirmar la desactivación, vuelve a la lista de dispositivos sin cambios.
 
 <p align="center">
-  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-05-supervisar-dispositivos-iot.jpg" alt="User Flow UF-05" width="100%">
+  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-05-supervisar-dispositivos-iot-parte-1.jpg" alt="User Flow UF-05 (parte 1 de 2)" width="100%">
+</p>
+
+<p align="center">
+  <img src="../../assets/applications-ux-ui-design/web-userflows/UF-05-supervisar-dispositivos-iot-parte-2.jpg" alt="User Flow UF-05 (parte 2 de 2)" width="100%">
 </p>
 
 **UF-06 · Facturar el consumo y registrar pagos**
