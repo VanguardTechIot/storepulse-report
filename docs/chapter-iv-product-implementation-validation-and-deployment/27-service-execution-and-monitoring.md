@@ -194,6 +194,12 @@ Las relaciones permiten observar cómo la telemetría contiene mediciones, cómo
 
 ![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=5)
 
+##### Edge API
+
+En la Edge API, el agregado `Telemetry` agrupa las mediciones de un envío del nodo con su voltaje de alimentación y sus eventos en buffer. `TelemetryService` valida y construye la telemetría, y `TelemetryRepository` la conserva como pendiente hasta que la REST API confirma su sincronización.
+
+![StorePulse - Service Execution and Monitoring - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/08-service-monitoring-edge-domain-class.puml&fmt=svg&v=1)
+
 #### 4.2.3.6.2. Bounded Context Database Design Diagram
 
 El modelo de datos representa las estructuras necesarias para persistir la información registrada por el contexto.
@@ -209,3 +215,9 @@ Las principales relaciones representadas en el modelo son:
 - `telemetry` → `measurements`
 
 ![StorePulse - Service Execution and Monitoring - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/06-service-monitoring-database.puml&fmt=svg&v=5)
+
+##### Edge API
+
+La Edge API guarda la telemetría en las tablas `telemetry` y `measurements` de su base SQLite local. El campo `synced` marca lo que falta sincronizar y `sync_attempts` cuenta los reintentos.
+
+![StorePulse - Service Execution and Monitoring - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/09-service-monitoring-edge-database.puml&fmt=svg&v=1)

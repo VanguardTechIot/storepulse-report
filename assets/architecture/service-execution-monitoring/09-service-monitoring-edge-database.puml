@@ -1,0 +1,40 @@
+@startuml storepulse-service-monitoring-edge-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Edge Database Design (SQLite)
+
+entity "telemetry" as telemetry {
+    * id : INTEGER <<PK>>
+    --
+    device_id : INTEGER
+    received_at : DATETIME
+    synced : BOOLEAN <<INDEX>>
+    sync_attempts : INTEGER
+    supply_voltage : REAL <<NULL>>
+    buffered_events : INTEGER <<NULL>>
+}
+
+entity "measurements" as measurements {
+    * id : INTEGER <<PK>>
+    --
+    telemetry_id : INTEGER <<FK>>
+    type : VARCHAR(255)
+    value : REAL
+    recorded_at : DATETIME
+}
+
+telemetry ||--|{ measurements : "contains (ON DELETE CASCADE)"
+
+note right of telemetry
+  device_id is the identifier of the
+  IoT device in the REST API.
+  Rows stay with synced = false until
+  the REST API confirms them.
+end note
+
+@enduml
