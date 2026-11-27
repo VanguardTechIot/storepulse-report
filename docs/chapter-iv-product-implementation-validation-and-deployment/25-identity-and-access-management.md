@@ -134,6 +134,18 @@ La REST API, desarrollada con Spring Boot, concentra los controladores, manejado
 
 ![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=5)
 
+##### Edge API
+
+La Edge API, desarrollada con Flask, registra los nodos ESP32, les emite su API key y la guarda solo como un verificador PBKDF2-SHA256. También autentica a cada nodo, permite rotar o revocar su clave y verifica localmente el token del administrador, por lo que funciona sin conexión a internet. El módulo de monitoreo usa `IamContextFacade` para validar al nodo antes de aceptar su telemetría.
+
+![StorePulse - Identity and Access Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/06-iam-edge-component.puml&fmt=svg&v=1)
+
+##### Embedded Application
+
+La aplicación embebida, desarrollada en C++ sobre ESP32 con Modest IoT, toma su identificador y su API key de `Secrets.h`, que no se versiona. Al arrancar se conecta a la red y se autentica con `EdgeApiGatewayClient`, que además envía la cabecera `X-API-Key` en cada petición a la Edge API.
+
+![StorePulse - Identity and Access Management - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/07-iam-embedded-component.puml&fmt=svg&v=1)
+
 #### 4.2.1.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.
@@ -143,6 +155,12 @@ Los diagramas de nivel de código detallan la estructura interna del dominio y e
 El diagrama de clases presenta los agregados raíz `UserAccount`, `PasswordRecovery` y `UnauthorizedAccessAttempt`, sus objetos de valor, las enumeraciones de rol y estado, los repositorios y los eventos de dominio. Las relaciones muestran cómo cada agregado permanece independiente y se referencia únicamente por identificador (`UserId`), siguiendo el límite de consistencia transaccional recomendado entre agregados.
 
 ![StorePulse - Identity and Access Management - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/04-iam-domain-class.puml&fmt=svg&v=4)
+
+###### Edge API
+
+En la Edge API, el agregado `Device` representa a cada nodo ESP32 registrado. Controla el ciclo de vida de su credencial: autentica la API key mientras está activo, la rota y se revoca. `ApiCredential` guarda solo el verificador PBKDF2-SHA256 de la clave, y `AuthenticatedUser` representa al administrador identificado por el token de la REST API.
+
+![StorePulse - Identity and Access Management - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/08-iam-edge-domain-class.puml&fmt=svg&v=1)
 
 ##### 4.2.1.6.2. Bounded Context Database Design Diagram
 
@@ -160,4 +178,10 @@ Las relaciones del modelo de datos son:
 - `users` → `unauthorized_access_attempts`
 
 ![StorePulse - Identity and Access Management - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/05-iam-database.puml&fmt=svg&v=4)
+
+###### Edge API
+
+La Edge API guarda los nodos registrados en la tabla `devices` de su base SQLite local. `platform_device_id` vincula cada nodo con su dispositivo IoT de la REST API y `credential_verifier` guarda el verificador de la API key, nunca la clave.
+
+![StorePulse - Identity and Access Management - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/09-iam-edge-database.puml&fmt=svg&v=1)
 

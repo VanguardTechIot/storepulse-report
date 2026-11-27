@@ -190,6 +190,12 @@ La Edge API mantiene una copia local de las reglas de seguridad y evalúa cada m
 
 ![StorePulse - Safety and Emergencies - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/04-safety-edge-component.puml&fmt=svg&v=1)
 
+#### Embedded Application
+
+La aplicación embebida reúne los nodos de seguridad: el sensor de humo MQ-2, el sensor de intrusión PIR con su horario de atención y su alarma local, y la cámara de áreas comunes. Cada nodo envía sus eventos SMOKE o MOTION a la Edge API y muestra en sus LEDs la alerta que la Edge API evalúa.
+
+![StorePulse - Safety and Emergencies - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/07-safety-embedded-component.puml&fmt=svg&v=1)
+
 ### 4.2.10.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura del dominio y el modelo de persistencia correspondiente al contexto.
@@ -201,6 +207,12 @@ El diagrama de clases representa los agregados `SafetyRule`, `Alert` y `DeviceSt
 Las relaciones permiten observar cómo una regla evalúa las mediciones mediante su umbral y el horario de atención, cómo una regla puede originar alertas y cómo las alertas determinan el estado de cada dispositivo.
 
 ![StorePulse - Safety and Emergencies - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/05-safety-domain-class.puml&fmt=svg&v=1)
+
+##### Edge API
+
+En la Edge API, `SafetyEvaluationService` aplica las reglas locales (`SafetyRule`) a cada medición y devuelve un `MeasurementAssessment` con el estado `NORMAL` o `ALERT`. Las reglas de movimiento solo se disparan fuera del horario de atención (`BusinessHours`, de 10:00 a 22:00, hora de Lima).
+
+![StorePulse - Safety and Emergencies - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/08-safety-edge-domain-class.puml&fmt=svg&v=1)
 
 #### 4.2.10.6.2. Bounded Context Database Design Diagram
 
@@ -217,3 +229,9 @@ Las principales relaciones representadas en el modelo son:
 - `safety_rules` → `alerts`
 
 ![StorePulse - Safety and Emergencies - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/06-safety-database.puml&fmt=svg&v=1)
+
+##### Edge API
+
+La Edge API guarda una copia local de las reglas de seguridad en la tabla `safety_rules` de su base SQLite, para evaluar las mediciones sin depender de la conexión con la REST API.
+
+![StorePulse - Safety and Emergencies - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/safety-and-emergencies/09-safety-edge-database.puml&fmt=svg&v=1)

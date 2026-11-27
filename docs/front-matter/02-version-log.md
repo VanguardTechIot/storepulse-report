@@ -542,4 +542,10 @@
     <td>Joaquín Carranza</td>
     <td>Se corrigió la configuración de exportación a PDF (inclusión de 34-safety-and-emergencies.md en config/build.yaml, escape de polaridad en 39-iot-device-design.md y recodificación a PNG válido de miguel-esquirva.png) para el release 3.1.1.</td>
   </tr>
+  <tr>
+    <td>3.2</td>
+    <td>27/11/26</td>
+    <td>Joaquín Carranza</td>
+    <td>Se corrigió la exportación a PDF (niveles de título, pies de figura, anchos de tabla, fotos de integrantes, páginas horizontales y SVG locales de los diagramas PlantUML), se agregaron los títulos de Student Outcome y del Capítulo V, se dividieron en partes los flujos WF-01, UF-01 y UF-05, se agregaron los diagramas de componentes, clases y base de datos del Edge API y de la Embedded Application en IAM, Service Execution and Monitoring, Dashboard and Analytics y Safety and Emergencies, se alineó Resource and Asset Management con el Edge implementado y se reemplazaron las referencias numeradas a figuras del Capítulo VI.</td>
+  </tr>
 </table>

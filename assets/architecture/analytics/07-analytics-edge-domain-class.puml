@@ -1,0 +1,122 @@
+@startuml storepulse-analytics-edge-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Dashboard and Analytics - Edge Domain Layer Class Diagram
+
+package "Local Analytics" {
+
+    class SensorAggregate <<Entity>> {
+        - platformDeviceId: int
+        - sensorType: SensorType
+        - sampleCount: int
+        - totalValue: float
+        - minValue: float
+        - maxValue: float
+        - latestValue: float
+        - deviationRatio: float
+        - latestRecordedAt: datetime
+        + averageValue(): float
+    }
+
+    class NodeHealthSnapshot <<Entity>> {
+        - platformDeviceId: int
+        - supplyVoltage: float | None
+        - powerStatus: PowerSourceStatus
+        - bufferedEvents: int
+        - telemetryCount: int
+        - lastSeenAt: datetime
+    }
+
+    class LocalNotification <<Aggregate Root>> {
+        - notificationId: int | None
+        - platformDeviceId: int
+        - category: NotificationCategory
+        - severity: NotificationSeverity
+        - status: NotificationStatus
+        - sensorType: SensorType | None
+        - message: str
+        - latestValue: float | None
+        - occurrenceCount: int
+        - firstOccurredAt: datetime
+        - lastOccurredAt: datetime
+        - acknowledgedAt: datetime | None
+        + registerRecurrence(message: str, latestValue: float, occurredAt: datetime, severity): LocalNotification
+        + acknowledge(at: datetime): LocalNotification
+    }
+
+    class TelemetryAnalyticsService <<Domain Service>> {
+        + classifyPowerSource(supplyVoltage: float): PowerSourceStatus
+        + applyMeasurement(existing, platformDeviceId, sensorType, value, recordedAt): SensorAggregate
+        + detectConsumptionAnomaly(previous, updated): bool
+        + updateHealth(existing, platformDeviceId, supplyVoltage, bufferedEvents, observedAt): NodeHealthSnapshot
+        + consolidateNotification(activeExisting, ...): LocalNotification
+        + buildOverview(aggregates, healthSnapshots, notifications): AnalyticsOverview
+    }
+
+    class AnalyticsOverview <<Read Model>> {
+        - trackedDevices: int
+        - totalTelemetryPackets: int
+        - activeNotifications: int
+        - criticalNotifications: int
+        - electricityTotalKwh: float
+        - waterTotalCubicMeters: float
+    }
+
+    class DeviceAnalyticsSummary <<Read Model>> {
+        - platformDeviceId: int
+        - health: NodeHealthSnapshot
+        - metrics: list<SensorAggregate>
+        - activeNotifications: list<LocalNotification>
+    }
+
+    enum SensorType {
+        TEMPERATURE
+        HUMIDITY
+        ELECTRICITY
+        WATER
+        MOTION
+        SMOKE
+    }
+
+    enum PowerSourceStatus {
+        MAINS
+        BATTERY_BACKUP
+        LOW_BATTERY
+        UNKNOWN
+    }
+
+    enum NotificationCategory {
+        SAFETY_ALERT
+        CONSUMPTION_ANOMALY
+        LOW_BATTERY
+        BUFFER_BACKLOG
+    }
+
+    enum NotificationSeverity {
+        WARNING
+        CRITICAL
+    }
+
+    enum NotificationStatus {
+        ACTIVE
+        ACKNOWLEDGED
+    }
+}
+
+SensorAggregate --> SensorType
+NodeHealthSnapshot --> PowerSourceStatus
+LocalNotification --> NotificationCategory
+LocalNotification --> NotificationSeverity
+LocalNotification --> NotificationStatus
+TelemetryAnalyticsService ..> SensorAggregate : updates
+TelemetryAnalyticsService ..> NodeHealthSnapshot : updates
+TelemetryAnalyticsService ..> LocalNotification : consolidates
+TelemetryAnalyticsService ..> AnalyticsOverview : builds
+DeviceAnalyticsSummary o-- NodeHealthSnapshot
+DeviceAnalyticsSummary o-- SensorAggregate
+DeviceAnalyticsSummary o-- LocalNotification
+
+@enduml

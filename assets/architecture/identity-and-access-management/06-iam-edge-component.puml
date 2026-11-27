@@ -1,0 +1,61 @@
+@startuml storepulse-iam-edge-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Edge Components
+
+Container_Boundary(edgeApi, "Edge API - Python Flask") {
+
+    Component(iamEndpoints, "IAM REST Services", "Flask Blueprint", "Authenticates nodes at POST /api/v1/iam/authentications and registers, lists, rotates the API key of and revokes devices at /api/v1/iam/devices.")
+
+    Component(deviceService, "DeviceApplicationService", "Python", "Coordinates device authentication, registration, API key rotation and revocation. Only the gallery administrator manages devices.")
+
+    Component(userAuthService, "UserAuthenticationService", "Python", "Recognises the access token of the user who manages the devices.")
+
+    Component(deviceDomain, "Device and ApiCredential", "Domain Layer", "Device aggregate with its credential lifecycle; the API key is kept only as a salted PBKDF2-SHA256 verifier.")
+
+    Component(deviceRepository, "DeviceRepository", "Python, Peewee", "Stores the registered devices and their API key verifiers.")
+
+    Component(tokenVerifier, "JwtTokenVerifier", "Python, PyJWT", "Verifies locally the access tokens issued by the REST API with the shared signing key, so it works without internet.")
+
+    Component(iamFacade, "IamContextFacade", "Python", "Lets other Edge modules authenticate a node by its identifier and API key.")
+}
+
+Container(embeddedApplication, "Embedded Application", "C++, ESP32", "Authenticates itself with its identifier and API key.")
+
+Container(webApplication, "Web Application", "Angular", "Used by the gallery administrator to manage the IoT devices.")
+
+Container(monitoringModule, "Edge Monitoring Module", "Python", "Receives the telemetry of the nodes.")
+
+ContainerDb(edgeDatabase, "Edge Local Database", "SQLite", "Stores the registered devices.")
+
+Container(restApi, "REST API", "Java, Spring Boot", "Issues the access tokens of the users.")
+
+Rel(embeddedApplication, iamEndpoints, "Authenticates with its API key", "HTTP/JSON")
+
+Rel(webApplication, iamEndpoints, "Manages devices with an access token", "HTTP/JSON")
+
+Rel(iamEndpoints, deviceService, "Invokes")
+
+Rel(iamEndpoints, userAuthService, "Identifies the user with")
+
+Rel(userAuthService, tokenVerifier, "Verifies tokens with")
+
+Rel(deviceService, deviceDomain, "Executes domain operations")
+
+Rel(deviceService, deviceRepository, "Loads and saves devices")
+
+Rel(monitoringModule, iamFacade, "Authenticates nodes with")
+
+Rel(iamFacade, deviceService, "Invokes")
+
+Rel(deviceRepository, edgeDatabase, "Reads and writes", "SQLite")
+
+Rel(tokenVerifier, restApi, "Trusts the access tokens issued by", "Shared signing key")
+
+@enduml

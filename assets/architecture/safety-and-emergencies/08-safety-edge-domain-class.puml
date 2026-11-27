@@ -1,0 +1,61 @@
+@startuml storepulse-safety-edge-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Edge Domain Layer Class Diagram
+
+package "Safety Rules" {
+
+    class SafetyRule <<Entity>> {
+        - name: str
+        - sensorType: str
+        - thresholdValue: float
+        - thresholdOperator: str
+        - enabled: bool
+        + isTriggeredBy(value: float, recordedAt: datetime): bool
+    }
+
+    class BusinessHours <<Value Object>> {
+        + ZONE: UTC-05:00
+        + OPENING: 10:00
+        + CLOSING: 22:00
+        + {static} includes(instant: datetime): bool
+    }
+
+    class MeasurementAssessment <<Value Object>> {
+        - sensorType: str
+        - deviceStatus: str
+        - response: str
+        + {static} normal(sensorType: str): MeasurementAssessment
+        + {static} alert(sensorType: str): MeasurementAssessment
+    }
+
+    class SafetyEvaluationService <<Domain Service>> {
+        + {static} evaluate(rules: list<SafetyRule>, sensorType: str, value: float, recordedAt: datetime): MeasurementAssessment
+    }
+
+    class SafetyRuleRepository <<Repository>> {
+        + findAll(): list<SafetyRule>
+        + findBySensorType(sensorType: str): list<SafetyRule>
+        + count(): int
+        + replaceAll(rules: list<SafetyRule>)
+    }
+
+    enum ThresholdOperator {
+        GREATER_THAN
+        GREATER_THAN_OR_EQUAL
+        LESS_THAN
+        LESS_THAN_OR_EQUAL
+        EQUAL
+    }
+}
+
+SafetyRule --> ThresholdOperator
+SafetyRule ..> BusinessHours : MOTION only outside hours
+SafetyEvaluationService ..> SafetyRule : applies
+SafetyEvaluationService ..> MeasurementAssessment : returns
+SafetyRuleRepository ..> SafetyRule : stores
+
+@enduml

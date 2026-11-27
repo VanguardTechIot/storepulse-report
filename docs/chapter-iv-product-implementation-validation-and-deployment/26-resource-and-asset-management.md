@@ -110,11 +110,8 @@ La **Infrastructure Layer** proporciona las implementaciones técnicas necesaria
 | `Repository Implementations` | Spring Boot / Spring Data JPA | Implementar las interfaces de repositorio del dominio. |
 | `EntityManager` | Spring Data JPA | Gestionar el acceso de la aplicación a la base de datos. |
 | MySQL | MySQL | Persistir recursos, activos y dispositivos IoT. |
-| `Device Gateway` | Python / Flask | Recibir comunicación proveniente de los dispositivos IoT. |
-| `Device Configuration` | Python | Procesar información de configuración de dispositivos. |
-| `Cloud Synchronization` | Python | Sincronizar información relacionada con dispositivos con la REST API central. |
 
-La relación con la infraestructura IoT se organiza mediante la comunicación entre la **Embedded Application**, la **Edge API** y la **REST API** central.
+Este contexto mantiene en la REST API el catálogo de dispositivos IoT (`IoTDevice`). En el Edge no tiene un módulo propio: el registro y la autenticación de los nodos pertenecen a Identity and Access Management, que vincula cada nodo con su `IoTDevice` mediante su identificador en la plataforma.
 
 ### 4.2.2.5. Bounded Context Software Architecture Component Level Diagrams
 
@@ -138,9 +135,7 @@ La REST API, desarrollada con Spring Boot, concentra los controladores, manejado
 ![StorePulse - Resource and Asset Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/03-resource-asset-rest-api-component.puml&fmt=svg&v=5)
 #### Edge API
 
-La Edge API, desarrollada con Python y Flask, actúa como intermediaria entre la aplicación embebida y la plataforma central para las operaciones relacionadas con los dispositivos.
-
-![StorePulse - Resource and Asset Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/resource-asset-management/04-resource-asset-edge-component.puml&fmt=svg&v=5)
+En el Edge, el registro y la autenticación de los nodos pertenecen a Identity and Access Management (sección 4.2.1.5). Cada nodo se vincula con su `IoTDevice` de este contexto mediante su identificador en la plataforma, que también acompaña a la telemetría sincronizada.
 ### 4.2.2.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.

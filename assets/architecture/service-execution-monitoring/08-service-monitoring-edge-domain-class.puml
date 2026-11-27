@@ -1,0 +1,47 @@
+@startuml storepulse-service-monitoring-edge-domain
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Edge Domain Layer Class Diagram
+
+package "Telemetry" {
+
+    class Telemetry <<Aggregate Root>> {
+        - id: int | None
+        - deviceId: int
+        - receivedAt: datetime
+        - measurements: list<Measurement>
+        - synced: bool
+        - supplyVoltage: float | None
+        - bufferedEvents: int | None
+    }
+
+    class Measurement <<Entity>> {
+        - id: int | None
+        - type: str
+        - value: float
+        - recordedAt: datetime
+    }
+
+    class TelemetryService <<Domain Service>> {
+        + {static} create(deviceId: int, receivedAt: str, measurements: list, supplyVoltage, bufferedEvents): Telemetry
+        + {static} parseInstant(value: str): datetime
+    }
+
+    class TelemetryRepository <<Repository>> {
+        + save(telemetry: Telemetry): Telemetry
+        + findPending(limit: int): list<Telemetry>
+        + countPending(): int
+        + markSynced(telemetryId: int)
+        + registerFailedAttempt(telemetryId: int)
+        + deleteOldestRoutine(): bool
+    }
+}
+
+Telemetry *-- "1..*" Measurement : measurements
+TelemetryService ..> Telemetry : creates
+TelemetryRepository ..> Telemetry : stores
+
+@enduml

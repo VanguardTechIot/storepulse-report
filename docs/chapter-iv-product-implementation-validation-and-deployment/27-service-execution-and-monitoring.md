@@ -176,6 +176,12 @@ La Edge API recibe la telemetría de los nodos, la guarda localmente, solicita s
 
 ![StorePulse - Service Execution and Monitoring - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/04-service-monitoring-edge-component.puml&fmt=svg&v=5)
 
+#### Embedded Application
+
+La aplicación embebida del nodo de consumo lee el medidor eléctrico PZEM-004T y el caudalímetro YF-S201, arma un reporte por intervalo con la fecha UTC y lo envía a la Edge API. Si un reporte no se entrega, guarda el consumo pendiente y lo suma al siguiente, para no perder kWh ni m³.
+
+![StorePulse - Service Execution and Monitoring - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/07-service-monitoring-embedded-component.puml&fmt=svg&v=1)
+
 ### 4.2.3.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura del dominio y el modelo de persistencia correspondiente al contexto.
@@ -187,6 +193,12 @@ El diagrama de clases representa los agregados `Telemetry` y `Consumption`, la e
 Las relaciones permiten observar cómo la telemetría contiene mediciones, cómo cada medición publica su evento de dominio y cómo las lecturas de agua y energía se acumulan en el consumo de cada periodo.
 
 ![StorePulse - Service Execution and Monitoring - Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/05-service-monitoring-domain-class.puml&fmt=svg&v=5)
+
+##### Edge API
+
+En la Edge API, el agregado `Telemetry` agrupa las mediciones de un envío del nodo con su voltaje de alimentación y sus eventos en buffer. `TelemetryService` valida y construye la telemetría, y `TelemetryRepository` la conserva como pendiente hasta que la REST API confirma su sincronización.
+
+![StorePulse - Service Execution and Monitoring - Edge Domain Layer Class Diagram](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/08-service-monitoring-edge-domain-class.puml&fmt=svg&v=1)
 
 #### 4.2.3.6.2. Bounded Context Database Design Diagram
 
@@ -203,3 +215,9 @@ Las principales relaciones representadas en el modelo son:
 - `telemetry` → `measurements`
 
 ![StorePulse - Service Execution and Monitoring - Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/06-service-monitoring-database.puml&fmt=svg&v=5)
+
+##### Edge API
+
+La Edge API guarda la telemetría en las tablas `telemetry` y `measurements` de su base SQLite local. El campo `synced` marca lo que falta sincronizar y `sync_attempts` cuenta los reintentos.
+
+![StorePulse - Service Execution and Monitoring - Edge Database Design](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/09-service-monitoring-edge-database.puml&fmt=svg&v=1)

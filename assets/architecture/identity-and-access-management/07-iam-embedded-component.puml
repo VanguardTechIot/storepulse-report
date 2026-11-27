@@ -1,0 +1,37 @@
+@startuml storepulse-iam-embedded-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Embedded Components
+
+Container_Boundary(embeddedApplication, "Embedded Application - C++ ESP32") {
+
+    Component(secrets, "Secrets", "C++ Header (not versioned)", "Holds the node identifier (DEVICE_ID), its API key (API_KEY) and the WiFi credentials.")
+
+    Component(nodeStartup, "Node Startup", "Arduino setup()", "Connects the node and authenticates it before it starts reading its sensors.")
+
+    Component(wifiDriver, "WiFiConnectivityDriver", "Modest IoT", "Connects the node to the gallery network and keeps retrying in the background.")
+
+    Component(gatewayClient, "EdgeApiGatewayClient", "Modest IoT GatewayClient", "Calls authenticate() and adds the X-API-Key header to every request sent to the Edge API.")
+}
+
+Container(edgeApi, "Edge API", "Python, Flask", "Registers the nodes and validates their API keys.")
+
+Rel(nodeStartup, wifiDriver, "Starts")
+
+Rel(nodeStartup, gatewayClient, "Requests authentication")
+
+Rel(gatewayClient, secrets, "Reads DEVICE_ID and API_KEY")
+
+Rel(wifiDriver, secrets, "Reads WiFi credentials")
+
+Rel(gatewayClient, wifiDriver, "Sends requests through")
+
+Rel(gatewayClient, edgeApi, "POST /iam/authentications with X-API-Key", "HTTP/JSON")
+
+@enduml

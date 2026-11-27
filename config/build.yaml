@@ -1,7 +1,8 @@
 # Exportación del informe StorePulse a PDF con Pandoc + Typst
 # Uso (desde la raíz del repo):  pandoc --defaults=config/build.yaml
 
-from: markdown-markdown_in_html_blocks
+# blank_before_header disabled: several .md files put a heading right after a paragraph or image.
+from: markdown-markdown_in_html_blocks-blank_before_header
 to: pdf
 pdf-engine: typst
 
@@ -76,6 +77,8 @@ variables:
   mainfont: "Libertinus Serif"
   fontsize: 11pt
   header-includes: |
-    #show figure: set block(breakable: true)
+    #show figure.where(kind: table): set block(breakable: true)
+    #show figure.where(kind: image): set block(breakable: false)
     #set table(inset: 5pt)
     #show table: set text(size: 9pt)
+    #show table: set par(justify: false)

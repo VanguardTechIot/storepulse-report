@@ -1,0 +1,28 @@
+@startuml storepulse-iam-edge-database
+
+hide circle
+
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Identity and Access Management - Edge Database Design (SQLite)
+
+entity "devices" as devices {
+    * device_id : VARCHAR(64) <<PK>>
+    --
+    device_type : VARCHAR(32)
+    platform_device_id : INTEGER <<UNIQUE>>
+    credential_verifier : VARCHAR(255)
+    created_at : DATETIME
+    revoked_at : DATETIME <<NULL>>
+}
+
+note right of devices
+  platform_device_id is the identifier
+  of the IoT device in the REST API.
+  credential_verifier keeps only the
+  salted PBKDF2-SHA256 verifier.
+end note
+
+@enduml

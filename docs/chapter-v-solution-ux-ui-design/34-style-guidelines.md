@@ -1,3 +1,5 @@
+# Capítulo V: Solution UX/UI Design
+
 # 5.1. Style Guidelines
 
 En esta sección se establecen los lineamientos de diseño visual, identidad de marca, componentes de interfaz y directrices de interacción para el ecosistema tecnológico **StorePulse**, desarrollado por **VanguardTech**. El propósito de esta guía es garantizar una experiencia de usuario (UX) consistente, accesible y de alta usabilidad a lo largo de todos los puntos de contacto de la solución: la plataforma web de administración, la aplicación móvil para inquilinos y personal de seguridad, y las interfaces físicas de los dispositivos IoT desplegados en las galerías comerciales.
