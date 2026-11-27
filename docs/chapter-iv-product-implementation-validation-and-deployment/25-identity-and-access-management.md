@@ -134,6 +134,18 @@ La REST API, desarrollada con Spring Boot, concentra los controladores, manejado
 
 ![StorePulse - Identity and Access Management - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/03-iam-rest-api-component.puml&fmt=svg&v=5)
 
+##### Edge API
+
+La Edge API, desarrollada con Flask, registra los nodos ESP32, les emite su API key y la guarda solo como un verificador PBKDF2-SHA256. También autentica a cada nodo, permite rotar o revocar su clave y verifica localmente el token del administrador, por lo que funciona sin conexión a internet. El módulo de monitoreo usa `IamContextFacade` para validar al nodo antes de aceptar su telemetría.
+
+![StorePulse - Identity and Access Management - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/06-iam-edge-component.puml&fmt=svg&v=1)
+
+##### Embedded Application
+
+La aplicación embebida, desarrollada en C++ sobre ESP32 con Modest IoT, toma su identificador y su API key de `Secrets.h`, que no se versiona. Al arrancar se conecta a la red y se autentica con `EdgeApiGatewayClient`, que además envía la cabecera `X-API-Key` en cada petición a la Edge API.
+
+![StorePulse - Identity and Access Management - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/identity-and-access-management/07-iam-embedded-component.puml&fmt=svg&v=1)
+
 #### 4.2.1.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura interna del dominio y el modelo de persistencia asociado al contexto.
