@@ -397,34 +397,34 @@ link:
 
 ##### Evidencias del proceso de despliegue
 
-La Figura 1 muestra la pantalla de configuración de Firebase Hosting, donde se indican los pasos para instalar Firebase CLI e inicializar el proyecto.
+La siguiente figura muestra la pantalla de configuración de Firebase Hosting, donde se indican los pasos para instalar Firebase CLI e inicializar el proyecto.
 
 ![Figura 1. Configuración de Firebase Hosting](../../assets/evidence_deployment/01-firebase-hosting-setup.jpeg)
 
-La Figura 2 presenta la terminal del entorno de desarrollo durante la autenticación y la inicialización de Firebase en el proyecto local.
+La siguiente figura presenta la terminal del entorno de desarrollo durante la autenticación y la inicialización de Firebase en el proyecto local.
 
 ![Figura 2. Inicialización de Firebase CLI](../../assets/evidence_deployment/02-firebase-cli-initialization.jpeg)
 
-La Figura 3 muestra la ejecución del comando de despliegue y el resultado exitoso reportado por Firebase CLI. La salida identifica el sitio `storepulse-web-app` y la URL pública de Hosting.
+La siguiente figura muestra la ejecución del comando de despliegue y el resultado exitoso reportado por Firebase CLI. La salida identifica el sitio `storepulse-web-app` y la URL pública de Hosting.
 
 ![Figura 3. Despliegue exitoso del frontend en Firebase Hosting](../../assets/evidence_deployment/03-firebase-hosting-deployment.jpeg)
 
-La Figura 4 presenta el panel de Firebase Hosting con la versión publicada y los dominios asociados al sitio.
+La siguiente figura presenta el panel de Firebase Hosting con la versión publicada y los dominios asociados al sitio.
 
 
 ![Figura 4. Panel de administración de Firebase Hosting](../../assets/evidence_deployment/04-firebase-hosting-console.jpeg)
 
 ##### Verificación del frontend publicado
 
-Después de completar el despliegue, se accedió a la aplicación mediante la URL pública `https://storepulse-web-app.web.app`. La Figura 5 muestra la pantalla de inicio de sesión cargada en el navegador, lo que permite comprobar que la ruta de acceso al frontend está disponible.
+Después de completar el despliegue, se accedió a la aplicación mediante la URL pública `https://storepulse-web-app.web.app`. La siguiente figura muestra la pantalla de inicio de sesión cargada en el navegador, lo que permite comprobar que la ruta de acceso al frontend está disponible.
 
 ![Figura 5. Pantalla de inicio de sesión de StorePulse en producción](../../assets/evidence_deployment/05-storepulse-login-production.jpeg)
 
-La Figura 6 corresponde al apartado de uso de Firebase Hosting. En la captura no se muestran datos de consumo en el periodo consultado; por ello, se incluye como referencia del panel de administración y no como evidencia de tráfico o uso efectivo por parte de usuarios.
+La siguiente figura corresponde al apartado de uso de Firebase Hosting. En la captura no se muestran datos de consumo en el periodo consultado; por ello, se incluye como referencia del panel de administración y no como evidencia de tráfico o uso efectivo por parte de usuarios.
 
 ![Figura 6. Métricas de uso de Firebase Hosting](../../assets/evidence_deployment/06-firebase-hosting-usage.jpeg)
 
-Finalmente, la Figura 7 muestra el dashboard de StorePulse cargado en el navegador. Esta captura evidencia la disponibilidad visual de la interfaz principal publicada, con sus módulos de navegación, indicadores y panel de consumo.
+Finalmente, la siguiente figura muestra el dashboard de StorePulse cargado en el navegador. Esta captura evidencia la disponibilidad visual de la interfaz principal publicada, con sus módulos de navegación, indicadores y panel de consumo.
 
 ![Figura 7. Dashboard de StorePulse en el entorno publicado](../../assets/evidence_deployment/07-storepulse-dashboard-production.jpeg)
 
@@ -794,63 +794,63 @@ Al cierre del **Sprint 2**, las aplicaciones y servicios de **StorePulse** se en
 
 El backend `storepulse-platform` se desplegó en Railway dentro del proyecto `enthusiastic-reprieve`, en el entorno `production`. Railway construye y publica el servicio automáticamente desde el repositorio de GitHub cada vez que se integra un cambio en la rama configurada, y lo conecta a una base de datos MySQL administrada en el mismo proyecto.
 
-La Figura 8 muestra la vista general del proyecto en Railway, con el servicio `storepulse-platform` y la base de datos `MySQL` (con su volumen persistente `mysql-volume`) en estado `Online`.
+La siguiente figura muestra la vista general del proyecto en Railway, con el servicio `storepulse-platform` y la base de datos `MySQL` (con su volumen persistente `mysql-volume`) en estado `Online`.
 
 ![Figura 8. Servicios del proyecto StorePulse en Railway](../../assets/evidence_deployment/08-railway-project-services.jpeg)
 
-La Figura 9 presenta el historial de despliegues del servicio. El despliegue activo, originado desde GitHub, figura como `Deployment successful` y expone el dominio público `storepulse-platform-production.up.railway.app` sobre Java 21 en la región US East.
+La siguiente figura presenta el historial de despliegues del servicio. El despliegue activo, originado desde GitHub, figura como `Deployment successful` y expone el dominio público `storepulse-platform-production.up.railway.app` sobre Java 21 en la región US East.
 
 ![Figura 9. Historial de despliegues de storepulse-platform en Railway](../../assets/evidence_deployment/09-railway-platform-deployments.jpeg)
 
-La Figura 10 corresponde a las estadísticas de la base de datos MySQL 8.4 en producción, donde se observan el tiempo de actividad, las conexiones abiertas y las consultas de lectura y escritura generadas por la aplicación.
+La siguiente figura corresponde a las estadísticas de la base de datos MySQL 8.4 en producción, donde se observan el tiempo de actividad, las conexiones abiertas y las consultas de lectura y escritura generadas por la aplicación.
 
 ![Figura 10. Estadísticas de la base de datos MySQL en Railway](../../assets/evidence_deployment/10-railway-mysql-database-stats.jpeg)
 
-La Figura 11 muestra los registros de despliegue del servicio activo. En ellos se confirma que Tomcat inició en el puerto `8080`, que `StorepulseRestApiApplication` arrancó correctamente y que la documentación OpenAPI se inicializó al recibir solicitudes.
+La siguiente figura muestra los registros de despliegue del servicio activo. En ellos se confirma que Tomcat inició en el puerto `8080`, que `StorepulseRestApiApplication` arrancó correctamente y que la documentación OpenAPI se inicializó al recibir solicitudes.
 
 ![Figura 11. Registros de despliegue de storepulse-platform en Railway](../../assets/evidence_deployment/11-railway-platform-deploy-logs.jpeg)
 
-La Figura 12 presenta la documentación Swagger UI publicada en `https://storepulse-platform-production.up.railway.app/swagger-ui.html`, con la versión `1.0.0` de StorePulse REST API y sus endpoints agrupados por bounded context.
+La siguiente figura presenta la documentación Swagger UI publicada en `https://storepulse-platform-production.up.railway.app/swagger-ui.html`, con la versión `1.0.0` de StorePulse REST API y sus endpoints agrupados por bounded context.
 
 ![Figura 12. Swagger UI de StorePulse REST API en producción](../../assets/evidence_deployment/12-swagger-rest-api-production.jpeg)
 
 ##### Despliegue de la Web Application en Firebase Hosting
 
-La Web Application se publicó nuevamente en Firebase Hosting, en el proyecto `storepulse-web-app`, ya integrada con la REST API desplegada en Railway. La Figura 13 muestra la descripción general del proyecto en Firebase, con la última implementación de Hosting registrada el 10 de noviembre de 2026.
+La Web Application se publicó nuevamente en Firebase Hosting, en el proyecto `storepulse-web-app`, ya integrada con la REST API desplegada en Railway. La siguiente figura muestra la descripción general del proyecto en Firebase, con la última implementación de Hosting registrada el 10 de noviembre de 2026.
 
 ![Figura 13. Descripción general del proyecto storepulse-web-app en Firebase](../../assets/evidence_deployment/13-firebase-project-overview.jpeg)
 
-La Figura 14 presenta el panel de administración del sitio, con la versión actual publicada y las versiones anteriores, así como los dominios predeterminados `storepulse-web-app.web.app` y `storepulse-web-app.firebaseapp.com`.
+La siguiente figura presenta el panel de administración del sitio, con la versión actual publicada y las versiones anteriores, así como los dominios predeterminados `storepulse-web-app.web.app` y `storepulse-web-app.firebaseapp.com`.
 
 ![Figura 14. Versiones y dominios del sitio en Firebase Hosting](../../assets/evidence_deployment/14-firebase-hosting-site-versions.jpeg)
 
-A diferencia del Sprint 1, la Figura 15 ya registra consumo del sitio: 1.12 MB de almacenamiento y 6.64 MB de descargas en el periodo de facturación, lo que evidencia accesos reales a la aplicación publicada.
+A diferencia del Sprint 1, la siguiente figura ya registra consumo del sitio: 1.12 MB de almacenamiento y 6.64 MB de descargas en el periodo de facturación, lo que evidencia accesos reales a la aplicación publicada.
 
 ![Figura 15. Métricas de uso de Firebase Hosting en el Sprint 2](../../assets/evidence_deployment/15-firebase-hosting-usage-sprint-2.jpeg)
 
-La Figura 16 muestra la pantalla de inicio de sesión de la Web Application cargada desde `https://storepulse-web-app.web.app/iam/sign-in`, punto de entrada del administrador de galería en producción.
+La siguiente figura muestra la pantalla de inicio de sesión de la Web Application cargada desde `https://storepulse-web-app.web.app/iam/sign-in`, punto de entrada del administrador de galería en producción.
 
 ![Figura 16. Web Application de StorePulse en producción](../../assets/evidence_deployment/16-storepulse-web-app-production.jpeg)
 
 ##### Despliegue del Landing Page en GitHub Pages
 
-El Landing Page se mantiene publicado en GitHub Pages desde la rama `main` del repositorio `storepulse-landing-page`. La Figura 17 muestra el historial de despliegues del entorno `github-pages`, donde el despliegue activo corresponde a la integración de `release/2.1.0` en `main`.
+El Landing Page se mantiene publicado en GitHub Pages desde la rama `main` del repositorio `storepulse-landing-page`. La siguiente figura muestra el historial de despliegues del entorno `github-pages`, donde el despliegue activo corresponde a la integración de `release/2.1.0` en `main`.
 
 ![Figura 17. Historial de despliegues del Landing Page en GitHub Pages](../../assets/evidence_deployment/17-github-pages-landing-deployments.jpeg)
 
-La Figura 18 presenta el Landing Page cargado en `https://vanguardtechiot.github.io/storepulse-landing-page/`, con la navegación principal, el selector de idioma y los botones de acceso hacia la Web Application.
+La siguiente figura presenta el Landing Page cargado en `https://vanguardtechiot.github.io/storepulse-landing-page/`, con la navegación principal, el selector de idioma y los botones de acceso hacia la Web Application.
 
 ![Figura 18. Landing Page de StorePulse publicado en GitHub Pages](../../assets/evidence_deployment/18-storepulse-landing-page-production.jpeg)
 
 ##### Distribución de la Mobile Application
 
-La aplicación móvil para Android se distribuyó a los verificadores del equipo mediante Firebase App Distribution, en el proyecto `storepulse-mobile`. La Figura 19 muestra la versión `1.0.0 (2)`, publicada el 15 de noviembre de 2026 con la nota *Release 1.0.0: UI refinements and StorePulse branding*, junto con el número de verificadores invitados, aceptados y descargas registradas.
+La aplicación móvil para Android se distribuyó a los verificadores del equipo mediante Firebase App Distribution, en el proyecto `storepulse-mobile`. La siguiente figura muestra la versión `1.0.0 (2)`, publicada el 15 de noviembre de 2026 con la nota *Release 1.0.0: UI refinements and StorePulse branding*, junto con el número de verificadores invitados, aceptados y descargas registradas.
 
 ![Figura 19. Distribución de StorePulse Mobile en Firebase App Distribution](../../assets/evidence_deployment/19-firebase-app-distribution-mobile.jpeg)
 
 ##### Ejecución del Edge Gateway
 
-El servicio `storepulse-edge` se ejecuta en la red local de la galería con `python main.py`, escuchando en `http://0.0.0.0:5000`, y guarda su información en la base de datos local `storepulse_edge.db`. La Figura 20 evidencia su interacción con la plataforma desplegada:
+El servicio `storepulse-edge` se ejecuta en la red local de la galería con `python main.py`, escuchando en `http://0.0.0.0:5000`, y guarda su información en la base de datos local `storepulse_edge.db`. La siguiente figura evidencia su interacción con la plataforma desplegada:
 
 1. El administrador de galería inicia sesión en la REST API de Railway (`/api/v1/authentication/sign-in`) y obtiene su token de acceso.
 2. Con ese token, el Edge registra el nodo `demo-node-01` de tipo `SMOKE_NODE` (`POST /api/v1/iam/devices`) y emite su API key. El Edge verifica el token localmente con la misma clave de firma de la REST API, por lo que el registro no depende de la conexión a internet.
@@ -877,27 +877,27 @@ Las evidencias corresponden a la sección **Insights > Pulse** de GitHub para el
 
 En conjunto, el equipo registró **802 commits** en los cinco repositorios de producto durante el sprint. El mayor volumen se concentró en `storepulse-platform`, donde participaron los seis integrantes, porque la REST API es la base que integran la Web Application, la Mobile Application y el Edge.
 
-La Figura 21 muestra la actividad de `storepulse-platform`: seis autores con 409 commits y la publicación del release `1.0.0`, versión desplegada en Railway.
+La siguiente figura muestra la actividad de `storepulse-platform`: seis autores con 409 commits y la publicación del release `1.0.0`, versión desplegada en Railway.
 
 ![Figura 21. GitHub Pulse del repositorio storepulse-platform](../../assets/team/insights/pulse-insights-storepulse-platform-av2.png)
 
-La Figura 22 corresponde a `storepulse-web-application`: cuatro autores con 171 commits y el release `2.0.0`. En `main` se modificaron 546 archivos (13,201 adiciones y 14,696 eliminaciones), producto de la migración de los datos de prueba a la REST API desplegada.
+La siguiente figura corresponde a `storepulse-web-application`: cuatro autores con 171 commits y el release `2.0.0`. En `main` se modificaron 546 archivos (13,201 adiciones y 14,696 eliminaciones), producto de la migración de los datos de prueba a la REST API desplegada.
 
 ![Figura 22. GitHub Pulse del repositorio storepulse-web-application](../../assets/team/insights/pulse-insights-storepulse-web-application-av2.png)
 
-La Figura 23 presenta la actividad de `storepulse-mobile`: cinco autores con 123 commits y los releases `1.0.0` y `1.0.1` de la aplicación para Android.
+La siguiente figura presenta la actividad de `storepulse-mobile`: cinco autores con 123 commits y los releases `1.0.0` y `1.0.1` de la aplicación para Android.
 
 ![Figura 23. GitHub Pulse del repositorio storepulse-mobile](../../assets/team/insights/pulse-insights-storepulse-mobile-av2.png)
 
-La Figura 24 muestra `storepulse-edge`: cinco autores con 55 commits y los releases `1.0.0` y `1.0.1` del Edge Gateway.
+La siguiente figura muestra `storepulse-edge`: cinco autores con 55 commits y los releases `1.0.0` y `1.0.1` del Edge Gateway.
 
 ![Figura 24. GitHub Pulse del repositorio storepulse-edge](../../assets/team/insights/pulse-insights-storepulse-edge-av2.png)
 
-La Figura 25 corresponde a `storepulse-landing-page`: seis autores con 44 commits, 22 archivos modificados en `main` (1,207 adiciones y 239 eliminaciones) y el release `2.1.0` publicado en GitHub Pages.
+La siguiente figura corresponde a `storepulse-landing-page`: seis autores con 44 commits, 22 archivos modificados en `main` (1,207 adiciones y 239 eliminaciones) y el release `2.1.0` publicado en GitHub Pages.
 
 ![Figura 25. GitHub Pulse del repositorio storepulse-landing-page](../../assets/team/insights/pulse-insights-storepulse-landing-page-av2.png)
 
-La Figura 26 muestra la actividad de `storepulse-report` durante la semana de cierre del Sprint 2 (8 al 15 de noviembre de 2026): seis autores con 46 commits excluyendo merges, 142 archivos modificados en `main` (2,084 adiciones y 3,152 eliminaciones) y la publicación del release `3.0.0`.
+La siguiente figura muestra la actividad de `storepulse-report` durante la semana de cierre del Sprint 2 (8 al 15 de noviembre de 2026): seis autores con 46 commits excluyendo merges, 142 archivos modificados en `main` (2,084 adiciones y 3,152 eliminaciones) y la publicación del release `3.0.0`.
 
 ![Figura 26. GitHub Pulse del repositorio storepulse-report](../../assets/team/insights/pulse-insights-storepulse-report-av2.png)
 
