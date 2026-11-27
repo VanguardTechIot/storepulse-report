@@ -127,6 +127,12 @@ La REST API, desarrollada con Spring Boot, concentra los controladores, manejado
 
 ![StorePulse - Analytics - REST API Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/03-analytics-rest-api-component.puml&fmt=svg&v=5)
 
+### Edge API
+
+La Edge API calcula la analítica local a partir de cada telemetría aceptada: agregados por sensor, salud de cada nodo, detección de anomalías de consumo y notificaciones locales consolidadas. El administrador la consulta con su token de acceso, incluso cuando no hay conexión con la REST API.
+
+![StorePulse - Analytics - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/analytics/06-analytics-edge-component.puml&fmt=svg&v=1)
+
 ## 4.2.5.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código se elaboran con **PlantUML**.
