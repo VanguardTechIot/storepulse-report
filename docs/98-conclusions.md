@@ -69,8 +69,13 @@ resolver las advertencias de tamaño del build de producción y unificar la ubic
 contextos.
 
 Preparar el alcance de la siguiente entrega. Según el enunciado, en el Sprint 2 debe desplegarse la primera versión de
-la aplicación móvil y de las demás aplicaciones (Edge API y Embedded Application), y deben completarse las Validation
-Interviews (6.3) y el Video About-the-Product (6.4), que todavía no tienen contenido.
+la aplicación móvil y de las demás aplicaciones (Edge API y Embedded Application).
 
 ## Video About-the-Team
-<tr><td>Link de About the team : </td><td><a href="https://shorturl.at/MBdUP">https://shorturl.at/MBdUP</a></td></tr>
+El video presenta al equipo VanguardTech y su experiencia en el desarrollo de StorePulse.
+
+<table>
+  <tr><th style="text-align: center;">Video About-the-Team</th></tr>
+  <tr><td align="center"><a href="https://shorturl.at/MBdUP"><img src="../../assets/videos/about-the-team.png" alt="Video About-the-Team" width="100%"/></a></td></tr>
+  <tr><td align="center"><a href="https://shorturl.at/MBdUP">https://shorturl.at/MBdUP</a></td></tr>
+</table>
