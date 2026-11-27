@@ -1,0 +1,51 @@
+@startuml storepulse-safety-embedded-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Safety and Emergencies - Embedded Components
+
+Container_Boundary(embeddedApplication, "Embedded Application - C++ ESP32") {
+
+    Component(smokeSensor, "SmokeSensor", "Modest IoT Sensor, MQ-2", "Measures the smoke concentration in ppm and raises its local alarm with hysteresis.")
+
+    Component(intrusionSensor, "IntrusionSensor", "Modest IoT Sensor, PIR", "Detects movement inside the premises.")
+
+    Component(attentionHours, "AttentionHours", "C++, RTC", "Decides whether a movement happens outside the attention hours of the gallery.")
+
+    Component(alarmBuzzer, "AlarmBuzzer", "C++ Actuator", "Sounds the local alarm when there is an intrusion outside attention hours.")
+
+    Component(statusLed, "Status and Alert LEDs", "C++ Actuator", "Show alerts, network loss and faults of the node.")
+
+    Component(commonArea, "Common Area Camera", "PIR, ESP32-CAM, microSD", "Captures and stores an image when it detects motion in a common area.")
+
+    Component(safetyPackages, "Safety Telemetry Packages", "Modest IoT TelemetryPackage", "Serialize SMOKE and MOTION measurements with the UTC date.")
+
+    Component(gatewayClient, "EdgeApiGatewayClient", "Modest IoT GatewayClient", "Sends the safety events and reads whether the Edge API evaluated them as an alert.")
+}
+
+Container(edgeApi, "Edge API", "Python, Flask", "Evaluates each measurement against the local safety rules.")
+
+Rel(intrusionSensor, attentionHours, "Checks the time with")
+
+Rel(attentionHours, alarmBuzzer, "Activates outside attention hours")
+
+Rel(smokeSensor, statusLed, "Turns on the alert LED")
+
+Rel(smokeSensor, safetyPackages, "Reports SMOKE")
+
+Rel(intrusionSensor, safetyPackages, "Reports MOTION")
+
+Rel(commonArea, safetyPackages, "Reports MOTION")
+
+Rel(safetyPackages, gatewayClient, "Sent by")
+
+Rel(gatewayClient, edgeApi, "POST /monitoring/telemetry with X-API-Key", "HTTP/JSON")
+
+Rel(gatewayClient, statusLed, "Shows the alert evaluated by the Edge")
+
+@enduml

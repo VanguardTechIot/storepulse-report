@@ -1,0 +1,53 @@
+@startuml storepulse-analytics-edge-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Dashboard and Analytics - Edge Components
+
+Container_Boundary(edgeApi, "Edge API - Python Flask") {
+
+    Component(analyticsEndpoints, "Analytics REST Services", "Flask Blueprint", "Exposes the local overview, the summary per device and the local notifications at /api/v1/analytics, protected with the user access token.")
+
+    Component(analyticsFacade, "AnalyticsContextFacade", "Python", "Receives each accepted telemetry record from the monitoring module.")
+
+    Component(commandService, "AnalyticsCommandService", "Python", "Updates the sensor aggregates and the node health, and records or acknowledges local notifications.")
+
+    Component(queryService, "AnalyticsQueryService", "Python", "Builds the overview, the device summary and the notification list.")
+
+    Component(analyticsDomain, "TelemetryAnalyticsService", "Domain Layer", "Classifies the power source, detects consumption anomalies, updates node health and consolidates repeated notifications.")
+
+    Component(analyticsRepositories, "Analytics Repositories", "Python, Peewee", "Store sensor aggregates, node health snapshots and local notifications.")
+}
+
+Container(monitoringModule, "Edge Monitoring Module", "Python", "Receives the telemetry of the nodes.")
+
+Container(webApplication, "Web Application", "Angular", "Shows the local analytics to the gallery administrator.")
+
+ContainerDb(edgeDatabase, "Edge Local Database", "SQLite", "Stores the local analytics.")
+
+Rel(monitoringModule, analyticsFacade, "Records telemetry analysis")
+
+Rel(analyticsFacade, commandService, "Invokes")
+
+Rel(webApplication, analyticsEndpoints, "Queries analytics with an access token", "HTTP/JSON")
+
+Rel(analyticsEndpoints, queryService, "Invokes queries")
+
+Rel(analyticsEndpoints, commandService, "Acknowledges notifications")
+
+Rel(commandService, analyticsDomain, "Applies analytics rules")
+
+Rel(queryService, analyticsDomain, "Builds the overview")
+
+Rel(commandService, analyticsRepositories, "Loads and saves")
+
+Rel(queryService, analyticsRepositories, "Reads")
+
+Rel(analyticsRepositories, edgeDatabase, "Reads and writes", "SQLite")
+
+@enduml

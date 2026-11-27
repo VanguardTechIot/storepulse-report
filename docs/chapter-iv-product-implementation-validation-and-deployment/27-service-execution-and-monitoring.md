@@ -176,6 +176,12 @@ La Edge API recibe la telemetría de los nodos, la guarda localmente, solicita s
 
 ![StorePulse - Service Execution and Monitoring - Edge Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/04-service-monitoring-edge-component.puml&fmt=svg&v=5)
 
+#### Embedded Application
+
+La aplicación embebida del nodo de consumo lee el medidor eléctrico PZEM-004T y el caudalímetro YF-S201, arma un reporte por intervalo con la fecha UTC y lo envía a la Edge API. Si un reporte no se entrega, guarda el consumo pendiente y lo suma al siguiente, para no perder kWh ni m³.
+
+![StorePulse - Service Execution and Monitoring - Embedded Components](https://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/VanguardTechIot/storepulse-report/refs/heads/develop/assets/architecture/service-execution-monitoring/07-service-monitoring-embedded-component.puml&fmt=svg&v=1)
+
 ### 4.2.3.6. Bounded Context Software Architecture Code Level Diagrams
 
 Los diagramas de nivel de código detallan la estructura del dominio y el modelo de persistencia correspondiente al contexto.
