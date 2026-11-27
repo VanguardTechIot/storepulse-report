@@ -1,0 +1,47 @@
+@startuml storepulse-service-monitoring-embedded-component
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_LEFT_RIGHT()
+HIDE_STEREOTYPE()
+skinparam shadowing false
+skinparam defaultFontName Arial
+
+title StorePulse - Service Execution and Monitoring - Embedded Components
+
+Container_Boundary(embeddedApplication, "Embedded Application - C++ ESP32") {
+
+    Component(electricitySensor, "ElectricityConsumptionSensor", "Modest IoT Sensor, PZEM-004T", "Reads the electricity meter and accumulates the consumed kWh.")
+
+    Component(waterSensor, "WaterConsumptionSensor", "Modest IoT Sensor, YF-S201", "Counts the pulses of the flow meter and accumulates the consumed m3.")
+
+    Component(nodeDevice, "Consumption Node", "Modest IoT Device", "Receives the sensor events and builds a report for each sending interval.")
+
+    Component(telemetryPackage, "ConsumptionTelemetryPackage", "Modest IoT TelemetryPackage", "Serializes the consumed kWh and m3 with the device identifier and the UTC date.")
+
+    Component(retryQueue, "Undelivered Consumption", "ConsumptionTelemetryPackage", "Keeps the consumption that could not be delivered and adds it to the next report, so no kWh or m3 is lost.")
+
+    Component(gatewayClient, "EdgeApiGatewayClient", "Modest IoT GatewayClient", "Sends each report with its API key and reads the HTTP result.")
+
+    Component(clockDriver, "UTC Clock", "C++ time.h", "Provides the UTC moment of each measurement.")
+}
+
+Container(edgeApi, "Edge API", "Python, Flask", "Receives, validates and stores the telemetry.")
+
+Rel(electricitySensor, nodeDevice, "Notifies consumption")
+
+Rel(waterSensor, nodeDevice, "Notifies consumption")
+
+Rel(nodeDevice, clockDriver, "Reads the UTC moment")
+
+Rel(nodeDevice, telemetryPackage, "Builds")
+
+Rel(nodeDevice, retryQueue, "Keeps the undelivered consumption")
+
+Rel(retryQueue, telemetryPackage, "Added to the next report")
+
+Rel(telemetryPackage, gatewayClient, "Sent by")
+
+Rel(gatewayClient, edgeApi, "POST /monitoring/telemetry with X-API-Key", "HTTP/JSON")
+
+@enduml
