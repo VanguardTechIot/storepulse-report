@@ -442,13 +442,16 @@ local function compute_widths(tbl, ncols, small_font)
     end
   end
 
-  local widths, fixed, score, minimum, long_text = {}, {}, {}, {}, {}
+  local widths, fixed, score, minimum, long_text, photo_column = {}, {}, {}, {}, {}, {}
   for j = 1, ncols do
     local avg = samples[j] > 0 and total_len[j] / samples[j] or 1
     long_text[j] = avg > 60
     score[j] = math.sqrt(math.max(avg, 1))
     minimum[j] = math.min(math.max(MIN_COLUMN, (word[j] * char_cm + pad_cm) / TEXT_WIDTH_CM), 0.35)
-    if body_cells[j] > 0 and photo_cells[j] == body_cells[j] then
+    -- Only a column made of photos alone (team profiles) is a photo column;
+    -- a screenshot inside a text column (interview evidence) keeps its own size.
+    photo_column[j] = body_cells[j] > 0 and photo_cells[j] == body_cells[j]
+    if photo_column[j] then
       widths[j], fixed[j] = PHOTO_COLUMN, true
     end
   end
@@ -475,7 +478,7 @@ local function compute_widths(tbl, ncols, small_font)
   local sum = 0
   for j = 1, ncols do sum = sum + widths[j] end
   for j = 1, ncols do widths[j] = widths[j] / sum end
-  return widths, photo_cells, long_text
+  return widths, photo_column, long_text
 end
 
 -- Short tables without explicit widths already look right with Typst automatic columns.
@@ -496,7 +499,7 @@ local function fix_table(tbl)
   local ncols = #tbl.colspecs
   if ncols < 2 or keeps_auto_width(tbl) then return nil end
   local small_font = ncols >= SMALL_FONT_FROM_COLUMNS
-  local widths, photo_cells, long_text = compute_widths(tbl, ncols, small_font)
+  local widths, photo_column, long_text = compute_widths(tbl, ncols, small_font)
 
   -- Long text reads better left aligned than centered.
   for j = 1, ncols do
@@ -507,7 +510,7 @@ local function fix_table(tbl)
 
   -- Photos of a photo column get the same size, cropped to fill it.
   for j = 1, ncols do
-    if photo_cells[j] > 0 then
+    if photo_column[j] then
       for _, body in ipairs(tbl.bodies) do
         for _, row in ipairs(body.body) do
           local cell = row.cells[j]
